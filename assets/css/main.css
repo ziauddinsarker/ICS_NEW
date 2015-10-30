@@ -1,0 +1,273 @@
+.form-group{
+	padding-bottom:10px;
+}
+
+.part2 .col-md-8, .part3 ,.part4,.part5{
+    background: skyblue ;
+    margin:0 0 10px 0;
+	padding:10px
+}
+aside.col-md-4 {
+    width: 32.5%;
+}
+.part2 .col-md-4{
+	background:paleturquoise;
+}
+
+.sidebar {
+    position: relative;
+
+}
+
+
+aside article {
+	margin-bottom:10px;
+}
+
+
+.grand-total {
+    background: tomato none repeat scroll 0 0;
+	padding: 10px;
+}
+
+.other-cost {
+    background: skyblue none repeat scroll 0 0;
+    padding: 0 0 0 13px;
+}
+
+.small-label {
+    width: 73px;
+}
+
+.other-cost .form-group input[type="text"] {
+    width: 140px;
+}
+
+.part3 .form-group input[type="text"] {
+    width: 140px;
+}
+
+.other-cost label {
+    width: 195px;
+}
+
+tr td input[type="text"].form-control {
+    width: 80px;
+}
+
+
+.form-signin
+{
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+    margin-bottom: 10px;
+}
+.form-signin .checkbox
+{
+    font-weight: normal;
+}
+.form-signin .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus
+{
+    z-index: 2;
+}
+.form-signin input[type="text"]
+{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"]
+{
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.account-wall
+{
+    margin-top: 20px;
+    padding: 40px 0px 20px 0px;
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.login-title
+{
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    display: block;
+}
+.profile-img
+{
+
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+
+}
+.need-help
+{
+    margin-top: 10px;
+}
+.new-account
+{
+    display: block;
+    margin-top: 10px;
+}
+
+th {
+    text-align: center;
+}
+
+.ppnw th {
+    text-align: left;
+}
+
+.ppnw td,th{
+    border:1px solid;
+    padding: 5px;
+}
+
+
+
+
+/********************** To Do List **********************/
+
+.wrap {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.task-list {
+    min-height: 300px;
+    background: #fff;
+    box-shadow: 2px 2px 0px #ddd;
+    margin-top: 40px;
+    padding: 22px 6%;
+}
+
+.task-list li {
+    font-size: 1.2em;
+    padding: 8px 0;
+    overflow: hidden;
+}
+
+.task-list li span {
+    width: 86%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float: left;
+}
+
+.task-list li .delete-button {
+    width: 10px;
+    height: auto;
+    padding-top: 7px;
+    float: right;
+    vertical-align: top;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.task-list li .delete-button:hover {
+    opacity: 0.85;
+}
+
+.add-new-task {
+    margin-top: 20px;
+    padding-bottom: 60px;
+}
+
+.add-new-task input[type='text'] {
+    width: 100%;
+    font: normal 1.2em 'Open Sans', Arial, sans-serif;
+    color: #999;
+    box-shadow: 2px 2px 0px #ddd;
+    border: none;
+    border-radius: none;
+    display: block;
+    padding: 12px 6%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+:focus {
+    outline: 0;
+}
+
+@media all and (max-width: 425px) {
+    .wrap {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
+
+
+/*************************/
+/*
+.typeahead, .tt-query, .tt-hint {
+    border: 2px solid #CCCCCC;
+    border-radius: 8px;
+    font-size: 24px;
+    height: 30px;
+    line-height: 30px;
+    outline: medium none;
+    padding: 8px 12px;
+    width: 396px;
+}
+.typeahead {
+    background-color: #FFFFFF;
+}
+.typeahead:focus {
+    border: 2px solid #0097CF;
+}
+.tt-query {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+.tt-hint {
+    color: #999999;
+}
+.tt-dropdown-menu {
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 12px;
+    padding: 8px 0;
+    width: 422px;
+}
+.tt-suggestion {
+    font-size: 24px;
+    line-height: 24px;
+    padding: 3px 20px;
+}
+.tt-suggestion.tt-is-under-cursor {
+    background-color: #0097CF;
+    color: #FFFFFF;
+}
+.tt-suggestion p {
+    margin: 0;
+}
+*/
