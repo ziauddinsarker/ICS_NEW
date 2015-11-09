@@ -20,12 +20,15 @@
     <script src="<?php echo base_url("assets/js/bootstrap.min.js")?> "></script>
     <!-- AdminLTE App -->
     <script src="<?php echo base_url("assets/dist/js/app.min.js")?> "></script>
-      <script src="<?php echo base_url('assets/js/angular.min.js'); ?>"></script>
+      <!--
+      <script src="<?php //echo base_url('assets/js/angular.min.js'); ?>"></script>
+      -->
       <script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
       <script src="<?php echo base_url('assets/js/typeahead.bundle.js'); ?>"></script>
       <script src="<?php echo base_url('assets/js/d3.min.js'); ?>"></script>
       <script src="<?php echo base_url('assets/js/bootstrap-sortable.js'); ?>"></script>
       <script src="<?php echo base_url('assets/js/moment.min.js'); ?>"></script>
+      <script src="<?php echo base_url('assets/js/dropzone.js'); ?>"></script>
 
 
       <script src="<?php echo base_url('assets/js/main.js'); ?>"></script>
@@ -57,8 +60,9 @@
           var r = h/2;
           var color = d3.scale.category20c();
 
-          var data = [{"label":"PPNW", "value":4},
-              {"label":"Cotton", "value":2},{"label":"Leather", "value":3},
+          var data = [{"label":"PPNW", "value":<?php foreach($ppnw_all_count as $ppnw){?><?php echo $ppnw->ppnw_count;?><?php }?>},
+              {"label":"Cotton", "value":2},
+              {"label":"Leather", "value":3},
               {"label":"Jute", "value":1}];
 
 

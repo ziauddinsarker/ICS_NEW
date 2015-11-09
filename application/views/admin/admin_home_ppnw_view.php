@@ -9,12 +9,9 @@
         <!-- Main content -->
         <section class="content">
 
+                <!-- Form Start -->
 
-
-                <div ng-app="">
-                    <!-- Form Start -->
-
-                    <form class="form-inline" role="form" action="<?=  base_url()?>ppnw/ppnw_costing" method="post">
+                <form class="form-inline add-new-ppnw-form" role="form" action="<?=  base_url()?>ppnw/ppnw_costing" method="post">
                 <!-- Part1 Form Start -->
 
                 <!-- Part1 Form Start -->
@@ -64,33 +61,33 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label for="order_gsm" class="small-label">GSM:</label>
-                                        <input type="text" class="form-control" id="order_gsm" name="order_gsm" ng-model="order_gsm" required>
+                                        <input type="text" class="form-control" id="order_gsm" name="order_gsm" required>
 
                                     </div>
                                     <br>
 
                                     <div class="form-group">
                                         <label for="order_colour" class="small-label">Color:</label>
-                                        <input type="text" class="form-control" id="order_colour" name="order_colour" ng-model="order_colour">
+                                        <input type="text" class="form-control" id="order_colour" name="order_colour">
                                     </div>
                                     <br>
 
                                     <div class="form-group">
                                         <label for="order_usd" class="small-label"> USD:</label>
-                                        <input type="text" class="form-control" id="order_usd" name="order_usd" ng-model="order_usd" required>
+                                        <input type="text" class="form-control" id="order_usd" name="order_usd"required>
                                     </div>
 
 
                                     <div class="form-group">
                                         <label for="order_wastage" class="small-label">Wastage:</label>
-                                        <input type="text" class="form-control" id="order_wastage" name="order_wastage" ng-model="order_wastage" required>
+                                        <input type="text" class="form-control" id="order_wastage" name="order_wastage" required>
                                     </div>
 
                                     <br>
 
                                     <div class="form-group">
                                         <label for="order_margin" class="small-label">Margin:</label>
-                                        <input type="text" class="form-control" id="order_margin" name="order_margin" ng-model="order_margin" required>
+                                        <input type="text" class="form-control" id="order_margin" name="order_margin"  required>
                                     </div>
 
                                 </div>
@@ -99,18 +96,18 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="order_quantity" class="medium-label">Order Quantity:</label>
-                                        <input type="text" class="form-control" id="order_quantity" name="order_quantity" ng-model="order_quantity" required>
+                                        <input type="text" class="form-control" id="order_quantity" name="order_quantity" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="order_transport" class="small-label"> Transport:</label>
-                                        <input type="text" class="form-control" id="order_transport" name="order_transport" ng-model="order_transport"> Tk/Truck
+                                        <input type="text" class="form-control" id="order_transport" name="order_transport"> Tk/Truck
                                     </div>
                                     <br>
 
                                     <div class="form-group">
                                         <label for="order_bank_document">Bank & Document Charge:</label>
-                                        <input type="text" class="form-control" id="order_bank_document"  name="order_bank_document" ng-model="order_bank_document">Tk/Shipment
+                                        <input type="text" class="form-control" id="order_bank_document"  name="order_bank_document">Tk/Shipment
                                     </div>
                                     <br>
 
@@ -131,21 +128,21 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">H:</label>
-                                            <input type="text" class="form-control" id="order_body_h" name="order_body_h" ng-model="order_body_h">
+                                            <input type="text" class="form-control" id="order_body_h" name="order_body_h">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Allowance:</label>
-                                            <input type="text" class="form-control" id="order_body_h_allowance" name="order_body_h_allowance" ng-model="order_body_h_allowance">
+                                            <input type="text" class="form-control" id="order_body_h_allowance" name="order_body_h_allowance">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Total:</label>
-                                            <input type="text" class="form-control" id="order_body_h_total" name="order_body_h_total" value="{{ order_body_h -- order_body_h_allowance }}" disabled>
+                                            <input type="text" class="form-control" id="order_body_h_total" name="order_body_h_total" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -154,21 +151,21 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label="order_body">W:</label>
-                                            <input type="text" class="form-control" id="order_body_w" name="order_body_w" ng-model="order_body_w">
+                                            <input type="text" class="form-control" id="order_body_w" name="order_body_w">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Allowance:</label>
-                                            <input type="text" class="form-control" id="order_body_w_allowance" name="order_body_w_allowance" ng-model="order_body_w_allowance">
+                                            <input type="text" class="form-control" id="order_body_w_allowance" name="order_body_w_allowance" >
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Total:</label>
-                                            <input type="text" class="form-control" id="order_body_w_total" name="order_body_w_total"  value="{{order_body_w -- order_body_w_allowance}}" disabled>
+                                            <input type="text" class="form-control" id="order_body_w_total" name="order_body_w_total" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -178,21 +175,21 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">P:</label>
-                                            <input type="text" class="form-control" id="order_body_panel" name="order_body_panel" ng-model="order_body_panel">
+                                            <input type="text" class="form-control" id="order_body_panel" name="order_body_panel" >
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Allowance:</label>
-                                            <input type="text" class="form-control" id="order_body_panel_allowance" name="order_body_panel_allowance" ng-model="order_body_panel_allowance">
+                                            <input type="text" class="form-control" id="order_body_panel_allowance" name="order_body_panel_allowance">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Total:</label>
-                                            <input type="text" class="form-control" id="order_body_panel_total" name="order_body_panel_total" value="{{ order_body_panel -- order_body_panel_allowance }}" disabled>
+                                            <input type="text" class="form-control" id="order_body_panel_total" name="order_body_panel_total"  disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -204,21 +201,21 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">L:</label>
-                                            <input type="text" class="form-control" id="order_handle_l" name="order_handle_l" ng-model="order_handle_l">
+                                            <input type="text" class="form-control" id="order_handle_l" name="order_handle_l">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Allowance:</label>
-                                            <input type="text" class="form-control" id="order_handle_l_allowance" name="order_handle_l_allowance" ng-model="order_handle_l_allowance">
+                                            <input type="text" class="form-control" id="order_handle_l_allowance" name="order_handle_l_allowance">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Total:</label>
-                                            <input type="text" class="form-control" id="order_handle_l_total" name="order_handle_l_total" value="{{ order_handle_l -- order_handle_l_allowance }}" disabled>
+                                            <input type="text" class="form-control" id="order_handle_l_total" name="order_handle_l_total" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -227,21 +224,21 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">W:</label>
-                                            <input type="text" class="form-control" id="order_handle_w" name="order_handle_w" ng-model="order_handle_w">
+                                            <input type="text" class="form-control" id="order_handle_w" name="order_handle_w" >
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Allowance:</label>
-                                            <input type="text" class="form-control" id="order_handle_w_allowance" name="order_handle_w_allowance" ng-model="order_handle_w_allowance">
+                                            <input type="text" class="form-control" id="order_handle_w_allowance" name="order_handle_w_allowance">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Total:</label>
-                                            <input type="text" class="form-control" id="order_handle_w_total" name="order_handle_w_total" value="{{ order_handle_w -- order_handle_w_allowance }}" disabled>
+                                            <input type="text" class="form-control" id="order_handle_w_total" name="order_handle_w_total" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -252,21 +249,21 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">L:</label>
-                                            <input type="text" class="form-control" id="order_pocket_l" name="order_pocket_l" ng-model="order_pocket_l">
+                                            <input type="text" class="form-control" id="order_pocket_l" name="order_pocket_l">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Allowance:</label>
-                                            <input type="text" class="form-control" id="order_pocket_l_allowance" name="order_pocket_l_allowance" ng-model="order_pocket_l_allowance">
+                                            <input type="text" class="form-control" id="order_pocket_l_allowance" name="order_pocket_l_allowance">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Total:</label>
-                                            <input type="text" class="form-control" id="order_pocket_l_total" name="order_pocket_l_total" value="{{ order_pocket_l -- order_pocket_l_allowance }}" disabled>
+                                            <input type="text" class="form-control" id="order_pocket_l_total" name="order_pocket_l_total" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -275,21 +272,21 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">W:</label>
-                                            <input type="text" class="form-control" id="order_pocket_w" name="order_pocket_w"  ng-model="order_pocket_w">
+                                            <input type="text" class="form-control" id="order_pocket_w" name="order_pocket_w">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Allowance:</label>
-                                            <input type="text" class="form-control" id="order_pocket_w_allowance" name="order_pocket_w_allowance"  ng-model="order_pocket_w_allowance">
+                                            <input type="text" class="form-control" id="order_pocket_w_allowance" name="order_pocket_w_allowance">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Total:</label>
-                                            <input type="text" class="form-control" id="order_pocket_w_total" name="order_pocket_w_total"  value="{{ order_pocket_w -- order_pocket_w_allowance }}" disabled>
+                                            <input type="text" class="form-control" id="order_pocket_w_total" name="order_pocket_w_total" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -301,21 +298,21 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">L:</label>
-                                            <input type="text" class="form-control" id="order_extra_1_l" name="order_extra_1_l" ng-model="order_extra_1_l">
+                                            <input type="text" class="form-control" id="order_extra_1_l" name="order_extra_1_l" >
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Allowance:</label>
-                                            <input type="text" class="form-control" id="order_extra_1_l_allowance" name="order_extra_1_l_allowance" ng-model="order_extra_1_l_allowance">
+                                            <input type="text" class="form-control" id="order_extra_1_l_allowance" name="order_extra_1_l_allowance">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Total:</label>
-                                            <input type="text" class="form-control" id="order_extra_1_l_total" name="order_extra_1_l_total" value="{{ order_extra_1_l -- order_extra_1_l_allowance }}" disabled>
+                                            <input type="text" class="form-control" id="order_extra_1_l_total" name="order_extra_1_l_total"  disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -324,21 +321,21 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">W:</label>
-                                            <input type="text" class="form-control" id="order_extra_1_w" name="order_extra_1_w" ng-model="order_extra_1_w">
+                                            <input type="text" class="form-control" id="order_extra_1_w" name="order_extra_1_w">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Allowance:</label>
-                                            <input type="text" class="form-control" id="order_extra_1_w_allowance" name="order_extra_1_w_allowance" ng-model="order_extra_1_w_allowance">
+                                            <input type="text" class="form-control" id="order_extra_1_w_allowance" name="order_extra_1_w_allowance">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Total:</label>
-                                            <input type="text" class="form-control" id="order_extra_1_w_total" name="order_extra_1_w_total" value="{{ order_extra_1_w -- order_extra_1_w_allowance }}" disabled>
+                                            <input type="text" class="form-control" id="order_extra_1_w_total" name="order_extra_1_w_total" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -349,21 +346,21 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">L:</label>
-                                            <input type="text" class="form-control" id="order_extra_2_l" name="order_extra_2_l" ng-model="order_extra_2_l">
+                                            <input type="text" class="form-control" id="order_extra_2_l" name="order_extra_2_l">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Allowance:</label>
-                                            <input type="text" class="form-control" id="order_extra_2_l_allowance" name="order_extra_2_l_allowance" ng-model="order_extra_2_l_allowance">
+                                            <input type="text" class="form-control" id="order_extra_2_l_allowance" name="order_extra_2_l_allowance">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Total:</label>
-                                            <input type="text" class="form-control" id="order_extra_2_l_total" name="order_extra_2_l_total" value="{{ order_extra_2_l -- order_extra_2_l_allowance }}" disabled>
+                                            <input type="text" class="form-control" id="order_extra_2_l_total" name="order_extra_2_l_total"  disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -372,21 +369,21 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">W:</label>
-                                            <input type="text" class="form-control" id="order_extra_2_w" name="order_extra_2_w" ng-model="order_extra_2_w">
+                                            <input type="text" class="form-control" id="order_extra_2_w" name="order_extra_2_w" >
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Allowance:</label>
-                                            <input type="text" class="form-control" id="order_extra_2_w_allowance" name="order_extra_2_w_allowance" ng-model="order_extra_2_w_allowance">
+                                            <input type="text" class="form-control" id="order_extra_2_w_allowance" name="order_extra_2_w_allowance">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Total:</label>
-                                            <input type="text" class="form-control" id="order_extra_2_w_total" name="order_extra_2_w_total" value="{{ order_extra_2_w -- order_extra_2_w_allowance }}" disabled>
+                                            <input type="text" class="form-control" id="order_extra_2_w_total" name="order_extra_2_w_total" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -397,21 +394,21 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">L:</label>
-                                            <input type="text" class="form-control" id="order_extra_3_l" name="order_extra_3_l" ng-model="order_extra_3_l">
+                                            <input type="text" class="form-control" id="order_extra_3_l" name="order_extra_3_l">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Allowance:</label>
-                                            <input type="text" class="form-control" id="order_extra_3_l_allowance" name="order_extra_3_l_allowance" ng-model="order_extra_3_l_allowance">
+                                            <input type="text" class="form-control" id="order_extra_3_l_allowance" name="order_extra_3_l_allowance">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Total:</label>
-                                            <input type="text" class="form-control" id="order_extra_3_l_total" name="order_extra_3_l_total" value="{{ order_extra_3_l -- order_extra_3_l_allowance }}" disabled>
+                                            <input type="text" class="form-control" id="order_extra_3_l_total" name="order_extra_3_l_total" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -420,21 +417,21 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">W:</label>
-                                            <input type="text" class="form-control" id="order_extra_3_w" name="order_extra_3_w" ng-model="order_extra_3_w">
+                                            <input type="text" class="form-control" id="order_extra_3_w" name="order_extra_3_w">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Allowance:</label>
-                                            <input type="text" class="form-control" id="order_extra_3_w_allowance" name="order_extra_3_w_allowance" ng-model="order_extra_3_w_allowance">
+                                            <input type="text" class="form-control" id="order_extra_3_w_allowance" name="order_extra_3_w_allowance">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Total:</label>
-                                            <input type="text" class="form-control" id="order_extra_3_w_total" name="order_extra_3_w_total"  value="{{ order_extra_3_w -- order_extra_3_w_allowance }}" disabled>
+                                            <input type="text" class="form-control" id="order_extra_3_w_total" name="order_extra_3_w_total"  disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -473,12 +470,12 @@
                                 <tbody>
                                 <tr class="success">
                                     <td>PPNW</td>
-                                    <td><input type="text" class="form-control" id="ppnw_cost" name="ppnw_cost" ng-model="ppnw_cost" required></td>
+                                    <td><input type="text" class="form-control" id="ppnw_cost" name="ppnw_cost"required></td>
                                     <td>Kg</td>
                                     <td><input type="text" class="form-control" id="ppnw_consumption" name="ppnw_consumption" disabled></td>
-                                    <td><input type="text" class="form-control" id="ppnw_consumption_rate" name="ppnw_consumption_rate" ng-model="ppnw_consumption_rate" disabled></td>
+                                    <td><input type="text" class="form-control" id="ppnw_consumption_rate" name="ppnw_consumption_rate"disabled></td>
                                     <td>SQM</td>
-                                    <td><input type="text" class="form-control" id="ppnw_consumption_cost" name="ppnw_consumption_cost" ng-model="ppnw_consumption_cost" disabled></td>
+                                    <td><input type="text" class="form-control" id="ppnw_consumption_cost" name="ppnw_consumption_cost"disabled></td>
                                 </tr>
                                 </tbody>
 
@@ -754,7 +751,6 @@
 
                     <aside class="col-md-4">
                         <article class="row grand-total">
-
                             <h4>Total Material incl Wastage: <span id="final_material_cost"></span></h4>
                             <h4>Total Overhead and Other Cost: <span id="total_overhead_and_other"></span></h4>
                             <h4>Total Cost: <span id="total_cost"></span></h4>

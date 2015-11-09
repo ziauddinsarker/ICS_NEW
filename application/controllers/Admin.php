@@ -17,13 +17,12 @@ class Admin extends CI_Controller
 
         $user_id = $this->session->userdata('user_id');
         $this->data['todos'] = $this->admin_model->get_todo($user_id);
+
         $this->data['ppnw_all_count'] = $this->ppnw_model->ppnw_total_count_by_user($username);
 
-        $all_sess = $this->session->all_userdata();
+        //$all_sess = $this->session->all_userdata();
        // var_dump($all_sess);
     }
-
-
 
     /**
      * Index
@@ -46,11 +45,18 @@ class Admin extends CI_Controller
         }
     }
 
+
+
     public function user_profile(){
         $username = $this->session->userdata('username');
-        $ifo = $this->user_model->get_singl_user_info($username);
-        var_dump($ifo);
-    }
+        $this->user_model->get_singl_user_info($username);
+      }
+
+    public function contacts(){
+        $this->load->view('admin/admin_header_view', $this->data);
+        $this->load->view('admin/admin_contact_view', $this->data);
+        $this->load->view('admin/admin_footer_view');
+      }
     /**
      *
      */

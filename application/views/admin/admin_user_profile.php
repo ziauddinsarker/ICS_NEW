@@ -6,6 +6,10 @@
 <!-- Main content -->
 <section class="content">
     <?php foreach($userinfo as $user){ ?>
+        <img src="<?php echo base_url("assets/images/employee/". $user->image_name. "")?>" class="img-circle" alt="User Image"></p>
+        <h1>Update Your Image</h1>
+
+        <form action="<?php echo site_url('user/do_upload'); ?>" class="dropzone"></form>
 
         <p><b>Name:</b> <?php echo $user->employee_name; ?></p>
         <p><b>Email:</b> <?php echo $user->employee_email; ?></p>

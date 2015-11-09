@@ -7,10 +7,8 @@
 
         <!-- Main content -->
         <section class="content">
-                <div ng-app="">
-
                 <!-- Fetching All Details of Selected Student From Database And Showing In a Form -->
-                <?php foreach ($single_ppnw_update as $ppnw_update): ?>
+
                 <!-- Form Start -->
                 <form class="form-inline" role="form" action="<?=  base_url()?>ppnw/update_ppnw_costing" method="post">
                 <!-- Part1 Form Start -->
@@ -21,33 +19,33 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="order_id">Order Id:</label>
-                                <input type="text" class="form-control" name="order_id" id="order_id"  value="<?php echo $ppnw_update->tbl_order_id_name; ?>" required>
+                                <input type="text" class="form-control" name="order_id" id="order_id"  value="<?php echo $order_id ?>" required>
                             </div>
                         </div>
 
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="order_company"> Company:</label>
-                                <input type="text" class="form-control" name="order_company" id="order_company" value="<?php echo $ppnw_update->tbl_company_id; ?>" required>
+                                <input type="text" class="form-control" name="order_company" id="order_company" value="<?php echo $order_id ?>" required>
                             </div>
                         </div>
 
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="order_company"> Item Name:</label>
-                                <input type="text" class="form-control" name="order_item_name" id="order_item_name"  value="<?php echo $ppnw_update->tbl_item_name; ?>" required>
+                                <input type="text" class="form-control" name="order_item_name" id="order_item_name"  value="<?php echo $order_id ?>" required>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="order_company"> Reference No:</label>
-                                <input type="text" class="form-control" name="order_ref_no" id="order_ref_no" value="<?php echo $ppnw_update->tbl_ref_name; ?>" required>
+                                <input type="text" class="form-control" name="order_ref_no" id="order_ref_no" value="<?php echo $order_id ?>" required>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="order_date"> Date:</label>
-                                <input type="text" class="form-control" name="order_date" id="order_date" value="<?php echo $ppnw_update->tbl_order_date; ?>" required>
+                                <input type="text" class="form-control" name="order_date" id="order_date" value="<?php echo $order_id ?>" required>
                             </div>
                         </div>
                     </div>
@@ -62,33 +60,33 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label for="order_gsm" class="small-label">GSM:</label>
-                                        <input type="text" class="form-control" id="order_gsm" name="order_gsm" value="<?php echo $ppnw_update->tbl_order_gsm; ?>" required>
+                                        <input type="text" class="form-control" id="order_gsm" name="order_gsm" value="<?php echo $order_id ?>" required>
 
                                     </div>
                                     <br>
 
                                     <div class="form-group">
                                         <label for="order_colour" class="small-label">Color:</label>
-                                        <input type="text" class="form-control" id="order_colour" name="order_colour" value="<?php echo $ppnw_update->tbl_order_color; ?>">
+                                        <input type="text" class="form-control" id="order_colour" name="order_colour" value="<?php echo $order_id ?>">
                                     </div>
                                     <br>
 
                                     <div class="form-group">
                                         <label for="order_usd" class="small-label"> USD:</label>
-                                        <input type="text" class="form-control" id="order_usd" name="order_usd" value="<?php echo $ppnw_update->tbl_order_usd; ?>" required>
+                                        <input type="text" class="form-control" id="order_usd" name="order_usd" value="<?php echo $order_id ?>" required>
                                     </div>
 
 
                                     <div class="form-group">
                                         <label for="order_wastage" class="small-label">Wastage:</label>
-                                        <input type="text" class="form-control" id="order_wastage" name="order_wastage" value="<?php echo $ppnw_update->tbl_order_wastage; ?>" required>
+                                        <input type="text" class="form-control" id="order_wastage" name="order_wastage" value="<?php echo $order_id ?>" required>
                                     </div>
 
                                     <br>
 
                                     <div class="form-group">
                                         <label for="order_margin" class="small-label">Margin:</label>
-                                        <input type="text" class="form-control" id="order_margin" name="order_margin" value="<?php echo $ppnw_update->tbl_order_margin; ?>" required>
+                                        <input type="text" class="form-control" id="order_margin" name="order_margin" value="<?php echo $order_id ?>" required>
                                     </div>
 
                                 </div>
@@ -97,18 +95,18 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="order_quantity" class="medium-label">Order Quantity:</label>
-                                        <input type="text" class="form-control" id="order_quantity" name="order_quantity" value="<?php echo $ppnw_update->tbl_order_quantity; ?>" required>
+                                        <input type="text" class="form-control" id="order_quantity" name="order_quantity" value="<?php echo $order_id ?>" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="order_transport" class="small-label"> Transport:</label>
-                                        <input type="text" class="form-control" id="order_transport" name="order_transport" value="<?php echo $ppnw_update->tbl_order_transport; ?>"> Tk/Truck
+                                        <input type="text" class="form-control" id="order_transport" name="order_transport" value="<?php echo $order_id ?>"> Tk/Truck
                                     </div>
                                     <br>
 
                                     <div class="form-group">
                                         <label for="order_bank_document">Bank & Document Charge:</label>
-                                        <input type="text" class="form-control" id="order_bank_document"  name="order_bank_document" value="<?php echo $ppnw_update->tbl_order_bank_doc_charge; ?>">Tk/Shipment
+                                        <input type="text" class="form-control" id="order_bank_document"  name="order_bank_document" value="<?php echo $order_id ?>">Tk/Shipment
                                     </div>
                                     <br>
 
@@ -129,21 +127,21 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">H:</label>
-                                            <input type="text" class="form-control" id="order_body_h" name="order_body_h" value="<?php echo $ppnw_update->tbl_dimension_body_height; ?>">
+                                            <input type="text" class="form-control" id="order_body_h" name="order_body_h" value="<?php echo $order_id ?>">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Allowance:</label>
-                                            <input type="text" class="form-control" id="order_body_h_allowance" name="order_body_h_allowance" value="<?php echo $ppnw_update->tbl_dimension_body_height_allowance; ?>">
+                                            <input type="text" class="form-control" id="order_body_h_allowance" name="order_body_h_allowance" value="<?php echo $order_id ?>">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Total:</label>
-                                            <input type="text" class="form-control" id="order_body_h_total" name="order_body_h_total" value="{{ order_body_h -- order_body_h_allowance }}" disabled>
+                                            <input type="text" class="form-control" id="order_body_h_total" name="order_body_h_total" value="<?php echo $order_id ?>" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -152,21 +150,21 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label="order_body">W:</label>
-                                            <input type="text" class="form-control" id="order_body_w" name="order_body_w" value="<?php echo $ppnw_update->tbl_dimension_body_width; ?>" >
+                                            <input type="text" class="form-control" id="order_body_w" name="order_body_w" value="<?php echo $order_id ?>" >
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Allowance:</label>
-                                            <input type="text" class="form-control" id="order_body_w_allowance" name="order_body_w_allowance" value="<?php echo $ppnw_update->tbl_dimension_body_width_allowance; ?>">
+                                            <input type="text" class="form-control" id="order_body_w_allowance" name="order_body_w_allowance" value="<?php echo $order_id ?>">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Total:</label>
-                                            <input type="text" class="form-control" id="order_body_w_total" name="order_body_w_total"  value="" disabled>
+                                            <input type="text" class="form-control" id="order_body_w_total" name="order_body_w_total"  value="<?php echo $order_id ?>" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -176,14 +174,14 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">P:</label>
-                                            <input type="text" class="form-control" id="order_body_panel" name="order_body_panel" value="<?php echo $ppnw_update->tbl_dimension_body_panel; ?>">
+                                            <input type="text" class="form-control" id="order_body_panel" name="order_body_panel" value="<?php echo $order_id ?>">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="order_body">Allowance:</label>
-                                            <input type="text" class="form-control" id="order_body_panel_allowance" name="order_body_panel_allowance" value="<?php echo $ppnw_update->tbl_dimension_body_panel_allowance; ?>">
+                                            <input type="text" class="form-control" id="order_body_panel_allowance" name="order_body_panel_allowance" value="<?php echo $order_id ?>">
                                         </div>
                                     </div>
 
@@ -202,7 +200,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">L:</label>
-                                            <input type="text" class="form-control" id="order_handle_l" name="order_handle_l" value="<?php echo $ppnw_update->tbl_dimension_handle_length; ?>">
+                                            <input type="text" class="form-control" id="order_handle_l" name="order_handle_l" value="<?php echo $order_id ?>">
                                         </div>
                                     </div>
 
@@ -225,7 +223,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">W:</label>
-                                            <input type="text" class="form-control" id="order_handle_w" name="order_handle_w" ng-model="order_handle_w" value="<?php echo $ppnw_update->tbl_dimension_handle_width; ?>" >
+                                            <input type="text" class="form-control" id="order_handle_w" name="order_handle_w" value="<?php echo $ppnw_update->tbl_dimension_handle_width; ?>" >
                                         </div>
                                     </div>
 
@@ -250,7 +248,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">L:</label>
-                                            <input type="text" class="form-control" id="order_pocket_l" name="order_pocket_l" ng-model="order_pocket_l" value="<?php echo $ppnw_update->tbl_dimension_pocket_length; ?>">
+                                            <input type="text" class="form-control" id="order_pocket_l" name="order_pocket_l" value="<?php echo $ppnw_update->tbl_dimension_pocket_length; ?>">
                                         </div>
                                     </div>
 
@@ -273,7 +271,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">W:</label>
-                                            <input type="text" class="form-control" id="order_pocket_w" name="order_pocket_w"  ng-model="order_pocket_w" value="<?php echo $ppnw_update->tbl_dimension_pocket_width; ?>">
+                                            <input type="text" class="form-control" id="order_pocket_w" name="order_pocket_w" value="<?php echo $ppnw_update->tbl_dimension_pocket_width; ?>">
                                         </div>
                                     </div>
 
@@ -322,7 +320,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">W:</label>
-                                            <input type="text" class="form-control" id="order_extra_1_w" name="order_extra_1_w" ng-model="order_extra_1_w" value="<?php echo $ppnw_update->tbl_dimension_extra_1_width; ?>">
+                                            <input type="text" class="form-control" id="order_extra_1_w" name="order_extra_1_w" value="<?php echo $ppnw_update->tbl_dimension_extra_1_width; ?>">
                                         </div>
                                     </div>
 
@@ -347,7 +345,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">L:</label>
-                                            <input type="text" class="form-control" id="order_extra_2_l" name="order_extra_2_l" ng-model="order_extra_2_l" value="<?php echo $ppnw_update->tbl_dimension_extra_2_length; ?>">
+                                            <input type="text" class="form-control" id="order_extra_2_l" name="order_extra_2_l" value="<?php echo $ppnw_update->tbl_dimension_extra_2_length; ?>">
                                         </div>
                                     </div>
 
@@ -370,7 +368,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">W:</label>
-                                            <input type="text" class="form-control" id="order_extra_2_w" name="order_extra_2_w" ng-model="order_extra_2_w" value="<?php echo $ppnw_update->tbl_dimension_extra_2_width; ?>">
+                                            <input type="text" class="form-control" id="order_extra_2_w" name="order_extra_2_w" value="<?php echo $ppnw_update->tbl_dimension_extra_2_width; ?>">
                                         </div>
                                     </div>
 
@@ -395,7 +393,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">L:</label>
-                                            <input type="text" class="form-control" id="order_extra_3_l" name="order_extra_3_l" ng-model="order_extra_3_l" value="<?php echo $ppnw_update->tbl_dimension_extra_3_length; ?>">
+                                            <input type="text" class="form-control" id="order_extra_3_l" name="order_extra_3_l" value="<?php echo $ppnw_update->tbl_dimension_extra_3_length; ?>">
                                         </div>
                                     </div>
 
@@ -418,7 +416,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_body">W:</label>
-                                            <input type="text" class="form-control" id="order_extra_3_w" name="order_extra_3_w" ng-model="order_extra_3_w" value="<?php echo $ppnw_update->tbl_dimension_extra_3_width; ?>">
+                                            <input type="text" class="form-control" id="order_extra_3_w" name="order_extra_3_w" value="<?php echo $ppnw_update->tbl_dimension_extra_3_width; ?>">
                                         </div>
                                     </div>
 
@@ -785,7 +783,6 @@
                 </div>
             </form>
                     <!-- foreach end-->
-        <?php endforeach; ?>
 
         </section><!-- /.content -->
 		

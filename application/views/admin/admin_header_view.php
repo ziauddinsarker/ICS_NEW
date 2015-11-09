@@ -29,6 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           apply the skin class to the body tag so the changes take effect.
     -->
     <link rel="stylesheet" href="<?php echo base_url("assets/dist/css/skins/skin-blue.min.css")?>">
+    <link rel="stylesheet" href="<?php echo base_url("assets/css/dropzone.css")?>">
     <link rel="stylesheet" href="<?php echo base_url("assets/css/main.css")?>">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -83,6 +84,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
               <!-- User Account Menu -->
               <li class="user user-menu">
+                <a href="<?php base_url() ?>/ICS_NEW/admin/contacts" class="btn">Contacts</a>
+              </li><li class="user user-menu">
                 <a href="<?php base_url() ?>/ICS_NEW/login/logout" class="btn">Sign out</a>
               </li>
             

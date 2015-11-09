@@ -7,7 +7,10 @@ class Multiple extends CI_Controller {
     {
         parent::__construct(); 
 	}
-	
+
+	/**
+	 *
+	 */
 	public function index(){
 		$this->load->model('admin_model');
 		
@@ -31,14 +34,18 @@ class Multiple extends CI_Controller {
 		
 	
 	}
-	
-	
+
+	/**
+	 *
+	 */
 	public function form(){
 		$this->load->view('multiple/form', array('error' => ''));
 	}
-	
-	
-	
+
+
+	/**
+	 * @return array
+	 */
 	private function setup_upload_option(){
 		$config = array();
 		$config['upload_path'] 	= './assets/images/gallery';
@@ -47,13 +54,19 @@ class Multiple extends CI_Controller {
 		$config['overwrite']	= false;
 		return $config;
 	}
-	
+
+	/**
+	 * @param $id
+	 */
 	public function edit_product_image($id){
 		$getrow = $this->db->query("SELECT * FROM product WHERE id=".$id."");
 		$row = $getrow->row();
 		$this->load->view('multiple/edit', array('row'=> $row));
 	}
-	
+
+	/**
+	 *
+	 */
 	public function do_upload(){
 		$this->load->library('upload');
 		$files = $_FILES;

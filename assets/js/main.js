@@ -23,6 +23,16 @@
   });
 }); */
 
+$('.add-new-ppnw-form').on('keyup keypress', function(e) {
+    var code = e.keyCode || e.which;
+    if (code == 13) {
+        e.preventDefault();
+        return false;
+    }
+});
+
+
+
 $(document).ready(function(){
   $("#order_date").datepicker({dateFormat : 'yy-mm-dd'});
 });
@@ -76,8 +86,10 @@ $(document).ready(function(){
   $(".form-control").keyup(function(){
 
 
-
-
+    /**
+     * Get Company name's First letter if company name have two word then it will take two letter from company
+     * @type {*|jQuery}
+     */
     var company_name_prag = $("#order_company").val();
 
     var matches = company_name_prag.match(/\b(\w)/g);
@@ -89,30 +101,128 @@ $(document).ready(function(){
    // document.write(date);
     console.log(date);
 
-
+  // Joining the date and company names first letters and add them into order id
     $('#order_id').val(acronym+date);
 
 
 
 
     /***************Consumption Calculation***********************/
+    /**********************/
+    /**Back,Front & Panel**/
+    /**********************/
+
+    //Body Height
+    var order_body_h = +$("#order_body_h").val();
+
+   // var str = +$("#order_body_h").val();
+
+   // var isDecimalFound = string.match([0]+(\.[0-9][0-9]?));
+
+   // document.getElementById("order_body_h").innerHTML = txt;
+
+    var order_body_h_allowance = +$("#order_body_h_allowance").val();
+    $("#order_body_h_total").val((order_body_h+ order_body_h_allowance).toFixed(2));
     var body_h = +$("#order_body_h_total").val();
+
+   //Body Width
+    var order_body_w = +$("#order_body_w").val();
+    var order_body_w_allowance = +$("#order_body_w_allowance").val();
+    $("#order_body_w_total").val((order_body_w + order_body_w_allowance).toFixed(2));
     var body_w = +$("#order_body_w_total").val();
+
+    //Body Panel
+    var order_body_panel = +$("#order_body_panel").val();
+    var order_body_panel_allowance = +$("#order_body_panel_allowance").val();
+    $("#order_body_panel_total").val((order_body_panel + order_body_panel_allowance).toFixed(2));
     var body_panel = +$("#order_body_panel_total").val();
+
+    /*****************/
+    /**Double Handle**/
+    /*****************/
+
+    //Handle Length
+    var order_handle_l = +$("#order_handle_l").val();
+    var order_handle_l_allowance = +$("#order_handle_l_allowance").val();
+    $("#order_handle_l_total").val((order_handle_l+ order_handle_l_allowance).toFixed(2));
     var handle_l = +$("#order_handle_l_total").val();
+
+   //Body Width
+    var order_handle_w = +$("#order_handle_w").val();
+    var order_handle_w_allowance = +$("#order_handle_w_allowance").val();
+    $("#order_handle_w_total").val((order_handle_w + order_handle_w_allowance).toFixed(2));
     var handle_w = +$("#order_handle_w_total").val();
+
+    /*****************/
+    /*****Pocket:*****/
+    /*****************/
+
+    //Pocket Length
+    var order_pocket_l = +$("#order_pocket_l").val();
+    var order_pocket_l_allowance = +$("#order_pocket_l_allowance").val();
+    $("#order_pocket_l_total").val((order_pocket_l+ order_pocket_l_allowance).toFixed(2));
     var pocket_l = +$("#order_pocket_l_total").val();
+
+   //Pocket Width
+    var order_pocket_w = +$("#order_pocket_w").val();
+    var order_pocket_w_allowance = +$("#order_pocket_w_allowance").val();
+    $("#order_pocket_w_total").val((order_pocket_w + order_pocket_w_allowance).toFixed(2));
     var pocket_w = +$("#order_pocket_w_total").val();
+
+    /******************/
+    /*****Extra 1:*****/
+    /******************/
+
+    //Extra 1 Length
+    var order_extra_1_l = +$("#order_extra_1_l").val();
+    var order_extra_1_l_allowance = +$("#order_extra_1_l_allowance").val();
+    $("#order_extra_1_l_total").val((order_extra_1_l+ order_extra_1_l_allowance).toFixed(2));
     var extra_1_l = +$("#order_extra_1_l_total").val();
+
+   //Extra 1 Width
+    var order_extra_1_w = +$("#order_extra_1_w").val();
+    var order_extra_1_w_allowance = +$("#order_extra_1_w_allowance").val();
+    $("#order_extra_1_w_total").val((order_extra_1_w + order_extra_1_w_allowance).toFixed(2));
     var extra_1_w = +$("#order_extra_1_w_total").val();
-    var extra_2_l = +$("#order_extra_2_l_total").val();
-    var extra_2_w = +$("#order_extra_2_w_total").val();
+
+
+    /******************/
+    /*****Extra 2:*****/
+    /******************/
+
+    //Extra 2 Length
+    var order_extra_2_l = +$("#order_extra_2_l").val();
+    var order_extra_2_l_allowance = +$("#order_pocket_2_allowance").val();
+    $("#order_extra_1_l_total").val((order_extra_1_l+ order_extra_1_l_allowance).toFixed(2));
+    var extra_2_l = +$("#order_extra_1_l_total").val();
+
+   //Extra 2 Width
+    var order_extra_2_l = +$("#order_extra_2_l").val();
+    var order_extra_2_l_allowance = +$("#order_extra_2_l_allowance").val();
+    $("#order_extra_2_l_total").val((order_extra_2_l + order_extra_2_l_allowance).toFixed(2));
+    var extra_2_w = +$("#order_extra_2_l_total").val();
+
+   /******************/
+    /*****Extra 3:*****/
+    /******************/
+
+    //Extra 3 Length
+    var order_extra_3_l = +$("#order_extra_3_l").val();
+    var order_extra_3_l_allowance = +$("#order_extra_3_l_allowance").val();
+    $("#order_extra_3_l_total").val((order_extra_3_l + order_extra_3_l_allowance).toFixed(2));
     var extra_3_l = +$("#order_extra_3_l_total").val();
+
+   //Extra 3 Width
+    var order_extra_3_w = +$("#order_extra_3_w").val();
+    var order_extra_3_w_allowance = +$("#order_extra_3_w_allowance").val();
+    $("#order_extra_3_w_total").val((order_extra_3_w + order_extra_3_w_allowance).toFixed(2));
     var extra_3_w = +$("#order_extra_3_w_total").val();
 
+
+    //PPNW Total Consumption
     $("#ppnw_consumption").val(((body_h*body_w*2)+((body_h+body_h+body_w)*body_panel)+(handle_l*handle_w*2)+(pocket_l*pocket_w)+(extra_1_l*extra_1_w)+(extra_2_l*extra_2_w)+(extra_3_l*extra_3_w)).toFixed(2));
 
-    /***************Cost Calculation***********************/
+    /***************Item Cost Calculation***********************/
     var ppnw_cost = +$("#ppnw_cost").val();
     var order_gsm = +$("#order_gsm").val();
 
@@ -123,74 +233,108 @@ $(document).ready(function(){
     var ppnw_consumption = +$("#ppnw_consumption").val();
     var ppnw_consumption_rate = +$("#ppnw_consumption_rate").val();
 
+    //Total Consumption
     $("#ppnw_consumption_cost").val((ppnw_consumption*ppnw_consumption_rate).toFixed(4));
 
+
+
+    /*******************************/
     /*******Zipper Cost*************/
+    /*******************************/
     var zipper_cost = +$("#zipper_cost").val();
 
     /*******Consumption Rate*************/
     $("#zipper_consumption_rate").val((zipper_cost/0.9144).toFixed(4));
-    console.log("zipper_consumption_rate:" + zipper_consumption_rate);
     var zipper_consumption = +$("#zipper_consumption").val();
     var zipper_consumption_rate = +$("#zipper_consumption_rate").val();
 
+    /***********Total Zipper Cost*********/
     $("#zipper_consumption_cost").val((zipper_consumption*zipper_consumption_rate).toFixed(4));
 
 
-    /*******Webbing Cost*************/
-    var webbing_cost = +$("#webbing_cost").val();
-    $("#webbing_consumption_rate").val((webbing_cost/0.9144).toFixed(4));
 
+    /*******************************/
+    /*******Webbing Cost*************/
+    /*******************************/
+    var webbing_cost = +$("#webbing_cost").val();
+
+    /*******Consumption Rate*************/
+    $("#webbing_consumption_rate").val((webbing_cost/0.9144).toFixed(4));
     var webbing_consumption = +$("#webbing_consumption").val();
     var webbing_consumption_rate = +$("#webbing_consumption_rate").val();
 
+    /***********Total Webbing Cost*********/
     $("#webbing_consumption_cost").val((webbing_consumption*webbing_consumption_rate).toFixed(4));
 
 
-    /*******Draw String Cost*************/
-    var draw_string_cost = +$("#draw_string_cost").val();
-    $("#draw_string_consumption_rate").val((draw_string_cost/0.9144).toFixed(4));
 
+
+    /************************************/
+    /**********Draw String Cost**********/
+    /************************************/
+    var draw_string_cost = +$("#draw_string_cost").val();
+
+    /*******Consumption Rate*************/
+    $("#draw_string_consumption_rate").val((draw_string_cost/0.9144).toFixed(4));
     var draw_string_consumption = +$("#draw_string_consumption").val();
     var draw_string_consumption_rate = +$("#draw_string_consumption_rate").val();
 
+    /***********Total Draw String Cost*********/
     $("#draw_string_consumption_cost").val((draw_string_consumption*draw_string_consumption_rate).toFixed(4));
 
 
-    /*******Velcro Cost*************/
+
+    /************************************/
+    /************Velcro Cost*************/
+    /************************************/
     var velcro_cost = +$("#velcro_cost").val();
+
+    /*******Consumption Rate*************/
     $("#velcro_consumption_rate").val((velcro_cost/0.9144).toFixed(4));
 
     var velcro_consumption = +$("#velcro_consumption").val();
     var velcro_consumption_rate = +$("#velcro_consumption_rate").val();
 
+    /*********** Total Velcro Cost*********/
     $("#velcro_consumption_cost").val((velcro_consumption*velcro_consumption_rate).toFixed(4));
 
 
-    /*******Tape Cost*************/
-    var tape_cost = +$("#tape_cost").val();
-    $("#tape_consumption_rate").val((tape_cost/0.9144).toFixed(4));
 
+
+    /************************************/
+    /*************Tape Cost**************/
+    /************************************/
+    var tape_cost = +$("#tape_cost").val();
+
+    /*******Consumption Rate*************/
+    $("#tape_consumption_rate").val((tape_cost/0.9144).toFixed(4));
     var tape_consumption = +$("#tape_consumption").val();
     var tape_consumption_rate = +$("#tape_consumption_rate").val();
 
+    /*********** Total Velcro Cost*********/
     $("#tape_consumption_cost").val((tape_consumption*tape_consumption_rate).toFixed(4));
 
 
-    /*******Extra 1 yard Cost*************/
-    var extra_trim_yard_1_cost = +$("#extra_trim_yard_1_cost").val();
-    $("#extra_trim_yard_1_consumption_rate").val((extra_trim_yard_1_cost/0.9144).toFixed(4));
 
+    /********************************************/
+    /*************Extra 1 yard Cost**************/
+    /********************************************/
+    var extra_trim_yard_1_cost = +$("#extra_trim_yard_1_cost").val();
+
+    $("#extra_trim_yard_1_consumption_rate").val((extra_trim_yard_1_cost/0.9144).toFixed(4));
     var extra_trim_yard_1_consumption = +$("#extra_trim_yard_1_consumption").val();
     var extra_trim_yard_1_consumption_rate = +$("#extra_trim_yard_1_consumption_rate").val();
 
     $("#extra_trim_yard_1_consumption_cost").val((extra_trim_yard_1_consumption*extra_trim_yard_1_consumption_rate).toFixed(4));
 
 
-    /*******Extra 2 yard Cost*************/
-    var extra_trim_yard_2_cost = +$("#extra_trim_yard_2_cost").val();
-    $("#extra_trim_yard_2_consumption_rate").val((extra_trim_yard_2_cost/0.9144).toFixed(4));
 
+    /********************************************/
+    /*************Extra 2 yard Cost**************/
+    /********************************************/
+    var extra_trim_yard_2_cost = +$("#extra_trim_yard_2_cost").val();
+
+    $("#extra_trim_yard_2_consumption_rate").val((extra_trim_yard_2_cost/0.9144).toFixed(4));
     var extra_trim_yard_2_consumption = +$("#extra_trim_yard_2_consumption").val();
     var extra_trim_yard_2_consumption_rate = +$("#extra_trim_yard_2_consumption_rate").val();
 
