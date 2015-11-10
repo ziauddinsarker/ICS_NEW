@@ -9,10 +9,36 @@ class Just_post_model extends CI_Model
     }
 
 
+    function get_single_post($url_slug){
+        $this->db->select('*');
+        $this->db->from('just_post');
+        $this->db->where('url_slug', $url_slug);
+        $query = $this->db->get();
+        return $query->first_row();
+    }
+
+    function get_rev_single_post($id){
+        $this->db->select('*');
+        $this->db->from('rev_just_post');
+        $this->db->where('rev_post_id', $id);
+        $result = $this->db->get();
+
+        if ($result->num_rows() > 0) {
+            foreach ($result->result() as $data) {
+                $result_array[] = $data;
+            }
+            return $result_array;
+        }
+    }
+
+
+
+
     /**
      * @return array
      */
     function view() {
+
         $result = $this->db->get('just_post');
 
         if ($result->num_rows() > 0) {
@@ -30,9 +56,11 @@ class Just_post_model extends CI_Model
     function add() {
         $title = $this->input->post('just_post_title');
         $description = $this->input->post('just_post_description');
+        $url_slug = strtolower(url_title($title));
         $data = array(
             'just_post_title' => $title,
-            'just_post_description' => $description
+            'just_post_description' => $description,
+            'url_slug' => $url_slug
         );
         $this->db->insert('just_post', $data);
     }
@@ -59,12 +87,25 @@ class Just_post_model extends CI_Model
     function update($id) {
         $title = $this->input->post('just_post_title');
         $description = $this->input->post('just_post_description');
+        $url_slug = strtolower(url_title($title));
         $data = array(
             'just_post_title' => $title,
-            'just_post_description' => $description
+            'just_post_description' => $description,
+            'url_slug' => $url_slug
         );
         $this->db->where('just_id', $id);
         $this->db->update('just_post', $data);
+
+        $rev_data = array(
+            'rev_post_id' => $id,
+            'just_post_title' => $title,
+            'just_post_description' => $description,
+            'url_slug' => $url_slug
+        );
+
+        $this->db->insert('rev_just_post', $rev_data);
+
+
     }
 
 }

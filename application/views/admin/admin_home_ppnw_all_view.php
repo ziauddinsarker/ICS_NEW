@@ -41,7 +41,7 @@
                                 <td><?php echo $ppnw->tbl_order_date;?></td>
                                 <td><?php echo $ppnw->tbl_order_quantity;?></td>
                                 <td><?php echo $ppnw->tbl_total_price;?></td>
-                                <td><a href="<?=  base_url()?>ppnw/edit_ppnw_costing/<?= $ppnw->ics_order_id;?>">Edit</a> | <a href="<?=  base_url()?>ppnw/delete_ppnw_costing/<?= $ppnw->ics_order_id;?>">Delete</a></td>
+                                <td><a href="<?=  base_url()?>ppnw/edit_ppnw_costing/<?= $ppnw->ics_order_id;?>">Edit</a> | <a href="<?=  base_url()?>ppnw/delete_ppnw_costing/<?= $ppnw->ics_order_id;?>">Delete</a>| <a href="<?=  base_url()?>ppnw/revision_ppnw_costing/<?= $ppnw->ics_order_id;?>">Revision</a></td>
                             </tr>
                         <?php }?>
                         </tbody>

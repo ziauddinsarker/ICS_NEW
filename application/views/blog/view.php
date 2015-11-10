@@ -28,12 +28,17 @@
             <td>
                 <a href="<?php echo site_url('just_post/edit/' . $row->just_id); ?>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Edit</a>
                 <a href="<?php echo site_url('just_post/delete/' . $row->just_id); ?>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</a>
-            </td>
+                <a href="<?php echo site_url('just_post/single_post/' . $row->url_slug); ?>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>view</a>
+                <a href="<?php echo site_url('just_post/rev_single_post/' . $row->just_id); ?>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>revisions</a>
+           </td>
             <?php
-            }
+                }
             }
             ?>
         </tr>
         </tbody>
     </table>
+
+
+
 </div>

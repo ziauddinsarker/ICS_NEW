@@ -16,15 +16,35 @@ class Just_post extends CI_Controller
      * Index of Admin Controller, This method will show all posts
      */
     public function index(){
+
         $data['data_get'] = $this->just_post_model->view();
         $this->load->view('blog/view', $data);
+    }
+
+
+    function single_post($url_slug){
+        $data['posts'] = $this->just_post_model->get_single_post($url_slug);
+        $this->load->view('blog/header');
+        $this->load->view('blog/single_view',$data);
+        $this->load->view('blog/footer');
+    }
+
+    function rev_single_post($id){
+        $data['posts'] = $this->just_post_model->get_rev_single_post($id);
+        //var_dump($data['posts']);
+
+        $this->load->view('blog/header');
+        $this->load->view('blog/rev_single_view',$data);
+        $this->load->view('blog/footer');
     }
 
     /**
      * View all Posts
      */
     function add() {
+        $this->load->view('blog/header');
         $this->load->view('blog/add');
+        $this->load->view('blog/footer');
     }
 
     function save() {
@@ -54,7 +74,10 @@ class Just_post extends CI_Controller
         $data['just_post_title'] = $dt->just_post_title;
         $data['just_post_description'] = $dt->just_post_description;
         $data['just_id'] = $post_id;
+
+        $this->load->view('blog/header', $data);
         $this->load->view('blog/edit', $data);
+        $this->load->view('blog/footer', $data);
     }
 
 
@@ -62,7 +85,7 @@ class Just_post extends CI_Controller
      * Add New Post
      */
     function update() {
-        if ($this->input->post('mit')) {
+        if ($this->input->post('update')) {
             $id = $this->input->post('id');
             $this->just_post_model->update($id);
             redirect('just_post');

@@ -46,7 +46,7 @@
 
 					<div class="col-sm-2 col-md-2">
 						<form class="navbar-form navbar-right" role="search">
-							<div class="input-group"><a href="<?php base_url() ?>/ICS_NEW/admin/" class="btn btn-warning">Dashboard</a></div>
+							<div class="input-group"><a href="<?php base_url() ?>/ICS_NEW/admin" class="btn btn-warning">Dashboard</a></div>
 						</form>
 					</div>
 

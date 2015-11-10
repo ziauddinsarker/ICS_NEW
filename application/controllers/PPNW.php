@@ -25,15 +25,6 @@ class PPNW extends CI_Controller
      * Show All PP Nonwovens Costing in a page of a Particular user
      */
 
-
-
-
-
-
-
-
-
-
     public function ppnw_all(){
         if (!$this->ion_auth->logged_in()) {
             // redirect them to the login page
@@ -43,6 +34,237 @@ class PPNW extends CI_Controller
             $this->load->view('admin/admin_home_ppnw_all_view', $this->data);
             $this->load->view('admin/admin_footer_view');
         }
+    }
+
+
+    public function revision_ppnw_costing($id){
+
+        if (!$this->ion_auth->logged_in()) {
+            // redirect them to the login page
+            redirect('login/index', 'refresh');
+        } else {
+            $this->data['revision_single_ppnw_costing'] = $this->ppnw_model->all_revisions_single_ppnw_costing($id);
+            //var_dump($this->data['revision_single_ppnw_costing']);
+            $this->load->view('admin/admin_header_view', $this->data);
+            $this->load->view('admin/admin_home_ppnw_single_user_rev_view', $this->data);
+            $this->load->view('admin/admin_footer_view');
+        }
+    }
+
+   /* public function single_revision_ppnw_costing($id){
+
+        if (!$this->ion_auth->logged_in()) {
+            // redirect them to the login page
+            redirect('login/index', 'refresh');
+        } else {
+            $this->data['single_revision_single_ppnw_costing'] = $this->ppnw_model->single_revisions_single_ppnw_costing($id);
+            //var_dump($this->data['revision_single_ppnw_costing']);
+            $this->load->view('admin/admin_header_view', $this->data);
+            $this->load->view('admin/admin_home_rev_ppnw_costing_view', $this->data);
+            $this->load->view('admin/admin_footer_view');
+        }
+    }*/
+
+    /**
+     *+Edit the PPNw Costing
+     */
+    public function single_revision_ppnw_costing($id){
+        //$dt = $this->ppnw_model->single_revisions_single_ppnw_costing();
+        $this->data['single_rev'] = $this->ppnw_model->single_revisions_single_ppnw_costing();
+
+
+
+        //var_dump($dt);
+
+       /*
+        $data['order_id'] = $dt->tbl_order_id_name;
+        $data['order_company'] = $dt->tbl_company_id;
+        $data['order_date'] = $dt->tbl_order_date;
+        $data['order_item_name'] = $dt->tbl_item_name;
+        $data['order_ref_no'] = $dt->tbl_ref_name;
+
+        $data['order_gsm'] = $dt->tbl_order_gsm;
+        $data['order_colour'] = $dt->tbl_order_color;
+        $data['order_usd'] = $dt->tbl_order_usd;
+        $data['order_wastage'] = $dt->tbl_order_wastage;
+        $data['order_margin'] = $dt->tbl_order_margin;
+
+        $data['order_quantity'] = $dt->tbl_order_quantity;
+        $data['order_transport'] = $dt->tbl_order_transport;
+        $data['order_bank_document'] = $dt->tbl_order_bank_doc_charge;
+
+        $data['order_body_h'] = $dt->tbl_dimension_body_height;
+        $data['order_body_h_allowance'] = $dt->tbl_dimension_body_height_allowance;
+        $data['order_body_h_total'] = $dt->tbl_dimension_body_height_total;
+
+        $data['order_body_w'] = $dt->tbl_dimension_body_width;
+        $data['order_body_w_allowance'] = $dt->tbl_dimension_body_width_allowance;
+        $data['order_body_w_total'] = $dt->tbl_dimension_body_width_total;
+
+        $data['order_body_panel'] = $dt->tbl_dimension_body_panel;
+        $data['order_body_panel_allowance'] = $dt->tbl_dimension_body_panel_allowance;
+        $data['order_body_panel_total'] = $dt->tbl_dimension_body_panel_total;
+
+        $data['order_handle_l'] = $dt->tbl_dimension_handle_length;
+        $data['order_handle_l_allowance'] = $dt->tbl_dimension_handle_length_allowance;
+        $data['order_handle_l_total'] = $dt->tbl_dimension_handle_length_total;
+
+        $data['order_handle_w'] = $dt->tbl_dimension_handle_width;
+        $data['order_handle_w_allowance'] = $dt->tbl_dimension_handle_width_allowance;
+        $data['order_handle_w_total'] = $dt->tbl_dimension_handle_width_total;
+
+        $data['order_pocket_l'] = $dt->tbl_dimension_pocket_length;
+        $data['order_pocket_l_allowance'] = $dt->tbl_dimension_pocket_length_allowance;
+        $data['order_pocket_l_total'] = $dt->tbl_dimension_pocket_length_total;
+
+        $data['order_pocket_w'] = $dt->tbl_dimension_pocket_width;
+        $data['order_pocket_w_allowance'] = $dt->tbl_dimension_pocket_width_allowance;
+        $data['order_pocket_w_total'] = $dt->tbl_dimension_pocket_width_total;
+
+        $data['order_extra_1_l'] = $dt->tbl_dimension_extra_1_length;
+        $data['order_extra_1_l_allowance'] = $dt->tbl_dimension_extra_1_length_allowance;
+        $data['order_extra_1_l_total'] = $dt->tbl_dimension_extra_1_length_total;
+
+        $data['order_extra_1_w'] = $dt->tbl_dimension_extra_1_width;
+        $data['order_extra_1_w_allowance'] = $dt->tbl_dimension_extra_1_width_allowance;
+        $data['order_extra_1_w_total'] = $dt->tbl_dimension_extra_1_width_total;
+
+        $data['order_extra_2_l'] = $dt->tbl_dimension_extra_2_length;
+        $data['order_extra_2_l_allowance'] = $dt->tbl_dimension_extra_2_length_allowance;
+        $data['order_extra_2_l_total'] = $dt->tbl_dimension_extra_2_length_total;
+
+        $data['order_extra_2_w'] = $dt->tbl_dimension_extra_2_width;
+        $data['order_extra_2_w_allowance'] = $dt->tbl_dimension_extra_2_width_allowance;
+        $data['order_extra_2_w_total'] = $dt->tbl_dimension_extra_2_width_total;
+
+        $data['order_extra_3_l'] = $dt->tbl_dimension_extra_3_length;
+        $data['order_extra_3_l_allowance'] = $dt->tbl_dimension_extra_3_length_allowance;
+        $data['order_extra_3_l_total'] = $dt->tbl_dimension_extra_3_length_total;
+
+        $data['order_extra_3_w'] = $dt->tbl_dimension_extra_3_width;
+        $data['order_extra_3_w_allowance'] = $dt->tbl_dimension_extra_3_width_allowance;
+        $data['order_extra_3_w_total'] = $dt->tbl_dimension_extra_3_width_total;
+
+        $data['ppnw_cost'] = $dt->tbl_order_ppnw_item_cost;
+        $data['ppnw_consumption'] = $dt->tbl_order_ppnw_item_consumption;
+        $data['ppnw_consumption_rate'] = $dt->tbl_order_ppnw_rate;
+        $data['ppnw_consumption_cost'] = $dt->tbl_order_ppnw_total_item_cost;
+
+        $data['zipper_cost'] = $dt->tbl_trims_yard_zipper_item_cost;
+        $data['zipper_consumption'] = $dt->tbl_trims_yard_zipper_item_consumption;
+        $data['zipper_consumption_rate'] = $dt->tbl_trims_yard_zipper_item_rate;
+        $data['zipper_consumption_cost'] = $dt->tbl_trims_yard_zipper_item_total_cost;
+
+        $data['webbing_cost'] = $dt->tbl_trims_yard_webbing_item_cost;
+        $data['webbing_consumption'] = $dt->tbl_trims_yard_webbing_item_consumption;
+        $data['webbing_consumption_rate'] = $dt->tbl_trims_yard_webbing_item_rate;
+        $data['webbing_consumption_cost'] = $dt->tbl_trims_yard_webbing_item_total_cost;
+
+
+        $data['draw_string_cost'] = $dt->tbl_trims_yard_draw_string_item_cost;
+        $data['draw_string_consumption'] = $dt->tbl_trims_yard_draw_string_item_consumption;
+        $data['draw_string_consumption_rate'] = $dt->tbl_trims_yard_draw_string_item_rate;
+        $data['draw_string_consumption_cost'] = $dt->tbl_trims_yard_draw_string_item_total_cost;
+
+        $data['velcro_cost'] = $dt->tbl_trims_yard_velcro_item_cost;
+        $data['velcro_consumption'] = $dt->tbl_trims_yard_velcro_item_consumption;
+        $data['velcro_consumption_rate'] = $dt->tbl_trims_yard_velcro_item_rate;
+        $data['velcro_consumption_cost'] = $dt->tbl_trims_yard_velcro_item_total_cost;
+
+        $data['tape_cost'] = $dt->tbl_trims_yard_tape_item_cost;
+        $data['tape_consumption'] = $dt->tbl_trims_yard_tape_item_consumption;
+        $data['tape_consumption_rate'] = $dt->tbl_trims_yard_tape_item_rate;
+        $data['tape_consumption_cost'] = $dt->tbl_trims_yard_tape_item_total_cost;
+
+        $data['extra_trim_yard_1_cost'] = $dt->tbl_trims_yard_extra_1_item_cost;
+        $data['extra_trim_yard_1_consumption'] = $dt->tbl_trims_yard_extra_1_item_consumption;
+        $data['extra_trim_yard_1_consumption_rate'] = $dt->tbl_trims_yard_extra_1_item_rate;
+        $data['extra_trim_yard_1_consumption_cost'] = $dt->tbl_trims_yard_extra_1_item_total_cost;
+
+        $data['extra_trim_yard_2_cost'] = $dt->tbl_trims_yard_extra_2_item_cost;
+        $data['extra_trim_yard_2_consumption'] = $dt->tbl_trims_yard_extra_2_item_consumption;
+        $data['extra_trim_yard_2_consumption_rate'] = $dt->tbl_trims_yard_extra_2_item_consumption;
+        $data['extra_trim_yard_2_consumption_cost'] = $dt->tbl_trims_yard_extra_2_item_total_cost;
+
+        $data['puller_cost'] = $dt->tbl_trims_piece_puller_item_cost;
+        $data['puller_consumption'] = $dt->tbl_trims_piece_puller_item_consumption;
+        $data['puller_consumption_rate'] = $dt->tbl_trims_piece_puller_item_rate;
+        $data['puller_consumption_cost'] = $dt->tbl_trims_piece_puller_item_total_cost;
+
+
+        $data['print_cost'] = $dt->tbl_trims_piece_print_item_cost;
+        $data['print_consumption'] = $dt->tbl_trims_piece_print_item_consumption;
+        $data['print_consumption_rate'] = $dt->tbl_trims_piece_print_item_rate;
+        $data['print_consumption_cost'] = $dt->tbl_trims_piece_print_item_total_cost;
+
+        $data['eyelet_cost'] = $dt->tbl_trims_piece_eyelet_item_cost;
+        $data['eyelet_consumption'] = $dt->tbl_trims_piece_eyelet_item_consumption;
+        $data['eyelet_consumption_rate'] = $dt->tbl_trims_piece_eyelet_item_rate;
+        $data['eyelet_consumption_cost'] = $dt->tbl_trims_piece_eyelet_item_total_cost;
+
+        $data['buckle_cost'] = $dt->tbl_trims_piece_buckle_item_cost;
+        $data['buckle_consumption'] = $dt->tbl_trims_piece_buckle_item_consumption;
+        $data['buckle_consumption_rate'] = $dt->tbl_trims_piece_buckle_item_rate;
+        $data['buckle_consumption_cost'] = $dt->tbl_trims_piece_buckle_item_total_cost;
+
+        $data['snap_button_cost'] = $dt->tbl_trims_piece_snap_button_item_cost;
+        $data['snap_button_consumption'] = $dt->tbl_trims_piece_snap_button_item_consumption;
+        $data['snap_button_consumption_rate'] = $dt->tbl_trims_piece_snap_button_item_rate;
+        $data['snap_button_consumption_cost'] = $dt->tbl_trims_piece_snap_button_item_total_cost;
+
+        $data['magnetic_button_cost'] = $dt->tbl_trims_piece_magnetic_button_item_cost;
+        $data['magnetic_button_consumption'] = $dt->tbl_trims_piece_magnetic_button_item_consumption;
+        $data['magnetic_button_consumption_rate'] = $dt->tbl_trims_piece_magnetic_button_item_rate;
+        $data['magnetic_button_consumption_cost'] = $dt->tbl_trims_piece_magnetic_button_item_total_cost;
+
+        $data['bottom_base_cost'] = $dt->tbl_trims_piece_bottom_base_item_cost;
+        $data['bottom_base_consumption'] = $dt->tbl_trims_piece_bottom_base_item_consumption;
+        $data['bottom_base_consumption_rate'] = $dt->tbl_trims_piece_bottom_base_item_rate;
+        $data['bottom_base_consumption_cost'] = $dt->tbl_trims_piece_bottom_base_item_total_cost;
+
+        $data['thread_cost'] = $dt->tbl_trims_piece_thread_item_cost;
+        $data['thread_consumption'] = $dt->tbl_trims_piece_thread_item_consumption;
+        $data['thread_consumption_rate'] = $dt->tbl_trims_piece_thread_item_rate;
+        $data['thread_consumption_cost'] = $dt->tbl_trims_piece_thread_item_total_cost;
+
+        $data['tag_cost'] = $dt->tbl_trims_piece_tag_item_cost;
+        $data['tag_consumption'] = $dt->tbl_trims_piece_tag_item_consumption;
+        $data['tag_consumption_rate'] = $dt->tbl_trims_piece_tag_item_rate;
+        $data['tag_consumption_cost'] = $dt->tbl_trims_piece_tag_item_total_cost;
+
+        $data['label_cost'] = $dt->tbl_trims_piece_label_item_cost;
+        $data['label_consumption'] = $dt->tbl_trims_piece_label_item_consumption;
+        $data['label_consumption_rate'] = $dt->tbl_trims_piece_label_item_rate;
+        $data['label_consumption_cost'] = $dt->tbl_trims_piece_label_item_total_cost;
+
+        $data['packing_cost'] = $dt->tbl_trims_piece_packing_item_cost;
+        $data['packing_consumption'] = $dt->tbl_trims_piece_packing_item_consumption;
+        $data['packing_consumption_rate'] = $dt->tbl_trims_piece_packing_item_rate;
+        $data['packing_consumption_cost'] = $dt->tbl_trims_piece_packing_item_total_cost;
+
+        $data['extra_1_piece_cost'] = $dt->tbl_trims_piece_extra_1_item_cost;
+        $data['extra_1_piece_consumption'] = $dt->tbl_trims_piece_extra_1_item_consumption;
+        $data['extra_1_piece_consumption_rate'] = $dt->tbl_trims_piece_extra_1_item_rate;
+        $data['extra_1_piece_consumption_cost'] = $dt->tbl_trims_piece_extra_1_item_total_cost;
+
+        $data['extra_2_piece_cost'] = $dt->tbl_trims_piece_extra_2_item_cost;
+        $data['extra_2_piece_consumption'] = $dt->tbl_trims_piece_extra_2_item_consumption;
+        $data['extra_2_piece_consumption_rate'] = $dt->tbl_trims_piece_extra_2_item_rate;
+        $data['extra_2_piece_consumption_cost'] = $dt->tbl_trims_piece_extra_2_item_total_cost;
+
+        $data['extra_3_piece_cost'] = $dt->tbl_trims_piece_extra_3_item_cost;
+        $data['extra_3_piece_consumption'] = $dt->tbl_trims_piece_extra_3_item_consumption;
+        $data['extra_3_piece_consumption_rate'] = $dt->tbl_trims_piece_extra_3_item_rate;
+        $data['extra_3_piece_consumption_cost'] = $dt->tbl_trims_piece_extra_3_item_total_cost;
+
+        $data['order_total_material_inc_wastage'] = $dt->tbl_order_total_material_inc_wastage;
+        $data['order_sewing'] = $dt->tbl_order_sewing;
+        $data['order_overheads'] = $dt->tbl_order_overheads;
+*/
+        $this->load->view('admin/admin_header_view', $this->data);
+        $this->load->view('admin/admin_home_rev_ppnw_costing_view', $this->data);
+        $this->load->view('admin/admin_footer_view');
+
     }
 
 
