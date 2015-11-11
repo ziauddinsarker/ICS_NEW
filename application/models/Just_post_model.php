@@ -9,6 +9,24 @@ class Just_post_model extends CI_Model
     }
 
 
+/***************CSV Upload*********************/
+    function get_just_post() {
+        $query = $this->db->get('just_post');
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return FALSE;
+        }
+    }
+
+
+    function insert_csv($data) {
+        $this->db->insert('just_post', $data);
+    }
+
+/************************************************/
+
+
     function get_single_post($url_slug){
         $this->db->select('*');
         $this->db->from('just_post');

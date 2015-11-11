@@ -473,12 +473,12 @@
                         <tbody >
                         <tr class="success" >
                             <td > PPNW</td >
-                            <td ><input type = "text" class="form-control" id = "ppnw_cost" name = "ppnw_cost" value = "<?php echo $ppnw_cost ?>" required ></td >
+                            <td ><input type = "text" class="form-control" id = "ppnw_cost" name = "ppnw_cost" value = "<?php echo $s_rev->tbl_order_ppnw_item_cost ?>" required ></td >
                             <td > Kg</td >
-                            <td ><input type = "text" class="form-control" id = "ppnw_consumption" name = "ppnw_consumption" value = "<?php echo $ppnw_consumption ?>" disabled ></td >
-                            <td ><input type = "text" class="form-control" id = "ppnw_consumption_rate" name = "ppnw_consumption_rate" value = "<?php echo $ppnw_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "ppnw_consumption" name = "ppnw_consumption" value = "<?php echo $s_rev->tbl_order_ppnw_item_consumption ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "ppnw_consumption_rate" name = "ppnw_consumption_rate" value = "<?php echo $s_rev->tbl_order_ppnw_rate ?>" disabled ></td >
                             <td > SQM</td >
-                            <td ><input type = "text" class="form-control" id = "ppnw_consumption_cost" name = "ppnw_consumption_cost" value = "<?php echo $ppnw_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "ppnw_consumption_cost" name = "ppnw_consumption_cost" value = "<?php echo $s_rev->tbl_order_ppnw_total_item_cost ?>" disabled ></td >
                         </tr >
                         </tbody >
 
@@ -509,71 +509,71 @@
                         <tbody >
                         <tr class="danger" >
                             <td > Zipper</td >
-                            <td ><input type = "text" class="form-control" id = "zipper_cost" name = "zipper_cost" value = "<?php echo $zipper_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "zipper_cost" name = "zipper_cost" value = "<?php echo $s_rev->tbl_trims_yard_zipper_item_cost ?>" ></td >
                             <td > Yard</td >
-                            <td ><input type = "text" class="form-control" id = "zipper_consumption" name = "zipper_consumption" value = "<?php echo $zipper_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "zipper_consumption_rate" name = "zipper_consumption_rate" value = "<?php echo $zipper_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "zipper_consumption" name = "zipper_consumption" value = "<?php echo $s_rev->tbl_trims_yard_zipper_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "zipper_consumption_rate" name = "zipper_consumption_rate" value = "<?php echo $s_rev->tbl_trims_yard_zipper_item_rate ?>" disabled ></td >
                             <td > Metre</td >
-                            <td ><input type = "text" class="form-control" id = "zipper_consumption_cost" name = "zipper_consumption_cost" value = "<?php echo $zipper_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "zipper_consumption_cost" name = "zipper_consumption_cost" value = "<?php echo $s_rev->tbl_trims_yard_zipper_item_total_cost ?>" disabled ></td >
                         </tr >
                         <tr class="danger" >
                             <td > Webbing</td >
-                            <td ><input type = "text" class="form-control" id = "webbing_cost" name = "webbing_cost" value = "<?php echo $webbing_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "webbing_cost" name = "webbing_cost" value = "<?php echo $s_rev->tbl_trims_yard_webbing_item_cost ?>" ></td >
                             <td > Yard</td >
-                            <td ><input type = "text" class="form-control" id = "webbing_consumption" name = "webbing_consumption" value = "<?php echo $webbing_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "webbing_consumption_rate" name = "webbing_consumption_rate" value = "<?php echo $webbing_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "webbing_consumption" name = "webbing_consumption" value = "<?php echo $s_rev->tbl_trims_yard_webbing_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "webbing_consumption_rate" name = "webbing_consumption_rate" value = "<?php echo $s_rev->tbl_trims_yard_webbing_item_rate ?>" disabled ></td >
                             <td > Metre</td >
-                            <td ><input type = "text" class="form-control" id = "webbing_consumption_cost" name = "webbing_consumption_cost" value = "<?php echo $webbing_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "webbing_consumption_cost" name = "webbing_consumption_cost" value = "<?php echo $s_rev->tbl_trims_yard_webbing_item_total_cost ?>" disabled ></td >
                         </tr >
 
                         <tr class="danger" >
                             <td > Draw String </td >
-                            <td ><input type = "text" class="form-control" id = "draw_string_cost" name = "draw_string_cost" value = "<?php echo $draw_string_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "draw_string_cost" name = "draw_string_cost" value = "<?php echo $s_rev->tbl_trims_yard_draw_string_item_cost ?>" ></td >
                             <td > Yard</td >
-                            <td ><input type = "text" class="form-control" id = "draw_string_consumption" name = "draw_string_consumption" value = "<?php echo $draw_string_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "draw_string_consumption_rate" name = "draw_string_consumption_rate" value = "<?php echo $draw_string_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "draw_string_consumption" name = "draw_string_consumption" value = "<?php echo $s_rev->tbl_trims_yard_draw_string_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "draw_string_consumption_rate" name = "draw_string_consumption_rate" value = "<?php echo $s_rev->tbl_trims_yard_draw_string_item_rate ?>" disabled ></td >
                             <td > Metre</td >
-                            <td ><input type = "text" class="form-control" id = "draw_string_consumption_cost" name = "draw_string_consumption_cost" value = "<?php echo $draw_string_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "draw_string_consumption_cost" name = "draw_string_consumption_cost" value = "<?php echo $s_rev->tbl_trims_yard_draw_string_item_total_cost ?>" disabled ></td >
                         </tr >
 
                         <tr class="danger" >
                             <td > Velcro</td >
-                            <td ><input type = "text" class="form-control" id = "velcro_cost" name = "velcro_cost" value = "<?php echo $velcro_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "velcro_cost" name = "velcro_cost" value = "<?php echo $s_rev->tbl_trims_yard_velcro_item_cost ?>" ></td >
                             <td > Yard</td >
-                            <td ><input type = "text" class="form-control" id = "velcro_consumption" name = "velcro_consumption" value = "<?php echo $velcro_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "velcro_consumption_rate" name = "velcro_consumption_rate" value = "<?php echo $velcro_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "velcro_consumption" name = "velcro_consumption" value = "<?php echo $s_rev->tbl_trims_yard_velcro_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "velcro_consumption_rate" name = "velcro_consumption_rate" value = "<?php echo $s_rev->tbl_trims_yard_velcro_item_rate ?>" disabled ></td >
                             <td > Metre</td >
-                            <td ><input type = "text" class="form-control" id = "velcro_consumption_cost" name = "velcro_consumption_cost" value = "<?php echo $velcro_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "velcro_consumption_cost" name = "velcro_consumption_cost" value = "<?php echo $s_rev->tbl_trims_yard_velcro_item_total_cost ?>" disabled ></td >
                         </tr >
 
                         <tr class="danger" >
                             <td > Tape</td >
-                            <td ><input type = "text" class="form-control" id = "tape_cost" name = "tape_cost" value = "<?php echo $tape_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "tape_cost" name = "tape_cost" value = "<?php echo $s_rev->tbl_trims_yard_tape_item_cost ?>" ></td >
                             <td > Yard</td >
-                            <td ><input type = "text" class="form-control" id = "tape_consumption" name = "tape_consumption" value = "<?php echo $tape_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "tape_consumption_rate" name = "tape_consumption_rate" value = "<?php echo $tape_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "tape_consumption" name = "tape_consumption" value = "<?php echo $s_rev->tbl_trims_yard_tape_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "tape_consumption_rate" name = "tape_consumption_rate" value = "<?php echo $s_rev->tbl_trims_yard_tape_item_rate ?>" disabled ></td >
                             <td > Metre</td >
-                            <td ><input type = "text" class="form-control" id = "tape_consumption_cost" name = "tape_consumption_cost"  value = "<?php echo $tape_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "tape_consumption_cost" name = "tape_consumption_cost"  value = "<?php echo $s_rev->tbl_trims_yard_tape_item_total_cost ?>" disabled ></td >
                         </tr >
 
                         <tr class="danger" >
                             <td > Extra 1 </td >
-                            <td ><input type = "text" class="form-control" id = "extra_trim_yard_1_cost" name = "extra_trim_yard_1_cost" value = "<?php echo $extra_trim_yard_1_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_trim_yard_1_cost" name = "extra_trim_yard_1_cost" value = "<?php echo $s_rev->tbl_trims_yard_extra_1_item_cost ?>" ></td >
                             <td > Yard</td >
-                            <td ><input type = "text" class="form-control" id = "extra_trim_yard_1_consumption" name = "extra_trim_yard_1_consumption" value = "<?php echo $extra_trim_yard_1_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "extra_trim_yard_1_consumption_rate" name = "extra_trim_yard_1_consumption_rate" value = "<?php echo $extra_trim_yard_1_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_trim_yard_1_consumption" name = "extra_trim_yard_1_consumption" value = "<?php echo $s_rev->tbl_trims_yard_extra_1_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_trim_yard_1_consumption_rate" name = "extra_trim_yard_1_consumption_rate" value = "<?php echo $s_rev->tbl_trims_yard_extra_1_item_rate ?>" disabled ></td >
                             <td > Metre</td >
-                            <td ><input type = "text" class="form-control" id = "extra_trim_yard_1_consumption_cost" name = "extra_trim_yard_1_consumption_cost" value = "<?php echo $extra_trim_yard_1_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_trim_yard_1_consumption_cost" name = "extra_trim_yard_1_consumption_cost" value = "<?php echo $s_rev->tbl_trims_yard_extra_1_item_total_cost ?>" disabled ></td >
                         </tr >
 
                         <tr class="danger" >
                             <td > Extra 2 </td >
-                            <td ><input type = "text" class="form-control" id = "extra_trim_yard_2_cost" name = "extra_trim_yard_2_cost" value = "<?php echo $extra_trim_yard_2_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_trim_yard_2_cost" name = "extra_trim_yard_2_cost" value = "<?php echo $s_rev->tbl_trims_yard_extra_2_item_cost ?>" ></td >
                             <td > Yard</td >
-                            <td ><input type = "text" class="form-control" id = "extra_trim_yard_2_consumption" name = "extra_trim_yard_2_consumption" value = "<?php echo $extra_trim_yard_2_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "extra_trim_yard_2_consumption_rate" name = "extra_trim_yard_2_consumption_rate" value = "<?php echo $extra_trim_yard_2_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_trim_yard_2_consumption" name = "extra_trim_yard_2_consumption" value = "<?php echo $s_rev->tbl_trims_yard_extra_2_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_trim_yard_2_consumption_rate" name = "extra_trim_yard_2_consumption_rate" value = "<?php echo $s_rev->tbl_trims_yard_extra_2_item_rate ?>" disabled ></td >
                             <td > Metre</td >
-                            <td ><input type = "text" class="form-control" id = "extra_trim_yard_2_consumption_cost" name = "extra_trim_yard_2_consumption_cost" value = "<?php echo $extra_trim_yard_2_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_trim_yard_2_consumption_cost" name = "extra_trim_yard_2_consumption_cost" value = "<?php echo $s_rev->tbl_trims_yard_extra_2_item_total_cost ?>" disabled ></td >
                         </tr >
                         </tbody >
 
@@ -607,142 +607,142 @@
 
                         <tr class="info" >
                             <td > Puller</td >
-                            <td ><input type = "text" class="form-control" id = "puller_cost" name = "puller_cost" value = "<?php echo $puller_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "puller_cost" name = "puller_cost" value = "<?php echo $s_rev->tbl_trims_piece_puller_item_cost ?>" ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "puller_consumption" name = "puller_consumption" value = "<?php echo $puller_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "puller_consumption_rate" name = "puller_consumption_rate" value = "<?php echo $puller_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "puller_consumption" name = "puller_consumption" value = "<?php echo $s_rev->tbl_trims_piece_puller_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "puller_consumption_rate" name = "puller_consumption_rate" value = "<?php echo $s_rev->tbl_trims_piece_puller_item_rate ?>" disabled ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "puller_consumption_cost" name = "puller_consumption_cost" value = "<?php echo $puller_consumption_cost ?>"  disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "puller_consumption_cost" name = "puller_consumption_cost" value = "<?php echo $s_rev->tbl_trims_piece_puller_item_total_cost ?>"  disabled ></td >
                         </tr >
 
                         <tr class="info" >
                             <td >Print</td >
-                            <td ><input type = "text" class="form-control" id = "print_cost" name = "print_cost" value = "<?php echo $print_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "print_cost" name = "print_cost" value = "<?php echo $s_rev->tbl_trims_piece_print_item_cost ?>" ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "print_consumption" name = "print_consumption" value = "<?php echo $print_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "print_consumption_rate" name = "print_consumption_rate" value = "<?php echo $print_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "print_consumption" name = "print_consumption" value = "<?php echo $s_rev->tbl_trims_piece_print_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "print_consumption_rate" name = "print_consumption_rate" value = "<?php echo $s_rev->tbl_trims_piece_print_item_rate ?>" disabled ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "print_consumption_cost" name = "print_consumption_cost" value = "<?php echo $print_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "print_consumption_cost" name = "print_consumption_cost" value = "<?php echo $s_rev->tbl_trims_piece_print_item_total_cost ?>" disabled ></td >
                         </tr >
 
                         <tr class="info" >
                             <td > Eyelet</td >
-                            <td ><input type = "text" class="form-control" id = "eyelet_cost" name = "eyelet_cost" value = "<?php echo $eyelet_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "eyelet_cost" name = "eyelet_cost" value = "<?php echo $s_rev->tbl_trims_piece_eyelet_item_cost ?>" ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "eyelet_consumption" name = "eyelet_consumption" value = "<?php echo $eyelet_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "eyelet_consumption_rate" name = "eyelet_consumption_rate" value = "<?php echo $eyelet_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "eyelet_consumption" name = "eyelet_consumption" value = "<?php echo $s_rev->tbl_trims_piece_eyelet_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "eyelet_consumption_rate" name = "eyelet_consumption_rate" value = "<?php echo $s_rev->tbl_trims_piece_eyelet_item_rate ?>" disabled ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "eyelet_consumption_cost" name = "eyelet_consumption_cost" value = "<?php echo $eyelet_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "eyelet_consumption_cost" name = "eyelet_consumption_cost" value = "<?php echo $s_rev->tbl_trims_piece_eyelet_item_total_cost ?>" disabled ></td >
                         </tr >
 
                         <tr class="info" >
                             <td > Buckle</td >
-                            <td ><input type = "text" class="form-control" id = "buckle_cost" name = "buckle_cost" value = "<?php echo $buckle_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "buckle_cost" name = "buckle_cost" value = "<?php echo $s_rev->tbl_trims_piece_buckle_item_cost ?>" ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "buckle_consumption" name = "buckle_consumption" value = "<?php echo $buckle_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "buckle_consumption_rate" name = "buckle_consumption_rate" value = "<?php echo $buckle_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "buckle_consumption" name = "buckle_consumption" value = "<?php echo $s_rev->tbl_trims_piece_buckle_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "buckle_consumption_rate" name = "buckle_consumption_rate" value = "<?php echo $s_rev->tbl_trims_piece_buckle_item_rate ?>" disabled ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "buckle_consumption_cost" name = "buckle_consumption_cost" value = "<?php echo $buckle_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "buckle_consumption_cost" name = "buckle_consumption_cost" value = "<?php echo $s_rev->tbl_trims_piece_buckle_item_total_cost ?>" disabled ></td >
                         </tr >
 
                         <tr class="info" >
                             <td > Snap Button </td >
-                            <td ><input type = "text" class="form-control" id = "snap_button_cost" name = "snap_button_cost" value = "<?php echo $snap_button_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "snap_button_cost" name = "snap_button_cost" value = "<?php echo $s_rev->tbl_trims_piece_snap_button_item_cost ?>" ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "snap_button_consumption" name = "snap_button_consumption" value = "<?php echo $snap_button_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "snap_button_consumption_rate" name = "snap_button_consumption_rate" value = "<?php echo $snap_button_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "snap_button_consumption" name = "snap_button_consumption" value = "<?php echo $s_rev->tbl_trims_piece_snap_button_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "snap_button_consumption_rate" name = "snap_button_consumption_rate" value = "<?php echo $s_rev->tbl_trims_piece_snap_button_item_rate ?>" disabled ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "snap_button_consumption_cost" name = "snap_button_consumption_cost" value = "<?php echo $snap_button_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "snap_button_consumption_cost" name = "snap_button_consumption_cost" value = "<?php echo $s_rev->tbl_trims_piece_snap_button_item_total_cost ?>" disabled ></td >
                         </tr >
 
                         <tr class="info" >
                             <td > Magnetic Button </td >
-                            <td ><input type = "text" class="form-control" id = "magnetic_button_cost" name = "magnetic_button_cost" value = "<?php echo $magnetic_button_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "magnetic_button_cost" name = "magnetic_button_cost" value = "<?php echo $s_rev->tbl_trims_piece_magnetic_button_item_cost ?>" ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "magnetic_button_consumption" name = "magnetic_button_consumption" value = "<?php echo $magnetic_button_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "magnetic_button_consumption_rate" name = "magnetic_button_consumption_rate" value = "<?php echo $magnetic_button_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "magnetic_button_consumption" name = "magnetic_button_consumption" value = "<?php echo $s_rev->tbl_trims_piece_magnetic_button_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "magnetic_button_consumption_rate" name = "magnetic_button_consumption_rate" value = "<?php echo $s_rev->tbl_trims_piece_magnetic_button_item_rate ?>" disabled ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "magnetic_button_consumption_cost" name = "magnetic_button_consumption_cost" value = "<?php echo $magnetic_button_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "magnetic_button_consumption_cost" name = "magnetic_button_consumption_cost" value = "<?php echo $s_rev->tbl_trims_piece_magnetic_button_item_total_cost ?>" disabled ></td >
                         </tr >
 
                         <tr class="info" >
                             <td > Bottom Base </td >
-                            <td ><input type = "text" class="form-control" id = "bottom_base_cost" name = "bottom_base_cost" value = "<?php echo $bottom_base_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "bottom_base_cost" name = "bottom_base_cost" value = "<?php echo $s_rev->tbl_trims_piece_bottom_base_item_cost ?>" ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "bottom_base_consumption" name = "bottom_base_consumption" value = "<?php echo $bottom_base_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "bottom_base_consumption_rate" name = "bottom_base_consumption_rate" value = "<?php echo $bottom_base_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "bottom_base_consumption" name = "bottom_base_consumption" value = "<?php echo $s_rev->tbl_trims_piece_bottom_base_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "bottom_base_consumption_rate" name = "bottom_base_consumption_rate" value = "<?php echo $s_rev->tbl_trims_piece_bottom_base_item_rate ?>" disabled ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "bottom_base_consumption_cost" name = "bottom_base_consumption_cost" value = "<?php echo $bottom_base_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "bottom_base_consumption_cost" name = "bottom_base_consumption_cost" value = "<?php echo $s_rev->tbl_trims_piece_bottom_base_item_total_cost ?>" disabled ></td >
                         </tr >
 
                         <tr class="info" >
                             <td > Thread</td >
-                            <td ><input type = "text" class="form-control" id = "thread_cost" name = "thread_cost" value = "<?php echo $thread_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "thread_cost" name = "thread_cost" value = "<?php echo $s_rev->tbl_trims_piece_thread_item_cost ?>" ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "thread_consumption" name = "thread_consumption" value = "<?php echo $thread_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "thread_consumption_rate" name = "thread_consumption_rate" value = "<?php echo $thread_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "thread_consumption" name = "thread_consumption" value = "<?php echo $s_rev->tbl_trims_piece_thread_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "thread_consumption_rate" name = "thread_consumption_rate" value = "<?php echo $s_rev->tbl_trims_piece_thread_item_rate ?>" disabled ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "thread_consumption_cost" name = "thread_consumption_cost" value = "<?php echo $thread_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "thread_consumption_cost" name = "thread_consumption_cost" value = "<?php echo $s_rev->tbl_trims_piece_thread_item_total_cost ?>" disabled ></td >
                         </tr >
 
                         <tr class="info" >
                             <td > Tag</td >
-                            <td ><input type = "text" class="form-control" id = "tag_cost" name = "tag_cost" value = "<?php echo $tag_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "tag_cost" name = "tag_cost" value = "<?php echo $s_rev->tbl_trims_piece_tag_item_cost ?>" ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "tag_consumption" name = "tag_consumption" value = "<?php echo $tag_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "tag_consumption_rate" name = "tag_consumption_rate" value = "<?php echo $tag_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "tag_consumption" name = "tag_consumption" value = "<?php echo $s_rev->tbl_trims_piece_tag_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "tag_consumption_rate" name = "tag_consumption_rate" value = "<?php echo $s_rev->tbl_trims_piece_tag_item_rate ?>" disabled ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "tag_consumption_cost" name = "tag_consumption_cost" value = "<?php echo $tag_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "tag_consumption_cost" name = "tag_consumption_cost" value = "<?php echo $s_rev->tbl_trims_piece_tag_item_total_cost ?>" disabled ></td >
                         </tr >
 
                         <tr class="info" >
                             <td > Label</td >
-                            <td ><input type = "text" class="form-control" id = "label_cost" name = "label_cost" value = "<?php echo $label_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "label_cost" name = "label_cost" value = "<?php echo $s_rev->tbl_trims_piece_label_item_cost ?>" ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "label_consumption" name = "label_consumption" value = "<?php echo $label_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "label_consumption_rate" name = "label_consumption_rate" value = "<?php echo $label_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "label_consumption" name = "label_consumption" value = "<?php echo $s_rev->tbl_trims_piece_label_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "label_consumption_rate" name = "label_consumption_rate" value = "<?php echo $s_rev->tbl_trims_piece_label_item_rate ?>" disabled ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "label_consumption_cost" name = "label_consumption_cost" value = "<?php echo $label_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "label_consumption_cost" name = "label_consumption_cost" value = "<?php echo $s_rev->tbl_trims_piece_label_item_total_cost ?>" disabled ></td >
                         </tr >
 
                         <tr class="info" >
                             <td > Packing</td >
-                            <td ><input type = "text" class="form-control" id = "packing_cost" name = "packing_cost" value = "<?php echo $packing_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "packing_cost" name = "packing_cost" value = "<?php echo $s_rev->tbl_trims_piece_packing_item_cost ?>" ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "packing_consumption" name = "packing_consumption" value = "<?php echo $packing_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "packing_consumption_rate" name = "packing_consumption_rate" value = "<?php echo $packing_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "packing_consumption" name = "packing_consumption" value = "<?php echo $s_rev->tbl_trims_piece_packing_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "packing_consumption_rate" name = "packing_consumption_rate" value = "<?php echo $s_rev->tbl_trims_piece_packing_item_rate ?>" disabled ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "packing_consumption_cost" name = "packing_consumption_cost" value = "<?php echo $packing_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "packing_consumption_cost" name = "packing_consumption_cost" value = "<?php echo $s_rev->tbl_trims_piece_packing_item_total_cost ?>" disabled ></td >
                         </tr >
 
                         <tr class="info" >
                             <td > Extra 1 </td >
-                            <td ><input type = "text" class="form-control" id = "extra_1_piece_cost" name = "extra_1_piece_cost" value = "<?php echo $extra_1_piece_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_1_piece_cost" name = "extra_1_piece_cost" value = "<?php echo $s_rev->tbl_trims_piece_extra_1_item_cost ?>" ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "extra_1_piece_consumption" name = "extra_1_piece_consumption" value = "<?php echo $extra_1_piece_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "extra_1_piece_consumption_rate" name = "extra_1_piece_consumption_rate" value = "<?php echo $extra_1_piece_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_1_piece_consumption" name = "extra_1_piece_consumption" value = "<?php echo $s_rev->tbl_trims_piece_extra_1_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_1_piece_consumption_rate" name = "extra_1_piece_consumption_rate" value = "<?php echo $s_rev->tbl_trims_piece_extra_1_item_rate ?>" disabled ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "extra_1_piece_consumption_cost" name = "extra_1_piece_consumption_cost" value = "<?php echo $extra_1_piece_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_1_piece_consumption_cost" name = "extra_1_piece_consumption_cost" value = "<?php echo $s_rev->tbl_trims_piece_extra_1_item_total_cost ?>" disabled ></td >
                         </tr >
 
                         <tr class="info" >
                             <td > Extra 2 </td >
-                            <td ><input type = "text" class="form-control" id = "extra_2_piece_cost" name = "extra_2_piece_cost" value = "<?php echo $extra_2_piece_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_2_piece_cost" name = "extra_2_piece_cost" value = "<?php echo $s_rev->tbl_trims_piece_extra_2_item_cost ?>" ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "extra_2_piece_consumption" name = "extra_2_piece_consumption" value = "<?php echo $extra_2_piece_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "extra_2_piece_consumption_rate" name = "extra_2_piece_consumption_rate" value = "<?php echo $extra_2_piece_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_2_piece_consumption" name = "extra_2_piece_consumption" value = "<?php echo $s_rev->tbl_trims_piece_extra_2_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_2_piece_consumption_rate" name = "extra_2_piece_consumption_rate" value = "<?php echo $s_rev->tbl_trims_piece_extra_2_item_rate ?>" disabled ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "extra_2_piece_consumption_cost" name = "extra_2_piece_consumption_cost" value = "<?php echo $extra_2_piece_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_2_piece_consumption_cost" name = "extra_2_piece_consumption_cost" value = "<?php echo $s_rev->tbl_trims_piece_extra_2_item_total_cost ?>" disabled ></td >
                         </tr >
 
                         <tr class="info" >
                             <td > Extra 3 </td >
-                            <td ><input type = "text" class="form-control" id = "extra_3_piece_cost" name = "extra_3_piece_cost" value = "<?php echo $extra_3_piece_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_3_piece_cost" name = "extra_3_piece_cost" value = "<?php echo $s_rev->tbl_trims_piece_extra_3_item_cost ?>" ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "extra_3_piece_consumption" name = "extra_3_piece_consumption" value = "<?php echo $extra_3_piece_consumption ?>" ></td >
-                            <td ><input type = "text" class="form-control" id = "extra_3_piece_consumption_rate" name = "extra_3_piece_consumption_rate" value = "<?php echo $extra_3_piece_consumption_rate ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_3_piece_consumption" name = "extra_3_piece_consumption" value = "<?php echo $s_rev->tbl_trims_piece_extra_3_item_consumption ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_3_piece_consumption_rate" name = "extra_3_piece_consumption_rate" value = "<?php echo $s_rev->tbl_trims_piece_extra_3_item_rate ?>" disabled ></td >
                             <td > Piece</td >
-                            <td ><input type = "text" class="form-control" id = "extra_3_piece_consumption_cost" name = "extra_3_piece_consumption_cost" value = "<?php echo $extra_3_piece_consumption_cost ?>" disabled ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_3_piece_consumption_cost" name = "extra_3_piece_consumption_cost" value = "<?php echo $s_rev->tbl_trims_piece_extra_3_item_total_cost ?>" disabled ></td >
                         </tr >
                         </tbody >
                 <?php
@@ -764,11 +764,8 @@
 
                     <h2><b>Price</b>: <span id="final_price"></span></h2>
 
-                    <input type="hidden" name="ppnw-id" value="<?php echo $ics_order_id ?>">
-
-                    <button class="btn btn-info" type="submit" name="updateppnw" value="updateppnw">Update</button>
-                    <button class="btn btn-info">PRINT</button>
-                    <button class="btn btn-info">PDF</button>
+                    <input type="hidden" name="ppnw-id" value="<?php echo $s_rev->tbl_ics_order_id ?>">
+                    <a href="<?php echo base_url("fpdf_test"); ?>" class="btn btn-info">PDF</a>
                 </article>
 
                 <article class="row other-cost">

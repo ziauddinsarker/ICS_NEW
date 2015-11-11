@@ -30,6 +30,16 @@ class PPNW extends CI_Controller
             // redirect them to the login page
             redirect('login/index', 'refresh');
         } else {
+            //Database
+            $ppnw_costing_id = $this->uri->segment(3);
+            var_dump($ppnw_costing_id);
+            $this->db->select('tbl_order_rev_id, tbl_dimension_body_height_total,tbl_dimension_body_width_total,tbl_dimension_body_panel_total');
+            $this->db->from('ppnw_costing_rev');
+            $this->db->where('tbl_order_rev_id',$ppnw_costing_id);
+            $query = $this->db->get();
+            $n = $query->result();
+            var_dump($n);
+
             $this->load->view('admin/admin_header_view', $this->data);
             $this->load->view('admin/admin_home_ppnw_all_view', $this->data);
             $this->load->view('admin/admin_footer_view');
