@@ -1,8 +1,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h1>
-        Update PP Nonwoven Costing
-    </h1>
+    <?php
+    $url = htmlspecialchars($_SERVER['HTTP_REFERER']);
+    echo "<a class='btn btn-default btn-info' href='$url'>Back</a>";
+    ?>
+    <a class="btn btn-default" href="<?php echo base_url("ppnw/ppnw_all"); ?>">All PPNW</a>
+    <h1>Revisioned PP Nonwoven Costing</h1>
 </section>
 
 <!-- Main content -->
@@ -737,7 +740,7 @@
 
                         <tr class="info" >
                             <td > Extra 3 </td >
-                            <td ><input type = "text" class="form-control" id = "extra_3_piece_cost" name = "extra_3_piece_cost" value = "<?php echo $s_rev->tbl_trims_piece_extra_3_item_cost ?>" ></td >
+                            <td ><input type = "text" class="form-control" id = "extra_3_piece_cost" name = "extra_3_piece_cost" value="<?php echo $s_rev->tbl_trims_piece_extra_3_item_cost ?>" ></td >
                             <td > Piece</td >
                             <td ><input type = "text" class="form-control" id = "extra_3_piece_consumption" name = "extra_3_piece_consumption" value = "<?php echo $s_rev->tbl_trims_piece_extra_3_item_consumption ?>" ></td >
                             <td ><input type = "text" class="form-control" id = "extra_3_piece_consumption_rate" name = "extra_3_piece_consumption_rate" value = "<?php echo $s_rev->tbl_trims_piece_extra_3_item_rate ?>" disabled ></td >
@@ -758,14 +761,17 @@
             <aside class="col-md-4">
                 <article class="row grand-total">
 
-                    <h4>Total Material incl Wastage: <span id="final_material_cost"></span></h4>
-                    <h4>Total Overhead and Other Cost: <span id="total_overhead_and_other"></span></h4>
-                    <h4>Total Cost: <span id="total_cost"></span></h4>
+                    <h4>Total Material incl Wastage: <span id="final_material_cost"><?php echo $s_rev->tbl_order_total_material_inc_wastage ?></span> </h4>
+                    <h4>Total Overhead and Other Cost: <span id="total_overhead_and_other"><?php echo $s_rev->tbl_order_total_overhead_and_other_cost ?></span></h4>
+                    <h4>Total Cost: <span id="total_cost"><?php echo $s_rev->tbl_total_cost ?></span></h4>
 
-                    <h2><b>Price</b>: <span id="final_price"></span></h2>
+                    <h2><b>Price</b>: <span id="final_price"><?php echo $s_rev->tbl_total_price ?></span></h2>
 
                     <input type="hidden" name="ppnw-id" value="<?php echo $s_rev->tbl_ics_order_id ?>">
+                    <?php /*
                     <a href="<?php echo base_url("fpdf_test"); ?>" class="btn btn-info">PDF</a>
+                    */
+                    ?>
                 </article>
 
                 <article class="row other-cost">
@@ -773,15 +779,15 @@
 
                     <div class="form-group">
                         <label for="order_total_material_inc_wastage">Total Material incl Wastage:</label>
-                        <input type="text" class="form-control" id="order_total_material_inc_wastage" name="order_total_material_inc_wastage" disabled>
+                        <input type="text" class="form-control" id="order_total_material_inc_wastage" name="order_total_material_inc_wastage" value="<?php echo $s_rev->tbl_order_total_material_inc_wastage ?>"disabled>
                     </div>
                     <div class="form-group">
                         <label for="order_sewing">Sewing:</label>
-                        <input type="text" class="form-control" id="order_sewing" name="order_sewing">
+                        <input type="text" class="form-control" id="order_sewing" name="order_sewing" value="<?php echo $s_rev->tbl_order_sewing ?>">
                     </div>
                     <div class="form-group">
                         <label for="order_overheads">Overheads:</label>
-                        <input type="text" class="form-control" id="order_overheads" name="order_overheads">
+                        <input type="text" class="form-control" id="order_overheads" name="order_overheads" value="<?php echo $s_rev->tbl_order_overheads ?>">
                     </div>
                 </article>
             </aside>

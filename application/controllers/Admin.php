@@ -11,6 +11,7 @@ class Admin extends CI_Controller
         $this->load->model('ppnw_model');
         $this->load->model('admin_model');
         $this->load->model('user_model');
+        //$this->load->library('breadcrumb');
 
         $username = $this->session->userdata('username');
         $this->data['employee'] = $this->admin_model->get_user_employee($username);
@@ -35,8 +36,8 @@ class Admin extends CI_Controller
             // redirect them to the login page
             redirect('login/index', 'refresh');
         } else {
-
         //If user is logged int then show the admin page. Admin page is not accessiable  if not logged in.
+
             $this->load->view('admin/admin_header_view', $this->data);
             $this->load->view('admin/admin_home_view', $this->data);
             $this->load->view('admin/admin_todo', $this->data);
@@ -44,7 +45,6 @@ class Admin extends CI_Controller
             $this->load->view('admin/admin_footer_view');
         }
     }
-
 
 
     public function user_profile(){

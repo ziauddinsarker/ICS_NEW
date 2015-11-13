@@ -29,9 +29,22 @@
       <script src="<?php echo base_url('assets/js/bootstrap-sortable.js'); ?>"></script>
       <script src="<?php echo base_url('assets/js/moment.min.js'); ?>"></script>
       <script src="<?php echo base_url('assets/js/dropzone.js'); ?>"></script>
+      <script src="<?php echo base_url('assets/js/html2canvas.js'); ?>"></script>
 
 
       <script src="<?php echo base_url('assets/js/main.js'); ?>"></script>
+
+      <script>
+
+          $(function(){
+              $("#order_company").autocomplete({
+                  source: "http://localhost/ICS_NEW/admin/json_search_buyer" // path to the get_birds method
+              });
+          });
+
+      </script>
+
+
 
       <script>
           $(document).ready(function(e){

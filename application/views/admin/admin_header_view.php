@@ -82,10 +82,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </script>
               </li>
 
+              <?php /*
               <!-- User Account Menu -->
               <li class="user user-menu">
                 <a href="<?php base_url() ?>/ICS_NEW/admin/contacts" class="btn">Contacts</a>
-              </li><li class="user user-menu">
+              </li>
+              */ ?>
+              <li class="user user-menu">
                 <a href="<?php base_url() ?>/ICS_NEW/login/logout" class="btn">Sign out</a>
               </li>
             

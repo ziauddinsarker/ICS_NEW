@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2015-11-10 18:06:39
+Date: 2015-11-13 18:00:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -52,14 +52,7 @@ CREATE TABLE `costing_by_user` (
 -- ----------------------------
 -- Records of costing_by_user
 -- ----------------------------
-INSERT INTO `costing_by_user` VALUES ('1', '1', null, null, null);
-INSERT INTO `costing_by_user` VALUES ('4', '2', null, null, null);
-INSERT INTO `costing_by_user` VALUES ('1', '22', null, null, null);
-INSERT INTO `costing_by_user` VALUES ('1', '23', null, null, null);
-INSERT INTO `costing_by_user` VALUES ('1', '25', null, null, null);
-INSERT INTO `costing_by_user` VALUES ('1', '26', null, null, null);
-INSERT INTO `costing_by_user` VALUES ('1', '28', null, null, null);
-INSERT INTO `costing_by_user` VALUES ('1', '29', null, null, null);
+INSERT INTO `costing_by_user` VALUES ('1', '57', null, null, null);
 
 -- ----------------------------
 -- Table structure for employee
@@ -155,13 +148,31 @@ CREATE TABLE `just_post` (
   `just_active` tinyint(1) DEFAULT NULL,
   `url_slug` varchar(255) NOT NULL,
   PRIMARY KEY (`just_id`,`url_slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of just_post
 -- ----------------------------
-INSERT INTO `just_post` VALUES ('17', 'This is new post with workable slug', '<p>This is new post with slug</p>', null, 'this-is-new-post-with-workable-slug');
-INSERT INTO `just_post` VALUES ('18', 'This is new post with workable slug', '<p>THis is new psot with dev Another Post</p>', null, 'this-is-new-post-with-workable-slug');
+INSERT INTO `just_post` VALUES ('17', 'This is new post with workable slug', '<p>This is new post with slug</p>', '1', 'this-is-new-post-with-workable-slug');
+INSERT INTO `just_post` VALUES ('18', 'This is new post with workable slug', '<p>THis is new psot with dev Another Post</p>', '1', 'this-is-new-post-with-workable-slug');
+INSERT INTO `just_post` VALUES ('19', 'This is csv inport', 'This is first New csv upload', '1', 'sdsadf');
+INSERT INTO `just_post` VALUES ('20', 'This is csv insdfsdfport', 'asd', '1', 'asdfasdfdf');
+INSERT INTO `just_post` VALUES ('21', 'sdfsdf', 'df', '1', 'asdfdasf');
+INSERT INTO `just_post` VALUES ('22', 'sadfsdaf', 'asdfasdff', '1', 'asdfasdfdf');
+INSERT INTO `just_post` VALUES ('23', 'asdf', 'asdfasdff', '1', 'asdfasf');
+INSERT INTO `just_post` VALUES ('24', 'asf', 'asdfasfd', '1', 'asdfaf');
+INSERT INTO `just_post` VALUES ('25', 'This is csv inport', 'This is first New csv upload', '1', 'sdsadf');
+INSERT INTO `just_post` VALUES ('26', 'This is csv insdfsdfport', 'asd', '1', 'asdfasdfdf');
+INSERT INTO `just_post` VALUES ('27', 'sdfsdf', 'df', '1', 'asdfdasf');
+INSERT INTO `just_post` VALUES ('28', 'sadfsdaf', 'asdfasdff', '1', 'asdfasdfdf');
+INSERT INTO `just_post` VALUES ('29', 'asdf', 'asdfasdff', '1', 'asdfasf');
+INSERT INTO `just_post` VALUES ('30', 'asf', 'asdfasfd', '1', 'asdfaf');
+INSERT INTO `just_post` VALUES ('31', 'This is csv inport', 'This is first New csv upload', '1', 'sdsadf');
+INSERT INTO `just_post` VALUES ('32', 'This is csv insdfsdfport', 'asd', '1', 'asdfasdfdf');
+INSERT INTO `just_post` VALUES ('33', 'sdfsdf', 'df', '1', 'asdfdasf');
+INSERT INTO `just_post` VALUES ('34', 'sadfsdaf', 'asdfasdff', '1', 'asdfasdfdf');
+INSERT INTO `just_post` VALUES ('35', 'asdf', 'asdfasdff', '1', 'asdfasf');
+INSERT INTO `just_post` VALUES ('36', 'asf', 'asdfasfd', '1', 'asdfaf');
 
 -- ----------------------------
 -- Table structure for login_attempts
@@ -237,115 +248,107 @@ CREATE TABLE `ppnw_costing` (
   `tbl_dimension_extra_3_width` decimal(3,2) DEFAULT NULL,
   `tbl_dimension_extra_3_width_allowance` decimal(3,2) DEFAULT NULL,
   `tbl_dimension_extra_3_width_total` decimal(3,2) DEFAULT NULL,
-  `tbl_order_ppnw_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_order_ppnw_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_order_ppnw_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_order_ppnw_total_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_zipper_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_zipper_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_zipper_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_zipper_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_webbing_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_webbing_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_webbing_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_webbing_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_draw_string_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_draw_string_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_draw_string_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_draw_string_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_velcro_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_velcro_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_velcro_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_velcro_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_tape_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_tape_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_tape_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_tape_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_extra_1_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_extra_1_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_extra_1_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_extra_1_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_extra_2_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_extra_2_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_extra_2_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_extra_2_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_puller_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_puller_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_puller_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_puller_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_print_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_print_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_print_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_print_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_eyelet_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_eyelet_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_eyelet_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_eyelet_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_buckle_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_buckle_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_buckle_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_buckle_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_snap_button_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_snap_button_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_snap_button_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_snap_button_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_magnetic_button_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_magnetic_button_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_magnetic_button_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_magnetic_button_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_bottom_base_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_bottom_base_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_bottom_base_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_bottom_base_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_thread_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_thread_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_thread_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_thread_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_tag_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_tag_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_tag_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_tag_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_label_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_label_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_label_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_label_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_packing_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_packing_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_packing_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_packing_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_1_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_1_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_1_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_1_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_2_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_2_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_2_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_2_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_3_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_3_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_3_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_3_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_order_total_material_inc_wastage` decimal(4,0) DEFAULT NULL,
-  `tbl_order_total_overhead_and_other_cost` decimal(6,4) DEFAULT NULL,
-  `tbl_order_sewing` decimal(4,0) DEFAULT NULL,
-  `tbl_order_overheads` decimal(4,0) DEFAULT NULL,
-  `tbl_total_cost` decimal(6,4) DEFAULT NULL,
-  `tbl_total_price` decimal(6,4) DEFAULT NULL,
+  `tbl_order_ppnw_item_cost` decimal(3,2) DEFAULT NULL,
+  `tbl_order_ppnw_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_order_ppnw_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_order_ppnw_total_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_zipper_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_zipper_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_yard_zipper_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_zipper_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_webbing_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_webbing_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_yard_webbing_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_webbing_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_draw_string_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_draw_string_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_yard_draw_string_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_draw_string_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_velcro_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_velcro_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_yard_velcro_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_velcro_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_tape_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_tape_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_yard_tape_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_tape_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_extra_1_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_extra_1_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_yard_extra_1_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_extra_1_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_extra_2_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_extra_2_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_yard_extra_2_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_extra_2_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_puller_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_puller_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_puller_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_puller_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_print_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_print_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_print_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_print_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_eyelet_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_eyelet_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_eyelet_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_eyelet_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_buckle_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_buckle_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_buckle_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_buckle_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_snap_button_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_snap_button_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_snap_button_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_snap_button_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_magnetic_button_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_magnetic_button_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_magnetic_button_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_magnetic_button_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_bottom_base_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_bottom_base_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_bottom_base_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_bottom_base_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_thread_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_thread_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_thread_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_thread_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_tag_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_tag_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_tag_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_tag_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_label_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_label_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_label_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_label_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_packing_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_packing_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_packing_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_packing_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_1_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_1_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_1_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_1_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_2_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_2_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_2_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_2_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_3_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_3_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_3_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_3_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_order_sewing` decimal(5,4) DEFAULT NULL,
+  `tbl_order_overheads` decimal(5,4) DEFAULT NULL,
+  `tbl_order_total_material_inc_wastage` decimal(7,4) DEFAULT NULL,
+  `tbl_order_total_overhead_and_other_cost` decimal(7,4) DEFAULT NULL,
+  `tbl_total_cost` decimal(7,4) DEFAULT NULL,
+  `tbl_total_price` decimal(7,4) DEFAULT NULL,
   PRIMARY KEY (`ics_order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of ppnw_costing
 -- ----------------------------
-INSERT INTO `ppnw_costing` VALUES ('1', 'SG2015-10-11', 'Simura Group', 'B-253P', 'Bata-D Cut Bag', '2015-10-11', '90', 'Red', '76', '5', '5', '250000', '20000', '4000', '2.52', '0.55', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.50', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '3', null, null, null, '1', '10', null, null, '1', '5', null, null, '0', '50', null, null, '0', '0', null, null, '0', '0', null, null, null, null, null, null, null, null, null, null, '1', '52', null, null, '1', '25', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, null, null, '0', '0', null, '20.5556');
-INSERT INTO `ppnw_costing` VALUES ('2', 'Simura021015001', 'Simura Nonwovens Limited', null, null, '2015-10-11', '90', '', '75', '5', '5', '25000', '20000', '1000', '0.25', '0.53', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0', null, null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, null, null, null, null, null, null, null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, null, null, '0', '0', null, '25.2536');
-INSERT INTO `ppnw_costing` VALUES ('20', 'B2015-10-14', 'Bata', 'B-253P', 'D cut Bag', '2015-10-14', '90', '', '0', '0', '0', '0', '0', '0', '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0', null, null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, null, null, null, null, null, null, null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, null, null, '0', '0', null, null);
-INSERT INTO `ppnw_costing` VALUES ('22', 'BC2015-10-12', 'Bata Company', '125AV', 'Bata-D Cut Bag', '2015-10-12', '90', 'Red', '75', '5', '5', '26500', '20000', '10000', '0.20', '0.20', null, '0.20', '0.03', null, '0.06', '0.03', null, '0.50', '0.03', null, '0.08', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '2', null, null, null, '0', '50', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '52', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, null, null, '0', '0', null, null);
-INSERT INTO `ppnw_costing` VALUES ('23', 'A2015-10-18', 'Apex', '125AV', 'Apex Cotton 12', '2015-10-18', '90', 'Blue', '75', '5', '5', '25000', '20000', '10000', '0.20', '0.03', null, '0.20', '0.00', null, '0.06', '0.03', null, '0.50', '0.03', null, '0.08', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '3', null, null, null, '0', '1', null, null, '0', '1', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, null, null, null, null, null, null, null, null, '1', '2', null, null, '1', '5', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, null, null, '0', '0', null, null);
-INSERT INTO `ppnw_costing` VALUES ('25', 'H2015-11-09', 'Himm', 'lsdkfj', 'KHI', '2015-11-09', '90', '', '5', '55', '5', '5', '5', '5', '9.99', '2.00', null, '2.52', '2.00', null, '2.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '3', null, null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, null, null, '0', '0', null, null);
-INSERT INTO `ppnw_costing` VALUES ('26', 'BB2015-11-17', 'Bata Bangaldesh', 'Kne-23', 'ICCS', '2015-11-17', '75', '', '47', '77', '77', '1025', '25122', '2555', '9.99', '0.00', null, '9.99', '0.00', null, '9.99', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '77', null, null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, null, null, '0', '0', null, null);
-INSERT INTO `ppnw_costing` VALUES ('28', 'NC2015-11-03', 'No Company ', 'll', 'Name', '2015-11-10', '900', '', '75', '5', '5', '522', '2500', '500', '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '3', null, null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, null, null, '0', '0', null, null);
-INSERT INTO `ppnw_costing` VALUES ('29', 'DIP2015-11-10', 'Dhaka International PPNW', 'snwl-ppnw-01', 'snwl1', '2015-11-10', '90', 'dgdfg', '75', '5', '5', '500', '8585', '23232', '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5', null, null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, null, '5.0000', '0', '0', '5.0000', '5.0000');
+INSERT INTO `ppnw_costing` VALUES ('57', 'BBS2015-11-13', 'Bangladesh Book Socaity', 'bncc1', 'BNC13', '2015-11-13', '1', 'Blue', '1', '1', '1', '1', '1', '1', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '44.0000', '0.0000', '0.0000', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '21.8718', '4.0000', '25.8718', '26.1305');
 
 -- ----------------------------
 -- Table structure for ppnw_costing_rev
@@ -405,119 +408,111 @@ CREATE TABLE `ppnw_costing_rev` (
   `tbl_dimension_extra_3_width` decimal(3,2) DEFAULT NULL,
   `tbl_dimension_extra_3_width_allowance` decimal(3,2) DEFAULT NULL,
   `tbl_dimension_extra_3_width_total` decimal(3,2) DEFAULT NULL,
-  `tbl_order_ppnw_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_order_ppnw_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_order_ppnw_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_order_ppnw_total_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_zipper_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_zipper_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_zipper_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_zipper_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_webbing_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_webbing_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_webbing_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_webbing_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_draw_string_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_draw_string_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_draw_string_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_draw_string_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_velcro_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_velcro_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_velcro_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_velcro_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_tape_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_tape_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_tape_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_tape_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_extra_1_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_extra_1_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_extra_1_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_extra_1_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_extra_2_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_extra_2_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_extra_2_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_yard_extra_2_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_puller_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_puller_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_puller_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_puller_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_print_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_print_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_print_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_print_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_eyelet_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_eyelet_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_eyelet_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_eyelet_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_buckle_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_buckle_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_buckle_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_buckle_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_snap_button_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_snap_button_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_snap_button_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_snap_button_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_magnetic_button_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_magnetic_button_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_magnetic_button_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_magnetic_button_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_bottom_base_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_bottom_base_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_bottom_base_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_bottom_base_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_thread_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_thread_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_thread_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_thread_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_tag_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_tag_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_tag_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_tag_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_label_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_label_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_label_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_label_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_packing_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_packing_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_packing_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_packing_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_1_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_1_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_1_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_1_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_2_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_2_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_2_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_2_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_3_item_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_3_item_consumption` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_3_item_rate` decimal(4,0) DEFAULT NULL,
-  `tbl_trims_piece_extra_3_item_total_cost` decimal(4,0) DEFAULT NULL,
-  `tbl_order_total_material_inc_wastage` decimal(4,0) DEFAULT NULL,
-  `tbl_order_total_overhead_and_other_cost` decimal(6,4) DEFAULT NULL,
-  `tbl_order_sewing` decimal(4,0) DEFAULT NULL,
-  `tbl_order_overheads` decimal(4,0) DEFAULT NULL,
-  `tbl_total_cost` decimal(6,4) DEFAULT NULL,
-  `tbl_total_price` decimal(6,4) DEFAULT NULL,
+  `tbl_order_ppnw_item_cost` decimal(3,2) DEFAULT NULL,
+  `tbl_order_ppnw_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_order_ppnw_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_order_ppnw_total_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_zipper_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_zipper_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_yard_zipper_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_zipper_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_webbing_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_webbing_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_yard_webbing_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_webbing_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_draw_string_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_draw_string_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_yard_draw_string_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_draw_string_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_velcro_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_velcro_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_yard_velcro_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_velcro_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_tape_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_tape_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_yard_tape_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_tape_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_extra_1_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_extra_1_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_yard_extra_1_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_extra_1_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_extra_2_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_extra_2_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_yard_extra_2_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_yard_extra_2_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_puller_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_puller_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_puller_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_puller_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_print_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_print_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_print_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_print_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_eyelet_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_eyelet_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_eyelet_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_eyelet_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_buckle_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_buckle_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_buckle_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_buckle_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_snap_button_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_snap_button_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_snap_button_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_snap_button_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_magnetic_button_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_magnetic_button_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_magnetic_button_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_magnetic_button_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_bottom_base_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_bottom_base_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_bottom_base_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_bottom_base_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_thread_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_thread_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_thread_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_thread_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_tag_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_tag_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_tag_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_tag_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_label_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_label_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_label_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_label_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_packing_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_packing_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_packing_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_packing_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_1_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_1_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_1_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_1_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_2_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_2_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_2_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_2_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_3_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_3_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_3_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_trims_piece_extra_3_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_order_sewing` decimal(5,4) DEFAULT NULL,
+  `tbl_order_overheads` decimal(5,4) DEFAULT NULL,
+  `tbl_order_total_material_inc_wastage` decimal(7,4) DEFAULT NULL,
+  `tbl_order_total_overhead_and_other_cost` decimal(7,4) DEFAULT NULL,
+  `tbl_total_cost` decimal(7,4) DEFAULT NULL,
+  `tbl_total_price` decimal(7,4) DEFAULT NULL,
   `tbl_modification_time` time DEFAULT NULL,
   `tbl_modification_date` date DEFAULT NULL,
   `tbl_ics_order_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`tbl_order_rev_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of ppnw_costing_rev
 -- ----------------------------
-INSERT INTO `ppnw_costing_rev` VALUES ('31', 'SNL2015-11-04', 'Simura Nonwovens Limited', 'snwl-ppnw-01', 'snwl1', '2015-11-04', '95', 'Red', '75', '5', '5', '10000', '5000', '2555', '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5', null, null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, null, null, '0', '0', null, null, '07:20:05', null, '29');
-INSERT INTO `ppnw_costing_rev` VALUES ('44', 'DI2015-11-10', 'Dhaka International ', 'snwl-ppnw-01', 'snwl1', '2015-11-10', '90', 'dgdfg', '75', '5', '5', '2584', '8585', '23232', '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5', null, null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, null, null, '0', '0', null, null, '01:22:37', '2015-11-10', '29');
-INSERT INTO `ppnw_costing_rev` VALUES ('45', 'DI2015-11-10', 'Dhaka International ', 'snwl-ppnw-01', 'snwl1', '2015-11-10', '90', 'dgdfg', '75', '5', '5', '15000', '8585', '23232', '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5', null, null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, null, null, '0', '0', null, null, '02:42:47', '2015-11-10', '29');
-INSERT INTO `ppnw_costing_rev` VALUES ('46', 'DIP2015-11-10', 'Dhaka International PPNW', 'snwl-ppnw-01', 'snwl1', '2015-11-10', '90', 'dgdfg', '75', '5', '5', '15000', '8585', '23232', '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5', null, null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, null, null, '0', '0', null, null, '02:43:00', '2015-11-10', '29');
-INSERT INTO `ppnw_costing_rev` VALUES ('47', 'NC2015-11-03', 'No Company ', 'll', 'Name', '2015-11-10', '900', '', '75', '5', '5', '522', '2500', '500', '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '3', null, null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, null, null, '0', '0', null, null, '04:13:21', '2015-11-10', '28');
-INSERT INTO `ppnw_costing_rev` VALUES ('48', 'BB2015-11-17', 'Bata Bangaldesh', 'Kne-23', 'ICCS', '2015-11-10', '58', '', '47', '77', '77', '77', '77', '77', '9.99', '0.00', null, '9.99', '0.00', null, '9.99', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '77', null, null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, null, null, '0', '0', null, null, '04:13:58', '2015-11-10', '26');
-INSERT INTO `ppnw_costing_rev` VALUES ('49', 'BB2015-11-10', 'Bata Bangaldesh', 'Kne-23', 'ICCS', '2015-11-10', '58', '', '47', '77', '77', '5000', '77', '77', '9.99', '0.00', null, '9.99', '0.00', null, '9.99', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '77', null, null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, null, null, '0', '0', null, null, '04:14:15', '2015-11-10', '26');
-INSERT INTO `ppnw_costing_rev` VALUES ('50', 'BB2015-11-10', 'Bata Bangaldesh', 'Kne-23', 'ICCS', '2015-11-10', '75', '', '47', '77', '77', '5000', '20500', '2555', '9.99', '0.00', null, '9.99', '0.00', null, '9.99', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '77', null, null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, null, null, '0', '0', null, null, '04:14:39', '2015-11-10', '26');
-INSERT INTO `ppnw_costing_rev` VALUES ('51', 'BB2015-11-17', 'Bata Bangaldesh', 'Kne-23', 'ICCS', '2015-11-17', '75', '', '47', '77', '77', '1025', '25122', '2555', '9.99', '0.00', null, '9.99', '0.00', null, '9.99', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '0.00', '0.00', null, '77', null, null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, '0', '0', null, null, null, null, '0', '0', null, null, '04:14:55', '2015-11-10', '26');
-INSERT INTO `ppnw_costing_rev` VALUES ('52', 'DIP2015-11-10', 'Dhaka International PPNW', 'snwl-ppnw-01', 'snwl1', '2015-11-10', '90', 'dgdfg', '75', '5', '5', '500', '8585', '23232', '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5.00', '5.00', null, '5', null, null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '5', '5', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, '6', '6', null, null, null, null, '0', '0', null, null, '05:06:43', '2015-11-10', '29');
+INSERT INTO `ppnw_costing_rev` VALUES ('65', 'BBS2015-11-13', 'Bangladesh Book Socaity', 'bncc1', 'BNC13', '2015-11-13', '1', 'Blue', '1', '1', '1', '1', '1', '1', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '44.0000', '0.0000', '0.0000', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '21.8718', '4.0000', '25.8718', '26.1305', '02:21:57', '2015-11-13', '57');
+INSERT INTO `ppnw_costing_rev` VALUES ('66', 'BBS2015-11-13', 'Bangladesh Book Socaity', 'bncc1', 'BNC13', '2015-11-13', '1', 'Blue', '1', '1', '1', '1', '1', '1', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '44.0000', '0.0000', '0.0000', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '21.8718', '4.0000', '25.8718', '26.1305', '02:25:12', '2015-11-13', '57');
 
 -- ----------------------------
 -- Table structure for product
@@ -682,7 +677,7 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', '127.0.0.1', 'admin', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', null, null, null, '1268889823', '1447125002', '1', 'Admin', 'istrator', 'ADMIN', '0');
+INSERT INTO `users` VALUES ('1', '127.0.0.1', 'admin', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', null, null, null, '1268889823', '1447410661', '1', 'Admin', 'istrator', 'ADMIN', '0');
 INSERT INTO `users` VALUES ('4', '127.0.0.1', 'timir', '$2y$08$AmclLIpLcaHUy5d/IMJBB.rGfDE7x5tUv/X5iAx0sZCwZCF56sqeu', null, 'timir@simuragroup.com', null, null, null, null, '1443787186', '1446351869', '1', 'Mahibullah', 'Timir', '', '');
 INSERT INTO `users` VALUES ('5', '127.0.0.1', 'rhossain', '$2y$08$hKjjbJpDYWNTomDjaZTTIOOS.symveD0C9ZTOyb9jVx1qXaWNFcjK', null, 'rhossain@simuragroup.com', null, null, null, null, '1444545302', '1444974816', '1', 'Rajib', ' Hossain', 'SIMURA Nonwovens Ltd.', '');
 

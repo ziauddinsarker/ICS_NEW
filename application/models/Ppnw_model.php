@@ -10,6 +10,9 @@ class Ppnw_model extends CI_Model
     }
 
 
+
+
+
     //get the costing for particular user
     //Get All ppnw costing info
     function gel_all_ppnw_costing($username){
@@ -22,6 +25,44 @@ class Ppnw_model extends CI_Model
         //$rowcount = $query->num_rows();
         return $query->result();
     }
+
+
+
+    /***************************************************************/
+    /**
+     * @param $q
+     */
+    function get_company($q){
+        $this->db->select('company_name');
+        $this->db->like('company_name', $q);
+        $query = $this->db->get('company');
+
+        var_dump($query);
+        if($query->num_rows > 0){
+            foreach ($query->result_array() as $row){
+                $row_set[] = htmlentities(stripslashes($row['company_name'])); //build an array
+            }
+            echo json_encode($row_set); //format the array into json data
+        }
+    }
+
+    function get_company_object($q){
+        $this->db->select('*');
+        $this->db->like('company_name', $q);
+        $query = $this->db->get('company');
+        if($query->num_rows > 0){
+            foreach ($query->result_array() as $row){
+                $new_row['company']=htmlentities(stripslashes($row['company_name']));
+                $row_set[] = $new_row; //build an array
+            }
+            echo json_encode($row_set); //format the array into json data
+        }
+    }
+    /***************************************************************/
+
+
+
+
 
     //get the costing for particular user and particular costing revisions
     //Get All ppnw costing info
@@ -73,8 +114,6 @@ class Ppnw_model extends CI_Model
         $this->db->insert('costing_by_user',$data);
         return $this->db->insert_id();
     }
-
-
 
     /**
      * @param $post_id
@@ -292,6 +331,11 @@ class Ppnw_model extends CI_Model
             'tbl_order_total_material_inc_wastage' => $this->input->post('order_total_material_inc_wastage'),
             'tbl_order_sewing' => $this->input->post('order_sewing'),
             'tbl_order_overheads' => $this->input->post('order_overheads'),
+
+            'tbl_order_total_overhead_and_other_cost' => $this->input->post('total_overhead_and_other_hidden'),
+            'tbl_total_cost' => $this->input->post('total_cost_hidden'),
+            'tbl_total_price' => $this->input->post('final_price_hidden'),
+
         );
 
 
@@ -483,6 +527,11 @@ class Ppnw_model extends CI_Model
             'tbl_order_total_material_inc_wastage' => $this->input->post('order_total_material_inc_wastage'),
             'tbl_order_sewing' => $this->input->post('order_sewing'),
             'tbl_order_overheads' => $this->input->post('order_overheads'),
+
+            'tbl_order_total_overhead_and_other_cost' => $this->input->post('total_overhead_and_other_hidden'),
+            'tbl_total_cost' => $this->input->post('total_cost_hidden'),
+            'tbl_total_price' => $this->input->post('final_price_hidden'),
+
             'tbl_modification_date' => date("Y-m-d"),
             'tbl_modification_time' => date("h:i:sa"),
             'tbl_ics_order_id' => $id,

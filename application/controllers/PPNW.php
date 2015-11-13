@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PPNW extends CI_Controller
+class Ppnw extends CI_Controller
 {
 
     public function __construct()
@@ -18,6 +18,19 @@ class PPNW extends CI_Controller
         $this->data['ppnw_all_costing'] = $this->ppnw_model->gel_all_ppnw_costing($username);
         $this->data['ppnw_all_count'] = $this->ppnw_model->ppnw_total_count_by_user($username);
     }
+
+
+
+    function get_companys(){
+        $this->load->model('ppnw_model');
+        if (isset($_GET['term'])){
+            $q = strtolower($_GET['term']);
+            $this->ppnw_model->get_company_object($q);
+           // $this->ppnw_model->get_company('Simura');
+        }
+    }
+
+
     /************************************************/
     /*****************PPNW***************************/
     /************************************************/
@@ -30,16 +43,17 @@ class PPNW extends CI_Controller
             // redirect them to the login page
             redirect('login/index', 'refresh');
         } else {
+            /*
             //Database
             $ppnw_costing_id = $this->uri->segment(3);
-            var_dump($ppnw_costing_id);
+           // var_dump($ppnw_costing_id);
             $this->db->select('tbl_order_rev_id, tbl_dimension_body_height_total,tbl_dimension_body_width_total,tbl_dimension_body_panel_total');
             $this->db->from('ppnw_costing_rev');
             $this->db->where('tbl_order_rev_id',$ppnw_costing_id);
             $query = $this->db->get();
             $n = $query->result();
-            var_dump($n);
-
+            //var_dump($n);
+            */
             $this->load->view('admin/admin_header_view', $this->data);
             $this->load->view('admin/admin_home_ppnw_all_view', $this->data);
             $this->load->view('admin/admin_footer_view');
@@ -81,7 +95,9 @@ class PPNW extends CI_Controller
     public function single_revision_ppnw_costing($id){
         //$dt = $this->ppnw_model->single_revisions_single_ppnw_costing();
         $this->data['single_rev'] = $this->ppnw_model->single_revisions_single_ppnw_costing();
-
+        $this->load->view('admin/admin_header_view', $this->data);
+        $this->load->view('admin/admin_home_rev_ppnw_costing_view', $this->data);
+        $this->load->view('admin/admin_footer_view');
 
 
         //var_dump($dt);
@@ -271,9 +287,7 @@ class PPNW extends CI_Controller
         $data['order_sewing'] = $dt->tbl_order_sewing;
         $data['order_overheads'] = $dt->tbl_order_overheads;
 */
-        $this->load->view('admin/admin_header_view', $this->data);
-        $this->load->view('admin/admin_home_rev_ppnw_costing_view', $this->data);
-        $this->load->view('admin/admin_footer_view');
+
 
     }
 
@@ -660,10 +674,13 @@ class PPNW extends CI_Controller
                 'tbl_trims_piece_extra_3_item_consumption' => $this->input->post('extra_3_piece_consumption'),
                 'tbl_trims_piece_extra_3_item_rate' => $this->input->post('extra_3_piece_consumption_rate'),
                 'tbl_trims_piece_extra_3_item_total_cost' => $this->input->post('extra_3_piece_consumption_cost'),
-
-                'tbl_order_total_material_inc_wastage' => $this->input->post('order_total_material_inc_wastage'),
                 'tbl_order_sewing' => $this->input->post('order_sewing'),
                 'tbl_order_overheads' => $this->input->post('order_overheads'),
+
+                'tbl_order_total_material_inc_wastage' => $this->input->post('order_total_material_inc_wastage'),
+                'tbl_order_total_overhead_and_other_cost' => $this->input->post('total_overhead_and_other_hidden'),
+                'tbl_total_cost' => $this->input->post('total_cost_hidden'),
+                'tbl_total_price' => $this->input->post('final_price_hidden'),
 
             );
 
@@ -875,9 +892,14 @@ class PPNW extends CI_Controller
         $data['extra_3_piece_consumption_rate'] = $dt->tbl_trims_piece_extra_3_item_rate;
         $data['extra_3_piece_consumption_cost'] = $dt->tbl_trims_piece_extra_3_item_total_cost;
 
-        $data['order_total_material_inc_wastage'] = $dt->tbl_order_total_material_inc_wastage;
+
         $data['order_sewing'] = $dt->tbl_order_sewing;
         $data['order_overheads'] = $dt->tbl_order_overheads;
+
+        $data['order_total_material_inc_wastage'] = $dt->tbl_order_total_material_inc_wastage;
+        $data['order_total_overhead_and_other_cost'] = $dt->tbl_order_total_overhead_and_other_cost;
+        $data['total_cost'] = $dt->tbl_total_cost;
+        $data['total_price'] = $dt->tbl_total_price;
 
         $this->load->view('admin/admin_header_view', $this->data);
         $this->load->view('admin/admin_home_ppnw_edit', $data);
@@ -887,9 +909,8 @@ class PPNW extends CI_Controller
     /**
      * @param null $id
      */
-    public function update_ppnw_costing($id = NULL)
+    public function update_ppnw_costing()
     {
-
         if ($this->input->post('updateppnw')) {
             $ppnwId = $this->input->post('ppnw-id');
             $this->ppnw_model->update_ppnw_costing($ppnwId);

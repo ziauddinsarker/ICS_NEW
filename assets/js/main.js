@@ -99,7 +99,7 @@ $(document).ready(function(){
     var date = $('#order_date').datepicker({ dateFormat: 'ddmmy' }).val();
 
    // document.write(date);
-    console.log(date);
+    //console.log(date);
 
   // Joining the date and company names first letters and add them into order id
     $('#order_id').val(acronym+date);
@@ -192,15 +192,15 @@ $(document).ready(function(){
 
     //Extra 2 Length
     var order_extra_2_l = +$("#order_extra_2_l").val();
-    var order_extra_2_l_allowance = +$("#order_pocket_2_allowance").val();
-    $("#order_extra_1_l_total").val((order_extra_1_l+ order_extra_1_l_allowance).toFixed(2));
-    var extra_2_l = +$("#order_extra_1_l_total").val();
+    var order_extra_2_l_allowance = +$("#order_extra_2_l_allowance").val();
+    $("#order_extra_2_l_total").val((order_extra_2_l+ order_extra_2_l_allowance).toFixed(2));
+    var extra_2_l = +$("#order_extra_2_l_total").val();
 
    //Extra 2 Width
-    var order_extra_2_l = +$("#order_extra_2_l").val();
-    var order_extra_2_l_allowance = +$("#order_extra_2_l_allowance").val();
-    $("#order_extra_2_l_total").val((order_extra_2_l + order_extra_2_l_allowance).toFixed(2));
-    var extra_2_w = +$("#order_extra_2_l_total").val();
+    var order_extra_2_w = +$("#order_extra_2_w").val();
+    var order_extra_2_w_allowance = +$("#order_extra_2_w_allowance").val();
+    $("#order_extra_2_w_total").val((order_extra_2_w + order_extra_2_w_allowance).toFixed(2));
+    var extra_2_w = +$("#order_extra_2_w_total").val();
 
    /******************/
     /*****Extra 3:*****/
@@ -415,7 +415,7 @@ $(document).ready(function(){
     /*******Bottom Base Cost*************/
     var bottom_base_cost = +$("#bottom_base_cost").val();
 
-    $("#bottom_base_consumption_rate").val((puller_cost).toFixed(3));
+    $("#bottom_base_consumption_rate").val((bottom_base_cost).toFixed(3));
 
     var bottom_base_consumption = +$("#bottom_base_consumption").val();
     var bottom_base_consumption_rate = +$("#bottom_base_consumption_rate").val();
@@ -534,6 +534,7 @@ $(document).ready(function(){
     $("#order_total_material_inc_wastage").val(((ppnw_consumption_cost+zipper_consumption_cost+webbing_consumption_cost+draw_string_consumption_cost+velcro_consumption_cost+tape_consumption_cost+extra_trim_yard_1_consumption_cost+extra_trim_yard_2_consumption_cost+puller_consumption_cost+print_consumption_cost+eyelet_consumption_cost+buckle_consumption_cost+snap_button_consumption_cost+magnetic_button_consumption_cost+bottom_base_consumption_cost+thread_consumption_cost+tag_consumption_cost+label_consumption_cost+packing_consumption_cost+extra_1_piece_consumption_cost+extra_2_piece_consumption_cost+extra_3_piece_consumption_cost)*(1+(order_wastage/100))).toFixed(4));
 
     $("#final_material_cost").text(((ppnw_consumption_cost+zipper_consumption_cost+webbing_consumption_cost+draw_string_consumption_cost+velcro_consumption_cost+tape_consumption_cost+extra_trim_yard_1_consumption_cost+extra_trim_yard_2_consumption_cost+puller_consumption_cost+print_consumption_cost+eyelet_consumption_cost+buckle_consumption_cost+snap_button_consumption_cost+magnetic_button_consumption_cost+bottom_base_consumption_cost+thread_consumption_cost+tag_consumption_cost+label_consumption_cost+packing_consumption_cost+extra_1_piece_consumption_cost+extra_2_piece_consumption_cost+extra_3_piece_consumption_cost)*(1+(order_wastage/100))).toFixed(4));
+    $("#final_material_cost_hidden").val(((ppnw_consumption_cost+zipper_consumption_cost+webbing_consumption_cost+draw_string_consumption_cost+velcro_consumption_cost+tape_consumption_cost+extra_trim_yard_1_consumption_cost+extra_trim_yard_2_consumption_cost+puller_consumption_cost+print_consumption_cost+eyelet_consumption_cost+buckle_consumption_cost+snap_button_consumption_cost+magnetic_button_consumption_cost+bottom_base_consumption_cost+thread_consumption_cost+tag_consumption_cost+label_consumption_cost+packing_consumption_cost+extra_1_piece_consumption_cost+extra_2_piece_consumption_cost+extra_3_piece_consumption_cost)*(1+(order_wastage/100))).toFixed(4));
 
 
     /*******Total Overheads and Others*************/
@@ -548,6 +549,7 @@ $(document).ready(function(){
     var bank_document_cost_per_bag = (bank_document_cost/bag_quantity)/usd; //Bank Document Cost Per Bag
 
     $("#total_overhead_and_other").text((sewing_cost+overheads_cost+transport_per_bag+bank_document_cost_per_bag).toFixed(4));
+    $("#total_overhead_and_other_hidden").val((sewing_cost+overheads_cost+transport_per_bag+bank_document_cost_per_bag).toFixed(4));
 
 
     /*******Total Cost*************/
@@ -555,19 +557,19 @@ $(document).ready(function(){
     var order_total_overhead_and_others = +$("#total_overhead_and_other").text();
 
     $("#total_cost").text((order_total_material_wastage_included+order_total_overhead_and_others).toFixed(4));
+    $("#total_cost_hidden").val((order_total_material_wastage_included+order_total_overhead_and_others).toFixed(4));
 
 
 
     /*******Final Price*************/
     var total_final_cost = +$("#total_cost").text();
 
-    console.log("Final Cost"+total_final_cost);
+    //console.log("Final Cost"+total_final_cost);
 
     var margin =  +$("#order_margin").val();
 
     $("#final_price").text((total_final_cost*(1+(margin/100))).toFixed(4));
-
-
+    $("#final_price_hidden").val((total_final_cost*(1+(margin/100))).toFixed(4));
 
   });
 
