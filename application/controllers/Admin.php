@@ -52,13 +52,15 @@ class Admin extends CI_Controller
         $this->user_model->get_singl_user_info($username);
       }
 
+
     public function contacts(){
         $this->load->view('admin/admin_header_view', $this->data);
         $this->load->view('admin/admin_contact_view', $this->data);
         $this->load->view('admin/admin_footer_view');
-      }
+    }
+
     /**
-     *
+     *ppnw
      */
     public function get_company(){
         $this->load->model('admin_model');
@@ -99,6 +101,23 @@ class Admin extends CI_Controller
         } else {
             $this->load->view('admin/admin_header_view', $this->data);
             $this->load->view('admin/admin_home_ppnw_view', $this->data);
+            $this->load->view('admin/admin_footer_view');
+        }
+    }
+
+    /**
+     * ppnew_add
+     *
+     * This is to show the PPnonwoven page
+     */
+    public function woven_add()
+    {
+        if (!$this->ion_auth->logged_in()) {
+            // redirect them to the login page
+            redirect('login/index', 'refresh');
+        } else {
+            $this->load->view('admin/admin_header_view', $this->data);
+            $this->load->view('admin/admin_home_woven_view', $this->data);
             $this->load->view('admin/admin_footer_view');
         }
     }

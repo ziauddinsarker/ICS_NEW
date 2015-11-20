@@ -284,3 +284,15 @@ th {
 #order_company.form-control {
     min-width: 276px;
 }
+
+.woven-table tbody tr td input.form-control[type="text"] {
+    width: 50px;
+    padding:5px;
+}
+.form-group.roll-name input.form-control[type="text"] {
+    width: 135px;
+}
+
+.form-group.role-width .form-control.woven-costing input.form-control[type="text"] {
+    width: 50px;
+}

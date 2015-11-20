@@ -144,8 +144,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu">
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="<?php base_url() ?>ppnw/ppnw_all/"><a href="<?=  base_url()?>admin/ppnw_add"><i class="fa fa-link"></i> <span>PPNW</span></a></li>
-            <li><a href="#"><i class="fa fa-link"></i> <span>Cotton</span></a></li>
+            <li class="active"><a href="<?=  base_url()?>admin/ppnw_add"><i class="fa fa-link"></i> <span>PPNW</span></a></li>
+            <li><a href="<?=  base_url()?>admin/woven_add"><i class="fa fa-link"></i> <span>Woven Fabric</span></a></li>
             <li><a href="#"><i class="fa fa-link"></i> <span>Jute</span></a></li>
 
           </ul><!-- /.sidebar-menu -->
