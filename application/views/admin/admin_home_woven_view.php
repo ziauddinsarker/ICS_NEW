@@ -117,6 +117,7 @@
                                         <div class="col-md-5">
                                             <div class="form-group roll-name">
                                                 <input type="text" class="form-control woven-costing" id="body_material_1_name" name="body_material_1_name" placeholder="Material 1" required>
+
                                             </div>
                                         </div>
 
@@ -136,7 +137,7 @@
 
                                         <div class="col-md-2">
                                             <div class="form-group role-width">
-                                                <input type="text" class="form-control woven-costing" id="body_material_2_roll_2" name="body_material_2_roll_2" placeholder="Roll Width" required>
+                                                <input type="text" class="form-control woven-costing" id="body_material_2_roll_2" name="body_material_2_roll_2"  placeholder="Roll Width" required>
                                             </div>
                                         </div>
                                     </div>
@@ -260,42 +261,43 @@
 
                                 <tbody>
                                 <tr class="success">
-                                    <td><input type="text" class="form-control woven-costing" id="body_material_1" name="body_material_1" placeholder="B M 1" required></td>
+                                    <td><span class="body_material_1_name_text"></span> <!--<input type="text" class="form-control woven-costing" id="body_material_1" name="body_material_1" placeholder="B M 1" required>--></td>
+
                                     <td><input type="text" class="form-control woven-costing" id="body_material_1_cost" name="body_material_1_cost"required></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_1_consumption" name="body_material_1_consumption" readonly="readonly"></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_1_consumption_rate" name="body_material_1_consumption_rate" readonly="readonly"></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_1_consumption_cost" name="body_material_1_consumption_cost" readonly="readonly"></td>
                                 </tr>
                                 <tr class="success">
-                                    <td><input type="text" class="form-control woven-costing" id="body_material_2" name="body_material_2" placeholder="B M 2" required></td>
+                                    <td><span class="body_material_2_name_text"> <!--<input type="text" class="form-control woven-costing" id="body_material_2" name="body_material_2" placeholder="B M 2" required>--></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_2_cost" name="body_material_2_cost" required></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_2_consumption" name="body_material_2_consumption" readonly="readonly"></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_2_consumption_rate" name="body_material_2_consumption_rate" readonly="readonly"></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_2_consumption_cost" name="body_material_2_consumption_cost" readonly="readonly"></td>
                                 </tr>
                                 <tr class="success">
-                                    <td><input type="text" class="form-control woven-costing" id="body_material_3" name="body_material_3" placeholder="B M 3" required></td>
+                                    <td><span class="body_material_3_name_text"><!--<input type="text" class="form-control woven-costing" id="body_material_3" name="body_material_3" placeholder="B M 3" required>--></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_3_cost" name="body_material_3_cost"required></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_3_consumption" name="body_material_3_consumption" readonly="readonly"></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_3_consumption_rate" name="body_material_3_consumption_rate" readonly="readonly"></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_3_consumption_cost" name="body_material_3_consumption_cost" readonly="readonly"></td>
                                 </tr>
                                 <tr class="success">
-                                    <td><input type="text" class="form-control woven-costing" id="body_material_4" name="body_material_4" placeholder="Ex 1" required></td>
+                                    <td><span class="body_material_4_name_text"><!--<input type="text" class="form-control woven-costing" id="body_material_4" name="body_material_4" placeholder="Ex 1" required>--></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_4_cost" name="body_material_4_cost"required></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_4_consumption" name="body_material_4_consumption" readonly="readonly"></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_4_consumption_rate" name="body_material_4_consumption_rate" readonly="readonly"></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_4_consumption_cost" name="body_material_4_consumption_cost" readonly="readonly"></td>
                                 </tr>
                                 <tr class="success">
-                                    <td><input type="text" class="form-control woven-costing" id="body_material_5" name="body_material_5" placeholder="Ex 2" required></td>
+                                    <td><span class="body_material_5_name_text"><!--<input type="text" class="form-control woven-costing" id="body_material_5" name="body_material_5" placeholder="Ex 2" required>--></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_5_cost" name="body_material_5_cost"required></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_5_consumption" name="body_material_5_consumption" readonly="readonly"></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_5_consumption_rate" name="body_material_5_consumption_rate" readonly="readonly"></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_5_consumption_cost" name="body_material_5_consumption_cost" readonly="readonly"></td>
                                 </tr>
                                 <tr class="success">
-                                    <td><input type="text" class="form-control woven-costing" id="body_material_5" name="body_material_6" placeholder="Ex 3" required></td>
+                                    <td><span class="body_material_6_name_text"><!--<input type="text" class="form-control woven-costing" id="body_material_5" name="body_material_6" placeholder="Ex 3" required>--></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_6_cost" name="body_material_6_cost"required></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_6_consumption" name="body_material_6_consumption" readonly="readonly"></td>
                                     <td><input type="text" class="form-control woven-costing" id="body_material_6_consumption_rate" name="body_material_6_consumption_rate" readonly="readonly"></td>
@@ -520,7 +522,7 @@
                                 </tr>
 
                                 <tr class="info">
-                                    <td>Extra 1</td>
+                                    <td><input type="text" class="form-control woven-costing" id="extra_1_piece_name" placeholder="Extra 1"name="extra_1_piece_name" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_1_piece_cost" name="extra_1_piece_cost" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_1_piece_consumption" name="extra_1_piece_consumption" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_1_piece_consumption_rate" name="extra_1_piece_consumption_rate" readonly="readonly"></td>
@@ -528,7 +530,7 @@
                                 </tr>
 
                                 <tr class="info">
-                                    <td>Extra 2</td>
+                                    <td><input type="text" class="form-control woven-costing" id="extra_2_piece_name" placeholder="Extra 2" name="extra_2_piece_name" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_2_piece_cost" name="extra_2_piece_cost" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_2_piece_consumption" name="extra_2_piece_consumption" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_2_piece_consumption_rate" name="extra_2_piece_consumption_rate" readonly="readonly"></td>
@@ -536,7 +538,7 @@
                                 </tr>
 
                                 <tr class="info">
-                                    <td>Extra 3</td>
+                                    <td><input type="text" class="form-control woven-costing" id="extra_3_piece_name" placeholder="Extra 3" name="extra_3_piece_name" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_3_piece_cost" name="extra_3_piece_cost" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_3_piece_consumption" name="extra_3_piece_consumption" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_3_piece_consumption_rate" name="extra_3_piece_consumption_rate" readonly="readonly"></td>
@@ -544,7 +546,7 @@
                                 </tr>
 
                                 <tr class="info">
-                                    <td>Extra 4</td>
+                                    <td><input type="text" class="form-control woven-costing" id="extra_4_piece_name" placeholder="Extra 4" name="extra_4_piece_name" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_4_piece_cost" name="extra_4_piece_cost" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_4_piece_consumption" name="extra_4_piece_consumption" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_4_piece_consumption_rate" name="extra_4_piece_consumption_rate" readonly="readonly"></td>
@@ -552,7 +554,7 @@
                                 </tr>
 
                                 <tr class="info">
-                                    <td>Extra 5</td>
+                                    <td><input type="text" class="form-control woven-costing" id="extra_5_piece_name" placeholder="Extra 5" name="extra_5_piece_name" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_5_piece_cost" name="extra_5_piece_cost" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_5_piece_consumption" name="extra_5_piece_consumption" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_5_piece_consumption_rate" name="extra_5_piece_consumption_rate" readonly="readonly"></td>
@@ -572,9 +574,9 @@
                                     <tr>
                                         <th></th>
                                         <td></td>
-                                        <td colspan="3">Polyester Fabric</td>
-                                        <td colspan="3">Lining Fabric</td>
-                                        <td colspan="3">Foam</td>
+                                        <td colspan="3"><span class="body_material_1_name_text"></span></td>
+                                        <td colspan="3"><span class="body_material_2_name_text"></span></td>
+                                        <td colspan="3"><span class="body_material_3_name_text"></span></td>
                                     </tr>
                                     <tr>
                                         <th colspan="2">Dimension:</th>
@@ -890,9 +892,9 @@
                                     <tr>
                                         <th></th>
                                         <td></td>
-                                        <td colspan="3">Extra 1</td>
-                                        <td colspan="3">Extra 2</td>
-                                        <td colspan="3">Extra 3</td>
+                                        <td colspan="3"><span class="body_material_4_name_text"></td>
+                                        <td colspan="3"><span class="body_material_5_name_text"></td>
+                                        <td colspan="3"><span class="body_material_6_name_text"></td>
                                     </tr>
                                     <tr>
                                         <th colspan="2">Dimension:</th>

@@ -9,25 +9,14 @@ class Woven extends CI_Controller
         parent::__construct();
         $this->load->library('ion_auth');
         $this->load->model('ppnw_model');
+        $this->load->model('woven_model');
 
         $username = $this->session->userdata('username');
-
         $this->data['employee'] = $this->admin_model->get_user_employee($username);
 
         //$this->data['ppnw_all_costing'] = $this->ppnw_model->gel_all_ppnw_costing();
-        $this->data['ppnw_all_costing'] = $this->ppnw_model->gel_all_ppnw_costing($username);
-        $this->data['ppnw_all_count'] = $this->ppnw_model->ppnw_total_count_by_user($username);
-    }
-
-
-
-    function get_companys(){
-        $this->load->model('ppnw_model');
-        if (isset($_GET['term'])){
-            $q = strtolower($_GET['term']);
-            $this->ppnw_model->get_company_object($q);
-           // $this->ppnw_model->get_company('Simura');
-        }
+        $this->data['woven_all_costing'] = $this->woven_model->gel_all_woven_costing($username);
+        $this->data['woven_all_count'] = $this->woven_model->woven_total_count_by_user($username);
     }
 
 
@@ -43,17 +32,6 @@ class Woven extends CI_Controller
             // redirect them to the login page
             redirect('login/index', 'refresh');
         } else {
-            /*
-            //Database
-            $ppnw_costing_id = $this->uri->segment(3);
-           // var_dump($ppnw_costing_id);
-            $this->db->select('tbl_order_rev_id, tbl_dimension_body_height_total,tbl_dimension_body_width_total,tbl_dimension_body_panel_total');
-            $this->db->from('ppnw_costing_rev');
-            $this->db->where('tbl_order_rev_id',$ppnw_costing_id);
-            $query = $this->db->get();
-            $n = $query->result();
-            //var_dump($n);
-            */
             $this->load->view('admin/admin_header_view', $this->data);
             $this->load->view('admin/admin_home_woven_all_view', $this->data);
             $this->load->view('admin/admin_footer_view');
@@ -75,22 +53,8 @@ class Woven extends CI_Controller
         }
     }
 
-   /* public function single_revision_ppnw_costing($id){
-
-        if (!$this->ion_auth->logged_in()) {
-            // redirect them to the login page
-            redirect('login/index', 'refresh');
-        } else {
-            $this->data['single_revision_single_ppnw_costing'] = $this->ppnw_model->single_revisions_single_ppnw_costing($id);
-            //var_dump($this->data['revision_single_ppnw_costing']);
-            $this->load->view('admin/admin_header_view', $this->data);
-            $this->load->view('admin/admin_home_rev_ppnw_costing_view', $this->data);
-            $this->load->view('admin/admin_footer_view');
-        }
-    }*/
-
     /**
-     *+Edit the PPNw Costing
+     *Edit the PPNw Costing
      */
     public function single_revision_woven_costing($id){
         //$dt = $this->ppnw_model->single_revisions_single_ppnw_costing();
@@ -99,7 +63,6 @@ class Woven extends CI_Controller
         $this->load->view('admin/admin_home_rev_ppnw_costing_view', $this->data);
         $this->load->view('admin/admin_footer_view');
     }
-
 
 
     /**
@@ -126,87 +89,528 @@ class Woven extends CI_Controller
         $this->form_validation->set_rules('order_transport', 'Order Transport', 'trim|xss_clean');
         $this->form_validation->set_rules('order_bank_document', 'Order Bank Document', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('order_body_h', 'Body Height', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_body_h_allowance', 'Body Height Allowance', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_body_h_total', 'Body Height Total', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('order_body_w', 'Body Width', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_body_w_allowance', 'Body Width Allowance', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_body_w_total', 'Body Width Total', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('order_body_panel', 'Body Panel', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_body_panel_allowance', 'Body Panel Allowance', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_body_panel_total', 'Body Panel Total', 'trim|xss_clean');
+        //Body Material 1
+        $this->form_validation->set_rules('body_material_1_front_length', 'Body Material 1 Front Length', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_front_length_allowance', 'Body Material 1 Front Length Allowance', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_front_length_total', 'Body Material 1 Front Length Total', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('order_handle_l', 'Double Handle Length', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_handle_l_allowance', 'Double Handle Length Allowance', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_handle_l_total', 'Double Handle Length Total', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_front_width', 'Body Material 1 Front Width', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_front_width_allowance', 'Body Material 1 Front Width Allowance', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_front_width_total', 'Body Material 1 Front Width Total', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('order_handle_w', 'Double Handle Width', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_handle_w_allowance', 'Double Handle Length Allowance', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_handle_w_total', 'Double Handle Width Total', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_back_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_back_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_back_length_total', 'Order Bank Document', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('order_pocket_l', 'Pocket Length', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_pocket_l_allowance', 'Pocket Length Allowance', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_pocket_l_total', 'Pocket Length Total', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_back_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_back_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_back_width_total', 'Order Bank Document', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('order_pocket_w', 'Pocket Width', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_pocket_w_allowance', 'Pocket Width Allowance', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_pocket_w_total', 'Pocket Width Total', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_top_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_top_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_top_length_total', 'Order Bank Document', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('order_extra_1_l', 'Extra 1 Length', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_extra_1_l_allowance', 'Extra 1 Length Allowance', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_extra_1_l_total', 'Extra 1 Length Total', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_top_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_top_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_top_width_total', 'Order Bank Document', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('order_extra_1_w', 'Extra 1 Width', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_extra_1_w_allowance', 'Extra 1 Width Allowance', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_extra_1_w_total', 'Extra 1 Width Total', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_bottom_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_bottom_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_bottom_width_total', 'Order Bank Document', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('order_extra_2_l', 'Extra 2 Length', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_extra_2_l_allowance', 'Extra 2 Length Allowance', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_extra_2_l_total', 'Extra 2 Length Total', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_left_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_left_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_left_length_total', 'Order Bank Document', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('order_extra_2_w', 'Extra 2 Width', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_extra_2_w_allowance', 'Extra 2 Width Allowance', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_extra_2_w_total', 'Extra 2 Width Total', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_left_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_left_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_left_width_total', 'Order Bank Document', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('order_extra_3_l', 'Extra 3 Length', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_extra_3_l_allowance', 'Extra 3 Length Allowance', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_extra_3_l_total', 'Extra 3 Length Total', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_right_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_right_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_right_length_total', 'Order Bank Document', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('order_extra_3_w', 'Extra 3 Width', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_extra_3_w_allowance', 'Extra 3 Width Allowance', 'trim|xss_clean');
-        $this->form_validation->set_rules('order_extra_3_w_total', 'Extra 3 Width Total', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_right_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_right_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_right_width_total', 'Order Bank Document', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('ppnw_cost', 'PP-Nonwovnes Cost', 'trim|xss_clean');
-        $this->form_validation->set_rules('ppnw_consumption', 'PP-Nonwovnes Consumption', 'trim|xss_clean');
-        $this->form_validation->set_rules('ppnw_consumption_rate', 'PP-Nonwovnes Consumption Rate', 'trim|xss_clean');
-        $this->form_validation->set_rules('ppnw_consumption_cost', 'PP-Nonwovnes Consumption Cost', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_pocket_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_pocket_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_pocket_length_total', 'Order Bank Document', 'trim|xss_clean');
 
+        $this->form_validation->set_rules('body_material_1_pocket_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_pocket_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_pocket_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_1_extra_1_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_extra_1_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_extra_1_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_1_extra_1_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_extra_1_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_extra_1_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_1_extra_2_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_extra_2_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_extra_2_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_1_extra_2_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_extra_2_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_extra_2_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_1_extra_3_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_extra_3_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_extra_3_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_1_extra_3_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_extra_3_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_extra_3_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+
+        //Body Material 2
+        $this->form_validation->set_rules('body_material_2_front_length', 'Body Material 1 Front Length', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_front_length_allowance', 'Body Material 1 Front Length Allowance', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_front_length_total', 'Body Material 1 Front Length Total', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_front_width', 'Body Material 1 Front Width', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_front_width_allowance', 'Body Material 1 Front Width Allowance', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_front_width_total', 'Body Material 1 Front Width Total', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_back_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_back_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_back_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_back_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_back_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_back_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_top_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_top_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_top_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_top_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_top_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_top_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_bottom_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_bottom_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_bottom_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_left_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_left_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_left_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_left_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_left_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_left_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_right_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_right_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_right_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_right_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_right_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_right_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_pocket_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_pocket_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_pocket_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_pocket_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_pocket_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_pocket_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_extra_1_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_extra_1_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_extra_1_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_extra_1_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_extra_1_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_extra_1_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_extra_2_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_extra_2_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_extra_2_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_extra_2_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_extra_2_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_extra_2_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_extra_3_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_extra_3_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_extra_3_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_extra_3_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_extra_3_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_extra_3_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+
+        //Body Material 3
+        $this->form_validation->set_rules('body_material_3_front_length', 'Body Material 1 Front Length', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_front_length_allowance', 'Body Material 1 Front Length Allowance', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_front_length_total', 'Body Material 1 Front Length Total', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_front_width', 'Body Material 1 Front Width', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_front_width_allowance', 'Body Material 1 Front Width Allowance', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_front_width_total', 'Body Material 1 Front Width Total', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_back_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_back_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_back_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_back_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_back_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_back_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_top_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_top_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_top_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_top_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_top_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_top_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_bottom_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_bottom_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_bottom_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_left_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_left_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_left_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_left_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_left_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_left_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_right_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_right_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_right_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_right_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_right_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_right_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_pocket_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_pocket_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_pocket_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_pocket_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_pocket_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_pocket_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_extra_1_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_extra_1_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_extra_1_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_extra_1_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_extra_1_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_extra_1_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_extra_2_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_extra_2_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_extra_2_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_extra_2_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_extra_2_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_extra_2_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_extra_3_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_extra_3_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_extra_3_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_extra_3_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_extra_3_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_extra_3_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+
+        //Body Material 4
+        $this->form_validation->set_rules('body_material_4_front_length', 'Body Material 1 Front Length', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_front_length_allowance', 'Body Material 1 Front Length Allowance', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_front_length_total', 'Body Material 1 Front Length Total', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_front_width', 'Body Material 1 Front Width', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_front_width_allowance', 'Body Material 1 Front Width Allowance', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_front_width_total', 'Body Material 1 Front Width Total', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_back_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_back_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_back_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_back_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_back_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_back_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_top_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_top_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_top_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_top_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_top_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_top_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_bottom_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_bottom_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_bottom_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_left_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_left_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_left_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_left_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_left_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_left_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_right_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_right_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_right_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_right_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_right_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_right_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_pocket_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_pocket_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_pocket_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_pocket_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_pocket_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_pocket_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_extra_1_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_extra_1_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_extra_1_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_extra_1_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_extra_1_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_extra_1_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_extra_2_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_extra_2_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_extra_2_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_extra_2_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_extra_2_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_extra_2_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_extra_3_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_extra_3_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_extra_3_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_extra_3_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_extra_3_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_extra_3_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+
+        //Body Material 5
+        $this->form_validation->set_rules('body_material_5_front_length', 'Body Material 1 Front Length', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_front_length_allowance', 'Body Material 1 Front Length Allowance', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_front_length_total', 'Body Material 1 Front Length Total', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_front_width', 'Body Material 1 Front Width', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_front_width_allowance', 'Body Material 1 Front Width Allowance', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_front_width_total', 'Body Material 1 Front Width Total', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_back_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_back_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_back_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_back_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_back_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_back_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_top_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_top_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_top_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_top_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_top_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_top_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_bottom_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_bottom_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_bottom_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_left_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_left_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_left_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_left_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_left_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_left_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_right_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_right_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_right_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_right_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_right_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_right_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_pocket_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_pocket_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_pocket_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_pocket_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_pocket_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_pocket_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_extra_1_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_extra_1_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_extra_1_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_extra_1_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_extra_1_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_extra_1_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_extra_2_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_extra_2_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_extra_2_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_extra_2_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_extra_2_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_extra_2_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_extra_3_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_extra_3_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_extra_3_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_extra_3_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_extra_3_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_extra_3_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+
+        //Body Material 6
+        $this->form_validation->set_rules('body_material_6_front_length', 'Body Material 1 Front Length', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_front_length_allowance', 'Body Material 1 Front Length Allowance', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_front_length_total', 'Body Material 1 Front Length Total', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_front_width', 'Body Material 1 Front Width', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_front_width_allowance', 'Body Material 1 Front Width Allowance', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_front_width_total', 'Body Material 1 Front Width Total', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_back_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_back_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_back_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_back_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_back_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_back_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_top_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_top_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_top_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_top_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_top_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_top_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_bottom_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_bottom_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_bottom_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_left_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_left_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_left_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_left_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_left_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_left_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_right_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_right_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_right_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_right_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_right_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_right_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_pocket_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_pocket_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_pocket_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_pocket_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_pocket_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_pocket_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_extra_1_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_extra_1_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_extra_1_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_extra_1_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_extra_1_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_extra_1_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_extra_2_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_extra_2_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_extra_2_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_extra_2_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_extra_2_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_extra_2_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_extra_3_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_extra_3_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_extra_3_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_extra_3_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_extra_3_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_extra_3_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+
+        //All Materials
+        $this->form_validation->set_rules('body_material_1_cost', 'Body Material Cost', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_consumption', 'Body Material Consumption', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_consumption_rate', 'Body Material Consumption Rate', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_consumption_cost', 'Body Material Consumption Cost', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_cost', 'Body Material Cost', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_consumption', 'Body Material Consumption', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_consumption_rate', 'Body Material Consumption Rate', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_consumption_cost', 'Body Material Consumption Cost', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_cost', 'Body Material Cost', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_consumption', 'Body Material Consumption', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_consumption_rate', 'Body Material Consumption Rate', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_consumption_cost', 'Body Material Consumption Cost', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_4_cost', 'Body Material Cost', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_consumption', 'Body Material Consumption', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_consumption_rate', 'Body Material Consumption Rate', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_4_consumption_cost', 'Body Material Consumption Cost', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_5_cost', 'Body Material Cost', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_consumption', 'Body Material Consumption', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_consumption_rate', 'Body Material Consumption Rate', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_5_consumption_cost', 'Body Material Consumption Cost', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_6_cost', 'Body Material Cost', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_consumption', 'Body Material Consumption', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_consumption_rate', 'Body Material Consumption Rate', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_6_consumption_cost', 'Body Material Consumption Cost', 'trim|xss_clean');
+
+
+        //All Trims In Yards
         $this->form_validation->set_rules('zipper_cost', 'Zipper Cost', 'trim|xss_clean');
         $this->form_validation->set_rules('zipper_consumption', 'Zipper Consumption', 'trim|xss_clean');
         $this->form_validation->set_rules('zipper_consumption_rate', 'Zipper Consumption Rate', 'trim|xss_clean');
         $this->form_validation->set_rules('zipper_consumption_cost', 'Zipper Consumption Cost', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('webbing_cost', 'Webbing Cost Width', 'trim|xss_clean');
-        $this->form_validation->set_rules('webbing_consumption', 'Webbing Consumption', 'trim|xss_clean');
-        $this->form_validation->set_rules('webbing_consumption_rate', 'Webbing Consumption Rate', 'trim|xss_clean');
-        $this->form_validation->set_rules('webbing_consumption_cost', 'Webbing Consumption Cost', 'trim|xss_clean');
+        $this->form_validation->set_rules('two_inch_webbing_cost', 'Webbing Cost Width', 'trim|xss_clean');
+        $this->form_validation->set_rules('two_inch_webbing_consumption', 'Webbing Consumption', 'trim|xss_clean');
+        $this->form_validation->set_rules('two_inch_webbing_consumption_rate', 'Webbing Consumption Rate', 'trim|xss_clean');
+        $this->form_validation->set_rules('two_inch_webbing_consumption_cost', 'Webbing Consumption Cost', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('draw_string_cost', 'Draw String Cost', 'trim|xss_clean');
-        $this->form_validation->set_rules('draw_string_consumption', 'Draw String Consumption', 'trim|xss_clean');
-        $this->form_validation->set_rules('draw_string_consumption_rate', 'Draw String Consumption Rate', 'trim|xss_clean');
-        $this->form_validation->set_rules('draw_string_consumption_cost', 'Draw String Consumption Cost', 'trim|xss_clean');
+        $this->form_validation->set_rules('one_and_half_inch_webbing_cost', 'Webbing Cost Width', 'trim|xss_clean');
+        $this->form_validation->set_rules('one_and_half_inch_webbing_consumption', 'Webbing Consumption', 'trim|xss_clean');
+        $this->form_validation->set_rules('one_and_half_inch_webbing_consumption_rate', 'Webbing Consumption Rate', 'trim|xss_clean');
+        $this->form_validation->set_rules('one_and_half_inch_webbing_consumption_cost', 'Webbing Consumption Cost', 'trim|xss_clean');
 
         $this->form_validation->set_rules('velcro_cost', 'Velcro Cost', 'trim|xss_clean');
         $this->form_validation->set_rules('velcro_consumption', 'Velcro Cost', 'trim|xss_clean');
         $this->form_validation->set_rules('velcro_consumption_rate', 'Velcro Consumption Rate', 'trim|xss_clean');
         $this->form_validation->set_rules('velcro_consumption_cost', 'Velcro Consumption Cost', 'trim|xss_clean');
-
-        $this->form_validation->set_rules('tape_cost', 'Tape Cost', 'trim|xss_clean');
-        $this->form_validation->set_rules('tape_consumption', 'Tape Consumption', 'trim|xss_clean');
-        $this->form_validation->set_rules('tape_consumption_rate', 'Tape Consumption Rate', 'trim|xss_clean');
-        $this->form_validation->set_rules('tape_consumption_cost', 'Tape Consumption Cost', 'trim|xss_clean');
 
         $this->form_validation->set_rules('extra_trim_yard_1_cost', 'Extra Trim Yard 1 Cost', 'trim|xss_clean');
         $this->form_validation->set_rules('extra_trim_yard_1_consumption', 'Extra Trim Yard 1 Consumption', 'trim|xss_clean');
@@ -218,8 +622,13 @@ class Woven extends CI_Controller
         $this->form_validation->set_rules('extra_trim_yard_2_consumption_rate', 'Extra Trim Yard 2 Consumption Rate', 'trim|xss_clean');
         $this->form_validation->set_rules('extra_trim_yard_2_consumption_cost', 'Extra Trim Yard 2 Consumption Cost', 'trim|xss_clean');
 
+        $this->form_validation->set_rules('extra_trim_yard_3_cost', 'Extra Trim Yard 2 Cost', 'trim|xss_clean');
+        $this->form_validation->set_rules('extra_trim_yard_3_consumption', 'Extra Trim Yard 2 Consumption', 'trim|xss_clean');
+        $this->form_validation->set_rules('extra_trim_yard_3_consumption_rate', 'Extra Trim Yard 2 Consumption Rate', 'trim|xss_clean');
+        $this->form_validation->set_rules('extra_trim_yard_3_consumption_cost', 'Extra Trim Yard 2 Consumption Cost', 'trim|xss_clean');
 
-        /*********Trims in Pices***********/
+
+        //All Trims in Pices
         $this->form_validation->set_rules('puller_cost', 'Puller Cost', 'trim|xss_clean');
         $this->form_validation->set_rules('puller_consumption', 'Puller Consumption', 'trim|xss_clean');
         $this->form_validation->set_rules('puller_consumption_rate', 'Puller Consumption Rate', 'trim|xss_clean');
@@ -230,25 +639,35 @@ class Woven extends CI_Controller
         $this->form_validation->set_rules('print_consumption_rate', 'Print Consumption Rate', 'trim|xss_clean');
         $this->form_validation->set_rules('print_consumption_cost', 'Print Consumption Cost', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('eyelet_cost', 'Eyelet Cost', 'trim|xss_clean');
-        $this->form_validation->set_rules('eyelet_consumption', 'Eyelet Consumption', 'trim|xss_clean');
-        $this->form_validation->set_rules('eyelet_consumption_rate', 'Eyelet Consumption Rate', 'trim|xss_clean');
-        $this->form_validation->set_rules('eyelet_consumption_cost', 'Eyelet Consumption Cost', 'trim|xss_clean');
-
         $this->form_validation->set_rules('buckle_cost', 'Buckle Cost', 'trim|xss_clean');
         $this->form_validation->set_rules('buckle_consumption', 'Buckle Consumption', 'trim|xss_clean');
         $this->form_validation->set_rules('buckle_consumption_rate', 'Buckle Consumption Rate', 'trim|xss_clean');
         $this->form_validation->set_rules('buckle_consumption_cost', 'Buckle Consumption Cost', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('swivel_hook_cost', 'Buckle Cost', 'trim|xss_clean');
+        $this->form_validation->set_rules('swivel_hook_consumption', 'Buckle Consumption', 'trim|xss_clean');
+        $this->form_validation->set_rules('swivel_hook_consumption_rate', 'Buckle Consumption Rate', 'trim|xss_clean');
+        $this->form_validation->set_rules('swivel_hook_consumption_cost', 'Buckle Consumption Cost', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('adjustable_buckle_cost', 'Buckle Cost', 'trim|xss_clean');
+        $this->form_validation->set_rules('adjustable_buckle_consumption', 'Buckle Consumption', 'trim|xss_clean');
+        $this->form_validation->set_rules('adjustable_buckle_consumption_rate', 'Buckle Consumption Rate', 'trim|xss_clean');
+        $this->form_validation->set_rules('adjustable_buckle_consumption_cost', 'Buckle Consumption Cost', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('magnetic_button_cost', 'Magnetic Button Cost', 'trim|xss_clean');
+        $this->form_validation->set_rules('magnetic_button_consumption', 'Magnetic Button Consumption', 'trim|xss_clean');
+        $this->form_validation->set_rules('magnetic_button_consumption_rate', 'Magnetic Button Consumption Rate', 'trim|xss_clean');
+        $this->form_validation->set_rules('magnetic_button_consumption_cost', 'Magnetic Button Consumption Cost', 'trim|xss_clean');
 
         $this->form_validation->set_rules('snap_button_cost', 'Snap Button Cost', 'trim|xss_clean');
         $this->form_validation->set_rules('snap_button_consumption', 'Snap Button Consumption', 'trim|xss_clean');
         $this->form_validation->set_rules('snap_button_consumption_rate', 'Snap Button Consumption Rate', 'trim|xss_clean');
         $this->form_validation->set_rules('snap_button_consumption_cost', 'Snap Button Consumption Cost', 'trim|xss_clean');
 
-        $this->form_validation->set_rules('magnetic_button_cost', 'Magnetic Button Cost', 'trim|xss_clean');
-        $this->form_validation->set_rules('magnetic_button_consumption', 'Magnetic Button Consumption', 'trim|xss_clean');
-        $this->form_validation->set_rules('magnetic_button_consumption_rate', 'Magnetic Button Consumption Rate', 'trim|xss_clean');
-        $this->form_validation->set_rules('magnetic_button_consumption_cost', 'Magnetic Button Consumption Cost', 'trim|xss_clean');
+        $this->form_validation->set_rules('rivet_cost', 'Snap Button Cost', 'trim|xss_clean');
+        $this->form_validation->set_rules('rivet_consumption', 'Snap Button Consumption', 'trim|xss_clean');
+        $this->form_validation->set_rules('rivet_consumption_rate', 'Snap Button Consumption Rate', 'trim|xss_clean');
+        $this->form_validation->set_rules('rivet_consumption_cost', 'Snap Button Consumption Cost', 'trim|xss_clean');
 
         $this->form_validation->set_rules('bottom_base_cost', 'Bottom Base Cost', 'trim|xss_clean');
         $this->form_validation->set_rules('bottom_base_consumption', 'Bottom Base Consumption', 'trim|xss_clean');
@@ -275,6 +694,11 @@ class Woven extends CI_Controller
         $this->form_validation->set_rules('packing_consumption_rate', 'Packing Consumption Rate', 'trim|xss_clean');
         $this->form_validation->set_rules('packing_consumption_cost', 'Packing Consumption Cost', 'trim|xss_clean');
 
+        $this->form_validation->set_rules('bottom_shoe_cost', 'Packing Cost', 'trim|xss_clean');
+        $this->form_validation->set_rules('bottom_shoe_consumption', 'Packing Consumption', 'trim|xss_clean');
+        $this->form_validation->set_rules('bottom_shoe_consumption_rate', 'Packing Consumption Rate', 'trim|xss_clean');
+        $this->form_validation->set_rules('bottom_shoe_consumption_cost', 'Packing Consumption Cost', 'trim|xss_clean');
+        
         $this->form_validation->set_rules('extra_1_piece_cost', 'Extra 1 Piece Cost', 'trim|xss_clean');
         $this->form_validation->set_rules('extra_1_piece_consumption', 'Extra 1 Piece Consumption', 'trim|xss_clean');
         $this->form_validation->set_rules('extra_1_piece_consumption_rate', 'Extra 1 Piece Consumption Rate', 'trim|xss_clean');
@@ -290,13 +714,22 @@ class Woven extends CI_Controller
         $this->form_validation->set_rules('extra_3_piece_consumption_rate', 'Extra 2 Piece Consumption Rate', 'trim|xss_clean');
         $this->form_validation->set_rules('extra_3_piece_consumption_cost', 'Extra 3 Piece Consumption Cost', 'trim|xss_clean');
 
+        $this->form_validation->set_rules('extra_4_piece_cost', 'Extra 2 Piece Cost', 'trim|xss_clean');
+        $this->form_validation->set_rules('extra_4_piece_consumption', 'Extra 2 Piece Consumption', 'trim|xss_clean');
+        $this->form_validation->set_rules('extra_4_piece_consumption_rate', 'Extra 2 Piece Consumption Rate', 'trim|xss_clean');
+        $this->form_validation->set_rules('extra_4_piece_consumption_cost', 'Extra 2 Piece Consumption Cost', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('extra_5_piece_cost', 'Pocket Width', 'trim|xss_clean');
+        $this->form_validation->set_rules('extra_5_piece_consumption', 'Extra 2 Piece Consumption', 'trim|xss_clean');
+        $this->form_validation->set_rules('extra_5_piece_consumption_rate', 'Extra 2 Piece Consumption Rate', 'trim|xss_clean');
+        $this->form_validation->set_rules('extra_5_piece_consumption_cost', 'Extra 3 Piece Consumption Cost', 'trim|xss_clean');
+
         $this->form_validation->set_rules('order_total_material_inc_wastage', 'Total Material Including Wastage', 'trim|xss_clean');
         $this->form_validation->set_rules('order_sewing', 'Sewing Cost', 'trim|xss_clean');
         $this->form_validation->set_rules('order_overheads', 'Overhead', 'trim|xss_clean');
 
 
         if ($this->form_validation->run() == FALSE) {
-
             $data['error'] = validation_errors();
             //fail validation
             $this->load->view('admin_header_view');
@@ -304,185 +737,710 @@ class Woven extends CI_Controller
             $this->load->view('admin_footer_view');
         } else {
 
-            $order_data = array(
-                'tbl_order_id_name' => $this->input->post('order_id'),
-                'tbl_company_id' => $this->input->post('order_company'),
-                'tbl_order_date' => $this->input->post('order_date'),
-                'tbl_item_name' => $this->input->post('order_item_name'),
-                'tbl_ref_name' => $this->input->post('order_ref_no'),
+            $woven_dimension_data = array(
+                //Body Material 1
+                'tbl_dimension_body_material_1_front_length' => $this->input->post('body_material_1_front_length'),
+                'tbl_dimension_body_material_1_front_length_allowance' => $this->input->post('body_material_1_front_length_allowance'),
+                'tbl_dimension_body_material_1_front_length_total' => $this->input->post('body_material_1_front_length_total'),
 
-                'tbl_order_gsm' => $this->input->post('order_gsm'),
-                'tbl_order_color' => $this->input->post('order_colour'),
-                'tbl_order_usd' => $this->input->post('order_usd'),
-                'tbl_order_wastage' => $this->input->post('order_wastage'),
-                'tbl_order_margin' => $this->input->post('order_margin'),
-                'tbl_order_quantity' => $this->input->post('order_quantity'),
-                'tbl_order_transport' => $this->input->post('order_transport'),
-                'tbl_order_bank_doc_charge' => $this->input->post('order_bank_document'),
+                'tbl_dimension_body_material_1_front_width' => $this->input->post('body_material_1_front_width'),
+                'tbl_dimension_body_material_1_front_width_allowance' => $this->input->post('body_material_1_front_width_allowance'),
+                'tbl_dimension_body_material_1_front_width_total' => $this->input->post('body_material_1_front_width_total'),
 
-                'tbl_dimension_body_height' => $this->input->post('order_body_h'),
-                'tbl_dimension_body_height_allowance' => $this->input->post('order_body_h_allowance'),
-                'tbl_dimension_body_height_total' => $this->input->post('order_body_h_total'),
+                'tbl_dimension_body_material_1_back_length' => $this->input->post('body_material_1_back_length'),
+                'tbl_dimension_body_material_1_back_length_allowance' => $this->input->post('body_material_1_back_length_allowance'),
+                'tbl_dimension_body_material_1_back_length_total' => $this->input->post('body_material_1_back_length_total'),
 
-                'tbl_dimension_body_width' => $this->input->post('order_body_w'),
-                'tbl_dimension_body_width_allowance' => $this->input->post('order_body_w_allowance'),
-                'tbl_dimension_body_width_total' => $this->input->post('order_body_w_total'),
+                'tbl_dimension_body_material_1_back_width' => $this->input->post('body_material_1_back_width'),
+                'tbl_dimension_body_material_1_back_width_allowance' => $this->input->post('body_material_1_back_width_allowance'),
+                'tbl_dimension_body_material_1_back_width_total' => $this->input->post('body_material_1_back_width_total'),
 
-                'tbl_dimension_body_panel' => $this->input->post('order_body_panel'),
-                'tbl_dimension_body_panel_allowance' => $this->input->post('order_body_panel_allowance'),
-                'tbl_dimension_body_panel_total' => $this->input->post('order_body_panel_total'),
+                'tbl_dimension_body_material_1_top_length' => $this->input->post('body_material_1_top_length'),
+                'tbl_dimension_body_material_1_top_length_allowance' => $this->input->post('body_material_1_top_length_allowance'),
+                'tbl_dimension_body_material_1_top_length_total' => $this->input->post('body_material_1_top_length_total'),
 
-                'tbl_dimension_handle_length' => $this->input->post('order_handle_l'),
-                'tbl_dimension_handle_length_allowance' => $this->input->post('order_handle_l_allowance'),
-                'tbl_dimension_handle_length_total' => $this->input->post('order_handle_l_total'),
+                'tbl_dimension_body_material_1_top_width' => $this->input->post('body_material_1_top_width'),
+                'tbl_dimension_body_material_1_top_width_allowance' => $this->input->post('body_material_1_top_width_allowance'),
+                'tbl_dimension_body_material_1_top_width_total' => $this->input->post('body_material_1_top_width_total'),
 
-                'tbl_dimension_handle_width' => $this->input->post('order_handle_w'),
-                'tbl_dimension_handle_width_allowance' => $this->input->post('order_handle_w_allowance'),
-                'tbl_dimension_handle_width_total' => $this->input->post('order_handle_w_total'),
+                'tbl_dimension_body_material_1_bottom_length' => $this->input->post('body_material_1_bottom_length'),
+                'tbl_dimension_body_material_1_bottom_length_allowance' => $this->input->post('body_material_1_bottom_length_allowance'),
+                'tbl_dimension_body_material_1_bottom_length_total' => $this->input->post('body_material_1_bottom_length_total'),
 
-                'tbl_dimension_pocket_length' => $this->input->post('order_pocket_l'),
-                'tbl_dimension_pocket_length_allowance' => $this->input->post('order_pocket_l_allowance'),
-                'tbl_dimension_pocket_length_total' => $this->input->post('order_pocket_l_total'),
+                'tbl_dimension_body_material_1_bottom_width' => $this->input->post('body_material_1_bottom_width'),
+                'tbl_dimension_body_material_1_bottom_width_allowance' => $this->input->post('body_material_1_bottom_width_allowance'),
+                'tbl_dimension_body_material_1_bottom_width_total' => $this->input->post('body_material_1_bottom_width_total'),
 
-                'tbl_dimension_pocket_width' => $this->input->post('order_pocket_w'),
-                'tbl_dimension_pocket_width_allowance' => $this->input->post('order_pocket_w_allowance'),
-                'tbl_dimension_pocket_width_total' => $this->input->post('order_pocket_w_total'),
+                'tbl_dimension_body_material_1_left_length' => $this->input->post('body_material_1_left_length'),
+                'tbl_dimension_body_material_1_left_length_allowance' => $this->input->post('body_material_1_left_length_allowance'),
+                'tbl_dimension_body_material_1_left_length_total' => $this->input->post('body_material_1_left_length_total'),
 
-                'tbl_dimension_extra_1_length' => $this->input->post('order_extra_1_l'),
-                'tbl_dimension_extra_1_length_allowance' => $this->input->post('order_extra_1_l_allowance'),
-                'tbl_dimension_extra_1_length_total' => $this->input->post('order_extra_1_l_total'),
+                'tbl_dimension_body_material_1_left_width' => $this->input->post('body_material_1_left_width'),
+                'tbl_dimension_body_material_1_left_width_allowance' => $this->input->post('body_material_1_left_width_allowance'),
+                'tbl_dimension_body_material_1_left_width_total' => $this->input->post('body_material_1_left_width_total'),
 
-                'tbl_dimension_extra_1_width' => $this->input->post('order_extra_1_w'),
-                'tbl_dimension_extra_1_width_allowance' => $this->input->post('order_extra_1_w_allowance'),
-                'tbl_dimension_extra_1_width_total' => $this->input->post('order_extra_1_w_total'),
+                'tbl_dimension_body_material_1_right_length' => $this->input->post('body_material_1_right_length'),
+                'tbl_dimension_body_material_1_right_length_allowance' => $this->input->post('body_material_1_right_length_allowance'),
+                'tbl_dimension_body_material_1_right_length_total' => $this->input->post('body_material_1_right_length_total'),
 
-                'tbl_dimension_extra_2_length' => $this->input->post('order_extra_2_l'),
-                'tbl_dimension_extra_2_length_allowance' => $this->input->post('order_extra_2_l_allowance'),
-                'tbl_dimension_extra_2_length_total' => $this->input->post('order_extra_2_l_total'),
+                'tbl_dimension_body_material_1_right_width' => $this->input->post('body_material_1_right_width'),
+                'tbl_dimension_body_material_1_right_width_allowance' => $this->input->post('body_material_1_right_width_allowance'),
+                'tbl_dimension_body_material_1_right_width_total' => $this->input->post('body_material_1_right_width_total'),
 
-                'tbl_dimension_extra_2_width' => $this->input->post('order_extra_2_w'),
-                'tbl_dimension_extra_2_width_allowance' => $this->input->post('order_extra_2_w_allowance'),
-                'tbl_dimension_extra_2_width_total' => $this->input->post('order_extra_2_w_total'),
+                'tbl_dimension_body_material_1_pocket_length' => $this->input->post('body_material_1_pocket_length'),
+                'tbl_dimension_body_material_1_pocket_length_allowance' => $this->input->post('body_material_1_pocket_length_allowance'),
+                'tbl_dimension_body_material_1_pocket_length_total' => $this->input->post('body_material_1_pocket_length_total'),
 
-                'tbl_dimension_extra_3_length' => $this->input->post('order_extra_3_l'),
-                'tbl_dimension_extra_3_length_allowance' => $this->input->post('order_extra_3_l_allowance'),
-                'tbl_dimension_extra_3_length_total' => $this->input->post('order_extra_3_l_total'),
+                'tbl_dimension_body_material_1_pocket_width' => $this->input->post('body_material_1_pocket_width'),
+                'tbl_dimension_body_material_1_pocket_width_allowance' => $this->input->post('body_material_1_pocket_width_allowance'),
+                'tbl_dimension_body_material_1_pocket_width_total' => $this->input->post('body_material_1_pocket_width_total'),
 
-                'tbl_dimension_extra_3_width' => $this->input->post('order_extra_3_w'),
-                'tbl_dimension_extra_3_width_allowance' => $this->input->post('order_extra_3_w_allowance'),
-                'tbl_dimension_extra_3_width_total' => $this->input->post('order_extra_3_w_total'),
+                'tbl_dimension_body_material_1_extra_1_length' => $this->input->post('body_material_1_extra_1_length'),
+                'tbl_dimension_body_material_1_extra_1_length_allowance' => $this->input->post('body_material_1_extra_1_length_allowance'),
+                'tbl_dimension_body_material_1_extra_1_length_total' => $this->input->post('body_material_1_extra_1_length_total'),
 
-                'tbl_order_ppnw_item_cost' => $this->input->post('ppnw_cost'),
-                'tbl_order_ppnw_item_consumption' => $this->input->post('ppnw_consumption'),
-                'tbl_order_ppnw_rate' => $this->input->post('ppnw_consumption_rate'),
-                'tbl_order_ppnw_total_item_cost' => $this->input->post('ppnw_consumption_cost'),
+                'tbl_dimension_body_material_1_extra_1_width' => $this->input->post('body_material_1_extra_1_width'),
+                'tbl_dimension_body_material_1_extra_1_width_allowance' => $this->input->post('body_material_1_extra_1_width_allowance'),
+                'tbl_dimension_body_material_1_extra_1_width_total' => $this->input->post('body_material_1_extra_1_width_total'),
 
-                'tbl_trims_yard_zipper_item_cost' => $this->input->post('zipper_cost'),
-                'tbl_trims_yard_zipper_item_consumption' => $this->input->post('zipper_consumption'),
-                'tbl_trims_yard_zipper_item_rate' => $this->input->post('zipper_consumption_rate'),
-                'tbl_trims_yard_zipper_item_total_cost' => $this->input->post('zipper_consumption_cost'),
+                'tbl_dimension_body_material_1_extra_2_length' => $this->input->post('body_material_1_extra_2_length'),
+                'tbl_dimension_body_material_1_extra_2_length_allowance' => $this->input->post('body_material_1_extra_2_length_allowance'),
+                'tbl_dimension_body_material_1_extra_2_length_total' => $this->input->post('body_material_1_extra_2_length_total'),
 
-                'tbl_trims_yard_webbing_item_cost' => $this->input->post('webbing_cost'),
-                'tbl_trims_yard_webbing_item_consumption' => $this->input->post('webbing_consumption'),
-                'tbl_trims_yard_webbing_item_rate' => $this->input->post('webbing_consumption_rate'),
-                'tbl_trims_yard_webbing_item_total_cost' => $this->input->post('webbing_consumption_cost'),
+                'tbl_dimension_body_material_1_extra_2_width' => $this->input->post('body_material_1_extra_2_width'),
+                'tbl_dimension_body_material_1_extra_2_width_allowance' => $this->input->post('body_material_1_extra_2_width_allowance'),
+                'tbl_dimension_body_material_1_extra_2_width_total' => $this->input->post('body_material_1_extra_2_width_total'),
 
-                'tbl_trims_yard_draw_string_item_cost' => $this->input->post('draw_string_cost'),
-                'tbl_trims_yard_draw_string_item_consumption' => $this->input->post('draw_string_consumption'),
-                'tbl_trims_yard_draw_string_item_rate' => $this->input->post('draw_string_consumption_rate'),
-                'tbl_trims_yard_draw_string_item_total_cost' => $this->input->post('draw_string_consumption_cost'),
+                'tbl_dimension_body_material_1_extra_3_length' => $this->input->post('body_material_1_extra_3_length'),
+                'tbl_dimension_body_material_1_extra_3_length_allowance' => $this->input->post('body_material_1_extra_3_length_allowance'),
+                'tbl_dimension_body_material_1_extra_3_length_total' => $this->input->post('body_material_1_extra_3_length_total'),
 
-                'tbl_trims_yard_velcro_item_cost' => $this->input->post('velcro_cost'),
-                'tbl_trims_yard_velcro_item_consumption' => $this->input->post('velcro_consumption'),
-                'tbl_trims_yard_velcro_item_rate' => $this->input->post('velcro_consumption_rate'),
-                'tbl_trims_yard_velcro_item_total_cost' => $this->input->post('velcro_consumption_cost'),
+                'tbl_dimension_body_material_1_extra_3_width' => $this->input->post('body_material_1_extra_3_width'),
+                'tbl_dimension_body_material_1_extra_3_width_allowance' => $this->input->post('body_material_1_extra_3_width_allowance'),
+                'tbl_dimension_body_material_1_extra_3_width_total' => $this->input->post('body_material_1_extra_3_width_total'),
 
-                'tbl_trims_yard_tape_item_cost' => $this->input->post('tape_cost'),
-                'tbl_trims_yard_tape_item_consumption' => $this->input->post('tape_consumption'),
-                'tbl_trims_yard_tape_item_rate' => $this->input->post('tape_consumption_rate'),
-                'tbl_trims_yard_tape_item_total_cost' => $this->input->post('tape_consumption_cost'),
+                //Body Material 2
+                'tbl_dimension_body_material_2_front_length' => $this->input->post('body_material_2_front_length'),
+                'tbl_dimension_body_material_2_front_length_allowance' => $this->input->post('body_material_2_front_length_allowance'),
+                'tbl_dimension_body_material_2_front_length_total' => $this->input->post('body_material_2_front_length_total'),
 
-                'tbl_trims_yard_extra_1_item_cost' => $this->input->post('extra_trim_yard_1_cost'),
-                'tbl_trims_yard_extra_1_item_consumption' => $this->input->post('extra_trim_yard_1_consumption'),
-                'tbl_trims_yard_extra_1_item_rate' => $this->input->post('extra_trim_yard_1_consumption_rate'),
-                'tbl_trims_yard_extra_1_item_total_cost' => $this->input->post('extra_trim_yard_1_consumption_cost'),
+                'tbl_dimension_body_material_2_front_width' => $this->input->post('body_material_2_front_width'),
+                'tbl_dimension_body_material_2_front_width_allowance' => $this->input->post('body_material_2_front_width_allowance'),
+                'tbl_dimension_body_material_2_front_width_total' => $this->input->post('body_material_2_front_width_total'),
 
-                'tbl_trims_yard_extra_2_item_cost' => $this->input->post('extra_trim_yard_2_cost'),
-                'tbl_trims_yard_extra_2_item_consumption' => $this->input->post('extra_trim_yard_2_consumption'),
-                'tbl_trims_yard_extra_2_item_rate' => $this->input->post('extra_trim_yard_2_consumption_rate'),
-                'tbl_trims_yard_extra_2_item_total_cost' => $this->input->post('extra_trim_yard_2_consumption_cost'),
+                'tbl_dimension_body_material_2_back_length' => $this->input->post('body_material_2_back_length'),
+                'tbl_dimension_body_material_2_back_length_allowance' => $this->input->post('body_material_2_back_length_allowance'),
+                'tbl_dimension_body_material_2_back_length_total' => $this->input->post('body_material_2_back_length_total'),
 
-                /***********Trims In Piece***********/
-                'tbl_trims_piece_puller_item_cost' => $this->input->post('puller_cost'),
-                'tbl_trims_piece_puller_item_consumption' => $this->input->post('puller_consumption'),
-                'tbl_trims_piece_puller_item_rate' => $this->input->post('puller_consumption_rate'),
-                'tbl_trims_piece_puller_item_total_cost' => $this->input->post('puller_consumption_cost'),
+                'tbl_dimension_body_material_2_back_width' => $this->input->post('body_material_2_back_width'),
+                'tbl_dimension_body_material_2_back_width_allowance' => $this->input->post('body_material_2_back_width_allowance'),
+                'tbl_dimension_body_material_2_back_width_total' => $this->input->post('body_material_2_back_width_total'),
 
-                'tbl_trims_piece_print_item_cost' => $this->input->post('print_cost'),
-                'tbl_trims_piece_print_item_consumption' => $this->input->post('print_consumption'),
-                'tbl_trims_piece_print_item_rate' => $this->input->post('print_consumption_rate'),
-                'tbl_trims_piece_print_item_total_cost' => $this->input->post('print_consumption_cost'),
+                'tbl_dimension_body_material_2_top_length' => $this->input->post('body_material_2_top_length'),
+                'tbl_dimension_body_material_2_top_length_allowance' => $this->input->post('body_material_2_top_length_allowance'),
+                'tbl_dimension_body_material_2_top_length_total' => $this->input->post('body_material_2_top_length_total'),
 
-                'tbl_trims_piece_eyelet_item_cost' => $this->input->post('eyelet_cost'),
-                'tbl_trims_piece_eyelet_item_consumption' => $this->input->post('eyelet_consumption'),
-                'tbl_trims_piece_eyelet_item_rate' => $this->input->post('eyelet_consumption_rate'),
-                'tbl_trims_piece_eyelet_item_total_cost' => $this->input->post('eyelet_consumption_cost'),
+                'tbl_dimension_body_material_2_top_width' => $this->input->post('body_material_2_top_width'),
+                'tbl_dimension_body_material_2_top_width_allowance' => $this->input->post('body_material_2_top_width_allowance'),
+                'tbl_dimension_body_material_2_top_width_total' => $this->input->post('body_material_2_top_width_total'),
 
-                'tbl_trims_piece_buckle_item_cost' => $this->input->post('buckle_cost'),
-                'tbl_trims_piece_buckle_item_consumption' => $this->input->post('buckle_consumption'),
-                'tbl_trims_piece_buckle_item_rate' => $this->input->post('buckle_consumption_rate'),
-                'tbl_trims_piece_buckle_item_total_cost' => $this->input->post('buckle_consumption_cost'),
+                'tbl_dimension_body_material_2_bottom_length' => $this->input->post('body_material_2_bottom_length'),
+                'tbl_dimension_body_material_2_bottom_length_allowance' => $this->input->post('body_material_2_bottom_length_allowance'),
+                'tbl_dimension_body_material_2_bottom_length_total' => $this->input->post('body_material_2_bottom_length_total'),
 
-                'tbl_trims_piece_snap_button_item_cost' => $this->input->post('snap_button_cost'),
-                'tbl_trims_piece_snap_button_item_consumption' => $this->input->post('snap_button_consumption'),
-                'tbl_trims_piece_snap_button_item_rate' => $this->input->post('snap_button_consumption_rate'),
-                'tbl_trims_piece_snap_button_item_total_cost' => $this->input->post('snap_button_consumption_cost'),
+                'tbl_dimension_body_material_2_bottom_width' => $this->input->post('body_material_2_bottom_width'),
+                'tbl_dimension_body_material_2_bottom_width_allowance' => $this->input->post('body_material_2_bottom_width_allowance'),
+                'tbl_dimension_body_material_2_bottom_width_total' => $this->input->post('body_material_2_bottom_width_total'),
 
-                'tbl_trims_piece_magnetic_button_item_cost' => $this->input->post('magnetic_button_cost'),
-                'tbl_trims_piece_magnetic_button_item_consumption' => $this->input->post('magnetic_button_consumption'),
-                'tbl_trims_piece_magnetic_button_item_rate' => $this->input->post('magnetic_button_consumption_rate'),
-                'tbl_trims_piece_magnetic_button_item_total_cost' => $this->input->post('magnetic_button_consumption_cost'),
+                'tbl_dimension_body_material_2_left_length' => $this->input->post('body_material_2_left_length'),
+                'tbl_dimension_body_material_2_left_length_allowance' => $this->input->post('body_material_2_left_length_allowance'),
+                'tbl_dimension_body_material_2_left_length_total' => $this->input->post('body_material_2_left_length_total'),
 
-                'tbl_trims_piece_bottom_base_item_cost' => $this->input->post('bottom_base_cost'),
-                'tbl_trims_piece_bottom_base_item_consumption' => $this->input->post('bottom_base_consumption'),
-                'tbl_trims_piece_bottom_base_item_rate' => $this->input->post('bottom_base_consumption_rate'),
-                'tbl_trims_piece_bottom_base_item_total_cost' => $this->input->post('bottom_base_consumption_cost'),
+                'tbl_dimension_body_material_2_left_width' => $this->input->post('body_material_2_left_width'),
+                'tbl_dimension_body_material_2_left_width_allowance' => $this->input->post('body_material_2_left_width_allowance'),
+                'tbl_dimension_body_material_2_left_width_total' => $this->input->post('body_material_2_left_width_total'),
 
-                'tbl_trims_piece_thread_item_cost' => $this->input->post('thread_cost'),
-                'tbl_trims_piece_thread_item_consumption' => $this->input->post('thread_consumption'),
-                'tbl_trims_piece_thread_item_rate' => $this->input->post('thread_consumption_rate'),
-                'tbl_trims_piece_thread_item_total_cost' => $this->input->post('thread_consumption_cost'),
+                'tbl_dimension_body_material_2_right_length' => $this->input->post('body_material_2_right_length'),
+                'tbl_dimension_body_material_2_right_length_allowance' => $this->input->post('body_material_2_right_length_allowance'),
+                'tbl_dimension_body_material_2_right_length_total' => $this->input->post('body_material_2_right_length_total'),
+
+                'tbl_dimension_body_material_2_right_width' => $this->input->post('body_material_2_right_width'),
+                'tbl_dimension_body_material_2_right_width_allowance' => $this->input->post('body_material_2_right_width_allowance'),
+                'tbl_dimension_body_material_2_right_width_total' => $this->input->post('body_material_2_right_width_total'),
+
+                'tbl_dimension_body_material_2_pocket_length' => $this->input->post('body_material_2_pocket_length'),
+                'tbl_dimension_body_material_2_pocket_length_allowance' => $this->input->post('body_material_2_pocket_length_allowance'),
+                'tbl_dimension_body_material_2_pocket_length_total' => $this->input->post('body_material_2_pocket_length_total'),
+
+                'tbl_dimension_body_material_2_pocket_width' => $this->input->post('body_material_2_pocket_width'),
+                'tbl_dimension_body_material_2_pocket_width_allowance' => $this->input->post('body_material_2_pocket_width_allowance'),
+                'tbl_dimension_body_material_2_pocket_width_total' => $this->input->post('body_material_2_pocket_width_total'),
+
+                'tbl_dimension_body_material_2_extra_1_length' => $this->input->post('body_material_2_extra_1_length'),
+                'tbl_dimension_body_material_2_extra_1_length_allowance' => $this->input->post('body_material_2_extra_1_length_allowance'),
+                'tbl_dimension_body_material_2_extra_1_length_total' => $this->input->post('body_material_2_extra_1_length_total'),
+
+                'tbl_dimension_body_material_2_extra_1_width' => $this->input->post('body_material_2_extra_1_width'),
+                'tbl_dimension_body_material_2_extra_1_width_allowance' => $this->input->post('body_material_2_extra_1_width_allowance'),
+                'tbl_dimension_body_material_2_extra_1_width_total' => $this->input->post('body_material_2_extra_1_width_total'),
+
+                'tbl_dimension_body_material_2_extra_2_length' => $this->input->post('body_material_2_extra_2_length'),
+                'tbl_dimension_body_material_2_extra_2_length_allowance' => $this->input->post('body_material_2_extra_2_length_allowance'),
+                'tbl_dimension_body_material_2_extra_2_length_total' => $this->input->post('body_material_2_extra_2_length_total'),
+
+                'tbl_dimension_body_material_2_extra_2_width' => $this->input->post('body_material_2_extra_2_width'),
+                'tbl_dimension_body_material_2_extra_2_width_allowance' => $this->input->post('body_material_2_extra_2_width_allowance'),
+                'tbl_dimension_body_material_2_extra_2_width_total' => $this->input->post('body_material_2_extra_2_width_total'),
+
+                'tbl_dimension_body_material_2_extra_3_length' => $this->input->post('body_material_2_extra_3_length'),
+                'tbl_dimension_body_material_2_extra_3_length_allowance' => $this->input->post('body_material_2_extra_3_length_allowance'),
+                'tbl_dimension_body_material_2_extra_3_length_total' => $this->input->post('body_material_2_extra_3_length_total'),
+
+                'tbl_dimension_body_material_2_extra_3_width' => $this->input->post('body_material_2_extra_3_width'),
+                'tbl_dimension_body_material_2_extra_3_width_allowance' => $this->input->post('body_material_2_extra_3_width_allowance'),
+                'tbl_dimension_body_material_2_extra_3_width_total' => $this->input->post('body_material_2_extra_3_width_total'),
 
 
-                'tbl_trims_piece_tag_item_cost' => $this->input->post('tag_cost'),
-                'tbl_trims_piece_tag_item_consumption' => $this->input->post('tag_consumption'),
-                'tbl_trims_piece_tag_item_rate' => $this->input->post('tag_consumption_rate'),
-                'tbl_trims_piece_tag_item_total_cost' => $this->input->post('tag_consumption_cost'),
 
-                'tbl_trims_piece_label_item_cost' => $this->input->post('label_cost'),
-                'tbl_trims_piece_label_item_consumption' => $this->input->post('label_consumption'),
-                'tbl_trims_piece_label_item_rate' => $this->input->post('label_consumption_rate'),
-                'tbl_trims_piece_label_item_total_cost' => $this->input->post('label_consumption_cost'),
+                //Body material 3
+                'tbl_dimension_body_material_3_front_length' => $this->input->post('body_material_3_front_length'),
+                'tbl_dimension_body_material_3_front_length_allowance' => $this->input->post('body_material_3_front_length_allowance'),
+                'tbl_dimension_body_material_3_front_length_total' => $this->input->post('body_material_3_front_length_total'),
 
-                'tbl_trims_piece_packing_item_cost' => $this->input->post('packing_cost'),
-                'tbl_trims_piece_packing_item_consumption' => $this->input->post('packing_consumption'),
-                'tbl_trims_piece_packing_item_rate' => $this->input->post('packing_consumption_rate'),
-                'tbl_trims_piece_packing_item_total_cost' => $this->input->post('packing_consumption_cost'),
+                'tbl_dimension_body_material_3_front_width' => $this->input->post('body_material_3_front_width'),
+                'tbl_dimension_body_material_3_front_width_allowance' => $this->input->post('body_material_3_front_width_allowance'),
+                'tbl_dimension_body_material_3_front_width_total' => $this->input->post('body_material_3_front_width_total'),
 
-                'tbl_trims_piece_extra_1_item_cost' => $this->input->post('extra_1_piece_cost'),
-                'tbl_trims_piece_extra_1_item_consumption' => $this->input->post('extra_1_piece_consumption'),
-                'tbl_trims_piece_extra_1_item_rate' => $this->input->post('extra_1_piece_consumption_rate'),
-                'tbl_trims_piece_extra_1_item_total_cost' => $this->input->post('extra_1_piece_consumption_cost'),
+                'tbl_dimension_body_material_3_back_length' => $this->input->post('body_material_3_back_length'),
+                'tbl_dimension_body_material_3_back_length_allowance' => $this->input->post('body_material_3_back_length_allowance'),
+                'tbl_dimension_body_material_3_back_length_total' => $this->input->post('body_material_3_back_length_total'),
 
-                'tbl_trims_piece_extra_2_item_cost' => $this->input->post('extra_2_piece_cost'),
-                'tbl_trims_piece_extra_2_item_consumption' => $this->input->post('extra_2_piece_consumption'),
-                'tbl_trims_piece_extra_2_item_rate' => $this->input->post('extra_2_piece_consumption_rate'),
-                'tbl_trims_piece_extra_2_item_total_cost' => $this->input->post('extra_2_piece_consumption_cost'),
+                'tbl_dimension_body_material_3_back_width' => $this->input->post('body_material_3_back_width'),
+                'tbl_dimension_body_material_3_back_width_allowance' => $this->input->post('body_material_3_back_width_allowance'),
+                'tbl_dimension_body_material_3_back_width_total' => $this->input->post('body_material_3_back_width_total'),
 
-                'tbl_trims_piece_extra_3_item_cost' => $this->input->post('extra_3_piece_cost'),
-                'tbl_trims_piece_extra_3_item_consumption' => $this->input->post('extra_3_piece_consumption'),
-                'tbl_trims_piece_extra_3_item_rate' => $this->input->post('extra_3_piece_consumption_rate'),
-                'tbl_trims_piece_extra_3_item_total_cost' => $this->input->post('extra_3_piece_consumption_cost'),
+                'tbl_dimension_body_material_3_top_length' => $this->input->post('body_material_3_top_length'),
+                'tbl_dimension_body_material_3_top_length_allowance' => $this->input->post('body_material_3_top_length_allowance'),
+                'tbl_dimension_body_material_3_top_length_total' => $this->input->post('body_material_3_top_length_total'),
+
+                'tbl_dimension_body_material_3_top_width' => $this->input->post('body_material_3_top_width'),
+                'tbl_dimension_body_material_3_top_width_allowance' => $this->input->post('body_material_3_top_width_allowance'),
+                'tbl_dimension_body_material_3_top_width_total' => $this->input->post('body_material_3_top_width_total'),
+
+                'tbl_dimension_body_material_3_bottom_length' => $this->input->post('body_material_3_bottom_length'),
+                'tbl_dimension_body_material_3_bottom_length_allowance' => $this->input->post('body_material_3_bottom_length_allowance'),
+                'tbl_dimension_body_material_3_bottom_length_total' => $this->input->post('body_material_3_bottom_length_total'),
+
+                'tbl_dimension_body_material_3_bottom_width' => $this->input->post('body_material_3_bottom_width'),
+                'tbl_dimension_body_material_3_bottom_width_allowance' => $this->input->post('body_material_3_bottom_width_allowance'),
+                'tbl_dimension_body_material_3_bottom_width_total' => $this->input->post('body_material_3_bottom_width_total'),
+
+                'tbl_dimension_body_material_3_left_length' => $this->input->post('body_material_3_left_length'),
+                'tbl_dimension_body_material_3_left_length_allowance' => $this->input->post('body_material_3_left_length_allowance'),
+                'tbl_dimension_body_material_3_left_length_total' => $this->input->post('body_material_3_left_length_total'),
+
+                'tbl_dimension_body_material_3_left_width' => $this->input->post('body_material_3_left_width'),
+                'tbl_dimension_body_material_3_left_width_allowance' => $this->input->post('body_material_3_left_width_allowance'),
+                'tbl_dimension_body_material_3_left_width_total' => $this->input->post('body_material_3_left_width_total'),
+
+                'tbl_dimension_body_material_3_right_length' => $this->input->post('body_material_3_right_length'),
+                'tbl_dimension_body_material_3_right_length_allowance' => $this->input->post('body_material_3_right_length_allowance'),
+                'tbl_dimension_body_material_3_right_length_total' => $this->input->post('body_material_3_right_length_total'),
+
+                'tbl_dimension_body_material_3_right_width' => $this->input->post('body_material_3_right_width'),
+                'tbl_dimension_body_material_3_right_width_allowance' => $this->input->post('body_material_3_right_width_allowance'),
+                'tbl_dimension_body_material_3_right_width_total' => $this->input->post('body_material_3_right_width_total'),
+
+                'tbl_dimension_body_material_3_pocket_length' => $this->input->post('body_material_3_pocket_length'),
+                'tbl_dimension_body_material_3_pocket_length_allowance' => $this->input->post('body_material_3_pocket_length_allowance'),
+                'tbl_dimension_body_material_3_pocket_length_total' => $this->input->post('body_material_3_pocket_length_total'),
+
+                'tbl_dimension_body_material_3_pocket_width' => $this->input->post('body_material_3_pocket_width'),
+                'tbl_dimension_body_material_3_pocket_width_allowance' => $this->input->post('body_material_3_pocket_width_allowance'),
+                'tbl_dimension_body_material_3_pocket_width_total' => $this->input->post('body_material_3_pocket_width_total'),
+
+                'tbl_dimension_body_material_3_extra_1_length' => $this->input->post('body_material_3_extra_1_length'),
+                'tbl_dimension_body_material_3_extra_1_length_allowance' => $this->input->post('body_material_3_extra_1_length_allowance'),
+                'tbl_dimension_body_material_3_extra_1_length_total' => $this->input->post('body_material_3_extra_1_length_total'),
+
+                'tbl_dimension_body_material_3_extra_1_width' => $this->input->post('body_material_3_extra_1_width'),
+                'tbl_dimension_body_material_3_extra_1_width_allowance' => $this->input->post('body_material_3_extra_1_width_allowance'),
+                'tbl_dimension_body_material_3_extra_1_width_total' => $this->input->post('body_material_3_extra_1_width_total'),
+
+                'tbl_dimension_body_material_3_extra_2_length' => $this->input->post('body_material_3_extra_2_length'),
+                'tbl_dimension_body_material_3_extra_2_length_allowance' => $this->input->post('body_material_3_extra_2_length_allowance'),
+                'tbl_dimension_body_material_3_extra_2_length_total' => $this->input->post('body_material_3_extra_2_length_total'),
+
+                'tbl_dimension_body_material_3_extra_2_width' => $this->input->post('body_material_3_extra_2_width'),
+                'tbl_dimension_body_material_3_extra_2_width_allowance' => $this->input->post('body_material_3_extra_2_width_allowance'),
+                'tbl_dimension_body_material_3_extra_2_width_total' => $this->input->post('body_material_3_extra_2_width_total'),
+
+                'tbl_dimension_body_material_3_extra_3_length' => $this->input->post('body_material_3_extra_3_length'),
+                'tbl_dimension_body_material_3_extra_3_length_allowance' => $this->input->post('body_material_3_extra_3_length_allowance'),
+                'tbl_dimension_body_material_3_extra_3_length_total' => $this->input->post('body_material_3_extra_3_length_total'),
+
+                'tbl_dimension_body_material_3_extra_3_width' => $this->input->post('body_material_3_extra_3_width'),
+                'tbl_dimension_body_material_3_extra_3_width_allowance' => $this->input->post('body_material_3_extra_3_width_allowance'),
+                'tbl_dimension_body_material_3_extra_3_width_total' => $this->input->post('body_material_3_extra_3_width_total'),
+
+
+
+                //Body material 4
+                'tbl_dimension_body_material_4_front_length' => $this->input->post('body_material_4_front_length'),
+                'tbl_dimension_body_material_4_front_length_allowance' => $this->input->post('body_material_4_front_length_allowance'),
+                'tbl_dimension_body_material_4_front_length_total' => $this->input->post('body_material_4_front_length_total'),
+
+                'tbl_dimension_body_material_4_front_width' => $this->input->post('body_material_4_front_width'),
+                'tbl_dimension_body_material_4_front_width_allowance' => $this->input->post('body_material_4_front_width_allowance'),
+                'tbl_dimension_body_material_4_front_width_total' => $this->input->post('body_material_4_front_width_total'),
+
+                'tbl_dimension_body_material_4_back_length' => $this->input->post('body_material_4_back_length'),
+                'tbl_dimension_body_material_4_back_length_allowance' => $this->input->post('body_material_4_back_length_allowance'),
+                'tbl_dimension_body_material_4_back_length_total' => $this->input->post('body_material_4_back_length_total'),
+
+                'tbl_dimension_body_material_4_back_width' => $this->input->post('body_material_4_back_width'),
+                'tbl_dimension_body_material_4_back_width_allowance' => $this->input->post('body_material_4_back_width_allowance'),
+                'tbl_dimension_body_material_4_back_width_total' => $this->input->post('body_material_4_back_width_total'),
+
+                'tbl_dimension_body_material_4_top_length' => $this->input->post('body_material_4_top_length'),
+                'tbl_dimension_body_material_4_top_length_allowance' => $this->input->post('body_material_4_top_length_allowance'),
+                'tbl_dimension_body_material_4_top_length_total' => $this->input->post('body_material_4_top_length_total'),
+
+                'tbl_dimension_body_material_4_top_width' => $this->input->post('body_material_4_top_width'),
+                'tbl_dimension_body_material_4_top_width_allowance' => $this->input->post('body_material_4_top_width_allowance'),
+                'tbl_dimension_body_material_4_top_width_total' => $this->input->post('body_material_4_top_width_total'),
+
+                'tbl_dimension_body_material_4_bottom_length' => $this->input->post('body_material_4_bottom_length'),
+                'tbl_dimension_body_material_4_bottom_length_allowance' => $this->input->post('body_material_4_bottom_length_allowance'),
+                'tbl_dimension_body_material_4_bottom_length_total' => $this->input->post('body_material_4_bottom_length_total'),
+
+                'tbl_dimension_body_material_4_bottom_width' => $this->input->post('body_material_4_bottom_width'),
+                'tbl_dimension_body_material_4_bottom_width_allowance' => $this->input->post('body_material_4_bottom_width_allowance'),
+                'tbl_dimension_body_material_4_bottom_width_total' => $this->input->post('body_material_4_bottom_width_total'),
+
+                'tbl_dimension_body_material_4_left_length' => $this->input->post('body_material_4_left_length'),
+                'tbl_dimension_body_material_4_left_length_allowance' => $this->input->post('body_material_4_left_length_allowance'),
+                'tbl_dimension_body_material_4_left_length_total' => $this->input->post('body_material_4_left_length_total'),
+
+                'tbl_dimension_body_material_4_left_width' => $this->input->post('body_material_4_left_width'),
+                'tbl_dimension_body_material_4_left_width_allowance' => $this->input->post('body_material_4_left_width_allowance'),
+                'tbl_dimension_body_material_4_left_width_total' => $this->input->post('body_material_4_left_width_total'),
+
+                'tbl_dimension_body_material_4_right_length' => $this->input->post('body_material_4_right_length'),
+                'tbl_dimension_body_material_4_right_length_allowance' => $this->input->post('body_material_4_right_length_allowance'),
+                'tbl_dimension_body_material_4_right_length_total' => $this->input->post('body_material_4_right_length_total'),
+
+                'tbl_dimension_body_material_4_right_width' => $this->input->post('body_material_4_right_width'),
+                'tbl_dimension_body_material_4_right_width_allowance' => $this->input->post('body_material_4_right_width_allowance'),
+                'tbl_dimension_body_material_4_right_width_total' => $this->input->post('body_material_4_right_width_total'),
+
+                'tbl_dimension_body_material_4_pocket_length' => $this->input->post('body_material_4_pocket_length'),
+                'tbl_dimension_body_material_4_pocket_length_allowance' => $this->input->post('body_material_4_pocket_length_allowance'),
+                'tbl_dimension_body_material_4_pocket_length_total' => $this->input->post('body_material_4_pocket_length_total'),
+
+                'tbl_dimension_body_material_4_pocket_width' => $this->input->post('body_material_4_pocket_width'),
+                'tbl_dimension_body_material_4_pocket_width_allowance' => $this->input->post('body_material_4_pocket_width_allowance'),
+                'tbl_dimension_body_material_4_pocket_width_total' => $this->input->post('body_material_4_pocket_width_total'),
+
+                'tbl_dimension_body_material_4_extra_1_length' => $this->input->post('body_material_4_extra_1_length'),
+                'tbl_dimension_body_material_4_extra_1_length_allowance' => $this->input->post('body_material_4_extra_1_length_allowance'),
+                'tbl_dimension_body_material_4_extra_1_length_total' => $this->input->post('body_material_4_extra_1_length_total'),
+
+                'tbl_dimension_body_material_4_extra_1_width' => $this->input->post('body_material_4_extra_1_width'),
+                'tbl_dimension_body_material_4_extra_1_width_allowance' => $this->input->post('body_material_4_extra_1_width_allowance'),
+                'tbl_dimension_body_material_4_extra_1_width_total' => $this->input->post('body_material_4_extra_1_width_total'),
+
+                'tbl_dimension_body_material_4_extra_2_length' => $this->input->post('body_material_4_extra_2_length'),
+                'tbl_dimension_body_material_4_extra_2_length_allowance' => $this->input->post('body_material_4_extra_2_length_allowance'),
+                'tbl_dimension_body_material_4_extra_2_length_total' => $this->input->post('body_material_4_extra_2_length_total'),
+
+                'tbl_dimension_body_material_4_extra_2_width' => $this->input->post('body_material_4_extra_2_width'),
+                'tbl_dimension_body_material_4_extra_2_width_allowance' => $this->input->post('body_material_4_extra_2_width_allowance'),
+                'tbl_dimension_body_material_4_extra_2_width_total' => $this->input->post('body_material_4_extra_2_width_total'),
+
+                'tbl_dimension_body_material_4_extra_3_length' => $this->input->post('body_material_4_extra_3_length'),
+                'tbl_dimension_body_material_4_extra_3_length_allowance' => $this->input->post('body_material_4_extra_3_length_allowance'),
+                'tbl_dimension_body_material_4_extra_3_length_total' => $this->input->post('body_material_4_extra_3_length_total'),
+
+                'tbl_dimension_body_material_4_extra_3_width' => $this->input->post('body_material_4_extra_3_width'),
+                'tbl_dimension_body_material_4_extra_3_width_allowance' => $this->input->post('body_material_4_extra_3_width_allowance'),
+                'tbl_dimension_body_material_4_extra_3_width_total' => $this->input->post('body_material_4_extra_3_width_total'),
+
+
+                //Body material 5
+                'tbl_dimension_body_material_5_front_length' => $this->input->post('body_material_5_front_length'),
+                'tbl_dimension_body_material_5_front_length_allowance' => $this->input->post('body_material_5_front_length_allowance'),
+                'tbl_dimension_body_material_5_front_length_total' => $this->input->post('body_material_5_front_length_total'),
+
+                'tbl_dimension_body_material_5_front_width' => $this->input->post('body_material_5_front_width'),
+                'tbl_dimension_body_material_5_front_width_allowance' => $this->input->post('body_material_5_front_width_allowance'),
+                'tbl_dimension_body_material_5_front_width_total' => $this->input->post('body_material_5_front_width_total'),
+
+                'tbl_dimension_body_material_5_back_length' => $this->input->post('body_material_5_back_length'),
+                'tbl_dimension_body_material_5_back_length_allowance' => $this->input->post('body_material_5_back_length_allowance'),
+                'tbl_dimension_body_material_5_back_length_total' => $this->input->post('body_material_5_back_length_total'),
+
+                'tbl_dimension_body_material_5_back_width' => $this->input->post('body_material_5_back_width'),
+                'tbl_dimension_body_material_5_back_width_allowance' => $this->input->post('body_material_5_back_width_allowance'),
+                'tbl_dimension_body_material_5_back_width_total' => $this->input->post('body_material_5_back_width_total'),
+
+                'tbl_dimension_body_material_5_top_length' => $this->input->post('body_material_5_top_length'),
+                'tbl_dimension_body_material_5_top_length_allowance' => $this->input->post('body_material_5_top_length_allowance'),
+                'tbl_dimension_body_material_5_top_length_total' => $this->input->post('body_material_5_top_length_total'),
+
+                'tbl_dimension_body_material_5_top_width' => $this->input->post('body_material_5_top_width'),
+                'tbl_dimension_body_material_5_top_width_allowance' => $this->input->post('body_material_5_top_width_allowance'),
+                'tbl_dimension_body_material_5_top_width_total' => $this->input->post('body_material_5_top_width_total'),
+
+                'tbl_dimension_body_material_5_bottom_length' => $this->input->post('body_material_5_bottom_length'),
+                'tbl_dimension_body_material_5_bottom_length_allowance' => $this->input->post('body_material_5_bottom_length_allowance'),
+                'tbl_dimension_body_material_5_bottom_length_total' => $this->input->post('body_material_5_bottom_length_total'),
+
+                'tbl_dimension_body_material_5_bottom_width' => $this->input->post('body_material_5_bottom_width'),
+                'tbl_dimension_body_material_5_bottom_width_allowance' => $this->input->post('body_material_5_bottom_width_allowance'),
+                'tbl_dimension_body_material_5_bottom_width_total' => $this->input->post('body_material_5_bottom_width_total'),
+
+                'tbl_dimension_body_material_5_left_length' => $this->input->post('body_material_5_left_length'),
+                'tbl_dimension_body_material_5_left_length_allowance' => $this->input->post('body_material_5_left_length_allowance'),
+                'tbl_dimension_body_material_5_left_length_total' => $this->input->post('body_material_5_left_length_total'),
+
+                'tbl_dimension_body_material_5_left_width' => $this->input->post('body_material_5_left_width'),
+                'tbl_dimension_body_material_5_left_width_allowance' => $this->input->post('body_material_5_left_width_allowance'),
+                'tbl_dimension_body_material_5_left_width_total' => $this->input->post('body_material_5_left_width_total'),
+
+                'tbl_dimension_body_material_5_right_length' => $this->input->post('body_material_5_right_length'),
+                'tbl_dimension_body_material_5_right_length_allowance' => $this->input->post('body_material_5_right_length_allowance'),
+                'tbl_dimension_body_material_5_right_length_total' => $this->input->post('body_material_5_right_length_total'),
+
+                'tbl_dimension_body_material_5_right_width' => $this->input->post('body_material_5_right_width'),
+                'tbl_dimension_body_material_5_right_width_allowance' => $this->input->post('body_material_5_right_width_allowance'),
+                'tbl_dimension_body_material_5_right_width_total' => $this->input->post('body_material_5_right_width_total'),
+
+                'tbl_dimension_body_material_5_pocket_length' => $this->input->post('body_material_5_pocket_length'),
+                'tbl_dimension_body_material_5_pocket_length_allowance' => $this->input->post('body_material_5_pocket_length_allowance'),
+                'tbl_dimension_body_material_5_pocket_length_total' => $this->input->post('body_material_5_pocket_length_total'),
+
+                'tbl_dimension_body_material_5_pocket_width' => $this->input->post('body_material_5_pocket_width'),
+                'tbl_dimension_body_material_5_pocket_width_allowance' => $this->input->post('body_material_5_pocket_width_allowance'),
+                'tbl_dimension_body_material_5_pocket_width_total' => $this->input->post('body_material_5_pocket_width_total'),
+
+                'tbl_dimension_body_material_5_extra_1_length' => $this->input->post('body_material_5_extra_1_length'),
+                'tbl_dimension_body_material_5_extra_1_length_allowance' => $this->input->post('body_material_5_extra_1_length_allowance'),
+                'tbl_dimension_body_material_5_extra_1_length_total' => $this->input->post('body_material_5_extra_1_length_total'),
+
+                'tbl_dimension_body_material_5_extra_1_width' => $this->input->post('body_material_5_extra_1_width'),
+                'tbl_dimension_body_material_5_extra_1_width_allowance' => $this->input->post('body_material_5_extra_1_width_allowance'),
+                'tbl_dimension_body_material_5_extra_1_width_total' => $this->input->post('body_material_5_extra_1_width_total'),
+
+                'tbl_dimension_body_material_5_extra_2_length' => $this->input->post('body_material_5_extra_2_length'),
+                'tbl_dimension_body_material_5_extra_2_length_allowance' => $this->input->post('body_material_5_extra_2_length_allowance'),
+                'tbl_dimension_body_material_5_extra_2_length_total' => $this->input->post('body_material_5_extra_2_length_total'),
+
+                'tbl_dimension_body_material_5_extra_2_width' => $this->input->post('body_material_5_extra_2_width'),
+                'tbl_dimension_body_material_5_extra_2_width_allowance' => $this->input->post('body_material_5_extra_2_width_allowance'),
+                'tbl_dimension_body_material_5_extra_2_width_total' => $this->input->post('body_material_5_extra_2_width_total'),
+
+                'tbl_dimension_body_material_5_extra_3_length' => $this->input->post('body_material_5_extra_3_length'),
+                'tbl_dimension_body_material_5_extra_3_length_allowance' => $this->input->post('body_material_5_extra_3_length_allowance'),
+                'tbl_dimension_body_material_5_extra_3_length_total' => $this->input->post('body_material_5_extra_3_length_total'),
+
+                'tbl_dimension_body_material_5_extra_3_width' => $this->input->post('body_material_5_extra_3_width'),
+                'tbl_dimension_body_material_5_extra_3_width_allowance' => $this->input->post('body_material_5_extra_3_width_allowance'),
+                'tbl_dimension_body_material_5_extra_3_width_total' => $this->input->post('body_material_5_extra_3_width_total'),
+
+
+                //Body material 5
+                'tbl_dimension_body_material_6_front_length' => $this->input->post('body_material_6_front_length'),
+                'tbl_dimension_body_material_6_front_length_allowance' => $this->input->post('body_material_6_front_length_allowance'),
+                'tbl_dimension_body_material_6_front_length_total' => $this->input->post('body_material_6_front_length_total'),
+
+                'tbl_dimension_body_material_6_front_width' => $this->input->post('body_material_6_front_width'),
+                'tbl_dimension_body_material_6_front_width_allowance' => $this->input->post('body_material_6_front_width_allowance'),
+                'tbl_dimension_body_material_6_front_width_total' => $this->input->post('body_material_6_front_width_total'),
+
+                'tbl_dimension_body_material_6_back_length' => $this->input->post('body_material_6_back_length'),
+                'tbl_dimension_body_material_6_back_length_allowance' => $this->input->post('body_material_6_back_length_allowance'),
+                'tbl_dimension_body_material_6_back_length_total' => $this->input->post('body_material_6_back_length_total'),
+
+                'tbl_dimension_body_material_6_back_width' => $this->input->post('body_material_6_back_width'),
+                'tbl_dimension_body_material_6_back_width_allowance' => $this->input->post('body_material_6_back_width_allowance'),
+                'tbl_dimension_body_material_6_back_width_total' => $this->input->post('body_material_6_back_width_total'),
+
+                'tbl_dimension_body_material_6_top_length' => $this->input->post('body_material_6_top_length'),
+                'tbl_dimension_body_material_6_top_length_allowance' => $this->input->post('body_material_6_top_length_allowance'),
+                'tbl_dimension_body_material_6_top_length_total' => $this->input->post('body_material_6_top_length_total'),
+
+                'tbl_dimension_body_material_6_top_width' => $this->input->post('body_material_6_top_width'),
+                'tbl_dimension_body_material_6_top_width_allowance' => $this->input->post('body_material_6_top_width_allowance'),
+                'tbl_dimension_body_material_6_top_width_total' => $this->input->post('body_material_6_top_width_total'),
+
+                'tbl_dimension_body_material_6_bottom_length' => $this->input->post('body_material_6_bottom_length'),
+                'tbl_dimension_body_material_6_bottom_length_allowance' => $this->input->post('body_material_6_bottom_length_allowance'),
+                'tbl_dimension_body_material_6_bottom_length_total' => $this->input->post('body_material_6_bottom_length_total'),
+
+                'tbl_dimension_body_material_6_bottom_width' => $this->input->post('body_material_6_bottom_width'),
+                'tbl_dimension_body_material_6_bottom_width_allowance' => $this->input->post('body_material_6_bottom_width_allowance'),
+                'tbl_dimension_body_material_6_bottom_width_total' => $this->input->post('body_material_6_bottom_width_total'),
+
+                'tbl_dimension_body_material_6_left_length' => $this->input->post('body_material_6_left_length'),
+                'tbl_dimension_body_material_6_left_length_allowance' => $this->input->post('body_material_6_left_length_allowance'),
+                'tbl_dimension_body_material_6_left_length_total' => $this->input->post('body_material_6_left_length_total'),
+
+                'tbl_dimension_body_material_6_left_width' => $this->input->post('body_material_6_left_width'),
+                'tbl_dimension_body_material_6_left_width_allowance' => $this->input->post('body_material_6_left_width_allowance'),
+                'tbl_dimension_body_material_6_left_width_total' => $this->input->post('body_material_6_left_width_total'),
+
+                'tbl_dimension_body_material_6_right_length' => $this->input->post('body_material_6_right_length'),
+                'tbl_dimension_body_material_6_right_length_allowance' => $this->input->post('body_material_6_right_length_allowance'),
+                'tbl_dimension_body_material_6_right_length_total' => $this->input->post('body_material_6_right_length_total'),
+
+                'tbl_dimension_body_material_6_right_width' => $this->input->post('body_material_6_right_width'),
+                'tbl_dimension_body_material_6_right_width_allowance' => $this->input->post('body_material_6_right_width_allowance'),
+                'tbl_dimension_body_material_6_right_width_total' => $this->input->post('body_material_6_right_width_total'),
+
+                'tbl_dimension_body_material_6_pocket_length' => $this->input->post('body_material_6_pocket_length'),
+                'tbl_dimension_body_material_6_pocket_length_allowance' => $this->input->post('body_material_6_pocket_length_allowance'),
+                'tbl_dimension_body_material_6_pocket_length_total' => $this->input->post('body_material_6_pocket_length_total'),
+
+                'tbl_dimension_body_material_6_pocket_width' => $this->input->post('body_material_6_pocket_width'),
+                'tbl_dimension_body_material_6_pocket_width_allowance' => $this->input->post('body_material_6_pocket_width_allowance'),
+                'tbl_dimension_body_material_6_pocket_width_total' => $this->input->post('body_material_6_pocket_width_total'),
+
+                'tbl_dimension_body_material_6_extra_1_length' => $this->input->post('body_material_6_extra_1_length'),
+                'tbl_dimension_body_material_6_extra_1_length_allowance' => $this->input->post('body_material_6_extra_1_length_allowance'),
+                'tbl_dimension_body_material_6_extra_1_length_total' => $this->input->post('body_material_6_extra_1_length_total'),
+
+                'tbl_dimension_body_material_6_extra_1_width' => $this->input->post('body_material_6_extra_1_width'),
+                'tbl_dimension_body_material_6_extra_1_width_allowance' => $this->input->post('body_material_6_extra_1_width_allowance'),
+                'tbl_dimension_body_material_6_extra_1_width_total' => $this->input->post('body_material_6_extra_1_width_total'),
+
+                'tbl_dimension_body_material_6_extra_2_length' => $this->input->post('body_material_6_extra_2_length'),
+                'tbl_dimension_body_material_6_extra_2_length_allowance' => $this->input->post('body_material_6_extra_2_length_allowance'),
+                'tbl_dimension_body_material_6_extra_2_length_total' => $this->input->post('body_material_6_extra_2_length_total'),
+
+                'tbl_dimension_body_material_6_extra_2_width' => $this->input->post('body_material_6_extra_2_width'),
+                'tbl_dimension_body_material_6_extra_2_width_allowance' => $this->input->post('body_material_6_extra_2_width_allowance'),
+                'tbl_dimension_body_material_6_extra_2_width_total' => $this->input->post('body_material_6_extra_2_width_total'),
+
+                'tbl_dimension_body_material_6_extra_3_length' => $this->input->post('body_material_6_extra_3_length'),
+                'tbl_dimension_body_material_6_extra_3_length_allowance' => $this->input->post('body_material_6_extra_3_length_allowance'),
+                'tbl_dimension_body_material_6_extra_3_length_total' => $this->input->post('body_material_6_extra_3_length_total'),
+
+                'tbl_dimension_body_material_6_extra_3_width' => $this->input->post('body_material_6_extra_3_width'),
+                'tbl_dimension_body_material_6_extra_3_width_allowance' => $this->input->post('body_material_6_extra_3_width_allowance'),
+                'tbl_dimension_body_material_6_extra_3_width_total' => $this->input->post('body_material_6_extra_3_width_total'),
+            );
+
+
+            $this->db->insert('woven_dimension', $woven_dimension_data);
+            $inserted_dimension_id = $this->db->insert_id();
+
+            $woven_costing_data = array(
+                'tbl_woven_dimension_id' => $inserted_dimension_id,
+                'tbl_woven_id_name' => $this->input->post('order_id'),
+                'tbl_woven_company_name' => $this->input->post('order_company'),
+                'tbl_woven_order_date' => $this->input->post('order_date'),
+                'tbl_woven_item_name' => $this->input->post('order_item_name'),
+                'tbl_woven_ref_name' => $this->input->post('order_ref_no'),
+
+                'tbl_woven_order_usd' => $this->input->post('order_usd'),
+                'tbl_woven_order_wastage' => $this->input->post('order_wastage'),
+                'tbl_woven_order_margin' => $this->input->post('order_margin'),
+                'tbl_woven_order_quantity' => $this->input->post('order_quantity'),
+                'tbl_woven_order_transport' => $this->input->post('order_transport'),
+                'tbl_woven_order_bank_doc_charge' => $this->input->post('order_bank_document'),
+
+                //Body Material Name
+                'tbl_woven_body_material_1_name' => $this->input->post('body_material_1_name'),
+                'tbl_woven_body_material_2_name' => $this->input->post('body_material_2_name'),
+                'tbl_woven_body_material_3_name' => $this->input->post('body_material_3_name'),
+                'tbl_woven_body_material_4_name' => $this->input->post('body_material_4_name'),
+                'tbl_woven_body_material_5_name' => $this->input->post('body_material_5_name'),
+                'tbl_woven_body_material_6_name' => $this->input->post('body_material_6_name'),
+
+                //Body Material Roll Width
+                'tbl_woven_body_material_1_roll_width' => $this->input->post('body_material_1_roll_1'),
+                'tbl_woven_body_material_2_roll_width' => $this->input->post('body_material_2_roll_2'),
+                'tbl_woven_body_material_3_roll_width' => $this->input->post('body_material_3_roll_3'),
+                'tbl_woven_body_material_4_roll_width' => $this->input->post('body_material_4_roll_4'),
+                'tbl_woven_body_material_5_roll_width' => $this->input->post('body_material_5_roll_5'),
+                'tbl_woven_body_material_6_roll_width' => $this->input->post('body_material_6_roll_6'),
+
+                //Body Material 1 consumption cost
+                'tbl_woven_body_material_1_cost' => $this->input->post('body_material_1_cost'),
+                'tbl_woven_body_material_1_consumption' => $this->input->post('body_material_1_consumption'),
+                'tbl_woven_body_material_1_rate' => $this->input->post('body_material_1_consumption_rate'),
+                'tbl_woven_body_material_1_total_cost' => $this->input->post('body_material_1_consumption_cost'),
+
+                //Body Material 2 consumption cost
+                'tbl_woven_body_material_2_cost' => $this->input->post('body_material_2_cost'),
+                'tbl_woven_body_material_2_consumption' => $this->input->post('body_material_2_consumption'),
+                'tbl_woven_body_material_2_rate' => $this->input->post('body_material_2_consumption_rate'),
+                'tbl_woven_body_material_2_total_cost' => $this->input->post('body_material_2_consumption_cost'),
+
+                //Body Material 3 consumption cost
+                'tbl_woven_body_material_3_cost' => $this->input->post('body_material_3_cost'),
+                'tbl_woven_body_material_3_consumption' => $this->input->post('body_material_3_consumption'),
+                'tbl_woven_body_material_3_rate' => $this->input->post('body_material_3_consumption_rate'),
+                'tbl_woven_body_material_3_total_cost' => $this->input->post('body_material_3_consumption_cost'),
+
+                //Body Material 4 consumption cost
+                'tbl_woven_body_material_4_cost' => $this->input->post('body_material_4_cost'),
+                'tbl_woven_body_material_4_consumption' => $this->input->post('body_material_4_consumption'),
+                'tbl_woven_body_material_4_rate' => $this->input->post('body_material_4_consumption_rate'),
+                'tbl_woven_body_material_4_total_cost' => $this->input->post('body_material_4_consumption_cost'),
+
+                //Body Material 5 consumption cost
+                'tbl_woven_body_material_5_cost' => $this->input->post('body_material_5_cost'),
+                'tbl_woven_body_material_5_consumption' => $this->input->post('body_material_5_consumption'),
+                'tbl_woven_body_material_5_rate' => $this->input->post('body_material_5_consumption_rate'),
+                'tbl_woven_body_material_5_total_cost' => $this->input->post('body_material_5_consumption_cost'),
+
+                //Body Material 6 consumption cost
+                'tbl_woven_body_material_6_cost' => $this->input->post('body_material_6_cost'),
+                'tbl_woven_body_material_6_consumption' => $this->input->post('body_material_6_consumption'),
+                'tbl_woven_body_material_6_rate' => $this->input->post('body_material_6_consumption_rate'),
+                'tbl_woven_body_material_6_total_cost' => $this->input->post('body_material_6_consumption_cost'),
+
+
+                // All Trims in yard
+                'tbl_woven_trims_yard_zipper_item_cost' => $this->input->post('zipper_cost'),
+                'tbl_woven_trims_yard_zipper_item_consumption' => $this->input->post('zipper_consumption'),
+                'tbl_woven_trims_yard_zipper_item_rate' => $this->input->post('zipper_consumption_rate'),
+                'tbl_woven_trims_yard_zipper_item_total_cost' => $this->input->post('zipper_consumption_cost'),
+
+                'tbl_woven_trims_yard_two_inch_webbing_item_cost' => $this->input->post('two_inch_webbing_cost'),
+                'tbl_woven_trims_yard_two_inch_webbing_item_consumption' => $this->input->post('two_inch_webbing_consumption'),
+                'tbl_woven_trims_yard_two_inch_webbing_item_rate' => $this->input->post('two_inch_webbing_consumption_rate'),
+                'tbl_woven_trims_yard_two_inch_webbing_item_total_cost' => $this->input->post('two_inch_webbing_consumption_cost'),
+
+                'tbl_woven_trims_yard_one_and_half_inch_webbing_item_cost' => $this->input->post('one_and_half_inch_webbing_cost'),
+                'tbl_woven_trims_yard_one_and_half_webbing_item_consumption' => $this->input->post('one_and_half_inch_webbing_consumption'),
+                'tbl_woven_trims_yard_one_and_half_webbing_item_rate' => $this->input->post('one_and_half_inch_webbing_consumption_rate'),
+                'tbl_woven_trims_yard_one_and_half_webbing_item_total_cost' => $this->input->post('one_and_half_inch_webbing_consumption_cost'),
+
+                'tbl_woven_trims_yard_velcro_item_cost' => $this->input->post('velcro_cost'),
+                'tbl_woven_trims_yard_velcro_item_consumption' => $this->input->post('velcro_consumption'),
+                'tbl_woven_trims_yard_velcro_item_rate' => $this->input->post('velcro_consumption_rate'),
+                'tbl_woven_trims_yard_velcro_item_total_cost' => $this->input->post('velcro_consumption_cost'),
+
+                'tbl_woven_trims_yard_extra_1_item_cost' => $this->input->post('extra_trim_yard_1_cost'),
+                'tbl_woven_trims_yard_extra_1_item_consumption' => $this->input->post('extra_trim_yard_1_consumption'),
+                'tbl_woven_trims_yard_extra_1_item_rate' => $this->input->post('extra_trim_yard_1_consumption_rate'),
+                'tbl_woven_trims_yard_extra_1_item_total_cost' => $this->input->post('extra_trim_yard_1_consumption_cost'),
+
+                'tbl_woven_trims_yard_extra_2_item_cost' => $this->input->post('extra_trim_yard_2_cost'),
+                'tbl_woven_trims_yard_extra_2_item_consumption' => $this->input->post('extra_trim_yard_2_consumption'),
+                'tbl_woven_trims_yard_extra_2_item_rate' => $this->input->post('extra_trim_yard_2_consumption_rate'),
+                'tbl_woven_trims_yard_extra_2_item_total_cost' => $this->input->post('extra_trim_yard_2_consumption_cost'),
+
+                'tbl_woven_trims_yard_extra_3_item_cost' => $this->input->post('extra_trim_yard_3_cost'),
+                'tbl_woven_trims_yard_extra_3_item_consumption' => $this->input->post('extra_trim_yard_3_consumption'),
+                'tbl_woven_trims_yard_extra_3_item_rate' => $this->input->post('extra_trim_yard_3_consumption_rate'),
+                'tbl_woven_trims_yard_extra_3_item_total_cost' => $this->input->post('extra_trim_yard_3_consumption_cost'),
+
+
+                //All Trims In Piece
+                'tbl_woven_trims_piece_puller_item_cost' => $this->input->post('puller_cost'),
+                'tbl_woven_trims_piece_puller_item_consumption' => $this->input->post('puller_consumption'),
+                'tbl_woven_trims_piece_puller_item_rate' => $this->input->post('puller_consumption_rate'),
+                'tbl_woven_trims_piece_puller_item_total_cost' => $this->input->post('puller_consumption_cost'),
+
+                'tbl_woven_trims_piece_print_item_cost' => $this->input->post('print_cost'),
+                'tbl_woven_trims_piece_print_item_consumption' => $this->input->post('print_consumption'),
+                'tbl_woven_trims_piece_print_item_rate' => $this->input->post('print_consumption_rate'),
+                'tbl_woven_trims_piece_print_item_total_cost' => $this->input->post('print_consumption_cost'),
+
+                'tbl_woven_trims_piece_d_buckle_item_cost' => $this->input->post('buckle_cost'),
+                'tbl_woven_trims_piece_d_buckle_item_consumption' => $this->input->post('buckle_consumption'),
+                'tbl_woven_trims_piece_d_buckle_item_rate' => $this->input->post('buckle_consumption_rate'),
+                'tbl_woven_trims_piece_d_buckle_item_total_cost' => $this->input->post('buckle_consumption_cost'),
+
+                'tbl_woven_trims_piece_swivel_hook_item_cost' => $this->input->post('swivel_hook_cost'),
+                'tbl_woven_trims_piece_swivel_hook_item_consumption' => $this->input->post('swivel_hook_consumption'),
+                'tbl_woven_trims_piece_swivel_hook_item_rate' => $this->input->post('swivel_hook_consumption_rate'),
+                'tbl_woven_trims_piece_swivel_hook_item_total_cost' => $this->input->post('swivel_hook_consumption_cost'),
+
+                'tbl_woven_trims_piece_adjustable_bukle_item_cost' => $this->input->post('adjustable_buckle_cost'),
+                'tbl_woven_trims_piece_adjustable_bukle_item_consumption' => $this->input->post('adjustable_buckle_consumption'),
+                'tbl_woven_trims_piece_adjustable_bukle_item_rate' => $this->input->post('adjustable_buckle_consumption_rate'),
+                'tbl_woven_trims_piece_adjustable_bukle_item_total_cost' => $this->input->post('adjustable_buckle_consumption_cost'),
+
+                'tbl_woven_trims_piece_magnetic_button_item_cost' => $this->input->post('magnetic_button_cost'),
+                'tbl_woven_trims_piece_magnetic_button_item_consumption' => $this->input->post('magnetic_button_consumption'),
+                'tbl_woven_trims_piece_magnetic_button_item_rate' => $this->input->post('magnetic_button_consumption_rate'),
+                'tbl_woven_trims_piece_magnetic_button_item_total_cost' => $this->input->post('magnetic_button_consumption_cost'),
+
+                'tbl_woven_trims_piece_snap_button_item_cost' => $this->input->post('snap_button_cost'),
+                'tbl_woven_trims_piece_snap_button_item_consumption' => $this->input->post('snap_button_consumption'),
+                'tbl_woven_trims_piece_snap_button_item_rate' => $this->input->post('snap_button_consumption_rate'),
+                'tbl_woven_trims_piece_snap_button_item_total_cost' => $this->input->post('snap_button_consumption_cost'),
+
+                'tbl_woven_trims_piece_rivet_item_cost' => $this->input->post('snap_button_cost'),
+                'tbl_woven_trims_piece_rivet_item_consumption' => $this->input->post('snap_button_consumption'),
+                'tbl_woven_trims_piece_rivet_item_rate' => $this->input->post('snap_button_consumption_rate'),
+                'tbl_woven_trims_piece_rivet_item_total_cost' => $this->input->post('snap_button_consumption_cost'),
+
+                'tbl_woven_trims_piece_bottom_base_item_cost' => $this->input->post('bottom_base_cost'),
+                'tbl_woven_trims_piece_bottom_base_item_consumption' => $this->input->post('bottom_base_consumption'),
+                'tbl_woven_trims_piece_bottom_base_item_rate' => $this->input->post('bottom_base_consumption_rate'),
+                'tbl_woven_trims_piece_bottom_base_item_total_cost' => $this->input->post('bottom_base_consumption_cost'),
+
+                'tbl_woven_trims_piece_thread_item_cost' => $this->input->post('thread_cost'),
+                'tbl_woven_trims_piece_thread_item_consumption' => $this->input->post('thread_consumption'),
+                'tbl_woven_trims_piece_thread_item_rate' => $this->input->post('thread_consumption_rate'),
+                'tbl_woven_trims_piece_thread_item_total_cost' => $this->input->post('thread_consumption_cost'),
+
+                'tbl_woven_trims_piece_tag_item_cost' => $this->input->post('tag_cost'),
+                'tbl_woven_trims_piece_tag_item_consumption' => $this->input->post('tag_consumption'),
+                'tbl_woven_trims_piece_tag_item_rate' => $this->input->post('tag_consumption_rate'),
+                'tbl_woven_trims_piece_tag_item_total_cost' => $this->input->post('tag_consumption_cost'),
+
+                'tbl_woven_trims_piece_label_item_cost' => $this->input->post('label_cost'),
+                'tbl_woven_trims_piece_label_item_consumption' => $this->input->post('label_consumption'),
+                'tbl_woven_trims_piece_label_item_rate' => $this->input->post('label_consumption_rate'),
+                'tbl_woven_trims_piece_label_item_total_cost' => $this->input->post('label_consumption_cost'),
+
+                'tbl_woven_trims_piece_packing_item_cost' => $this->input->post('packing_cost'),
+                'tbl_woven_trims_piece_packing_item_consumption' => $this->input->post('packing_consumption'),
+                'tbl_woven_trims_piece_packing_item_rate' => $this->input->post('packing_consumption_rate'),
+                'tbl_woven_trims_piece_packing_item_total_cost' => $this->input->post('packing_consumption_cost'),
+
+                'tbl_woven_trims_piece_bottom_shoe_item_cost' => $this->input->post('bottom_shoe_cost'),
+                'tbl_woven_trims_piece_bottom_shoe_item_consumption' => $this->input->post('bottom_shoe_consumption'),
+                'tbl_woven_trims_piece_bottom_shoe_item_rate' => $this->input->post('bottom_shoe_consumption_rate'),
+                'tbl_woven_trims_piece_bottom_shoe_item_total_cost' => $this->input->post('bottom_shoe_consumption_cost'),
+
+                'tbl_woven_trims_piece_extra_1_name' => $this->input->post('extra_1_piece_name'),
+                'tbl_woven_trims_piece_extra_1_item_cost' => $this->input->post('extra_1_piece_cost'),
+                'tbl_woven_trims_piece_extra_1_item_consumption' => $this->input->post('extra_1_piece_consumption'),
+                'tbl_woven_trims_piece_extra_1_item_rate' => $this->input->post('extra_1_piece_consumption_rate'),
+                'tbl_woven_trims_piece_extra_1_item_total_cost' => $this->input->post('extra_1_piece_consumption_cost'),
+
+                'tbl_woven_trims_piece_extra_2_name' => $this->input->post('extra_2_piece_name'),
+                'tbl_woven_trims_piece_extra_2_item_cost' => $this->input->post('extra_2_piece_cost'),
+                'tbl_woven_trims_piece_extra_2_item_consumption' => $this->input->post('extra_2_piece_consumption'),
+                'tbl_woven_trims_piece_extra_2_item_rate' => $this->input->post('extra_2_piece_consumption_rate'),
+                'tbl_woven_trims_piece_extra_2_item_total_cost' => $this->input->post('extra_2_piece_consumption_cost'),
+
+                'tbl_woven_trims_piece_extra_3_name' => $this->input->post('extra_3_piece_name'),
+                'tbl_woven_trims_piece_extra_3_item_cost' => $this->input->post('extra_3_piece_cost'),
+                'tbl_woven_trims_piece_extra_3_item_consumption' => $this->input->post('extra_3_piece_consumption'),
+                'tbl_woven_trims_piece_extra_3_item_rate' => $this->input->post('extra_3_piece_consumption_rate'),
+                'tbl_woven_trims_piece_extra_3_item_total_cost' => $this->input->post('extra_3_piece_consumption_cost'),
+
+                'tbl_woven_trims_piece_extra_4_name' => $this->input->post('extra_4_piece_name'),
+                'tbl_woven_trims_piece_extra_4_item_cost' => $this->input->post('extra_3_piece_cost'),
+                'tbl_woven_trims_piece_extra_4_item_consumption' => $this->input->post('extra_3_piece_consumption'),
+                'tbl_woven_trims_piece_extra_4_item_rate' => $this->input->post('extra_3_piece_consumption_rate'),
+                'tbl_woven_trims_piece_extra_4_item_total_cost' => $this->input->post('extra_3_piece_consumption_cost'),
+
+                'tbl_woven_trims_piece_extra_5_name' => $this->input->post('extra_5_piece_name'),
+                'tbl_woven_trims_piece_extra_5_item_cost' => $this->input->post('extra_3_piece_cost'),
+                'tbl_woven_trims_piece_extra_5_item_consumption' => $this->input->post('extra_3_piece_consumption'),
+                'tbl_woven_trims_piece_extra_5_item_rate' => $this->input->post('extra_3_piece_consumption_rate'),
+                'tbl_woven_trims_piece_extra_5_item_total_cost' => $this->input->post('extra_3_piece_consumption_cost'),
+
                 'tbl_order_sewing' => $this->input->post('order_sewing'),
                 'tbl_order_overheads' => $this->input->post('order_overheads'),
 
@@ -490,19 +1448,19 @@ class Woven extends CI_Controller
                 'tbl_order_total_overhead_and_other_cost' => $this->input->post('total_overhead_and_other_hidden'),
                 'tbl_total_cost' => $this->input->post('total_cost_hidden'),
                 'tbl_total_price' => $this->input->post('final_price_hidden'),
-
             );
 
-            $this->db->insert('ppnw_costing', $order_data);
+
+            $this->db->insert('woven_costing', $woven_costing_data);
 
             $insert_id = $this->db->insert_id();
             $user_id = $this->session->userdata('user_id');
 
             $data = array(
                 'costing_user_id' => $user_id ,
-                'costing_user_ppnw' => $insert_id
+                'costing_user_woven' => $insert_id
             );
-            $this->ppnw_model->add_costing_by_user($data);
+            $this->woven_model->add_costing_by_user($data);
 
             redirect(base_url('admin'));
         }
@@ -512,206 +1470,480 @@ class Woven extends CI_Controller
      *+Edit the PPNw Costing
      */
     public function edit_woven_costing(){
-        $ppnw_costing_id = $this->uri->segment(3);
-        if ($ppnw_costing_id == NULL) {
-            redirect('ppnw/ppnw_all');
+        $woven_costing_id = $this->uri->segment(3);
+        if ($woven_costing_id == NULL) {
+            redirect('woven/woven_all');
         }
 
-        $dt = $this->ppnw_model->edit_ppnw_costing($ppnw_costing_id);
+        $dt = $this->woven_model->edit_woven_costing($woven_costing_id);
+        //var_dump($dt);
+        $data['woven_order_id'] = $dt->tbl_woven_order_id;
+        $data['woven_id_name'] = $dt->tbl_woven_id_name;
+        $data['woven_company_name'] = $dt->tbl_woven_company_name;
+        $data['woven_order_date'] = $dt->tbl_woven_order_date;
+        $data['woven_item_name'] = $dt->tbl_woven_item_name;
+        $data['woven_ref_name'] = $dt->tbl_woven_ref_name;
+
+        $data['woven_order_gsm'] = $dt->tbl_woven_order_gsm;
+        $data['woven_order_color'] = $dt->tbl_woven_order_color;
+        $data['woven_order_usd'] = $dt->tbl_woven_order_usd;
+
+        $data['woven_order_wastage'] = $dt->tbl_woven_order_wastage;
+        $data['woven_order_margin'] = $dt->tbl_woven_order_margin;
+
+        $data['woven_order_quantity'] = $dt->tbl_woven_order_quantity;
+        $data['woven_order_transport'] = $dt->tbl_woven_order_transport;
+        $data['woven_order_bank_doc_charge'] = $dt->tbl_woven_order_bank_doc_charge;
+        $data['woven_total_material_inc_wastage'] = $dt->tbl_order_total_material_inc_wastage;
+
+        $data['woven_order_sewing'] = $dt->tbl_order_sewing;
+        $data['woven_order_overheads'] = $dt->tbl_order_overheads;
+
+        $data['woven_order_total_material_inc_wastage'] = $dt->tbl_order_total_material_inc_wastage;
+        $data['woven_order_total_overhead_and_other_cost'] = $dt->tbl_order_total_overhead_and_other_cost;
+        $data['woven_total_cost'] = $dt->tbl_total_cost;
+        $data['woven_total_price'] = $dt->tbl_total_price;
+
+        //Body Material Name
+        $data['woven_body_material_1_name'] = $dt->tbl_woven_body_material_1_name;
+        $data['woven_body_material_2_name'] = $dt->tbl_woven_body_material_2_name;
+        $data['woven_body_material_3_name'] = $dt->tbl_woven_body_material_3_name;
+        $data['woven_body_material_4_name'] = $dt->tbl_woven_body_material_4_name;
+        $data['woven_body_material_5_name'] = $dt->tbl_woven_body_material_5_name;
+        $data['woven_body_material_6_name'] = $dt->tbl_woven_body_material_6_name;
+
+        //Body Material Roll Width
+        $data['woven_body_material_1_roll_width'] = $dt->tbl_woven_body_material_1_roll_width;
+        $data['woven_body_material_2_roll_width'] = $dt->tbl_woven_body_material_2_roll_width;
+        $data['woven_body_material_3_roll_width'] = $dt->tbl_woven_body_material_3_roll_width;
+        $data['woven_body_material_4_roll_width'] = $dt->tbl_woven_body_material_4_roll_width;
+        $data['woven_body_material_5_roll_width'] = $dt->tbl_woven_body_material_5_roll_width;
+        $data['woven_body_material_6_roll_width'] = $dt->tbl_woven_body_material_6_roll_width;
+
+        //Body Material 1 consumption cost
+        $data['woven_body_material_1_cost'] = $dt->tbl_woven_body_material_1_cost;
+        $data['woven_body_material_1_consumption'] = $dt->tbl_woven_body_material_1_consumption;
+        $data['woven_body_material_1_rate'] = $dt->tbl_woven_body_material_1_rate;
+        $data['woven_body_material_1_total_cost'] = $dt->tbl_woven_body_material_1_total_cost;
+
+        //Body Material 2 consumption cost
+        $data['woven_body_material_2_cost'] = $dt->tbl_woven_body_material_2_cost;
+        $data['woven_body_material_2_consumption'] = $dt->tbl_woven_body_material_2_consumption;
+        $data['woven_body_material_2_rate'] = $dt->tbl_woven_body_material_2_rate;
+        $data['woven_body_material_2_total_cost'] = $dt->tbl_woven_body_material_2_total_cost;
+
+        //Body Material 3 consumption cost
+        $data['woven_body_material_3_cost'] = $dt->tbl_woven_body_material_3_cost;
+        $data['woven_body_material_3_consumption'] = $dt->tbl_woven_body_material_3_consumption;
+        $data['woven_body_material_3_rate'] = $dt->tbl_woven_body_material_3_rate;
+        $data['woven_body_material_3_total_cost'] = $dt->tbl_woven_body_material_3_total_cost;
+
+        //Body Material 4 consumption cost
+        $data['woven_body_material_4_cost'] = $dt->tbl_woven_body_material_4_cost;
+        $data['woven_body_material_4_consumption'] = $dt->tbl_woven_body_material_4_consumption;
+        $data['woven_body_material_4_rate'] = $dt->tbl_woven_body_material_4_rate;
+        $data['woven_body_material_4_total_cost'] = $dt->tbl_woven_body_material_4_total_cost;
+
+        //Body Material 5 consumption cost
+        $data['woven_body_material_5_cost'] = $dt->tbl_woven_body_material_5_cost;
+        $data['woven_body_material_5_consumption'] = $dt->tbl_woven_body_material_5_consumption;
+        $data['woven_body_material_5_rate'] = $dt->tbl_woven_body_material_5_rate;
+        $data['woven_body_material_5_total_cost'] = $dt->tbl_woven_body_material_5_total_cost;
+
+        //Body Material 6 consumption cost
+        $data['woven_body_material_6_cost'] = $dt->tbl_woven_body_material_6_cost;
+        $data['woven_body_material_6_consumption'] = $dt->tbl_woven_body_material_6_consumption;
+        $data['woven_body_material_6_rate'] = $dt->tbl_woven_body_material_6_rate;
+        $data['woven_body_material_6_total_cost'] = $dt->tbl_woven_body_material_6_total_cost;
 
 
-        $data['ics_order_id'] = $dt->ics_order_id;
-        $data['order_id'] = $dt->tbl_order_id_name;
-        $data['order_company'] = $dt->tbl_company_id;
-        $data['order_date'] = $dt->tbl_order_date;
-        $data['order_item_name'] = $dt->tbl_item_name;
-        $data['order_ref_no'] = $dt->tbl_ref_name;
-
-        $data['order_gsm'] = $dt->tbl_order_gsm;
-        $data['order_colour'] = $dt->tbl_order_color;
-        $data['order_usd'] = $dt->tbl_order_usd;
-        $data['order_wastage'] = $dt->tbl_order_wastage;
-        $data['order_margin'] = $dt->tbl_order_margin;
-
-        $data['order_quantity'] = $dt->tbl_order_quantity;
-        $data['order_transport'] = $dt->tbl_order_transport;
-        $data['order_bank_document'] = $dt->tbl_order_bank_doc_charge;
-
-        $data['order_body_h'] = $dt->tbl_dimension_body_height;
-        $data['order_body_h_allowance'] = $dt->tbl_dimension_body_height_allowance;
-        $data['order_body_h_total'] = $dt->tbl_dimension_body_height_total;
-
-        $data['order_body_w'] = $dt->tbl_dimension_body_width;
-        $data['order_body_w_allowance'] = $dt->tbl_dimension_body_width_allowance;
-        $data['order_body_w_total'] = $dt->tbl_dimension_body_width_total;
-
-        $data['order_body_panel'] = $dt->tbl_dimension_body_panel;
-        $data['order_body_panel_allowance'] = $dt->tbl_dimension_body_panel_allowance;
-        $data['order_body_panel_total'] = $dt->tbl_dimension_body_panel_total;
-
-        $data['order_handle_l'] = $dt->tbl_dimension_handle_length;
-        $data['order_handle_l_allowance'] = $dt->tbl_dimension_handle_length_allowance;
-        $data['order_handle_l_total'] = $dt->tbl_dimension_handle_length_total;
-
-        $data['order_handle_w'] = $dt->tbl_dimension_handle_width;
-        $data['order_handle_w_allowance'] = $dt->tbl_dimension_handle_width_allowance;
-        $data['order_handle_w_total'] = $dt->tbl_dimension_handle_width_total;
-
-        $data['order_pocket_l'] = $dt->tbl_dimension_pocket_length;
-        $data['order_pocket_l_allowance'] = $dt->tbl_dimension_pocket_length_allowance;
-        $data['order_pocket_l_total'] = $dt->tbl_dimension_pocket_length_total;
-
-        $data['order_pocket_w'] = $dt->tbl_dimension_pocket_width;
-        $data['order_pocket_w_allowance'] = $dt->tbl_dimension_pocket_width_allowance;
-        $data['order_pocket_w_total'] = $dt->tbl_dimension_pocket_width_total;
-
-        $data['order_extra_1_l'] = $dt->tbl_dimension_extra_1_length;
-        $data['order_extra_1_l_allowance'] = $dt->tbl_dimension_extra_1_length_allowance;
-        $data['order_extra_1_l_total'] = $dt->tbl_dimension_extra_1_length_total;
-
-        $data['order_extra_1_w'] = $dt->tbl_dimension_extra_1_width;
-        $data['order_extra_1_w_allowance'] = $dt->tbl_dimension_extra_1_width_allowance;
-        $data['order_extra_1_w_total'] = $dt->tbl_dimension_extra_1_width_total;
-
-        $data['order_extra_2_l'] = $dt->tbl_dimension_extra_2_length;
-        $data['order_extra_2_l_allowance'] = $dt->tbl_dimension_extra_2_length_allowance;
-        $data['order_extra_2_l_total'] = $dt->tbl_dimension_extra_2_length_total;
-
-        $data['order_extra_2_w'] = $dt->tbl_dimension_extra_2_width;
-        $data['order_extra_2_w_allowance'] = $dt->tbl_dimension_extra_2_width_allowance;
-        $data['order_extra_2_w_total'] = $dt->tbl_dimension_extra_2_width_total;
-
-        $data['order_extra_3_l'] = $dt->tbl_dimension_extra_3_length;
-        $data['order_extra_3_l_allowance'] = $dt->tbl_dimension_extra_3_length_allowance;
-        $data['order_extra_3_l_total'] = $dt->tbl_dimension_extra_3_length_total;
-
-        $data['order_extra_3_w'] = $dt->tbl_dimension_extra_3_width;
-        $data['order_extra_3_w_allowance'] = $dt->tbl_dimension_extra_3_width_allowance;
-        $data['order_extra_3_w_total'] = $dt->tbl_dimension_extra_3_width_total;
-
-        $data['ppnw_cost'] = $dt->tbl_order_ppnw_item_cost;
-        $data['ppnw_consumption'] = $dt->tbl_order_ppnw_item_consumption;
-        $data['ppnw_consumption_rate'] = $dt->tbl_order_ppnw_rate;
-        $data['ppnw_consumption_cost'] = $dt->tbl_order_ppnw_total_item_cost;
-
-        $data['zipper_cost'] = $dt->tbl_trims_yard_zipper_item_cost;
-        $data['zipper_consumption'] = $dt->tbl_trims_yard_zipper_item_consumption;
-        $data['zipper_consumption_rate'] = $dt->tbl_trims_yard_zipper_item_rate;
-        $data['zipper_consumption_cost'] = $dt->tbl_trims_yard_zipper_item_total_cost;
-
-        $data['webbing_cost'] = $dt->tbl_trims_yard_webbing_item_cost;
-        $data['webbing_consumption'] = $dt->tbl_trims_yard_webbing_item_consumption;
-        $data['webbing_consumption_rate'] = $dt->tbl_trims_yard_webbing_item_rate;
-        $data['webbing_consumption_cost'] = $dt->tbl_trims_yard_webbing_item_total_cost;
+        $data['zipper_cost'] = $dt->tbl_woven_trims_yard_zipper_item_cost;
+        $data['zipper_consumption'] = $dt->tbl_woven_trims_yard_zipper_item_consumption;
+        $data['zipper_consumption_rate'] = $dt->tbl_woven_trims_yard_zipper_item_rate;
+        $data['zipper_consumption_cost'] = $dt->tbl_woven_trims_yard_zipper_item_total_cost;
 
 
-        $data['draw_string_cost'] = $dt->tbl_trims_yard_draw_string_item_cost;
-        $data['draw_string_consumption'] = $dt->tbl_trims_yard_draw_string_item_consumption;
-        $data['draw_string_consumption_rate'] = $dt->tbl_trims_yard_draw_string_item_rate;
-        $data['draw_string_consumption_cost'] = $dt->tbl_trims_yard_draw_string_item_total_cost;
+        $data['woven_trims_yard_two_inch_webbing_item_cost'] = $dt->tbl_woven_trims_yard_two_inch_webbing_item_cost;
+        $data['woven_trims_yard_two_inch_webbing_item_consumption'] = $dt->tbl_woven_trims_yard_two_inch_webbing_item_consumption;
+        $data['woven_trims_yard_two_inch_webbing_item_rate'] = $dt->tbl_woven_trims_yard_two_inch_webbing_item_rate;
+        $data['woven_trims_yard_two_inch_webbing_item_total_cost'] = $dt->tbl_woven_trims_yard_two_inch_webbing_item_total_cost;
 
-        $data['velcro_cost'] = $dt->tbl_trims_yard_velcro_item_cost;
-        $data['velcro_consumption'] = $dt->tbl_trims_yard_velcro_item_consumption;
-        $data['velcro_consumption_rate'] = $dt->tbl_trims_yard_velcro_item_rate;
-        $data['velcro_consumption_cost'] = $dt->tbl_trims_yard_velcro_item_total_cost;
+        $data['woven_trims_yard_one_and_half_inch_webbing_item_cost'] = $dt->tbl_woven_trims_yard_one_and_half_inch_webbing_item_cost;
+        $data['woven_trims_yard_one_and_half_webbing_item_consumption'] = $dt->tbl_woven_trims_yard_one_and_half_webbing_item_consumption;
+        $data['woven_trims_yard_one_and_half_webbing_item_rate'] = $dt->tbl_woven_trims_yard_one_and_half_webbing_item_rate;
+        $data['woven_trims_yard_one_and_half_webbing_item_total_cost'] = $dt->tbl_woven_trims_yard_one_and_half_webbing_item_total_cost;
 
-        $data['tape_cost'] = $dt->tbl_trims_yard_tape_item_cost;
-        $data['tape_consumption'] = $dt->tbl_trims_yard_tape_item_consumption;
-        $data['tape_consumption_rate'] = $dt->tbl_trims_yard_tape_item_rate;
-        $data['tape_consumption_cost'] = $dt->tbl_trims_yard_tape_item_total_cost;
+        $data['woven_trims_yard_velcro_item_cost'] = $dt->tbl_woven_trims_yard_velcro_item_cost;
+        $data['woven_trims_yard_velcro_item_consumption'] = $dt->tbl_woven_trims_yard_velcro_item_consumption;
+        $data['woven_trims_yard_velcro_item_rate'] = $dt->tbl_woven_trims_yard_velcro_item_rate;
+        $data['woven_trims_yard_velcro_item_total_cost'] = $dt->tbl_woven_trims_yard_velcro_item_total_cost;
 
-        $data['extra_trim_yard_1_cost'] = $dt->tbl_trims_yard_extra_1_item_cost;
-        $data['extra_trim_yard_1_consumption'] = $dt->tbl_trims_yard_extra_1_item_consumption;
-        $data['extra_trim_yard_1_consumption_rate'] = $dt->tbl_trims_yard_extra_1_item_rate;
-        $data['extra_trim_yard_1_consumption_cost'] = $dt->tbl_trims_yard_extra_1_item_total_cost;
+        $data['woven_trims_yard_extra_1_item_cost'] = $dt->tbl_woven_trims_yard_extra_1_item_cost;
+        $data['woven_trims_yard_extra_1_item_consumption'] = $dt->tbl_woven_trims_yard_extra_1_item_consumption;
+        $data['woven_trims_yard_extra_1_item_rate'] = $dt->tbl_woven_trims_yard_extra_1_item_rate;
+        $data['woven_trims_yard_extra_1_item_total_cost'] = $dt->tbl_woven_trims_yard_extra_1_item_total_cost;
 
-        $data['extra_trim_yard_2_cost'] = $dt->tbl_trims_yard_extra_2_item_cost;
-        $data['extra_trim_yard_2_consumption'] = $dt->tbl_trims_yard_extra_2_item_consumption;
-        $data['extra_trim_yard_2_consumption_rate'] = $dt->tbl_trims_yard_extra_2_item_consumption;
-        $data['extra_trim_yard_2_consumption_cost'] = $dt->tbl_trims_yard_extra_2_item_total_cost;
+        $data['woven_trims_yard_extra_2_item_cost'] = $dt->tbl_woven_trims_yard_extra_2_item_cost;
+        $data['woven_trims_yard_extra_2_item_consumption'] = $dt->tbl_woven_trims_yard_extra_2_item_consumption;
+        $data['woven_trims_yard_extra_2_item_rate'] = $dt->tbl_woven_trims_yard_extra_2_item_rate;
+        $data['woven_trims_yard_extra_2_item_total_cost'] = $dt->tbl_woven_trims_yard_extra_2_item_total_cost;
 
-        $data['puller_cost'] = $dt->tbl_trims_piece_puller_item_cost;
-        $data['puller_consumption'] = $dt->tbl_trims_piece_puller_item_consumption;
-        $data['puller_consumption_rate'] = $dt->tbl_trims_piece_puller_item_rate;
-        $data['puller_consumption_cost'] = $dt->tbl_trims_piece_puller_item_total_cost;
-
-
-        $data['print_cost'] = $dt->tbl_trims_piece_print_item_cost;
-        $data['print_consumption'] = $dt->tbl_trims_piece_print_item_consumption;
-        $data['print_consumption_rate'] = $dt->tbl_trims_piece_print_item_rate;
-        $data['print_consumption_cost'] = $dt->tbl_trims_piece_print_item_total_cost;
-
-        $data['eyelet_cost'] = $dt->tbl_trims_piece_eyelet_item_cost;
-        $data['eyelet_consumption'] = $dt->tbl_trims_piece_eyelet_item_consumption;
-        $data['eyelet_consumption_rate'] = $dt->tbl_trims_piece_eyelet_item_rate;
-        $data['eyelet_consumption_cost'] = $dt->tbl_trims_piece_eyelet_item_total_cost;
-
-        $data['buckle_cost'] = $dt->tbl_trims_piece_buckle_item_cost;
-        $data['buckle_consumption'] = $dt->tbl_trims_piece_buckle_item_consumption;
-        $data['buckle_consumption_rate'] = $dt->tbl_trims_piece_buckle_item_rate;
-        $data['buckle_consumption_cost'] = $dt->tbl_trims_piece_buckle_item_total_cost;
-
-        $data['snap_button_cost'] = $dt->tbl_trims_piece_snap_button_item_cost;
-        $data['snap_button_consumption'] = $dt->tbl_trims_piece_snap_button_item_consumption;
-        $data['snap_button_consumption_rate'] = $dt->tbl_trims_piece_snap_button_item_rate;
-        $data['snap_button_consumption_cost'] = $dt->tbl_trims_piece_snap_button_item_total_cost;
-
-        $data['magnetic_button_cost'] = $dt->tbl_trims_piece_magnetic_button_item_cost;
-        $data['magnetic_button_consumption'] = $dt->tbl_trims_piece_magnetic_button_item_consumption;
-        $data['magnetic_button_consumption_rate'] = $dt->tbl_trims_piece_magnetic_button_item_rate;
-        $data['magnetic_button_consumption_cost'] = $dt->tbl_trims_piece_magnetic_button_item_total_cost;
-
-        $data['bottom_base_cost'] = $dt->tbl_trims_piece_bottom_base_item_cost;
-        $data['bottom_base_consumption'] = $dt->tbl_trims_piece_bottom_base_item_consumption;
-        $data['bottom_base_consumption_rate'] = $dt->tbl_trims_piece_bottom_base_item_rate;
-        $data['bottom_base_consumption_cost'] = $dt->tbl_trims_piece_bottom_base_item_total_cost;
-
-        $data['thread_cost'] = $dt->tbl_trims_piece_thread_item_cost;
-        $data['thread_consumption'] = $dt->tbl_trims_piece_thread_item_consumption;
-        $data['thread_consumption_rate'] = $dt->tbl_trims_piece_thread_item_rate;
-        $data['thread_consumption_cost'] = $dt->tbl_trims_piece_thread_item_total_cost;
-
-        $data['tag_cost'] = $dt->tbl_trims_piece_tag_item_cost;
-        $data['tag_consumption'] = $dt->tbl_trims_piece_tag_item_consumption;
-        $data['tag_consumption_rate'] = $dt->tbl_trims_piece_tag_item_rate;
-        $data['tag_consumption_cost'] = $dt->tbl_trims_piece_tag_item_total_cost;
-
-        $data['label_cost'] = $dt->tbl_trims_piece_label_item_cost;
-        $data['label_consumption'] = $dt->tbl_trims_piece_label_item_consumption;
-        $data['label_consumption_rate'] = $dt->tbl_trims_piece_label_item_rate;
-        $data['label_consumption_cost'] = $dt->tbl_trims_piece_label_item_total_cost;
-
-        $data['packing_cost'] = $dt->tbl_trims_piece_packing_item_cost;
-        $data['packing_consumption'] = $dt->tbl_trims_piece_packing_item_consumption;
-        $data['packing_consumption_rate'] = $dt->tbl_trims_piece_packing_item_rate;
-        $data['packing_consumption_cost'] = $dt->tbl_trims_piece_packing_item_total_cost;
-
-        $data['extra_1_piece_cost'] = $dt->tbl_trims_piece_extra_1_item_cost;
-        $data['extra_1_piece_consumption'] = $dt->tbl_trims_piece_extra_1_item_consumption;
-        $data['extra_1_piece_consumption_rate'] = $dt->tbl_trims_piece_extra_1_item_rate;
-        $data['extra_1_piece_consumption_cost'] = $dt->tbl_trims_piece_extra_1_item_total_cost;
-
-        $data['extra_2_piece_cost'] = $dt->tbl_trims_piece_extra_2_item_cost;
-        $data['extra_2_piece_consumption'] = $dt->tbl_trims_piece_extra_2_item_consumption;
-        $data['extra_2_piece_consumption_rate'] = $dt->tbl_trims_piece_extra_2_item_rate;
-        $data['extra_2_piece_consumption_cost'] = $dt->tbl_trims_piece_extra_2_item_total_cost;
-
-        $data['extra_3_piece_cost'] = $dt->tbl_trims_piece_extra_3_item_cost;
-        $data['extra_3_piece_consumption'] = $dt->tbl_trims_piece_extra_3_item_consumption;
-        $data['extra_3_piece_consumption_rate'] = $dt->tbl_trims_piece_extra_3_item_rate;
-        $data['extra_3_piece_consumption_cost'] = $dt->tbl_trims_piece_extra_3_item_total_cost;
+        $data['woven_trims_yard_extra_3_item_cost'] = $dt->tbl_woven_trims_yard_extra_3_item_cost;
+        $data['woven_trims_yard_extra_3_item_consumption'] = $dt->tbl_woven_trims_yard_extra_3_item_consumption;
+        $data['woven_trims_yard_extra_3_item_rate'] = $dt->tbl_woven_trims_yard_extra_3_item_rate;
+        $data['woven_trims_yard_extra_3_item_total_cost'] = $dt->tbl_woven_trims_yard_extra_3_item_total_cost;
 
 
-        $data['order_sewing'] = $dt->tbl_order_sewing;
-        $data['order_overheads'] = $dt->tbl_order_overheads;
+        $data['woven_trims_piece_puller_item_cost'] = $dt->tbl_woven_trims_piece_puller_item_cost;
+        $data['woven_trims_piece_puller_item_consumption'] = $dt->tbl_woven_trims_piece_puller_item_consumption;
+        $data['woven_trims_piece_puller_item_rate'] = $dt->tbl_woven_trims_piece_puller_item_rate;
+        $data['woven_trims_piece_puller_item_total_cost'] = $dt->tbl_woven_trims_piece_puller_item_total_cost;
 
-        $data['order_total_material_inc_wastage'] = $dt->tbl_order_total_material_inc_wastage;
-        $data['order_total_overhead_and_other_cost'] = $dt->tbl_order_total_overhead_and_other_cost;
-        $data['total_cost'] = $dt->tbl_total_cost;
-        $data['total_price'] = $dt->tbl_total_price;
+
+        $data['woven_trims_piece_print_item_cost'] = $dt->tbl_woven_trims_piece_print_item_cost;
+        $data['woven_trims_piece_print_item_consumption'] = $dt->tbl_woven_trims_piece_print_item_consumption;
+        $data['woven_trims_piece_print_item_rate'] = $dt->tbl_woven_trims_piece_print_item_rate;
+        $data['woven_trims_piece_print_item_total_cost'] = $dt->tbl_woven_trims_piece_print_item_total_cost;
+
+        $data['woven_trims_piece_d_buckle_item_cost'] = $dt->tbl_woven_trims_piece_d_buckle_item_cost;
+        $data['woven_trims_piece_d_buckle_item_consumption'] = $dt->tbl_woven_trims_piece_d_buckle_item_consumption;
+        $data['woven_trims_piece_d_buckle_item_rate'] = $dt->tbl_woven_trims_piece_d_buckle_item_rate;
+        $data['woven_trims_piece_d_buckle_item_total_cost'] = $dt->tbl_woven_trims_piece_d_buckle_item_total_cost;
+
+        $data['woven_trims_piece_swivel_hook_item_cost'] = $dt->tbl_woven_trims_piece_swivel_hook_item_cost;
+        $data['woven_trims_piece_swivel_hook_item_consumption'] = $dt->tbl_woven_trims_piece_swivel_hook_item_consumption;
+        $data['woven_trims_piece_swivel_hook_item_rate'] = $dt->tbl_woven_trims_piece_swivel_hook_item_rate;
+        $data['woven_trims_piece_swivel_hook_item_total_cost'] = $dt->tbl_woven_trims_piece_swivel_hook_item_total_cost;
+
+        $data['woven_trims_piece_adjustable_bukle_item_cost'] = $dt->tbl_woven_trims_piece_adjustable_bukle_item_cost;
+        $data['woven_trims_piece_adjustable_bukle_item_consumption'] = $dt->tbl_woven_trims_piece_adjustable_bukle_item_consumption;
+        $data['woven_trims_piece_adjustable_bukle_item_rate'] = $dt->tbl_woven_trims_piece_adjustable_bukle_item_rate;
+        $data['woven_trims_piece_adjustable_bukle_item_total_cost'] = $dt->tbl_woven_trims_piece_adjustable_bukle_item_total_cost;
+
+
+        $data['woven_trims_piece_magnetic_button_item_cost'] = $dt->tbl_woven_trims_piece_magnetic_button_item_cost;
+        $data['woven_trims_piece_magnetic_button_item_consumption'] = $dt->tbl_woven_trims_piece_magnetic_button_item_consumption;
+        $data['woven_trims_piece_magnetic_button_item_rate'] = $dt->tbl_woven_trims_piece_magnetic_button_item_rate;
+        $data['woven_trims_piece_magnetic_button_item_total_cost'] = $dt->tbl_woven_trims_piece_magnetic_button_item_total_cost;
+
+        $data['woven_trims_piece_snap_button_item_cost'] = $dt->tbl_woven_trims_piece_snap_button_item_cost;
+        $data['woven_trims_piece_snap_button_item_consumption'] = $dt->tbl_woven_trims_piece_snap_button_item_consumption;
+        $data['woven_trims_piece_snap_button_item_rate'] = $dt->tbl_woven_trims_piece_snap_button_item_rate;
+        $data['woven_trims_piece_snap_button_item_total_cost'] = $dt->tbl_woven_trims_piece_snap_button_item_total_cost;
+
+        $data['woven_trims_piece_rivet_item_cost'] = $dt->tbl_woven_trims_piece_rivet_item_cost;
+        $data['woven_trims_piece_rivet_item_consumption'] = $dt->tbl_woven_trims_piece_rivet_item_consumption;
+        $data['woven_trims_piece_rivet_item_rate'] = $dt->tbl_woven_trims_piece_rivet_item_rate;
+        $data['woven_trims_piece_rivet_item_total_cost'] = $dt->tbl_woven_trims_piece_rivet_item_total_cost;
+
+        $data['woven_trims_piece_bottom_base_item_cost'] = $dt->tbl_woven_trims_piece_bottom_base_item_cost;
+        $data['woven_trims_piece_bottom_base_item_consumption'] = $dt->tbl_woven_trims_piece_bottom_base_item_consumption;
+        $data['woven_trims_piece_bottom_base_item_rate'] = $dt->tbl_woven_trims_piece_bottom_base_item_rate;
+        $data['woven_trims_piece_bottom_base_item_total_cost'] = $dt->tbl_woven_trims_piece_bottom_base_item_total_cost;
+
+        $data['woven_trims_piece_thread_item_cost'] = $dt->tbl_woven_trims_piece_thread_item_cost;
+        $data['woven_trims_piece_thread_item_consumption'] = $dt->tbl_woven_trims_piece_thread_item_consumption;
+        $data['woven_trims_piece_thread_item_rate'] = $dt->tbl_woven_trims_piece_thread_item_rate;
+        $data['woven_trims_piece_thread_item_total_cost'] = $dt->tbl_woven_trims_piece_thread_item_total_cost;
+
+        $data['woven_trims_piece_tag_item_cost'] = $dt->tbl_woven_trims_piece_tag_item_cost;
+        $data['woven_trims_piece_tag_item_consumption'] = $dt->tbl_woven_trims_piece_tag_item_consumption;
+        $data['woven_trims_piece_tag_item_rate'] = $dt->tbl_woven_trims_piece_tag_item_rate;
+        $data['woven_trims_piece_tag_item_total_cost'] = $dt->tbl_woven_trims_piece_tag_item_total_cost;
+
+        $data['woven_trims_piece_label_item_cost'] = $dt->tbl_woven_trims_piece_label_item_cost;
+        $data['woven_trims_piece_label_item_consumption'] = $dt->tbl_woven_trims_piece_label_item_consumption;
+        $data['woven_trims_piece_label_item_rate'] = $dt->tbl_woven_trims_piece_label_item_rate;
+        $data['woven_trims_piece_label_item_total_cost'] = $dt->tbl_woven_trims_piece_label_item_total_cost;
+
+        $data['woven_trims_piece_packing_item_cost'] = $dt->tbl_woven_trims_piece_packing_item_cost;
+        $data['woven_trims_piece_packing_item_consumption'] = $dt->tbl_woven_trims_piece_packing_item_consumption;
+        $data['woven_trims_piece_packing_item_rate'] = $dt->tbl_woven_trims_piece_packing_item_rate;
+        $data['woven_trims_piece_packing_item_total_cost'] = $dt->tbl_woven_trims_piece_packing_item_total_cost;
+
+        $data['woven_trims_piece_bottom_shoe_item_cost'] = $dt->tbl_woven_trims_piece_bottom_shoe_item_cost;
+        $data['woven_trims_piece_bottom_shoe_item_consumption'] = $dt->tbl_woven_trims_piece_bottom_shoe_item_consumption;
+        $data['woven_trims_piece_bottom_shoe_item_rate'] = $dt->tbl_woven_trims_piece_bottom_shoe_item_rate;
+        $data['woven_trims_piece_bottom_shoe_item_total_cost'] = $dt->tbl_woven_trims_piece_bottom_shoe_item_total_cost;
+
+        $data['woven_trims_piece_extra_1_name'] = $dt->tbl_woven_trims_piece_extra_1_name;
+        $data['woven_trims_piece_extra_1_item_cost'] = $dt->tbl_woven_trims_piece_extra_1_item_cost;
+        $data['woven_trims_piece_extra_1_item_consumption'] = $dt->tbl_woven_trims_piece_extra_1_item_consumption;
+        $data['woven_trims_piece_extra_1_item_rate'] = $dt->tbl_woven_trims_piece_extra_1_item_rate;
+        $data['woven_trims_piece_extra_1_item_total_cost'] = $dt->tbl_woven_trims_piece_extra_1_item_total_cost;
+
+        $data['woven_trims_piece_extra_2_name'] = $dt->tbl_woven_trims_piece_extra_2_name;
+        $data['woven_trims_piece_extra_2_item_cost'] = $dt->tbl_woven_trims_piece_extra_2_item_cost;
+        $data['woven_trims_piece_extra_2_item_consumption'] = $dt->tbl_woven_trims_piece_extra_2_item_consumption;
+        $data['woven_trims_piece_extra_2_item_rate'] = $dt->tbl_woven_trims_piece_extra_2_item_rate;
+        $data['woven_trims_piece_extra_2_item_total_cost'] = $dt->tbl_woven_trims_piece_extra_2_item_total_cost;
+
+        $data['woven_trims_piece_extra_3_name'] = $dt->tbl_woven_trims_piece_extra_3_name;
+        $data['woven_trims_piece_extra_3_item_cost'] = $dt->tbl_woven_trims_piece_extra_3_item_cost;
+        $data['woven_trims_piece_extra_3_item_consumption'] = $dt->tbl_woven_trims_piece_extra_3_item_consumption;
+        $data['woven_trims_piece_extra_3_item_rate'] = $dt->tbl_woven_trims_piece_extra_3_item_rate;
+        $data['woven_trims_piece_extra_3_item_total_cost'] = $dt->tbl_woven_trims_piece_extra_3_item_total_cost;
+
+        $data['woven_trims_piece_extra_4_name'] = $dt->tbl_woven_trims_piece_extra_4_name;
+        $data['woven_trims_piece_extra_4_item_cost'] = $dt->tbl_woven_trims_piece_extra_4_item_cost;
+        $data['woven_trims_piece_extra_4_item_consumption'] = $dt->tbl_woven_trims_piece_extra_4_item_consumption;
+        $data['woven_trims_piece_extra_4_item_rate'] = $dt->tbl_woven_trims_piece_extra_4_item_rate;
+        $data['woven_trims_piece_extra_4_item_total_cost'] = $dt->tbl_woven_trims_piece_extra_4_item_total_cost;
+
+        $data['woven_trims_piece_extra_5_name'] = $dt->tbl_woven_trims_piece_extra_5_name;
+        $data['woven_trims_piece_extra_5_item_cost'] = $dt->tbl_woven_trims_piece_extra_5_item_cost;
+        $data['woven_trims_piece_extra_5_item_consumption'] = $dt->tbl_woven_trims_piece_extra_5_item_consumption;
+        $data['woven_trims_piece_extra_5_item_rate'] = $dt->tbl_woven_trims_piece_extra_5_item_rate;
+        $data['woven_trims_piece_extra_5_item_total_cost'] = $dt->tbl_woven_trims_piece_extra_5_item_total_cost;
+
+
+        //Dimension for Body Material 1
+        $data['dimension_id'] = $dt->tbl_dimension_id;
+
+        $data['body_material_1_front_length'] = $dt->tbl_dimension_body_material_1_front_length;
+        $data['body_material_1_front_length_allowance'] = $dt->tbl_dimension_body_material_1_front_length_allowance;
+        $data['body_material_1_front_length_total'] = $dt->tbl_dimension_body_material_1_front_length_total;
+
+        $data['body_material_1_front_width'] = $dt->tbl_dimension_body_material_1_front_width;
+        $data['body_material_1_front_width_allowance'] = $dt->tbl_dimension_body_material_1_front_width_allowance;
+        $data['body_material_1_front_width_total'] = $dt->tbl_dimension_body_material_1_front_width_total;
+
+        $data['body_material_1_back_length'] = $dt->tbl_dimension_body_material_1_back_length;
+        $data['body_material_1_back_length_allowance'] = $dt->tbl_dimension_body_material_1_back_length_allowance;
+        $data['body_material_1_back_length_total'] = $dt->tbl_dimension_body_material_1_back_length_total;
+
+        $data['body_material_1_back_width'] = $dt->tbl_dimension_body_material_1_back_width;
+        $data['body_material_1_back_width_allowance'] = $dt->tbl_dimension_body_material_1_back_width_allowance;
+        $data['body_material_1_back_width_total'] = $dt->tbl_dimension_body_material_1_back_width_total;
+
+        $data['body_material_1_top_length'] = $dt->tbl_dimension_body_material_1_top_length;
+        $data['body_material_1_top_length_allowance'] = $dt->tbl_dimension_body_material_1_top_length_allowance;
+        $data['body_material_1_top_length_total'] = $dt->tbl_dimension_body_material_1_top_length_total;
+
+        $data['body_material_1_top_width'] = $dt->tbl_dimension_body_material_1_top_width;
+        $data['body_material_1_top_width_allowance'] = $dt->tbl_dimension_body_material_1_top_width_allowance;
+        $data['body_material_1_top_width_total'] = $dt->tbl_dimension_body_material_1_top_width_total;
+
+        $data['body_material_1_bottom_length'] = $dt->tbl_dimension_body_material_1_bottom_length;
+        $data['body_material_1_bottom_length_allowance'] = $dt->tbl_dimension_body_material_1_bottom_length_allowance;
+        $data['body_material_1_bottom_length_total'] = $dt->tbl_dimension_body_material_1_bottom_length_total;
+
+        $data['body_material_1_bottom_width'] = $dt->tbl_dimension_body_material_1_bottom_width;
+        $data['body_material_1_bottom_width_allowance'] = $dt->tbl_dimension_body_material_1_bottom_width_allowance;
+        $data['body_material_1_bottom_width_total'] = $dt->tbl_dimension_body_material_1_bottom_width_total;
+
+        $data['body_material_1_left_length'] = $dt->tbl_dimension_body_material_1_left_length;
+        $data['body_material_1_left_length_allowance'] = $dt->tbl_dimension_body_material_1_left_length_allowance;
+        $data['body_material_1_left_length_total'] = $dt->tbl_dimension_body_material_1_left_length_total;
+
+        $data['body_material_1_left_width'] = $dt->tbl_dimension_body_material_1_left_width;
+        $data['body_material_1_left_width_allowance'] = $dt->tbl_dimension_body_material_1_left_width_allowance;
+        $data['body_material_1_left_width_total'] = $dt->tbl_dimension_body_material_1_left_width_total;
+
+        $data['body_material_1_right_length'] = $dt->tbl_dimension_body_material_1_right_length;
+        $data['body_material_1_right_length_allowance'] = $dt->tbl_dimension_body_material_1_right_length_allowance;
+        $data['body_material_1_right_length_total'] = $dt->tbl_dimension_body_material_1_right_length_total;
+
+        $data['body_material_1_right_width'] = $dt->tbl_dimension_body_material_1_right_width;
+        $data['body_material_1_right_width_allowance'] = $dt->tbl_dimension_body_material_1_right_width_allowance;
+        $data['body_material_1_right_width_total'] = $dt->tbl_dimension_body_material_1_right_width_total;
+
+        $data['body_material_1_pocket_length'] = $dt->tbl_dimension_body_material_1_pocket_length;
+        $data['body_material_1_pocket_length_allowance'] = $dt->tbl_dimension_body_material_1_pocket_length_allowance;
+        $data['body_material_1_pocket_length_total'] = $dt->tbl_dimension_body_material_1_pocket_length_total;
+
+        $data['body_material_1_pocket_width'] = $dt->tbl_dimension_body_material_1_pocket_width;
+        $data['body_material_1_pocket_width_allowance'] = $dt->tbl_dimension_body_material_1_pocket_width_allowance;
+        $data['body_material_1_pocket_width_total'] = $dt->tbl_dimension_body_material_1_pocket_width_total;
+
+        $data['body_material_1_extra_1_length'] = $dt->tbl_dimension_body_material_1_extra_1_length;
+        $data['body_material_1_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_1_extra_1_length_allowance;
+        $data['body_material_1_extra_1_length_total'] = $dt->tbl_dimension_body_material_1_extra_1_length_total;
+
+        $data['body_material_1_extra_1_width'] = $dt->tbl_dimension_body_material_1_extra_1_width;
+        $data['body_material_1_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_1_extra_1_width_allowance;
+        $data['body_material_1_extra_1_width_total'] = $dt->tbl_dimension_body_material_1_extra_1_width_total;
+
+        $data['body_material_1_extra_2_length'] = $dt->tbl_dimension_body_material_1_extra_2_length;
+        $data['body_material_1_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_1_extra_2_length_allowance;
+        $data['body_material_1_extra_2_length_total'] = $dt->tbl_dimension_body_material_1_extra_2_length_total;
+
+        $data['body_material_1_extra_2_width'] = $dt->tbl_dimension_body_material_1_extra_2_width;
+        $data['body_material_1_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_1_extra_2_width_allowance;
+        $data['body_material_1_extra_2_width_total'] = $dt->tbl_dimension_body_material_1_extra_2_width_total;
+
+        $data['body_material_1_extra_3_length'] = $dt->tbl_dimension_body_material_1_extra_3_length;
+        $data['body_material_1_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_1_extra_3_length_allowance;
+        $data['body_material_1_extra_3_length_total'] = $dt->tbl_dimension_body_material_1_extra_3_length_total;
+
+        $data['body_material_1_extra_3_length_total'] = $dt->tbl_dimension_body_material_1_extra_3_length_total;
+        $data['body_material_1_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_1_extra_3_width_allowance;
+        $data['body_material_1_extra_3_width_total'] = $dt->tbl_dimension_body_material_1_extra_3_width_total;
+
+        //Dimension for Body Material 2
+        $data['body_material_2_front_length'] = $dt->tbl_dimension_body_material_2_front_length;
+        $data['body_material_2_front_length_allowance'] = $dt->tbl_dimension_body_material_2_front_length_allowance;
+        $data['body_material_2_front_length_total'] = $dt->tbl_dimension_body_material_2_front_length_total;
+
+        $data['body_material_2_front_width'] = $dt->tbl_dimension_body_material_2_front_width;
+        $data['body_material_2_front_width_allowance'] = $dt->tbl_dimension_body_material_2_front_width_allowance;
+        $data['body_material_2_front_width_total'] = $dt->tbl_dimension_body_material_2_front_width_total;
+
+        $data['body_material_2_back_length'] = $dt->tbl_dimension_body_material_2_back_length;
+        $data['body_material_2_back_length_allowance'] = $dt->tbl_dimension_body_material_2_back_length_allowance;
+        $data['body_material_2_back_length_total'] = $dt->tbl_dimension_body_material_2_back_length_total;
+
+        $data['body_material_2_back_width'] = $dt->tbl_dimension_body_material_2_back_width;
+        $data['body_material_2_back_width_allowance'] = $dt->tbl_dimension_body_material_2_back_width_allowance;
+        $data['body_material_2_back_width_total'] = $dt->tbl_dimension_body_material_2_back_width_total;
+
+        $data['body_material_2_top_length'] = $dt->tbl_dimension_body_material_2_top_length;
+        $data['body_material_2_top_length_allowance'] = $dt->tbl_dimension_body_material_2_top_length_allowance;
+        $data['body_material_2_top_length_total'] = $dt->tbl_dimension_body_material_2_top_length_total;
+
+        $data['body_material_2_top_width'] = $dt->tbl_dimension_body_material_2_top_width;
+        $data['body_material_2_top_width_allowance'] = $dt->tbl_dimension_body_material_2_top_width_allowance;
+        $data['body_material_2_top_width_total'] = $dt->tbl_dimension_body_material_2_top_width_total;
+
+        $data['body_material_2_bottom_length'] = $dt->tbl_dimension_body_material_2_bottom_length;
+        $data['body_material_2_bottom_length_allowance'] = $dt->tbl_dimension_body_material_2_bottom_length_allowance;
+        $data['body_material_2_bottom_length_total'] = $dt->tbl_dimension_body_material_2_bottom_length_total;
+
+        $data['body_material_2_bottom_width'] = $dt->tbl_dimension_body_material_2_bottom_width;
+        $data['body_material_2_bottom_width_allowance'] = $dt->tbl_dimension_body_material_2_bottom_width_allowance;
+        $data['body_material_2_bottom_width_total'] = $dt->tbl_dimension_body_material_2_bottom_width_total;
+
+        $data['body_material_2_left_length'] = $dt->tbl_dimension_body_material_2_left_length;
+        $data['body_material_2_left_length_allowance'] = $dt->tbl_dimension_body_material_2_left_length_allowance;
+        $data['body_material_2_left_length_total'] = $dt->tbl_dimension_body_material_2_left_length_total;
+
+        $data['body_material_2_left_width'] = $dt->tbl_dimension_body_material_2_left_width;
+        $data['body_material_2_left_width_allowance'] = $dt->tbl_dimension_body_material_2_left_width_allowance;
+        $data['body_material_2_left_width_total'] = $dt->tbl_dimension_body_material_2_left_width_total;
+
+        $data['body_material_2_right_length'] = $dt->tbl_dimension_body_material_2_right_length;
+        $data['body_material_2_right_length_allowance'] = $dt->tbl_dimension_body_material_2_right_length_allowance;
+        $data['body_material_2_right_length_total'] = $dt->tbl_dimension_body_material_2_right_length_total;
+
+        $data['body_material_2_right_width'] = $dt->tbl_dimension_body_material_2_right_width;
+        $data['body_material_2_right_width_allowance'] = $dt->tbl_dimension_body_material_2_right_width_allowance;
+        $data['body_material_2_right_width_total'] = $dt->tbl_dimension_body_material_2_right_width_total;
+
+        $data['body_material_2_pocket_length'] = $dt->tbl_dimension_body_material_2_pocket_length;
+        $data['body_material_2_pocket_length_allowance'] = $dt->tbl_dimension_body_material_2_pocket_length_allowance;
+        $data['body_material_2_pocket_length_total'] = $dt->tbl_dimension_body_material_2_pocket_length_total;
+
+        $data['body_material_2_pocket_width'] = $dt->tbl_dimension_body_material_2_pocket_width;
+        $data['body_material_2_pocket_width_allowance'] = $dt->tbl_dimension_body_material_2_pocket_width_allowance;
+        $data['body_material_2_pocket_width_total'] = $dt->tbl_dimension_body_material_2_pocket_width_total;
+
+        $data['body_material_2_extra_1_length'] = $dt->tbl_dimension_body_material_2_extra_1_length;
+        $data['body_material_2_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_2_extra_1_length_allowance;
+        $data['body_material_2_extra_1_length_total'] = $dt->tbl_dimension_body_material_2_extra_1_length_total;
+
+        $data['body_material_2_extra_1_width'] = $dt->tbl_dimension_body_material_2_extra_1_width;
+        $data['body_material_2_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_2_extra_1_width_allowance;
+        $data['body_material_2_extra_1_width_total'] = $dt->tbl_dimension_body_material_2_extra_1_width_total;
+
+        $data['body_material_2_extra_2_length'] = $dt->tbl_dimension_body_material_2_extra_2_length;
+        $data['body_material_2_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_2_extra_2_length_allowance;
+        $data['body_material_2_extra_2_length_total'] = $dt->tbl_dimension_body_material_2_extra_2_length_total;
+
+        $data['body_material_2_extra_2_width'] = $dt->tbl_dimension_body_material_2_extra_2_width;
+        $data['body_material_2_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_2_extra_2_width_allowance;
+        $data['body_material_2_extra_2_width_total'] = $dt->tbl_dimension_body_material_2_extra_2_width_total;
+
+        $data['body_material_2_extra_3_length'] = $dt->tbl_dimension_body_material_2_extra_3_length;
+        $data['body_material_2_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_2_extra_3_length_allowance;
+        $data['body_material_2_extra_3_length_total'] = $dt->tbl_dimension_body_material_2_extra_3_length_total;
+
+        $data['body_material_2_extra_3_length_total'] = $dt->tbl_dimension_body_material_2_extra_3_length_total;
+        $data['body_material_2_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_2_extra_3_width_allowance;
+        $data['body_material_2_extra_3_width_total'] = $dt->tbl_dimension_body_material_2_extra_3_width_total;
+
+        //Dimension for Body Material 3
+        $data['body_material_3_front_length'] = $dt->tbl_dimension_body_material_3_front_length;
+        $data['body_material_3_front_length_allowance'] = $dt->tbl_dimension_body_material_3_front_length_allowance;
+        $data['body_material_3_front_length_total'] = $dt->tbl_dimension_body_material_3_front_length_total;
+
+        $data['body_material_3_front_width'] = $dt->tbl_dimension_body_material_3_front_width;
+        $data['body_material_3_front_width_allowance'] = $dt->tbl_dimension_body_material_3_front_width_allowance;
+        $data['body_material_3_front_width_total'] = $dt->tbl_dimension_body_material_3_front_width_total;
+
+        $data['body_material_3_back_length'] = $dt->tbl_dimension_body_material_3_back_length;
+        $data['body_material_3_back_length_allowance'] = $dt->tbl_dimension_body_material_3_back_length_allowance;
+        $data['body_material_3_back_length_total'] = $dt->tbl_dimension_body_material_3_back_length_total;
+
+        $data['body_material_3_back_width'] = $dt->tbl_dimension_body_material_3_back_width;
+        $data['body_material_3_back_width_allowance'] = $dt->tbl_dimension_body_material_3_back_width_allowance;
+        $data['body_material_3_back_width_total'] = $dt->tbl_dimension_body_material_3_back_width_total;
+
+        $data['body_material_3_top_length'] = $dt->tbl_dimension_body_material_3_top_length;
+        $data['body_material_3_top_length_allowance'] = $dt->tbl_dimension_body_material_3_top_length_allowance;
+        $data['body_material_3_top_length_total'] = $dt->tbl_dimension_body_material_3_top_length_total;
+
+        $data['body_material_3_top_width'] = $dt->tbl_dimension_body_material_3_top_width;
+        $data['body_material_3_top_width_allowance'] = $dt->tbl_dimension_body_material_3_top_width_allowance;
+        $data['body_material_3_top_width_total'] = $dt->tbl_dimension_body_material_3_top_width_total;
+
+        $data['body_material_3_bottom_length'] = $dt->tbl_dimension_body_material_3_bottom_length;
+        $data['body_material_3_bottom_length_allowance'] = $dt->tbl_dimension_body_material_3_bottom_length_allowance;
+        $data['body_material_3_bottom_length_total'] = $dt->tbl_dimension_body_material_3_bottom_length_total;
+
+        $data['body_material_3_bottom_width'] = $dt->tbl_dimension_body_material_3_bottom_width;
+        $data['body_material_3_bottom_width_allowance'] = $dt->tbl_dimension_body_material_3_bottom_width_allowance;
+        $data['body_material_3_bottom_width_total'] = $dt->tbl_dimension_body_material_3_bottom_width_total;
+
+        $data['body_material_3_left_length'] = $dt->tbl_dimension_body_material_3_left_length;
+        $data['body_material_3_left_length_allowance'] = $dt->tbl_dimension_body_material_3_left_length_allowance;
+        $data['body_material_3_left_length_total'] = $dt->tbl_dimension_body_material_3_left_length_total;
+
+        $data['body_material_3_left_width'] = $dt->tbl_dimension_body_material_3_left_width;
+        $data['body_material_3_left_width_allowance'] = $dt->tbl_dimension_body_material_3_left_width_allowance;
+        $data['body_material_3_left_width_total'] = $dt->tbl_dimension_body_material_3_left_width_total;
+
+        $data['body_material_3_right_length'] = $dt->tbl_dimension_body_material_3_right_length;
+        $data['body_material_3_right_length_allowance'] = $dt->tbl_dimension_body_material_3_right_length_allowance;
+        $data['body_material_3_right_length_total'] = $dt->tbl_dimension_body_material_3_right_length_total;
+
+        $data['body_material_3_right_width'] = $dt->tbl_dimension_body_material_3_right_width;
+        $data['body_material_3_right_width_allowance'] = $dt->tbl_dimension_body_material_3_right_width_allowance;
+        $data['body_material_3_right_width_total'] = $dt->tbl_dimension_body_material_3_right_width_total;
+
+        $data['body_material_3_pocket_length'] = $dt->tbl_dimension_body_material_3_pocket_length;
+        $data['body_material_3_pocket_length_allowance'] = $dt->tbl_dimension_body_material_3_pocket_length_allowance;
+        $data['body_material_3_pocket_length_total'] = $dt->tbl_dimension_body_material_3_pocket_length_total;
+
+        $data['body_material_3_pocket_width'] = $dt->tbl_dimension_body_material_3_pocket_width;
+        $data['body_material_3_pocket_width_allowance'] = $dt->tbl_dimension_body_material_3_pocket_width_allowance;
+        $data['body_material_3_pocket_width_total'] = $dt->tbl_dimension_body_material_3_pocket_width_total;
+
+        $data['body_material_3_extra_1_length'] = $dt->tbl_dimension_body_material_3_extra_1_length;
+        $data['body_material_3_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_3_extra_1_length_allowance;
+        $data['body_material_3_extra_1_length_total'] = $dt->tbl_dimension_body_material_3_extra_1_length_total;
+
+        $data['body_material_3_extra_1_width'] = $dt->tbl_dimension_body_material_3_extra_1_width;
+        $data['body_material_3_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_3_extra_1_width_allowance;
+        $data['body_material_3_extra_1_width_total'] = $dt->tbl_dimension_body_material_3_extra_1_width_total;
+
+        $data['body_material_3_extra_2_length'] = $dt->tbl_dimension_body_material_3_extra_2_length;
+        $data['body_material_3_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_3_extra_2_length_allowance;
+        $data['body_material_3_extra_2_length_total'] = $dt->tbl_dimension_body_material_3_extra_2_length_total;
+
+        $data['body_material_3_extra_2_width'] = $dt->tbl_dimension_body_material_3_extra_2_width;
+        $data['body_material_3_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_3_extra_2_width_allowance;
+        $data['body_material_3_extra_2_width_total'] = $dt->tbl_dimension_body_material_3_extra_2_width_total;
+
+        $data['body_material_3_extra_3_length'] = $dt->tbl_dimension_body_material_3_extra_3_length;
+        $data['body_material_3_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_3_extra_3_length_allowance;
+        $data['body_material_3_extra_3_length_total'] = $dt->tbl_dimension_body_material_3_extra_3_length_total;
+
+        $data['body_material_3_extra_3_length_total'] = $dt->tbl_dimension_body_material_3_extra_3_length_total;
+        $data['body_material_3_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_3_extra_3_width_allowance;
+        $data['body_material_3_extra_3_width_total'] = $dt->tbl_dimension_body_material_3_extra_3_width_total;
 
         $this->load->view('admin/admin_header_view', $this->data);
-        $this->load->view('admin/admin_home_ppnw_edit', $data);
+        $this->load->view('admin/admin_home_woven_edit', $data);
         $this->load->view('admin/admin_footer_view', $data);
     }
 
@@ -720,38 +1952,14 @@ class Woven extends CI_Controller
      */
     public function update_woven_costing()
     {
-        if ($this->input->post('updateppnw')) {
-            $ppnwId = $this->input->post('ppnw-id');
-            $this->ppnw_model->update_ppnw_costing($ppnwId);
-            redirect('ppnw/ppnw_all');
+        if ($this->input->post('updatewoven')) {
+            $wovenId = $this->input->post('woven-id');
+            $this->woven_model->update_woven_costing($wovenId);
+            redirect('woven/woven_all');
         } else{
-            $id = $this->input->post('ppnw-id');
-            redirect('ppnw/edit_ppnw_costing/'. $id);
+            $id = $this->input->post('woven-id');
+            redirect('woven/edit_woven_costing/'. $id);
         }
-
-
-/*
-        if($_POST){
-
-
-            //$this->db->update('ppnw_costing', $ppnw_update_data);
-            //Get User ID from session Data
-            $user_id = $this->session->userdata('user_id');
-            //Get PP Nonwoven Costing ID
-            $costing_id = $this->ppnw_model->show_single_costing_by_user($user_id,$id)->ics_order_id;
-            $this->ppnw_model->update_ppnw_costing($ppnw_update_data, $costing_id);
-
-            redirect(base_url('ppnw/ppnw_all'));
-
-        }else{
-            $user_id = $this->session->userdata('user_id');
-            $this->data['single_ppnw_update'] = $this->ppnw_model->show_single_costing_by_user($user_id, $id);
-
-            $this->load->view('admin/admin_header_view', $this->data);
-            $this->load->view('admin/admin_home_ppnw_update_view', $this->data);
-            $this->load->view('admin/admin_footer_view');
-        }*/
-
     }
 
 

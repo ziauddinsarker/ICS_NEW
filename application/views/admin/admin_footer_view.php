@@ -74,8 +74,8 @@
           var color = d3.scale.category20c();
 
           var data = [{"label":"PPNW", "value":<?php foreach($ppnw_all_count as $ppnw){?><?php echo $ppnw->ppnw_count;?><?php }?>},
-              {"label":"Cotton", "value":2},
-              {"label":"Leather", "value":3},
+              {"label":"Woven", "value":<?php foreach($woven_all_count as $woven){?><?php echo $woven->woven_count;?><?php }?>},
+              {"label":"Leather", "value":1},
               {"label":"Jute", "value":1}];
 
 

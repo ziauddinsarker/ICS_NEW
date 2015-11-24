@@ -9,6 +9,7 @@ class Admin extends CI_Controller
         parent::__construct();
         $this->load->library('ion_auth');
         $this->load->model('ppnw_model');
+        $this->load->model('woven_model');
         $this->load->model('admin_model');
         $this->load->model('user_model');
         //$this->load->library('breadcrumb');
@@ -20,6 +21,8 @@ class Admin extends CI_Controller
         $this->data['todos'] = $this->admin_model->get_todo($user_id);
 
         $this->data['ppnw_all_count'] = $this->ppnw_model->ppnw_total_count_by_user($username);
+
+        $this->data['woven_all_count'] = $this->woven_model->woven_total_count_by_user($username);
 
         //$all_sess = $this->session->all_userdata();
        // var_dump($all_sess);

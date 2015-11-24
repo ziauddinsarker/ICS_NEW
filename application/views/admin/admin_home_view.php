@@ -25,11 +25,16 @@
             </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box">
+                <a href="<?php base_url() ?>woven/woven_all/">
                 <span class="info-box-icon bg-red"><i class="fa fa-bar-chart"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">Cotton</span>
-                  <span class="info-box-number">0</span>
+                  <span class="info-box-text">Woven</span>
+                  <span class="info-box-number">
+                    <?php foreach($woven_all_count as $woven){?>
+                      <td><?php echo $woven->woven_count;?></td>
+                    <?php }?></span>
                 </div><!-- /.info-box-content -->
+                </a>
               </div><!-- /.info-box -->
             </div><!-- /.col -->
 
