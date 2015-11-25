@@ -795,7 +795,7 @@
                                         <td><input type="text" class="form-control woven-costing" id="body_material_3_pocket_width_total" name="body_material_3_pocket_width_total" readonly="readonly"></td>
                                     </tr>
                                     <tr>
-                                        <th rowspan="2">Extra 1</th>
+                                        <th rowspan="2"> <input type="text" class="form-control woven-costing" id="body_material_first_extra_1" name="body_material_first_extra_1" placeholder="Extra 1"></th>
                                         <td>Length</td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_1_extra_1_length" name="body_material_1_extra_1_length" ></td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_1_extra_1_length_allowance" name="body_material_1_extra_1_length_allowance" ></td>
@@ -824,7 +824,7 @@
                                         <td><input type="text" class="form-control woven-costing" id="body_material_3_extra_1_width_total" name="body_material_3_pocket_width_total" readonly="readonly"></td>
                                     </tr>
                                     <tr>
-                                        <th rowspan="2">Extra 2</th>
+                                        <th rowspan="2"><input type="text" class="form-control woven-costing" id="body_material_first_extra_2" name="body_material_first_extra_2" placeholder="Extra 2"></th>
                                         <td>Length</td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_1_extra_2_length" name="body_material_1_extra_2_length" ></td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_1_extra_2_length_allowance" name="body_material_1_extra_2_length_allowance" ></td>
@@ -855,7 +855,7 @@
 
                                     </tr>
                                     <tr>
-                                        <th rowspan="2">Extra 3</th>
+                                        <th rowspan="2"><input type="text" class="form-control woven-costing" id="body_material_first_extra_3" name="body_material_first_extra_3" placeholder="Extra 3"></th>
                                         <td>Length</td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_1_extra_3_length" name="body_material_1_extra_3_length" ></td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_1_extra_3_length_allowance" name="body_material_1_extra_3_length_allowance" ></td>
@@ -1113,7 +1113,7 @@
                                         <td><input type="text" class="form-control woven-costing" id="body_material_6_pocket_width_total" name="body_material_6_pocket_width_total" readonly="readonly"></td>
                                     </tr>
                                     <tr>
-                                        <th rowspan="2">Extra 1</th>
+                                        <th rowspan="2"><input type="text" class="form-control woven-costing" id="body_material_second_extra_1" name="body_material_second_extra_1" placeholder="Extra 1"></th>
                                         <td>Length</td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_1_length" name="body_material_4_extra_1_length" ></td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_1_length_allowance" name="body_material_4_extra_1_length_allowance" ></td>
@@ -1142,7 +1142,7 @@
                                         <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_1_width_total" name="body_material_6_pocket_width_total" readonly="readonly"></td>
                                     </tr>
                                     <tr>
-                                        <th rowspan="2">Extra 2</th>
+                                        <th rowspan="2"><input type="text" class="form-control woven-costing" id="body_material_second_extra_2" name="body_material_second_extra_2" placeholder="Extra 2"></th>
                                         <td>Length</td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_2_length" name="body_material_4_extra_2_length" ></td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_2_length_allowance" name="body_material_4_extra_2_length_allowance" ></td>
@@ -1173,7 +1173,7 @@
 
                                     </tr>
                                     <tr>
-                                        <th rowspan="2">Extra 3</th>
+                                        <th rowspan="2"><input type="text" class="form-control woven-costing" id="body_material_second_extra_3" name="body_material_second_extra_3" placeholder="Extra 3"></th>
                                         <td>Length</td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_3_length" name="body_material_4_extra_3_length" ></td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_3_length_allowance" name="body_material_4_extra_3_length_allowance" ></td>

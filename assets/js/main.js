@@ -886,39 +886,108 @@ $(document).ready(function(){
         var body_material_6_cost = $("#body_material_6_cost").val();
 
 /*
-
         if((body_material_1_cost && body_material_1_roll_1)==''){
             var body_material_1_roll_1 = $("#body_material_1_roll_1").val(1);
             var body_material_1_cost = $("#body_material_1_cost").val(0);
+            var body_material_1_consumption_rate = $("#body_material_1_consumption_rate").val(0);
         }else{
             var body_material_1_roll_1 = $("#body_material_1_roll_1").val();
             var body_material_1_cost = $("#body_material_1_cost").val();
+            var body_material_1_consumption_rate = $("#body_material_1_consumption_rate").val();
         }
-*/
+        */
+
+        //Body Material 1
+        if((body_material_1_roll_1 == "")||(body_material_1_roll_1 == 0)){
+            var body_material_1_consumption = +$("#body_material_1_consumption").val(0);
+            $("#body_material_1_consumption_rate").val((0).toFixed(4));
+            $("#body_material_1_consumption_cost").val((0).toFixed(4));
+        }else{
+            $("#body_material_1_consumption_rate").val((body_material_1_cost/body_material_1_roll_1/0.9144).toFixed(4));
+            var body_material_1_consumption_rate = +$("#body_material_1_consumption_rate").val();
+            $("#body_material_1_consumption_cost").val((body_material_1_consumption*body_material_1_consumption_rate).toFixed(4));
+        }
+
+        //Body Material 2
+        if((body_material_2_roll_2 == "")||(body_material_2_roll_2 == 0)){
+            var body_material_2_consumption = +$("#body_material_2_consumption").val(0);
+            $("#body_material_2_consumption_rate").val((0).toFixed(4));
+            $("#body_material_2_consumption_cost").val((0).toFixed(4));
+        }else{
+            $("#body_material_2_consumption_rate").val((body_material_2_cost/body_material_2_roll_2/0.9144).toFixed(4));
+            var body_material_2_consumption_rate = +$("#body_material_2_consumption_rate").val();
+            $("#body_material_2_consumption_cost").val((body_material_2_consumption*body_material_2_consumption_rate).toFixed(4));
+        }
+
+        //Body Material 3
+        if((body_material_3_roll_3 == "")||(body_material_3_roll_3 == 0)){
+            var body_material_3_consumption = +$("#body_material_3_consumption").val(0);
+            $("#body_material_3_consumption_rate").val((0).toFixed(4));
+            $("#body_material_3_consumption_cost").val((0).toFixed(4));
+        }else{
+            $("#body_material_3_consumption_rate").val((body_material_3_cost/body_material_3_roll_3/0.9144).toFixed(4));
+            var body_material_3_consumption_rate = +$("#body_material_3_consumption_rate").val();
+            $("#body_material_3_consumption_cost").val((body_material_3_consumption*body_material_2_consumption_rate).toFixed(4));
+        }
+
+        //Body Material 4
+        if((body_material_4_roll_4 == "")||(body_material_4_roll_4 == 0)){
+            var body_material_4_consumption = +$("#body_material_4_consumption").val(0);
+            $("#body_material_4_consumption_rate").val((0).toFixed(4));
+            $("#body_material_4_consumption_cost").val((0).toFixed(4));
+        }else{
+            $("#body_material_4_consumption_rate").val((body_material_4_cost/body_material_4_roll_4/0.9144).toFixed(4));
+            var body_material_4_consumption_rate = +$("#body_material_4_consumption_rate").val();
+            $("#body_material_4_consumption_cost").val((body_material_4_consumption*body_material_4_consumption_rate).toFixed(4));
+        }
+
+        //Body Material 5
+        if((body_material_5_roll_5 == "")||(body_material_5_roll_5 == 0)){
+            var body_material_5_consumption = +$("#body_material_5_consumption").val(0);
+            $("#body_material_5_consumption_rate").val((0).toFixed(4));
+            $("#body_material_5_consumption_cost").val((0).toFixed(4));
+        }else{
+            $("#body_material_5_consumption_rate").val((body_material_5_cost/body_material_5_roll_5/0.9144).toFixed(4));
+            var body_material_5_consumption_rate = +$("#body_material_5_consumption_rate").val();
+            $("#body_material_5_consumption_cost").val((body_material_5_consumption*body_material_5_consumption_rate).toFixed(4));
+        }
+
+        //Body Material 6
+        if((body_material_6_roll_6 == "")||(body_material_6_roll_6 == 0)){
+            var body_material_6_consumption = +$("#body_material_6_consumption").val(0);
+            $("#body_material_6_consumption_rate").val((0).toFixed(4));
+            $("#body_material_6_consumption_cost").val((0).toFixed(4));
+        }else{
+            $("#body_material_6_consumption_rate").val((body_material_6_cost/body_material_6_roll_6/0.9144).toFixed(4));
+            var body_material_6_consumption_rate = +$("#body_material_6_consumption_rate").val();
+            $("#body_material_6_consumption_cost").val((body_material_6_consumption*body_material_6_consumption_rate).toFixed(4));
+        }
+
+
 
         //All Body Material Consumption Rate from (All Body Material * All Body Material Roll Width)
-        $("#body_material_1_consumption_rate").val((body_material_1_cost/body_material_1_roll_1/0.9144).toFixed(4));
-        $("#body_material_2_consumption_rate").val((body_material_2_cost/body_material_2_roll_2/0.9144).toFixed(4));
-        $("#body_material_3_consumption_rate").val((body_material_3_cost/body_material_3_roll_3/0.9144).toFixed(4));
-        $("#body_material_4_consumption_rate").val((body_material_4_cost/body_material_4_roll_4/0.9144).toFixed(4));
-        $("#body_material_5_consumption_rate").val((body_material_5_cost/body_material_5_roll_5/0.9144).toFixed(4));
-        $("#body_material_6_consumption_rate").val((body_material_6_cost/body_material_6_roll_6/0.9144).toFixed(4));
+        //$("#body_material_1_consumption_rate").val((body_material_1_cost/body_material_1_roll_1/0.9144).toFixed(4));
+        //$("#body_material_2_consumption_rate").val((body_material_2_cost/body_material_2_roll_2/0.9144).toFixed(4));
+        //$("#body_material_3_consumption_rate").val((body_material_3_cost/body_material_3_roll_3/0.9144).toFixed(4));
+        //$("#body_material_4_consumption_rate").val((body_material_4_cost/body_material_4_roll_4/0.9144).toFixed(4));
+        //$("#body_material_5_consumption_rate").val((body_material_5_cost/body_material_5_roll_5/0.9144).toFixed(4));
+        //$("#body_material_6_consumption_rate").val((body_material_6_cost/body_material_6_roll_6/0.9144).toFixed(4));
 
         //All Body Material Consumption Rate in Variable
-        var body_material_1_consumption_rate = +$("#body_material_1_consumption_rate").val();
-        var body_material_2_consumption_rate = +$("#body_material_2_consumption_rate").val();
-        var body_material_3_consumption_rate = +$("#body_material_3_consumption_rate").val();
-        var body_material_4_consumption_rate = +$("#body_material_4_consumption_rate").val();
-        var body_material_5_consumption_rate = +$("#body_material_5_consumption_rate").val();
-        var body_material_6_consumption_rate = +$("#body_material_6_consumption_rate").val();
+
+        //var body_material_2_consumption_rate = +$("#body_material_2_consumption_rate").val();
+       // var body_material_3_consumption_rate = +$("#body_material_3_consumption_rate").val();
+        //var body_material_4_consumption_rate = +$("#body_material_4_consumption_rate").val();
+        //var body_material_5_consumption_rate = +$("#body_material_5_consumption_rate").val();
+        //var body_material_6_consumption_rate = +$("#body_material_6_consumption_rate").val();
 
         //All Body Material Final Cost
-        $("#body_material_1_consumption_cost").val((body_material_1_consumption*body_material_1_consumption_rate).toFixed(4));
-        $("#body_material_2_consumption_cost").val((body_material_2_consumption*body_material_2_consumption_rate).toFixed(4));
-        $("#body_material_3_consumption_cost").val((body_material_3_consumption*body_material_3_consumption_rate).toFixed(4));
-        $("#body_material_4_consumption_cost").val((body_material_4_consumption*body_material_4_consumption_rate).toFixed(4));
-        $("#body_material_5_consumption_cost").val((body_material_5_consumption*body_material_5_consumption_rate).toFixed(4));
-        $("#body_material_6_consumption_cost").val((body_material_6_consumption*body_material_6_consumption_rate).toFixed(4));
+
+        //$("#body_material_2_consumption_cost").val((body_material_2_consumption*body_material_2_consumption_rate).toFixed(4));
+        //$("#body_material_3_consumption_cost").val((body_material_3_consumption*body_material_3_consumption_rate).toFixed(4));
+        //$("#body_material_4_consumption_cost").val((body_material_4_consumption*body_material_4_consumption_rate).toFixed(4));
+       // $("#body_material_5_consumption_cost").val((body_material_5_consumption*body_material_5_consumption_rate).toFixed(4));
+       // $("#body_material_6_consumption_cost").val((body_material_6_consumption*body_material_6_consumption_rate).toFixed(4));
 
 
 

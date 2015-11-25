@@ -17,8 +17,6 @@
                             <th>ID</th>
                             <th>Company Name</th>
                             <th>Date</th>
-                            <th>GSM </th>
-                            <th>Size (H x W x L)</th>
                             <th>Quantity </th>
                             <th>Price</th>
                             <th></th>
@@ -30,8 +28,6 @@
                                 <td><?php echo $ppnw->tbl_woven_id_name;?></td>
                                 <td><?php echo $ppnw->tbl_woven_company_name;?></td>
                                 <td><?php echo $ppnw->tbl_woven_order_date;?></td>
-                                <td><?php echo $ppnw->tbl_woven_order_gsm;?></td>
-                                <td><?php //echo $ppnw->tbl_dimension_body_height_total;?> x <?php //echo $ppnw->tbl_dimension_body_width_total;?> x <?php //echo $ppnw->tbl_dimension_body_panel_total;?></td>
                                 <td><?php echo $ppnw->tbl_woven_order_quantity;?></td>
                                 <td><?php echo $ppnw->tbl_total_price;?></td>
                                 <td><a class='btn btn-default btn-info' href="<?=  base_url()?>woven/edit_woven_costing/<?= $ppnw->tbl_woven_order_id;?>">Edit</a>  <a class='btn btn-default btn-info' href="<?=  base_url()?>woven/revision_woven_costing/<?= $ppnw->tbl_woven_order_id;?>">Revisions</a><?php /* |<a href="<?=  base_url()?>ppnw/delete_ppnw_costing/<?= $ppnw->ics_order_id;?>">Delete</a>| <a href="<?=  base_url()?>ppnw/ppnw_all">PDF</a>*/?> </td>

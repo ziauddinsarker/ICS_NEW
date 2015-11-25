@@ -10,16 +10,16 @@
                 <!-- Form Start -->
                 <form class="form-inline add-new-ppnw-form" role="form" action="<?=  base_url()?>woven/update_woven_costing" method="post">
                 <!-- Part1 Form Start -->
-                    <div class="row">
-                        <div class="part1">
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="order_id">Order Id:</label>
-                                    <input type="text" class="form-control woven-costing" name="order_id" id="order_id" placeholder="Order ID" value="<?php echo $woven_id_name ?>" required readonly="readonly">
-                                </div>
-                            </div>
+                <div class="row">
+                    <div class="part1">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="order_id">Order Id:</label>
+                                <input type="text" class="form-control woven-costing" name="order_id" id="order_id" placeholder="Order ID" value="<?php echo $woven_id_name ?>" required readonly="readonly">
                             </div>
                         </div>
+                        </div>
+                    </div>
 
                 <!-- Part1 Form Start -->
                 <div class="row">
@@ -94,12 +94,11 @@
                                         <input type="hidden" name="woven-id" value="<?php echo $woven_order_id ?>">
                                         <input type="hidden" name="dimension-id" value="<?php echo $dimension_id ?>">
 
-                                        <button class="btn btn-info" type="submit" name="updatewoven" value="updatewoven">Update</button>
-                                    <!--
-                                        <button class="btn btn-info" type="submit" name="submit">save</button>
-                                        <button class="btn btn-info">PRINT</button>
-                                        <button class="btn btn-info">PDF</button>
-                                        -->
+                                          <button class="btn btn-info" type="submit" name="updatewoven" value="updatewoven">Update</button>                                                                    <!--
+                                         <!--  <button class="btn btn-info" type="submit" name="submit">save</button>
+                                          <button class="btn btn-info">PRINT</button>
+                                          <button class="btn btn-info">PDF</button>
+                                          -->
                                     </article>
                                     </div>
                                 </div>
@@ -361,7 +360,7 @@
                                 </tr>
 
                                 <tr class="danger">
-                                    <td>Extra 1</td>
+                                    <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_extra_1" name="extra_trim_yard_extra_1_name" value="<?php echo $extra_trim_yard_extra_1_name ?>" placeholder="Extra 1"></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_1_cost" name="extra_trim_yard_1_cost" value="<?php echo $woven_trims_yard_extra_1_item_cost ?>"></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_1_consumption" name="extra_trim_yard_1_consumption" value="<?php echo $woven_trims_yard_extra_1_item_consumption ?>"></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_1_consumption_rate" name="extra_trim_yard_1_consumption_rate" value="<?php echo $woven_trims_yard_extra_1_item_rate ?>" readonly="readonly"></td>
@@ -369,7 +368,7 @@
                                 </tr>
 
                                 <tr class="danger">
-                                    <td>Extra 2</td>
+                                    <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_extra_2" name="extra_trim_yard_extra_2_name" value="<?php echo $extra_trim_yard_extra_2_name ?>" placeholder="Extra 2"></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_2_cost" name="extra_trim_yard_2_cost" value="<?php echo $woven_trims_yard_extra_2_item_cost ?>" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_2_consumption" name="extra_trim_yard_2_consumption" value="<?php echo $woven_trims_yard_extra_2_item_consumption ?>"></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_2_consumption_rate" name="extra_trim_yard_2_consumption_rate" value="<?php echo $woven_trims_yard_extra_2_item_rate ?>" readonly="readonly"></td>
@@ -377,7 +376,7 @@
                                 </tr>
 
                                 <tr class="danger">
-                                    <td>Extra 2</td>
+                                    <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_extra_3" name="extra_trim_yard_extra_3_name" value="<?php echo $extra_trim_yard_extra_3_name ?>" placeholder="Extra 3"></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_3_cost" name="extra_trim_yard_3_cost" value="<?php echo $woven_trims_yard_extra_3_item_cost ?>"></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_3_consumption" name="extra_trim_yard_3_consumption" value="<?php echo $woven_trims_yard_extra_3_item_consumption ?>"></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_3_consumption_rate" name="extra_trim_yard_3_consumption_rate" value="<?php echo $woven_trims_yard_extra_3_item_rate ?>" readonly="readonly"></td>
@@ -796,7 +795,7 @@
                                         <td><input type="text" class="form-control woven-costing" id="body_material_3_pocket_width_total" name="body_material_3_pocket_width_total" value="<?php echo $body_material_3_pocket_width_total ?>" readonly="readonly"></td>
                                     </tr>
                                     <tr>
-                                        <th rowspan="2">Extra 1</th>
+                                        <th rowspan="2"><input type="text" class="form-control woven-costing" id="body_material_first_extra_1" name="body_material_first_extra_1" placeholder="Extra 1" value="<?php echo $body_material_first_extra_1 ?>"></th>
                                         <td>Length</td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_1_extra_1_length" name="body_material_1_extra_1_length" value="<?php echo $body_material_1_extra_1_length ?>"></td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_1_extra_1_length_allowance" name="body_material_1_extra_1_length_allowance" value="<?php echo $body_material_1_extra_1_length_allowance ?>"></td>
@@ -825,7 +824,7 @@
                                         <td><input type="text" class="form-control woven-costing" id="body_material_3_extra_1_width_total" name="body_material_3_pocket_width_total" value="<?php echo $body_material_3_pocket_width_total ?>" readonly="readonly"></td>
                                     </tr>
                                     <tr>
-                                        <th rowspan="2">Extra 2</th>
+                                        <th rowspan="2"><input type="text" class="form-control woven-costing" id="body_material_first_extra_2" name="body_material_first_extra_2" placeholder="Extra 2" value="<?php echo $body_material_first_extra_2 ?>"></th>
                                         <td>Length</td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_1_extra_2_length" name="body_material_1_extra_2_length" value="<?php echo $body_material_1_extra_2_length ?>"></td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_1_extra_2_length_allowance" name="body_material_1_extra_2_length_allowance" value="<?php echo $body_material_1_extra_2_length_allowance ?>"></td>
@@ -856,7 +855,7 @@
 
                                     </tr>
                                     <tr>
-                                        <th rowspan="2">Extra 3</th>
+                                        <th rowspan="2"><input type="text" class="form-control woven-costing" id="body_material_first_extra_3" name="body_material_first_extra_3" placeholder="Extra 3" value="<?php echo $body_material_first_extra_3 ?>"></th>
                                         <td>Length</td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_1_extra_3_length" name="body_material_1_extra_3_length" value="<?php echo $body_material_1_extra_3_length ?>"></td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_1_extra_3_length_allowance" name="body_material_1_extra_3_length_allowance" value="<?php echo $body_material_1_extra_3_length_allowance ?>"></td>
@@ -913,295 +912,295 @@
                                     <tr>
                                         <th rowspan="2">Front</th>
                                         <td>Length</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_front_length" name="body_material_4_front_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_front_length_allowance" name="body_material_4_front_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_front_length_total" name="body_material_4_front_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_front_length" name="body_material_4_front_length" value="<?php echo $body_material_4_front_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_front_length_allowance" name="body_material_4_front_length_allowance" value="<?php echo $body_material_4_front_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_front_length_total" name="body_material_4_front_length_total" value="<?php echo $body_material_4_front_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_front_length" name="body_material_5_front_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_front_length_allowance" name="body_material_5_front_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_front_length_total" name="body_material_5_front_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_front_length" name="body_material_5_front_length" value="<?php echo $body_material_5_front_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_front_length_allowance" name="body_material_5_front_length_allowance" value="<?php echo $body_material_5_front_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_front_length_total" name="body_material_5_front_length_total" value="<?php echo $body_material_5_front_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_front_length" name="body_material_6_front_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_front_length_allowance" name="body_material_6_front_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_front_length_total" name="body_material_6_front_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_front_length" name="body_material_6_front_length" value="<?php echo $body_material_6_front_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_front_length_allowance" name="body_material_6_front_length_allowance" value="<?php echo $body_material_6_front_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_front_length_total" name="body_material_6_front_length_total" value="<?php echo $body_material_6_front_length_total ?>" readonly="readonly"></td>
                                     </tr>
                                     <tr>
                                         <td>Width</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_front_width" name="body_material_4_front_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_front_width_allowance" name="body_material_4_front_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_front_width_total" name="body_material_4_front_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_front_width" name="body_material_4_front_width" value="<?php echo $body_material_4_front_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_front_width_allowance" name="body_material_4_front_width_allowance" value="<?php echo $body_material_4_front_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_front_width_total" name="body_material_4_front_width_total" value="<?php echo $body_material_4_front_width_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_front_width" name="body_material_5_front_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_front_width_allowance" name="body_material_5_front_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_front_width_total" name="body_material_5_front_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_front_width" name="body_material_5_front_width" value="<?php echo $body_material_5_front_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_front_width_allowance" name="body_material_5_front_width_allowance" value="<?php echo $body_material_5_front_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_front_width_total" name="body_material_5_front_width_total" value="<?php echo $body_material_5_front_width_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_front_width" name="body_material_6_front_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_front_width_allowance" name="body_material_6_front_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_front_width_total" name="body_material_6_front_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_front_width" name="body_material_6_front_width" value="<?php echo $body_material_6_front_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_front_width_allowance" name="body_material_6_front_width_allowance" value="<?php echo $body_material_6_front_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_front_width_total" name="body_material_6_front_width_total" value="<?php echo $body_material_6_front_width_total ?>" readonly="readonly"></td>
                                     </tr>
                                     <tr>
                                         <th rowspan="2">Back</th>
                                         <td>Length</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_back_length" name="body_material_4_back_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_back_length_allowance" name="body_material_4_back_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_back_length_total" name="body_material_4_back_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_back_length" name="body_material_4_back_length" value="<?php echo $body_material_4_back_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_back_length_allowance" name="body_material_4_back_length_allowance" value="<?php echo $body_material_4_back_length_allowance ?>" ></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_back_length_total" name="body_material_4_back_length_total" value="<?php echo $body_material_4_back_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_back_length" name="body_material_5_back_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_back_length_allowance" name="body_material_5_back_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_back_length_total" name="body_material_5_back_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_back_length" name="body_material_5_back_length" value="<?php echo $body_material_5_back_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_back_length_allowance" name="body_material_5_back_length_allowance" value="<?php echo $body_material_5_back_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_back_length_total" name="body_material_5_back_length_total" value="<?php echo $body_material_5_back_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_back_length" name="body_material_6_back_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_back_length_allowance" name="body_material_6_back_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_back_length_total" name="body_material_6_back_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_back_length" name="body_material_6_back_length" value="<?php echo $body_material_6_back_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_back_length_allowance" name="body_material_6_back_length_allowance" value="<?php echo $body_material_6_back_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_back_length_total" name="body_material_6_back_length_total" value="<?php echo $body_material_6_back_length_total ?>"readonly="readonly"></td>
                                     </tr>
                                     <tr>
                                         <td>Width</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_back_width" name="body_material_4_back_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_back_width_allowance" name="body_material_4_back_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_back_width_total" name="body_material_4_back_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_back_width" name="body_material_4_back_width" value="<?php echo $body_material_4_back_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_back_width_allowance" name="body_material_4_back_width_allowance" value="<?php echo $body_material_4_back_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_back_width_total" name="body_material_4_back_width_total" value="<?php echo $body_material_4_back_width_total ?>"readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_back_width" name="body_material_5_back_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_back_width_allowance" name="body_material_5_back_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_back_width_total" name="body_material_5_back_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_back_width" name="body_material_5_back_width" value="<?php echo $body_material_5_back_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_back_width_allowance" name="body_material_5_back_width_allowance" value="<?php echo $body_material_5_back_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_back_width_total" name="body_material_5_back_width_total" value="<?php echo $body_material_5_back_width_total ?>"readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_back_width" name="body_material_6_back_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_back_width_allowance" name="body_material_6_back_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_back_width_total" name="body_material_6_back_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_back_width" name="body_material_6_back_width" value="<?php echo $body_material_6_back_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_back_width_allowance" name="body_material_6_back_width_allowance" value="<?php echo $body_material_6_back_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_back_width_total" name="body_material_6_back_width_total" value="<?php echo $body_material_6_back_width_total ?>"readonly="readonly"></td>
                                     </tr>
                                     <tr>
                                         <th rowspan="2">Top</th>
                                         <td>Length</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_top_length" name="body_material_4_top_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_top_length_allowance" name="body_material_4_top_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_top_length_total" name="body_material_4_top_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_top_length" name="body_material_4_top_length" value="<?php echo $body_material_4_top_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_top_length_allowance" name="body_material_4_top_length_allowance" value="<?php echo $body_material_4_top_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_top_length_total" name="body_material_4_top_length_total" value="<?php echo $body_material_4_top_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_top_length" name="body_material_5_top_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_top_length_allowance" name="body_material_5_top_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_top_length_total" name="body_material_5_top_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_top_length" name="body_material_5_top_length" value="<?php echo $body_material_5_top_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_top_length_allowance" name="body_material_5_top_length_allowance" value="<?php echo $body_material_5_top_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_top_length_total" name="body_material_5_top_length_total" value="<?php echo $body_material_5_top_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_top_length" name="body_material_6_top_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_top_length_allowance" name="body_material_6_top_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_top_length_total" name="body_material_6_top_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_top_length" name="body_material_6_top_length" value="<?php echo $body_material_6_top_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_top_length_allowance" name="body_material_6_top_length_allowance" value="<?php echo $body_material_6_top_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_top_length_total" name="body_material_6_top_length_total" value="<?php echo $body_material_6_top_length_total ?>" readonly="readonly"></td>
                                     </tr>
                                     <tr>
                                         <td>Width</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_top_width" name="body_material_4_top_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_top_width_allowance" name="body_material_4_top_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_top_width_total" name="body_material_4_top_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_top_width" name="body_material_4_top_width" value="<?php echo $body_material_4_top_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_top_width_allowance" name="body_material_4_top_width_allowance" value="<?php echo $body_material_4_top_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_top_width_total" name="body_material_4_top_width_total" value="<?php echo $body_material_4_top_width_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_top_width" name="body_material_5_top_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_top_width_allowance" name="body_material_5_top_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_top_width_total" name="body_material_5_top_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_top_width" name="body_material_5_top_width" value="<?php echo $body_material_5_top_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_top_width_allowance" name="body_material_5_top_width_allowance" value="<?php echo $body_material_5_top_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_top_width_total" name="body_material_5_top_width_total" value="<?php echo $body_material_5_top_width_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_top_width" name="body_material_6_top_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_top_width_allowance" name="body_material_6_top_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_top_width_total" name="body_material_6_top_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_top_width" name="body_material_6_top_width" value="<?php echo $body_material_6_top_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_top_width_allowance" name="body_material_6_top_width_allowance" value="<?php echo $body_material_6_top_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_top_width_total" name="body_material_6_top_width_total" value="<?php echo $body_material_6_top_width_total ?>" readonly="readonly"></td>
                                     </tr>
                                     <tr>
                                         <th rowspan="2">Bottom</th>
                                         <td>Length</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_bottom_length" name="body_material_4_bottom_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_bottom_length_allowance" name="body_material_4_bottom_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_bottom_length_total" name="body_material_4_bottom_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_bottom_length" name="body_material_4_bottom_length" value="<?php echo $body_material_4_bottom_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_bottom_length_allowance" name="body_material_4_bottom_length_allowance" value="<?php echo $body_material_4_bottom_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_bottom_length_total" name="body_material_4_bottom_length_total" value="<?php echo $body_material_4_bottom_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_bottom_length" name="body_material_5_bottom_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_bottom_length_allowance" name="body_material_5_bottom_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_bottom_length_total" name="body_material_5_bottom_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_bottom_length" name="body_material_5_bottom_length" value="<?php echo $body_material_5_bottom_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_bottom_length_allowance" name="body_material_5_bottom_length_allowance" value="<?php echo $body_material_5_bottom_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_bottom_length_total" name="body_material_5_bottom_length_total" value="<?php echo $body_material_5_bottom_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_bottom_length" name="body_material_6_bottom_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_bottom_length_allowance" name="body_material_6_bottom_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_bottom_length_total" name="body_material_6_bottom_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_bottom_length" name="body_material_6_bottom_length" value="<?php echo $body_material_6_bottom_length ?>" ></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_bottom_length_allowance" name="body_material_6_bottom_length_allowance" value="<?php echo $body_material_6_bottom_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_bottom_length_total" name="body_material_6_bottom_length_total" value="<?php echo $body_material_6_bottom_length_total ?>" readonly="readonly"></td>
                                     </tr>
                                     <tr>
                                         <td>Width</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_bottom_width" name="body_material_4_bottom_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_bottom_width_allowance" name="body_material_4_bottom_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_bottom_width_total" name="body_material_4_bottom_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_bottom_width" name="body_material_4_bottom_width" value="<?php echo $body_material_4_bottom_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_bottom_width_allowance" name="body_material_4_bottom_width_allowance" value="<?php echo $body_material_4_bottom_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_bottom_width_total" name="body_material_4_bottom_width_total" value="<?php echo $body_material_4_bottom_width_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_bottom_width" name="body_material_5_bottom_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_bottom_width_allowance" name="body_material_5_bottom_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_bottom_width_total" name="body_material_5_bottom_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_bottom_width" name="body_material_5_bottom_width" value="<?php echo $body_material_5_bottom_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_bottom_width_allowance" name="body_material_5_bottom_width_allowance" value="<?php echo $body_material_5_bottom_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_bottom_width_total" name="body_material_5_bottom_width_total" value="<?php echo $body_material_5_bottom_width_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_bottom_width" name="body_material_6_bottom_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_bottom_width_allowance" name="body_material_6_bottom_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_bottom_width_total" name="body_material_6_bottom_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_bottom_width" name="body_material_6_bottom_width" value="<?php echo $body_material_6_bottom_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_bottom_width_allowance" name="body_material_6_bottom_width_allowance" value="<?php echo $body_material_6_bottom_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_bottom_width_total" name="body_material_6_bottom_width_total" value="<?php echo $body_material_6_bottom_width_total ?>" readonly="readonly"></td>
                                     </tr>
                                     <tr>
                                         <th rowspan="2">Left</th>
                                         <td>Length</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_left_length" name="body_material_4_left_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_left_length_allowance" name="body_material_4_left_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_left_length_total" name="body_material_4_left_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_left_length" name="body_material_4_left_length" value="<?php echo $body_material_4_left_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_left_length_allowance" name="body_material_4_left_length_allowance" value="<?php echo $body_material_4_left_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_left_length_total" name="body_material_4_left_length_total" value="<?php echo $body_material_4_left_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_left_length" name="body_material_5_left_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_left_length_allowance" name="body_material_5_left_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_left_length_total" name="body_material_5_left_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_left_length" name="body_material_5_left_length" value="<?php echo $body_material_5_left_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_left_length_allowance" name="body_material_5_left_length_allowance" value="<?php echo $body_material_5_left_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_left_length_total" name="body_material_5_left_length_total" value="<?php echo $body_material_5_left_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_left_length" name="body_material_6_left_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_left_length_allowance" name="body_material_6_left_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_left_length_total" name="body_material_6_left_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_left_length" name="body_material_6_left_length" value="<?php echo $body_material_6_left_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_left_length_allowance" name="body_material_6_left_length_allowance" value="<?php echo $body_material_6_left_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_left_length_total" name="body_material_6_left_length_total" value="<?php echo $body_material_6_left_length_total ?>" readonly="readonly"></td>
                                     </tr>
                                     <tr>
                                         <td>Width</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_left_width" name="body_material_4_left_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_left_width_allowance" name="body_material_4_left_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_left_width_total" name="body_material_4_left_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_left_width" name="body_material_4_left_width" value="<?php echo $body_material_4_left_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_left_width_allowance" name="body_material_4_left_width_allowance" value="<?php echo $body_material_4_left_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_left_width_total" name="body_material_4_left_width_total" value="<?php echo $body_material_4_left_width_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_left_width" name="body_material_5_left_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_left_width_allowance" name="body_material_5_left_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_left_width_total" name="body_material_5_left_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_left_width" name="body_material_5_left_width" value="<?php echo $body_material_5_left_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_left_width_allowance" name="body_material_5_left_width_allowance" value="<?php echo $body_material_5_left_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_left_width_total" name="body_material_5_left_width_total" value="<?php echo $body_material_5_left_width_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_left_width" name="body_material_6_left_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_left_width_allowance" name="body_material_6_left_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_left_width_total" name="body_material_6_left_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_left_width" name="body_material_6_left_width" value="<?php echo $body_material_6_left_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_left_width_allowance" name="body_material_6_left_width_allowance" value="<?php echo $body_material_6_left_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_left_width_total" name="body_material_6_left_width_total" value="<?php echo $body_material_6_left_width_total ?>" readonly="readonly"></td>
                                     </tr>
                                     <tr>
                                         <th rowspan="2">Right</th>
                                         <td>Length</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_right_length" name="body_material_4_right_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_right_length_allowance" name="body_material_4_right_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_right_length_total" name="body_material_4_right_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_right_length" name="body_material_4_right_length" value="<?php echo $body_material_4_right_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_right_length_allowance" name="body_material_4_right_length_allowance" value="<?php echo $body_material_4_right_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_right_length_total" name="body_material_4_right_length_total" value="<?php echo $body_material_4_right_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_right_length" name="body_material_5_right_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_right_length_allowance" name="body_material_5_right_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_right_length_total" name="body_material_5_right_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_right_length" name="body_material_5_right_length" value="<?php echo $body_material_5_right_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_right_length_allowance" name="body_material_5_right_length_allowance" value="<?php echo $body_material_5_right_length_allowance ?>" ></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_right_length_total" name="body_material_5_right_length_total" value="<?php echo $body_material_5_right_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_right_length" name="body_material_6_right_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_right_length_allowance" name="body_material_6_right_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_right_length_total" name="body_material_6_right_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_right_length" name="body_material_6_right_length" value="<?php echo $body_material_6_right_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_right_length_allowance" name="body_material_6_right_length_allowance" value="<?php echo $body_material_6_right_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_right_length_total" name="body_material_6_right_length_total" value="<?php echo $body_material_6_right_length_total ?>" readonly="readonly"></td>
                                     </tr>
                                     <tr>
                                         <td>Width</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_right_width" name="body_material_4_right_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_right_width_allowance" name="body_material_4_right_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_right_width_total" name="body_material_4_right_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_right_width" name="body_material_4_right_width" value="<?php echo $body_material_4_right_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_right_width_allowance" name="body_material_4_right_width_allowance" value="<?php echo $body_material_4_right_width_allowance ?>" ></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_right_width_total" name="body_material_4_right_width_total" value="<?php echo $body_material_4_right_width_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_right_width" name="body_material_5_right_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_right_width_allowance" name="body_material_5_right_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_right_width_total" name="body_material_5_right_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_right_width" name="body_material_5_right_width" value="<?php echo $body_material_5_right_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_right_width_allowance" name="body_material_5_right_width_allowance" value="<?php echo $body_material_5_right_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_right_width_total" name="body_material_5_right_width_total" value="<?php echo $body_material_5_right_width_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_right_width" name="body_material_6_right_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_right_width_allowance" name="body_material_6_right_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_right_width_total" name="body_material_6_right_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_right_width" name="body_material_6_right_width" value="<?php echo $body_material_6_right_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_right_width_allowance" name="body_material_6_right_width_allowance" value="<?php echo $body_material_6_right_width_allowance ?>" ></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_right_width_total" name="body_material_6_right_width_total" value="<?php echo $body_material_6_right_width_total ?>" readonly="readonly"></td>
                                     </tr>
                                     <tr>
                                         <th rowspan="2">Pocet</th>
                                         <td>Length</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_pocket_length" name="body_material_4_pocket_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_pocket_length_allowance" name="body_material_4_pocket_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_pocket_length_total" name="body_material_4_pocket_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_pocket_length" name="body_material_4_pocket_length" value="<?php echo $body_material_4_pocket_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_pocket_length_allowance" name="body_material_4_pocket_length_allowance" value="<?php echo $body_material_4_pocket_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_pocket_length_total" name="body_material_4_pocket_length_total" value="<?php echo $body_material_4_pocket_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_pocket_length" name="body_material_5_pocket_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_pocket_length_allowance" name="body_material_5_pocket_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_pocket_length_total" name="body_material_5_pocket_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_pocket_length" name="body_material_5_pocket_length" value="<?php echo $body_material_5_pocket_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_pocket_length_allowance" name="body_material_5_pocket_length_allowance" value="<?php echo $body_material_5_pocket_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_pocket_length_total" name="body_material_5_pocket_length_total" value="<?php echo $body_material_5_pocket_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_pocket_length" name="body_material_6_pocket_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_pocket_length_allowance" name="body_material_6_pocket_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_pocket_length_total" name="body_material_6_pocket_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_pocket_length" name="body_material_6_pocket_length" value="<?php echo $body_material_6_pocket_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_pocket_length_allowance" name="body_material_6_pocket_length_allowance" value="<?php echo $body_material_6_pocket_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_pocket_length_total" name="body_material_6_pocket_length_total" value="<?php echo $body_material_6_pocket_length_total ?>" readonly="readonly"></td>
                                     </tr>
                                     <tr>
                                         <td>Width</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_pocket_width" name="body_material_4_pocket_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_pocket_width_allowance" name="body_material_4_pocket_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_pocket_width_total" name="body_material_4_pocket_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_pocket_width" name="body_material_4_pocket_width" value="<?php echo $body_material_4_pocket_width ?>" ></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_pocket_width_allowance" name="body_material_4_pocket_width_allowance" value="<?php echo $body_material_4_pocket_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_pocket_width_total" name="body_material_4_pocket_width_total" value="<?php echo $body_material_4_pocket_width_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_pocket_width" name="body_material_5_pocket_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_pocket_width_allowance" name="body_material_5_pocket_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_pocket_width_total" name="body_material_5_pocket_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_pocket_width" name="body_material_5_pocket_width" value="<?php echo $body_material_5_pocket_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_pocket_width_allowance" name="body_material_5_pocket_width_allowance" value="<?php echo $body_material_5_pocket_width_allowance ?>" ></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_pocket_width_total" name="body_material_5_pocket_width_total" value="<?php echo $body_material_5_pocket_width_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_pocket_width" name="body_material_6_pocket_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_pocket_width_allowance" name="body_material_6_pocket_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_pocket_width_total" name="body_material_6_pocket_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_pocket_width" name="body_material_6_pocket_width" value="<?php echo $body_material_6_pocket_width ?>" ></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_pocket_width_allowance" name="body_material_6_pocket_width_allowance" value="<?php echo $body_material_6_pocket_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_pocket_width_total" name="body_material_6_pocket_width_total" value="<?php echo $body_material_6_pocket_width_total ?>" readonly="readonly"></td>
                                     </tr>
                                     <tr>
-                                        <th rowspan="2">Extra 1</th>
+                                        <th rowspan="2"><input type="text" class="form-control woven-costing" id="body_material_second_extra_1" name="body_material_second_extra_1" placeholder="Extra 1" value="<?php echo $body_material_second_extra_1 ?>"></th>
                                         <td>Length</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_1_length" name="body_material_4_extra_1_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_1_length_allowance" name="body_material_4_extra_1_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_1_length_total" name="body_material_4_extra_1_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_1_length" name="body_material_4_extra_1_length" value="<?php echo $body_material_4_extra_1_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_1_length_allowance" name="body_material_4_extra_1_length_allowance" value="<?php echo $body_material_4_extra_1_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_1_length_total" name="body_material_4_extra_1_length_total" value="<?php echo $body_material_4_extra_1_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_1_length" name="body_material_5_extra_1_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_1_length_allowance" name="body_material_5_extra_1_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_1_length_total" name="body_material_5_extra_1_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_1_length" name="body_material_5_extra_1_length" value="<?php echo $body_material_5_extra_1_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_1_length_allowance" name="body_material_5_extra_1_length_allowance" value="<?php echo $body_material_5_extra_1_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_1_length_total" name="body_material_5_extra_1_length_total" value="<?php echo $body_material_5_extra_1_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_1_length" name="body_material_6_extra_1_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_1_length_allowance" name="body_material_6_extra_1_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_1_length_total" name="body_material_6_extra_1_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_1_length" name="body_material_6_extra_1_length" value="<?php echo $body_material_6_extra_1_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_1_length_allowance" name="body_material_6_extra_1_length_allowance" value="<?php echo $body_material_6_extra_1_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_1_length_total" name="body_material_6_extra_1_length_total" value="<?php echo $body_material_6_extra_1_length_total ?>" readonly="readonly"></td>
                                     </tr>
                                     <tr>
                                         <td>Width</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_1_width" name="body_material_4_extra_1_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_1_width_allowance" name="body_material_4_extra_1_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_1_width_total" name="body_material_4_extra_1_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_1_width" name="body_material_4_extra_1_width" value="<?php echo $body_material_4_extra_1_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_1_width_allowance" name="body_material_4_extra_1_width_allowance" value="<?php echo $body_material_4_extra_1_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_1_width_total" name="body_material_4_extra_1_width_total" value="<?php echo $body_material_4_extra_1_width_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_1_width" name="body_material_5_extra_1_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_1_width_allowance" name="body_material_5_extra_1_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_1_width_total" name="body_material_5_extra_1_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_1_width" name="body_material_5_extra_1_width" value="<?php echo $body_material_5_extra_1_width ?>" ></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_1_width_allowance" name="body_material_5_extra_1_width_allowance" value="<?php echo $body_material_5_extra_1_width_allowance ?>" ></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_1_width_total" name="body_material_5_extra_1_width_total" value="<?php echo $body_material_5_extra_1_width_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_1_width" name="body_material_6_extra_1_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_1_width_allowance" name="body_material_6_extra_1_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_1_width_total" name="body_material_6_pocket_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_1_width" name="body_material_6_extra_1_width" value="<?php echo $body_material_6_extra_1_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_1_width_allowance" name="body_material_6_extra_1_width_allowance" value="<?php echo $body_material_6_extra_1_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_1_width_total" name="body_material_6_pocket_width_total" value="<?php echo $body_material_6_pocket_width_total ?>" readonly="readonly"></td>
                                     </tr>
                                     <tr>
-                                        <th rowspan="2">Extra 2</th>
+                                        <th rowspan="2"><input type="text" class="form-control woven-costing" id="body_material_second_extra_2" name="body_material_second_extra_2" placeholder="Extra 2" value="<?php echo $body_material_second_extra_2 ?>"></th>
                                         <td>Length</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_2_length" name="body_material_4_extra_2_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_2_length_allowance" name="body_material_4_extra_2_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_2_length_total" name="body_material_4_extra_2_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_2_length" name="body_material_4_extra_2_length" value="<?php echo $body_material_4_extra_2_length ?>" ></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_2_length_allowance" name="body_material_4_extra_2_length_allowance" value="<?php echo $body_material_4_extra_2_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_2_length_total" name="body_material_4_extra_2_length_total" value="<?php echo $body_material_4_extra_2_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_2_length" name="body_material_5_extra_2_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_2_length_allowance" name="body_material_5_extra_2_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_2_length_total" name="body_material_5_extra_2_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_2_length" name="body_material_5_extra_2_length" value="<?php echo $body_material_5_extra_2_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_2_length_allowance" name="body_material_5_extra_2_length_allowance" value="<?php echo $body_material_5_extra_2_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_2_length_total" name="body_material_5_extra_2_length_total" value="<?php echo $body_material_5_extra_2_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_2_length" name="body_material_6_extra_2_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_2_length_allowance" name="body_material_6_extra_2_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_2_length_total" name="body_material_6_extra_2_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_2_length" name="body_material_6_extra_2_length" value="<?php echo $body_material_6_extra_2_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_2_length_allowance" name="body_material_6_extra_2_length_allowance" value="<?php echo $body_material_6_extra_2_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_2_length_total" name="body_material_6_extra_2_length_total" value="<?php echo $body_material_6_extra_2_length_total ?>" readonly="readonly"></td>
 
                                     </tr>
                                     <tr>
                                         <td>Width</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_2_width" name="body_material_4_extra_2_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_2_width_allowance" name="body_material_4_extra_2_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_2_width_total" name="body_material_4_extra_2_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_2_width" name="body_material_4_extra_2_width" value="<?php echo $body_material_4_extra_2_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_2_width_allowance" name="body_material_4_extra_2_width_allowance" value="<?php echo $body_material_4_extra_2_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_2_width_total" name="body_material_4_extra_2_width_total" value="<?php echo $body_material_4_extra_2_width_total ?>"readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_2_width" name="body_material_5_extra_2_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_2_width_allowance" name="body_material_5_extra_2_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_2_width_total" name="body_material_5_extra_2_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_2_width" name="body_material_5_extra_2_width" value="<?php echo $body_material_5_extra_2_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_2_width_allowance" name="body_material_5_extra_2_width_allowance" value="<?php echo $body_material_5_extra_2_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_2_width_total" name="body_material_5_extra_2_width_total" value="<?php echo $body_material_5_extra_2_width_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_2_width" name="body_material_6_extra_2_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_2_width_allowance" name="body_material_6_extra_2_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_2_width_total" name="body_material_6_extra_2_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_2_width" name="body_material_6_extra_2_width" value="<?php echo $body_material_6_extra_2_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_2_width_allowance" name="body_material_6_extra_2_width_allowance" value="<?php echo $body_material_6_extra_2_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_2_width_total" name="body_material_6_extra_2_width_total" value="<?php echo $body_material_6_extra_2_width_total ?>" readonly="readonly"></td>
 
                                     </tr>
                                     <tr>
-                                        <th rowspan="2">Extra 3</th>
+                                        <th rowspan="2"><input type="text" class="form-control woven-costing" id="body_material_second_extra_3" name="body_material_second_extra_3" placeholder="Extra 3" value="<?php echo $body_material_second_extra_3 ?>"></th>
                                         <td>Length</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_3_length" name="body_material_4_extra_3_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_3_length_allowance" name="body_material_4_extra_3_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_3_length_total" name="body_material_4_extra_3_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_3_length" name="body_material_4_extra_3_length" value="<?php echo $body_material_4_extra_3_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_3_length_allowance" name="body_material_4_extra_3_length_allowance" value="<?php echo $body_material_4_extra_3_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_3_length_total" name="body_material_4_extra_3_length_total" value="<?php echo $body_material_4_extra_3_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_3_length" name="body_material_5_extra_3_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_3_length_allowance" name="body_material_5_extra_3_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_3_length_total" name="body_material_5_extra_3_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_3_length" name="body_material_5_extra_3_length" value="<?php echo $body_material_5_extra_3_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_3_length_allowance" name="body_material_5_extra_3_length_allowance" value="<?php echo $body_material_5_extra_3_length_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_3_length_total" name="body_material_5_extra_3_length_total" value="<?php echo $body_material_5_extra_3_length_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_3_length" name="body_material_6_extra_3_length" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_3_length_allowance" name="body_material_6_extra_3_length_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_3_length_total" name="body_material_6_extra_3_length_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_3_length" name="body_material_6_extra_3_length" value="<?php echo $body_material_6_extra_3_length ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_3_length_allowance" name="body_material_6_extra_3_length_allowance" value="<?php echo $body_material_6_extra_3_length_allowance ?>" ></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_3_length_total" name="body_material_6_extra_3_length_total" value="<?php echo $body_material_6_extra_3_length_total ?>" readonly="readonly"></td>
 
                                     </tr>
                                     <tr>
                                         <td>Width</td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_3_width" name="body_material_4_extra_3_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_3_width_allowance" name="body_material_4_extra_3_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_3_width_total" name="body_material_4_extra_3_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_3_width" name="body_material_4_extra_3_width" value="<?php echo $body_material_4_extra_3_width ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_3_width_allowance" name="body_material_4_extra_3_width_allowance" value="<?php echo $body_material_4_extra_3_width_allowance ?>" ></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_4_extra_3_width_total" name="body_material_4_extra_3_width_total" value="<?php echo $body_material_4_extra_3_width_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_3_width" name="body_material_5_extra_3_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_3_width_allowance" name="body_material_5_extra_3_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_3_width_total" name="body_material_5_extra_3_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_3_width" name="body_material_5_extra_3_width" value="<?php echo $body_material_5_extra_3_width ?>" ></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_3_width_allowance" name="body_material_5_extra_3_width_allowance" value="<?php echo $body_material_5_extra_3_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_5_extra_3_width_total" name="body_material_5_extra_3_width_total" value="<?php echo $body_material_5_extra_3_width_total ?>" readonly="readonly"></td>
 
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_3_width" name="body_material_6_extra_3_width" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_3_width_allowance" name="body_material_6_extra_3_width_allowance" ></td>
-                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_3_width_total" name="body_material_6_extra_3_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_3_width" name="body_material_6_extra_3_width" value="<?php echo $body_material_6_extra_3_width ?>" ></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_3_width_allowance" name="body_material_6_extra_3_width_allowance" value="<?php echo $body_material_6_extra_3_width_allowance ?>"></td>
+                                        <td><input type="text" class="form-control woven-costing" id="body_material_6_extra_3_width_total" name="body_material_6_extra_3_width_total" value="<?php echo $body_material_6_extra_3_width_total?>" readonly="readonly"></td>
                                     </tr>
                                 </table>
 

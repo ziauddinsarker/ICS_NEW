@@ -45,10 +45,10 @@ class Woven extends CI_Controller
             // redirect them to the login page
             redirect('login/index', 'refresh');
         } else {
-            $this->data['revision_single_ppnw_costing'] = $this->ppnw_model->all_revisions_single_ppnw_costing($id);
-            //var_dump($this->data['revision_single_ppnw_costing']);
+            $this->data['revision_single_woven_costing'] = $this->woven_model->all_revisions_single_woven_costing($id);
+            //var_dump($this->data['revision_single_woven_costing']);
             $this->load->view('admin/admin_header_view', $this->data);
-            $this->load->view('admin/admin_home_ppnw_single_user_rev_view', $this->data);
+            $this->load->view('admin/admin_home_woven_single_user_rev_view', $this->data);
             $this->load->view('admin/admin_footer_view');
         }
     }
@@ -57,10 +57,741 @@ class Woven extends CI_Controller
      *Edit the PPNw Costing
      */
     public function single_revision_woven_costing($id){
+        $woven_costing_id = $this->uri->segment(3);
+        if ($woven_costing_id == NULL) {
+            redirect('woven/woven_all');
+        }
+
         //$dt = $this->ppnw_model->single_revisions_single_ppnw_costing();
-        $this->data['single_rev'] = $this->ppnw_model->single_revisions_single_ppnw_costing();
-        $this->load->view('admin/admin_header_view', $this->data);
-        $this->load->view('admin/admin_home_rev_ppnw_costing_view', $this->data);
+        $dt = $this->woven_model->single_revision_woven_costing($woven_costing_id);
+        //var_dump($dt);
+        $data['woven_order_id'] = $dt->tbl_woven_order_id;
+        $data['woven_id_name'] = $dt->tbl_woven_id_name;
+        $data['woven_company_name'] = $dt->tbl_woven_company_name;
+        $data['woven_order_date'] = $dt->tbl_woven_order_date;
+        $data['woven_item_name'] = $dt->tbl_woven_item_name;
+        $data['woven_ref_name'] = $dt->tbl_woven_ref_name;
+
+        $data['woven_order_gsm'] = $dt->tbl_woven_order_gsm;
+        $data['woven_order_color'] = $dt->tbl_woven_order_color;
+        $data['woven_order_usd'] = $dt->tbl_woven_order_usd;
+
+        $data['woven_order_wastage'] = $dt->tbl_woven_order_wastage;
+        $data['woven_order_margin'] = $dt->tbl_woven_order_margin;
+
+        $data['woven_order_quantity'] = $dt->tbl_woven_order_quantity;
+        $data['woven_order_transport'] = $dt->tbl_woven_order_transport;
+        $data['woven_order_bank_doc_charge'] = $dt->tbl_woven_order_bank_doc_charge;
+        $data['woven_total_material_inc_wastage'] = $dt->tbl_order_total_material_inc_wastage;
+
+        $data['woven_order_sewing'] = $dt->tbl_order_sewing;
+        $data['woven_order_overheads'] = $dt->tbl_order_overheads;
+
+        $data['woven_order_total_material_inc_wastage'] = $dt->tbl_order_total_material_inc_wastage;
+        $data['woven_order_total_overhead_and_other_cost'] = $dt->tbl_order_total_overhead_and_other_cost;
+        $data['woven_total_cost'] = $dt->tbl_total_cost;
+        $data['woven_total_price'] = $dt->tbl_total_price;
+
+        //Body Material Name
+        $data['woven_body_material_1_name'] = $dt->tbl_woven_body_material_1_name;
+        $data['woven_body_material_2_name'] = $dt->tbl_woven_body_material_2_name;
+        $data['woven_body_material_3_name'] = $dt->tbl_woven_body_material_3_name;
+        $data['woven_body_material_4_name'] = $dt->tbl_woven_body_material_4_name;
+        $data['woven_body_material_5_name'] = $dt->tbl_woven_body_material_5_name;
+        $data['woven_body_material_6_name'] = $dt->tbl_woven_body_material_6_name;
+
+        //Body Material Roll Width
+        $data['woven_body_material_1_roll_width'] = $dt->tbl_woven_body_material_1_roll_width;
+        $data['woven_body_material_2_roll_width'] = $dt->tbl_woven_body_material_2_roll_width;
+        $data['woven_body_material_3_roll_width'] = $dt->tbl_woven_body_material_3_roll_width;
+        $data['woven_body_material_4_roll_width'] = $dt->tbl_woven_body_material_4_roll_width;
+        $data['woven_body_material_5_roll_width'] = $dt->tbl_woven_body_material_5_roll_width;
+        $data['woven_body_material_6_roll_width'] = $dt->tbl_woven_body_material_6_roll_width;
+
+        //Body Material 1 consumption cost
+        $data['woven_body_material_1_cost'] = $dt->tbl_woven_body_material_1_cost;
+        $data['woven_body_material_1_consumption'] = $dt->tbl_woven_body_material_1_consumption;
+        $data['woven_body_material_1_rate'] = $dt->tbl_woven_body_material_1_rate;
+        $data['woven_body_material_1_total_cost'] = $dt->tbl_woven_body_material_1_total_cost;
+
+        //Body Material 2 consumption cost
+        $data['woven_body_material_2_cost'] = $dt->tbl_woven_body_material_2_cost;
+        $data['woven_body_material_2_consumption'] = $dt->tbl_woven_body_material_2_consumption;
+        $data['woven_body_material_2_rate'] = $dt->tbl_woven_body_material_2_rate;
+        $data['woven_body_material_2_total_cost'] = $dt->tbl_woven_body_material_2_total_cost;
+
+        //Body Material 3 consumption cost
+        $data['woven_body_material_3_cost'] = $dt->tbl_woven_body_material_3_cost;
+        $data['woven_body_material_3_consumption'] = $dt->tbl_woven_body_material_3_consumption;
+        $data['woven_body_material_3_rate'] = $dt->tbl_woven_body_material_3_rate;
+        $data['woven_body_material_3_total_cost'] = $dt->tbl_woven_body_material_3_total_cost;
+
+        //Body Material 4 consumption cost
+        $data['woven_body_material_4_cost'] = $dt->tbl_woven_body_material_4_cost;
+        $data['woven_body_material_4_consumption'] = $dt->tbl_woven_body_material_4_consumption;
+        $data['woven_body_material_4_rate'] = $dt->tbl_woven_body_material_4_rate;
+        $data['woven_body_material_4_total_cost'] = $dt->tbl_woven_body_material_4_total_cost;
+
+        //Body Material 5 consumption cost
+        $data['woven_body_material_5_cost'] = $dt->tbl_woven_body_material_5_cost;
+        $data['woven_body_material_5_consumption'] = $dt->tbl_woven_body_material_5_consumption;
+        $data['woven_body_material_5_rate'] = $dt->tbl_woven_body_material_5_rate;
+        $data['woven_body_material_5_total_cost'] = $dt->tbl_woven_body_material_5_total_cost;
+
+        //Body Material 6 consumption cost
+        $data['woven_body_material_6_cost'] = $dt->tbl_woven_body_material_6_cost;
+        $data['woven_body_material_6_consumption'] = $dt->tbl_woven_body_material_6_consumption;
+        $data['woven_body_material_6_rate'] = $dt->tbl_woven_body_material_6_rate;
+        $data['woven_body_material_6_total_cost'] = $dt->tbl_woven_body_material_6_total_cost;
+
+
+        $data['zipper_cost'] = $dt->tbl_woven_trims_yard_zipper_item_cost;
+        $data['zipper_consumption'] = $dt->tbl_woven_trims_yard_zipper_item_consumption;
+        $data['zipper_consumption_rate'] = $dt->tbl_woven_trims_yard_zipper_item_rate;
+        $data['zipper_consumption_cost'] = $dt->tbl_woven_trims_yard_zipper_item_total_cost;
+
+
+        $data['woven_trims_yard_two_inch_webbing_item_cost'] = $dt->tbl_woven_trims_yard_two_inch_webbing_item_cost;
+        $data['woven_trims_yard_two_inch_webbing_item_consumption'] = $dt->tbl_woven_trims_yard_two_inch_webbing_item_consumption;
+        $data['woven_trims_yard_two_inch_webbing_item_rate'] = $dt->tbl_woven_trims_yard_two_inch_webbing_item_rate;
+        $data['woven_trims_yard_two_inch_webbing_item_total_cost'] = $dt->tbl_woven_trims_yard_two_inch_webbing_item_total_cost;
+
+        $data['woven_trims_yard_one_and_half_inch_webbing_item_cost'] = $dt->tbl_woven_trims_yard_one_and_half_inch_webbing_item_cost;
+        $data['woven_trims_yard_one_and_half_webbing_item_consumption'] = $dt->tbl_woven_trims_yard_one_and_half_webbing_item_consumption;
+        $data['woven_trims_yard_one_and_half_webbing_item_rate'] = $dt->tbl_woven_trims_yard_one_and_half_webbing_item_rate;
+        $data['woven_trims_yard_one_and_half_webbing_item_total_cost'] = $dt->tbl_woven_trims_yard_one_and_half_webbing_item_total_cost;
+
+        $data['woven_trims_yard_velcro_item_cost'] = $dt->tbl_woven_trims_yard_velcro_item_cost;
+        $data['woven_trims_yard_velcro_item_consumption'] = $dt->tbl_woven_trims_yard_velcro_item_consumption;
+        $data['woven_trims_yard_velcro_item_rate'] = $dt->tbl_woven_trims_yard_velcro_item_rate;
+        $data['woven_trims_yard_velcro_item_total_cost'] = $dt->tbl_woven_trims_yard_velcro_item_total_cost;
+
+
+        $data['extra_trim_yard_extra_1_name'] = $dt->tbl_woven_trims_yard_extra_1_name;
+        $data['extra_trim_yard_extra_2_name'] = $dt->tbl_woven_trims_yard_extra_2_name;
+        $data['extra_trim_yard_extra_3_name'] = $dt->tbl_woven_trims_yard_extra_3_name;
+
+
+        $data['woven_trims_yard_extra_1_item_cost'] = $dt->tbl_woven_trims_yard_extra_1_item_cost;
+        $data['woven_trims_yard_extra_1_item_consumption'] = $dt->tbl_woven_trims_yard_extra_1_item_consumption;
+        $data['woven_trims_yard_extra_1_item_rate'] = $dt->tbl_woven_trims_yard_extra_1_item_rate;
+        $data['woven_trims_yard_extra_1_item_total_cost'] = $dt->tbl_woven_trims_yard_extra_1_item_total_cost;
+
+        $data['woven_trims_yard_extra_2_item_cost'] = $dt->tbl_woven_trims_yard_extra_2_item_cost;
+        $data['woven_trims_yard_extra_2_item_consumption'] = $dt->tbl_woven_trims_yard_extra_2_item_consumption;
+        $data['woven_trims_yard_extra_2_item_rate'] = $dt->tbl_woven_trims_yard_extra_2_item_rate;
+        $data['woven_trims_yard_extra_2_item_total_cost'] = $dt->tbl_woven_trims_yard_extra_2_item_total_cost;
+
+        $data['woven_trims_yard_extra_3_item_cost'] = $dt->tbl_woven_trims_yard_extra_3_item_cost;
+        $data['woven_trims_yard_extra_3_item_consumption'] = $dt->tbl_woven_trims_yard_extra_3_item_consumption;
+        $data['woven_trims_yard_extra_3_item_rate'] = $dt->tbl_woven_trims_yard_extra_3_item_rate;
+        $data['woven_trims_yard_extra_3_item_total_cost'] = $dt->tbl_woven_trims_yard_extra_3_item_total_cost;
+
+
+        $data['woven_trims_piece_puller_item_cost'] = $dt->tbl_woven_trims_piece_puller_item_cost;
+        $data['woven_trims_piece_puller_item_consumption'] = $dt->tbl_woven_trims_piece_puller_item_consumption;
+        $data['woven_trims_piece_puller_item_rate'] = $dt->tbl_woven_trims_piece_puller_item_rate;
+        $data['woven_trims_piece_puller_item_total_cost'] = $dt->tbl_woven_trims_piece_puller_item_total_cost;
+
+
+        $data['woven_trims_piece_print_item_cost'] = $dt->tbl_woven_trims_piece_print_item_cost;
+        $data['woven_trims_piece_print_item_consumption'] = $dt->tbl_woven_trims_piece_print_item_consumption;
+        $data['woven_trims_piece_print_item_rate'] = $dt->tbl_woven_trims_piece_print_item_rate;
+        $data['woven_trims_piece_print_item_total_cost'] = $dt->tbl_woven_trims_piece_print_item_total_cost;
+
+        $data['woven_trims_piece_d_buckle_item_cost'] = $dt->tbl_woven_trims_piece_d_buckle_item_cost;
+        $data['woven_trims_piece_d_buckle_item_consumption'] = $dt->tbl_woven_trims_piece_d_buckle_item_consumption;
+        $data['woven_trims_piece_d_buckle_item_rate'] = $dt->tbl_woven_trims_piece_d_buckle_item_rate;
+        $data['woven_trims_piece_d_buckle_item_total_cost'] = $dt->tbl_woven_trims_piece_d_buckle_item_total_cost;
+
+        $data['woven_trims_piece_swivel_hook_item_cost'] = $dt->tbl_woven_trims_piece_swivel_hook_item_cost;
+        $data['woven_trims_piece_swivel_hook_item_consumption'] = $dt->tbl_woven_trims_piece_swivel_hook_item_consumption;
+        $data['woven_trims_piece_swivel_hook_item_rate'] = $dt->tbl_woven_trims_piece_swivel_hook_item_rate;
+        $data['woven_trims_piece_swivel_hook_item_total_cost'] = $dt->tbl_woven_trims_piece_swivel_hook_item_total_cost;
+
+        $data['woven_trims_piece_adjustable_bukle_item_cost'] = $dt->tbl_woven_trims_piece_adjustable_bukle_item_cost;
+        $data['woven_trims_piece_adjustable_bukle_item_consumption'] = $dt->tbl_woven_trims_piece_adjustable_bukle_item_consumption;
+        $data['woven_trims_piece_adjustable_bukle_item_rate'] = $dt->tbl_woven_trims_piece_adjustable_bukle_item_rate;
+        $data['woven_trims_piece_adjustable_bukle_item_total_cost'] = $dt->tbl_woven_trims_piece_adjustable_bukle_item_total_cost;
+
+
+        $data['woven_trims_piece_magnetic_button_item_cost'] = $dt->tbl_woven_trims_piece_magnetic_button_item_cost;
+        $data['woven_trims_piece_magnetic_button_item_consumption'] = $dt->tbl_woven_trims_piece_magnetic_button_item_consumption;
+        $data['woven_trims_piece_magnetic_button_item_rate'] = $dt->tbl_woven_trims_piece_magnetic_button_item_rate;
+        $data['woven_trims_piece_magnetic_button_item_total_cost'] = $dt->tbl_woven_trims_piece_magnetic_button_item_total_cost;
+
+        $data['woven_trims_piece_snap_button_item_cost'] = $dt->tbl_woven_trims_piece_snap_button_item_cost;
+        $data['woven_trims_piece_snap_button_item_consumption'] = $dt->tbl_woven_trims_piece_snap_button_item_consumption;
+        $data['woven_trims_piece_snap_button_item_rate'] = $dt->tbl_woven_trims_piece_snap_button_item_rate;
+        $data['woven_trims_piece_snap_button_item_total_cost'] = $dt->tbl_woven_trims_piece_snap_button_item_total_cost;
+
+        $data['woven_trims_piece_rivet_item_cost'] = $dt->tbl_woven_trims_piece_rivet_item_cost;
+        $data['woven_trims_piece_rivet_item_consumption'] = $dt->tbl_woven_trims_piece_rivet_item_consumption;
+        $data['woven_trims_piece_rivet_item_rate'] = $dt->tbl_woven_trims_piece_rivet_item_rate;
+        $data['woven_trims_piece_rivet_item_total_cost'] = $dt->tbl_woven_trims_piece_rivet_item_total_cost;
+
+        $data['woven_trims_piece_bottom_base_item_cost'] = $dt->tbl_woven_trims_piece_bottom_base_item_cost;
+        $data['woven_trims_piece_bottom_base_item_consumption'] = $dt->tbl_woven_trims_piece_bottom_base_item_consumption;
+        $data['woven_trims_piece_bottom_base_item_rate'] = $dt->tbl_woven_trims_piece_bottom_base_item_rate;
+        $data['woven_trims_piece_bottom_base_item_total_cost'] = $dt->tbl_woven_trims_piece_bottom_base_item_total_cost;
+
+        $data['woven_trims_piece_thread_item_cost'] = $dt->tbl_woven_trims_piece_thread_item_cost;
+        $data['woven_trims_piece_thread_item_consumption'] = $dt->tbl_woven_trims_piece_thread_item_consumption;
+        $data['woven_trims_piece_thread_item_rate'] = $dt->tbl_woven_trims_piece_thread_item_rate;
+        $data['woven_trims_piece_thread_item_total_cost'] = $dt->tbl_woven_trims_piece_thread_item_total_cost;
+
+        $data['woven_trims_piece_tag_item_cost'] = $dt->tbl_woven_trims_piece_tag_item_cost;
+        $data['woven_trims_piece_tag_item_consumption'] = $dt->tbl_woven_trims_piece_tag_item_consumption;
+        $data['woven_trims_piece_tag_item_rate'] = $dt->tbl_woven_trims_piece_tag_item_rate;
+        $data['woven_trims_piece_tag_item_total_cost'] = $dt->tbl_woven_trims_piece_tag_item_total_cost;
+
+        $data['woven_trims_piece_label_item_cost'] = $dt->tbl_woven_trims_piece_label_item_cost;
+        $data['woven_trims_piece_label_item_consumption'] = $dt->tbl_woven_trims_piece_label_item_consumption;
+        $data['woven_trims_piece_label_item_rate'] = $dt->tbl_woven_trims_piece_label_item_rate;
+        $data['woven_trims_piece_label_item_total_cost'] = $dt->tbl_woven_trims_piece_label_item_total_cost;
+
+        $data['woven_trims_piece_packing_item_cost'] = $dt->tbl_woven_trims_piece_packing_item_cost;
+        $data['woven_trims_piece_packing_item_consumption'] = $dt->tbl_woven_trims_piece_packing_item_consumption;
+        $data['woven_trims_piece_packing_item_rate'] = $dt->tbl_woven_trims_piece_packing_item_rate;
+        $data['woven_trims_piece_packing_item_total_cost'] = $dt->tbl_woven_trims_piece_packing_item_total_cost;
+
+        $data['woven_trims_piece_bottom_shoe_item_cost'] = $dt->tbl_woven_trims_piece_bottom_shoe_item_cost;
+        $data['woven_trims_piece_bottom_shoe_item_consumption'] = $dt->tbl_woven_trims_piece_bottom_shoe_item_consumption;
+        $data['woven_trims_piece_bottom_shoe_item_rate'] = $dt->tbl_woven_trims_piece_bottom_shoe_item_rate;
+        $data['woven_trims_piece_bottom_shoe_item_total_cost'] = $dt->tbl_woven_trims_piece_bottom_shoe_item_total_cost;
+
+        $data['woven_trims_piece_extra_1_name'] = $dt->tbl_woven_trims_piece_extra_1_name;
+        $data['woven_trims_piece_extra_1_item_cost'] = $dt->tbl_woven_trims_piece_extra_1_item_cost;
+        $data['woven_trims_piece_extra_1_item_consumption'] = $dt->tbl_woven_trims_piece_extra_1_item_consumption;
+        $data['woven_trims_piece_extra_1_item_rate'] = $dt->tbl_woven_trims_piece_extra_1_item_rate;
+        $data['woven_trims_piece_extra_1_item_total_cost'] = $dt->tbl_woven_trims_piece_extra_1_item_total_cost;
+
+        $data['woven_trims_piece_extra_2_name'] = $dt->tbl_woven_trims_piece_extra_2_name;
+        $data['woven_trims_piece_extra_2_item_cost'] = $dt->tbl_woven_trims_piece_extra_2_item_cost;
+        $data['woven_trims_piece_extra_2_item_consumption'] = $dt->tbl_woven_trims_piece_extra_2_item_consumption;
+        $data['woven_trims_piece_extra_2_item_rate'] = $dt->tbl_woven_trims_piece_extra_2_item_rate;
+        $data['woven_trims_piece_extra_2_item_total_cost'] = $dt->tbl_woven_trims_piece_extra_2_item_total_cost;
+
+        $data['woven_trims_piece_extra_3_name'] = $dt->tbl_woven_trims_piece_extra_3_name;
+        $data['woven_trims_piece_extra_3_item_cost'] = $dt->tbl_woven_trims_piece_extra_3_item_cost;
+        $data['woven_trims_piece_extra_3_item_consumption'] = $dt->tbl_woven_trims_piece_extra_3_item_consumption;
+        $data['woven_trims_piece_extra_3_item_rate'] = $dt->tbl_woven_trims_piece_extra_3_item_rate;
+        $data['woven_trims_piece_extra_3_item_total_cost'] = $dt->tbl_woven_trims_piece_extra_3_item_total_cost;
+
+        $data['woven_trims_piece_extra_4_name'] = $dt->tbl_woven_trims_piece_extra_4_name;
+        $data['woven_trims_piece_extra_4_item_cost'] = $dt->tbl_woven_trims_piece_extra_4_item_cost;
+        $data['woven_trims_piece_extra_4_item_consumption'] = $dt->tbl_woven_trims_piece_extra_4_item_consumption;
+        $data['woven_trims_piece_extra_4_item_rate'] = $dt->tbl_woven_trims_piece_extra_4_item_rate;
+        $data['woven_trims_piece_extra_4_item_total_cost'] = $dt->tbl_woven_trims_piece_extra_4_item_total_cost;
+
+        $data['woven_trims_piece_extra_5_name'] = $dt->tbl_woven_trims_piece_extra_5_name;
+        $data['woven_trims_piece_extra_5_item_cost'] = $dt->tbl_woven_trims_piece_extra_5_item_cost;
+        $data['woven_trims_piece_extra_5_item_consumption'] = $dt->tbl_woven_trims_piece_extra_5_item_consumption;
+        $data['woven_trims_piece_extra_5_item_rate'] = $dt->tbl_woven_trims_piece_extra_5_item_rate;
+        $data['woven_trims_piece_extra_5_item_total_cost'] = $dt->tbl_woven_trims_piece_extra_5_item_total_cost;
+
+
+        //Dimension for Body Material 1
+        $data['dimension_id'] = $dt->tbl_dimension_id;
+
+
+        $data['body_material_first_extra_1'] = $dt->tbl_dimnesion_body_material_first_extra_1;
+        $data['body_material_first_extra_2'] = $dt->tbl_dimnesion_body_material_first_extra_2;
+        $data['body_material_first_extra_3'] = $dt->tbl_dimnesion_body_material_first_extra_3;
+        $data['body_material_second_extra_1'] = $dt->tbl_dimnesion_body_material_second_extra_1;
+        $data['body_material_second_extra_2'] = $dt->tbl_dimnesion_body_material_second_extra_2;
+        $data['body_material_second_extra_3'] = $dt->tbl_dimnesion_body_material_second_extra_3;
+
+
+
+        $data['body_material_1_front_length'] = $dt->tbl_dimension_body_material_1_front_length;
+        $data['body_material_1_front_length_allowance'] = $dt->tbl_dimension_body_material_1_front_length_allowance;
+        $data['body_material_1_front_length_total'] = $dt->tbl_dimension_body_material_1_front_length_total;
+
+        $data['body_material_1_front_width'] = $dt->tbl_dimension_body_material_1_front_width;
+        $data['body_material_1_front_width_allowance'] = $dt->tbl_dimension_body_material_1_front_width_allowance;
+        $data['body_material_1_front_width_total'] = $dt->tbl_dimension_body_material_1_front_width_total;
+
+        $data['body_material_1_back_length'] = $dt->tbl_dimension_body_material_1_back_length;
+        $data['body_material_1_back_length_allowance'] = $dt->tbl_dimension_body_material_1_back_length_allowance;
+        $data['body_material_1_back_length_total'] = $dt->tbl_dimension_body_material_1_back_length_total;
+
+        $data['body_material_1_back_width'] = $dt->tbl_dimension_body_material_1_back_width;
+        $data['body_material_1_back_width_allowance'] = $dt->tbl_dimension_body_material_1_back_width_allowance;
+        $data['body_material_1_back_width_total'] = $dt->tbl_dimension_body_material_1_back_width_total;
+
+        $data['body_material_1_top_length'] = $dt->tbl_dimension_body_material_1_top_length;
+        $data['body_material_1_top_length_allowance'] = $dt->tbl_dimension_body_material_1_top_length_allowance;
+        $data['body_material_1_top_length_total'] = $dt->tbl_dimension_body_material_1_top_length_total;
+
+        $data['body_material_1_top_width'] = $dt->tbl_dimension_body_material_1_top_width;
+        $data['body_material_1_top_width_allowance'] = $dt->tbl_dimension_body_material_1_top_width_allowance;
+        $data['body_material_1_top_width_total'] = $dt->tbl_dimension_body_material_1_top_width_total;
+
+        $data['body_material_1_bottom_length'] = $dt->tbl_dimension_body_material_1_bottom_length;
+        $data['body_material_1_bottom_length_allowance'] = $dt->tbl_dimension_body_material_1_bottom_length_allowance;
+        $data['body_material_1_bottom_length_total'] = $dt->tbl_dimension_body_material_1_bottom_length_total;
+
+        $data['body_material_1_bottom_width'] = $dt->tbl_dimension_body_material_1_bottom_width;
+        $data['body_material_1_bottom_width_allowance'] = $dt->tbl_dimension_body_material_1_bottom_width_allowance;
+        $data['body_material_1_bottom_width_total'] = $dt->tbl_dimension_body_material_1_bottom_width_total;
+
+        $data['body_material_1_left_length'] = $dt->tbl_dimension_body_material_1_left_length;
+        $data['body_material_1_left_length_allowance'] = $dt->tbl_dimension_body_material_1_left_length_allowance;
+        $data['body_material_1_left_length_total'] = $dt->tbl_dimension_body_material_1_left_length_total;
+
+        $data['body_material_1_left_width'] = $dt->tbl_dimension_body_material_1_left_width;
+        $data['body_material_1_left_width_allowance'] = $dt->tbl_dimension_body_material_1_left_width_allowance;
+        $data['body_material_1_left_width_total'] = $dt->tbl_dimension_body_material_1_left_width_total;
+
+        $data['body_material_1_right_length'] = $dt->tbl_dimension_body_material_1_right_length;
+        $data['body_material_1_right_length_allowance'] = $dt->tbl_dimension_body_material_1_right_length_allowance;
+        $data['body_material_1_right_length_total'] = $dt->tbl_dimension_body_material_1_right_length_total;
+
+        $data['body_material_1_right_width'] = $dt->tbl_dimension_body_material_1_right_width;
+        $data['body_material_1_right_width_allowance'] = $dt->tbl_dimension_body_material_1_right_width_allowance;
+        $data['body_material_1_right_width_total'] = $dt->tbl_dimension_body_material_1_right_width_total;
+
+        $data['body_material_1_pocket_length'] = $dt->tbl_dimension_body_material_1_pocket_length;
+        $data['body_material_1_pocket_length_allowance'] = $dt->tbl_dimension_body_material_1_pocket_length_allowance;
+        $data['body_material_1_pocket_length_total'] = $dt->tbl_dimension_body_material_1_pocket_length_total;
+
+        $data['body_material_1_pocket_width'] = $dt->tbl_dimension_body_material_1_pocket_width;
+        $data['body_material_1_pocket_width_allowance'] = $dt->tbl_dimension_body_material_1_pocket_width_allowance;
+        $data['body_material_1_pocket_width_total'] = $dt->tbl_dimension_body_material_1_pocket_width_total;
+
+        $data['body_material_1_extra_1_length'] = $dt->tbl_dimension_body_material_1_extra_1_length;
+        $data['body_material_1_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_1_extra_1_length_allowance;
+        $data['body_material_1_extra_1_length_total'] = $dt->tbl_dimension_body_material_1_extra_1_length_total;
+
+        $data['body_material_1_extra_1_width'] = $dt->tbl_dimension_body_material_1_extra_1_width;
+        $data['body_material_1_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_1_extra_1_width_allowance;
+        $data['body_material_1_extra_1_width_total'] = $dt->tbl_dimension_body_material_1_extra_1_width_total;
+
+        $data['body_material_1_extra_2_length'] = $dt->tbl_dimension_body_material_1_extra_2_length;
+        $data['body_material_1_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_1_extra_2_length_allowance;
+        $data['body_material_1_extra_2_length_total'] = $dt->tbl_dimension_body_material_1_extra_2_length_total;
+
+        $data['body_material_1_extra_2_width'] = $dt->tbl_dimension_body_material_1_extra_2_width;
+        $data['body_material_1_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_1_extra_2_width_allowance;
+        $data['body_material_1_extra_2_width_total'] = $dt->tbl_dimension_body_material_1_extra_2_width_total;
+
+        $data['body_material_1_extra_3_length'] = $dt->tbl_dimension_body_material_1_extra_3_length;
+        $data['body_material_1_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_1_extra_3_length_allowance;
+        $data['body_material_1_extra_3_length_total'] = $dt->tbl_dimension_body_material_1_extra_3_length_total;
+
+        $data['body_material_1_extra_3_width'] = $dt->tbl_dimension_body_material_1_extra_3_width;
+        $data['body_material_1_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_1_extra_3_width_allowance;
+        $data['body_material_1_extra_3_width_total'] = $dt->tbl_dimension_body_material_1_extra_3_width_total;
+
+        //Dimension for Body Material 2
+        $data['body_material_2_front_length'] = $dt->tbl_dimension_body_material_2_front_length;
+        $data['body_material_2_front_length_allowance'] = $dt->tbl_dimension_body_material_2_front_length_allowance;
+        $data['body_material_2_front_length_total'] = $dt->tbl_dimension_body_material_2_front_length_total;
+
+        $data['body_material_2_front_width'] = $dt->tbl_dimension_body_material_2_front_width;
+        $data['body_material_2_front_width_allowance'] = $dt->tbl_dimension_body_material_2_front_width_allowance;
+        $data['body_material_2_front_width_total'] = $dt->tbl_dimension_body_material_2_front_width_total;
+
+        $data['body_material_2_back_length'] = $dt->tbl_dimension_body_material_2_back_length;
+        $data['body_material_2_back_length_allowance'] = $dt->tbl_dimension_body_material_2_back_length_allowance;
+        $data['body_material_2_back_length_total'] = $dt->tbl_dimension_body_material_2_back_length_total;
+
+        $data['body_material_2_back_width'] = $dt->tbl_dimension_body_material_2_back_width;
+        $data['body_material_2_back_width_allowance'] = $dt->tbl_dimension_body_material_2_back_width_allowance;
+        $data['body_material_2_back_width_total'] = $dt->tbl_dimension_body_material_2_back_width_total;
+
+        $data['body_material_2_top_length'] = $dt->tbl_dimension_body_material_2_top_length;
+        $data['body_material_2_top_length_allowance'] = $dt->tbl_dimension_body_material_2_top_length_allowance;
+        $data['body_material_2_top_length_total'] = $dt->tbl_dimension_body_material_2_top_length_total;
+
+        $data['body_material_2_top_width'] = $dt->tbl_dimension_body_material_2_top_width;
+        $data['body_material_2_top_width_allowance'] = $dt->tbl_dimension_body_material_2_top_width_allowance;
+        $data['body_material_2_top_width_total'] = $dt->tbl_dimension_body_material_2_top_width_total;
+
+        $data['body_material_2_bottom_length'] = $dt->tbl_dimension_body_material_2_bottom_length;
+        $data['body_material_2_bottom_length_allowance'] = $dt->tbl_dimension_body_material_2_bottom_length_allowance;
+        $data['body_material_2_bottom_length_total'] = $dt->tbl_dimension_body_material_2_bottom_length_total;
+
+        $data['body_material_2_bottom_width'] = $dt->tbl_dimension_body_material_2_bottom_width;
+        $data['body_material_2_bottom_width_allowance'] = $dt->tbl_dimension_body_material_2_bottom_width_allowance;
+        $data['body_material_2_bottom_width_total'] = $dt->tbl_dimension_body_material_2_bottom_width_total;
+
+        $data['body_material_2_left_length'] = $dt->tbl_dimension_body_material_2_left_length;
+        $data['body_material_2_left_length_allowance'] = $dt->tbl_dimension_body_material_2_left_length_allowance;
+        $data['body_material_2_left_length_total'] = $dt->tbl_dimension_body_material_2_left_length_total;
+
+        $data['body_material_2_left_width'] = $dt->tbl_dimension_body_material_2_left_width;
+        $data['body_material_2_left_width_allowance'] = $dt->tbl_dimension_body_material_2_left_width_allowance;
+        $data['body_material_2_left_width_total'] = $dt->tbl_dimension_body_material_2_left_width_total;
+
+        $data['body_material_2_right_length'] = $dt->tbl_dimension_body_material_2_right_length;
+        $data['body_material_2_right_length_allowance'] = $dt->tbl_dimension_body_material_2_right_length_allowance;
+        $data['body_material_2_right_length_total'] = $dt->tbl_dimension_body_material_2_right_length_total;
+
+        $data['body_material_2_right_width'] = $dt->tbl_dimension_body_material_2_right_width;
+        $data['body_material_2_right_width_allowance'] = $dt->tbl_dimension_body_material_2_right_width_allowance;
+        $data['body_material_2_right_width_total'] = $dt->tbl_dimension_body_material_2_right_width_total;
+
+        $data['body_material_2_pocket_length'] = $dt->tbl_dimension_body_material_2_pocket_length;
+        $data['body_material_2_pocket_length_allowance'] = $dt->tbl_dimension_body_material_2_pocket_length_allowance;
+        $data['body_material_2_pocket_length_total'] = $dt->tbl_dimension_body_material_2_pocket_length_total;
+
+        $data['body_material_2_pocket_width'] = $dt->tbl_dimension_body_material_2_pocket_width;
+        $data['body_material_2_pocket_width_allowance'] = $dt->tbl_dimension_body_material_2_pocket_width_allowance;
+        $data['body_material_2_pocket_width_total'] = $dt->tbl_dimension_body_material_2_pocket_width_total;
+
+        $data['body_material_2_extra_1_length'] = $dt->tbl_dimension_body_material_2_extra_1_length;
+        $data['body_material_2_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_2_extra_1_length_allowance;
+        $data['body_material_2_extra_1_length_total'] = $dt->tbl_dimension_body_material_2_extra_1_length_total;
+
+        $data['body_material_2_extra_1_width'] = $dt->tbl_dimension_body_material_2_extra_1_width;
+        $data['body_material_2_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_2_extra_1_width_allowance;
+        $data['body_material_2_extra_1_width_total'] = $dt->tbl_dimension_body_material_2_extra_1_width_total;
+
+        $data['body_material_2_extra_2_length'] = $dt->tbl_dimension_body_material_2_extra_2_length;
+        $data['body_material_2_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_2_extra_2_length_allowance;
+        $data['body_material_2_extra_2_length_total'] = $dt->tbl_dimension_body_material_2_extra_2_length_total;
+
+        $data['body_material_2_extra_2_width'] = $dt->tbl_dimension_body_material_2_extra_2_width;
+        $data['body_material_2_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_2_extra_2_width_allowance;
+        $data['body_material_2_extra_2_width_total'] = $dt->tbl_dimension_body_material_2_extra_2_width_total;
+
+        $data['body_material_2_extra_3_length'] = $dt->tbl_dimension_body_material_2_extra_3_length;
+        $data['body_material_2_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_2_extra_3_length_allowance;
+        $data['body_material_2_extra_3_length_total'] = $dt->tbl_dimension_body_material_2_extra_3_length_total;
+
+        $data['body_material_2_extra_3_width'] = $dt->tbl_dimension_body_material_2_extra_3_length_total;
+        $data['body_material_2_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_2_extra_3_width_allowance;
+        $data['body_material_2_extra_3_width_total'] = $dt->tbl_dimension_body_material_2_extra_3_width_total;
+
+        //Dimension for Body Material 3
+        $data['body_material_3_front_length'] = $dt->tbl_dimension_body_material_3_front_length;
+        $data['body_material_3_front_length_allowance'] = $dt->tbl_dimension_body_material_3_front_length_allowance;
+        $data['body_material_3_front_length_total'] = $dt->tbl_dimension_body_material_3_front_length_total;
+
+        $data['body_material_3_front_width'] = $dt->tbl_dimension_body_material_3_front_width;
+        $data['body_material_3_front_width_allowance'] = $dt->tbl_dimension_body_material_3_front_width_allowance;
+        $data['body_material_3_front_width_total'] = $dt->tbl_dimension_body_material_3_front_width_total;
+
+        $data['body_material_3_back_length'] = $dt->tbl_dimension_body_material_3_back_length;
+        $data['body_material_3_back_length_allowance'] = $dt->tbl_dimension_body_material_3_back_length_allowance;
+        $data['body_material_3_back_length_total'] = $dt->tbl_dimension_body_material_3_back_length_total;
+
+        $data['body_material_3_back_width'] = $dt->tbl_dimension_body_material_3_back_width;
+        $data['body_material_3_back_width_allowance'] = $dt->tbl_dimension_body_material_3_back_width_allowance;
+        $data['body_material_3_back_width_total'] = $dt->tbl_dimension_body_material_3_back_width_total;
+
+        $data['body_material_3_top_length'] = $dt->tbl_dimension_body_material_3_top_length;
+        $data['body_material_3_top_length_allowance'] = $dt->tbl_dimension_body_material_3_top_length_allowance;
+        $data['body_material_3_top_length_total'] = $dt->tbl_dimension_body_material_3_top_length_total;
+
+        $data['body_material_3_top_width'] = $dt->tbl_dimension_body_material_3_top_width;
+        $data['body_material_3_top_width_allowance'] = $dt->tbl_dimension_body_material_3_top_width_allowance;
+        $data['body_material_3_top_width_total'] = $dt->tbl_dimension_body_material_3_top_width_total;
+
+        $data['body_material_3_bottom_length'] = $dt->tbl_dimension_body_material_3_bottom_length;
+        $data['body_material_3_bottom_length_allowance'] = $dt->tbl_dimension_body_material_3_bottom_length_allowance;
+        $data['body_material_3_bottom_length_total'] = $dt->tbl_dimension_body_material_3_bottom_length_total;
+
+        $data['body_material_3_bottom_width'] = $dt->tbl_dimension_body_material_3_bottom_width;
+        $data['body_material_3_bottom_width_allowance'] = $dt->tbl_dimension_body_material_3_bottom_width_allowance;
+        $data['body_material_3_bottom_width_total'] = $dt->tbl_dimension_body_material_3_bottom_width_total;
+
+        $data['body_material_3_left_length'] = $dt->tbl_dimension_body_material_3_left_length;
+        $data['body_material_3_left_length_allowance'] = $dt->tbl_dimension_body_material_3_left_length_allowance;
+        $data['body_material_3_left_length_total'] = $dt->tbl_dimension_body_material_3_left_length_total;
+
+        $data['body_material_3_left_width'] = $dt->tbl_dimension_body_material_3_left_width;
+        $data['body_material_3_left_width_allowance'] = $dt->tbl_dimension_body_material_3_left_width_allowance;
+        $data['body_material_3_left_width_total'] = $dt->tbl_dimension_body_material_3_left_width_total;
+
+        $data['body_material_3_right_length'] = $dt->tbl_dimension_body_material_3_right_length;
+        $data['body_material_3_right_length_allowance'] = $dt->tbl_dimension_body_material_3_right_length_allowance;
+        $data['body_material_3_right_length_total'] = $dt->tbl_dimension_body_material_3_right_length_total;
+
+        $data['body_material_3_right_width'] = $dt->tbl_dimension_body_material_3_right_width;
+        $data['body_material_3_right_width_allowance'] = $dt->tbl_dimension_body_material_3_right_width_allowance;
+        $data['body_material_3_right_width_total'] = $dt->tbl_dimension_body_material_3_right_width_total;
+
+        $data['body_material_3_pocket_length'] = $dt->tbl_dimension_body_material_3_pocket_length;
+        $data['body_material_3_pocket_length_allowance'] = $dt->tbl_dimension_body_material_3_pocket_length_allowance;
+        $data['body_material_3_pocket_length_total'] = $dt->tbl_dimension_body_material_3_pocket_length_total;
+
+        $data['body_material_3_pocket_width'] = $dt->tbl_dimension_body_material_3_pocket_width;
+        $data['body_material_3_pocket_width_allowance'] = $dt->tbl_dimension_body_material_3_pocket_width_allowance;
+        $data['body_material_3_pocket_width_total'] = $dt->tbl_dimension_body_material_3_pocket_width_total;
+
+        $data['body_material_3_extra_1_length'] = $dt->tbl_dimension_body_material_3_extra_1_length;
+        $data['body_material_3_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_3_extra_1_length_allowance;
+        $data['body_material_3_extra_1_length_total'] = $dt->tbl_dimension_body_material_3_extra_1_length_total;
+
+        $data['body_material_3_extra_1_width'] = $dt->tbl_dimension_body_material_3_extra_1_width;
+        $data['body_material_3_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_3_extra_1_width_allowance;
+        $data['body_material_3_extra_1_width_total'] = $dt->tbl_dimension_body_material_3_extra_1_width_total;
+
+        $data['body_material_3_extra_2_length'] = $dt->tbl_dimension_body_material_3_extra_2_length;
+        $data['body_material_3_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_3_extra_2_length_allowance;
+        $data['body_material_3_extra_2_length_total'] = $dt->tbl_dimension_body_material_3_extra_2_length_total;
+
+        $data['body_material_3_extra_2_width'] = $dt->tbl_dimension_body_material_3_extra_2_width;
+        $data['body_material_3_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_3_extra_2_width_allowance;
+        $data['body_material_3_extra_2_width_total'] = $dt->tbl_dimension_body_material_3_extra_2_width_total;
+
+        $data['body_material_3_extra_3_length'] = $dt->tbl_dimension_body_material_3_extra_3_length;
+        $data['body_material_3_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_3_extra_3_length_allowance;
+        $data['body_material_3_extra_3_length_total'] = $dt->tbl_dimension_body_material_3_extra_3_length_total;
+
+        $data['body_material_3_extra_3_width'] = $dt->tbl_dimension_body_material_3_extra_3_length_total;
+        $data['body_material_3_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_3_extra_3_width_allowance;
+        $data['body_material_3_extra_3_width_total'] = $dt->tbl_dimension_body_material_3_extra_3_width_total;
+
+
+        //Dimension for Body Material 4
+        $data['body_material_4_front_length'] = $dt->tbl_dimension_body_material_4_front_length;
+        $data['body_material_4_front_length_allowance'] = $dt->tbl_dimension_body_material_4_front_length_allowance;
+        $data['body_material_4_front_length_total'] = $dt->tbl_dimension_body_material_4_front_length_total;
+
+        $data['body_material_4_front_width'] = $dt->tbl_dimension_body_material_4_front_width;
+        $data['body_material_4_front_width_allowance'] = $dt->tbl_dimension_body_material_4_front_width_allowance;
+        $data['body_material_4_front_width_total'] = $dt->tbl_dimension_body_material_4_front_width_total;
+
+        $data['body_material_4_back_length'] = $dt->tbl_dimension_body_material_4_back_length;
+        $data['body_material_4_back_length_allowance'] = $dt->tbl_dimension_body_material_4_back_length_allowance;
+        $data['body_material_4_back_length_total'] = $dt->tbl_dimension_body_material_4_back_length_total;
+
+        $data['body_material_4_back_width'] = $dt->tbl_dimension_body_material_4_back_width;
+        $data['body_material_4_back_width_allowance'] = $dt->tbl_dimension_body_material_4_back_width_allowance;
+        $data['body_material_4_back_width_total'] = $dt->tbl_dimension_body_material_4_back_width_total;
+
+        $data['body_material_4_top_length'] = $dt->tbl_dimension_body_material_4_top_length;
+        $data['body_material_4_top_length_allowance'] = $dt->tbl_dimension_body_material_4_top_length_allowance;
+        $data['body_material_4_top_length_total'] = $dt->tbl_dimension_body_material_4_top_length_total;
+
+        $data['body_material_4_top_width'] = $dt->tbl_dimension_body_material_4_top_width;
+        $data['body_material_4_top_width_allowance'] = $dt->tbl_dimension_body_material_4_top_width_allowance;
+        $data['body_material_4_top_width_total'] = $dt->tbl_dimension_body_material_4_top_width_total;
+
+        $data['body_material_4_bottom_length'] = $dt->tbl_dimension_body_material_4_bottom_length;
+        $data['body_material_4_bottom_length_allowance'] = $dt->tbl_dimension_body_material_4_bottom_length_allowance;
+        $data['body_material_4_bottom_length_total'] = $dt->tbl_dimension_body_material_4_bottom_length_total;
+
+        $data['body_material_4_bottom_width'] = $dt->tbl_dimension_body_material_4_bottom_width;
+        $data['body_material_4_bottom_width_allowance'] = $dt->tbl_dimension_body_material_4_bottom_width_allowance;
+        $data['body_material_4_bottom_width_total'] = $dt->tbl_dimension_body_material_4_bottom_width_total;
+
+        $data['body_material_4_left_length'] = $dt->tbl_dimension_body_material_4_left_length;
+        $data['body_material_4_left_length_allowance'] = $dt->tbl_dimension_body_material_4_left_length_allowance;
+        $data['body_material_4_left_length_total'] = $dt->tbl_dimension_body_material_4_left_length_total;
+
+        $data['body_material_4_left_width'] = $dt->tbl_dimension_body_material_4_left_width;
+        $data['body_material_4_left_width_allowance'] = $dt->tbl_dimension_body_material_4_left_width_allowance;
+        $data['body_material_4_left_width_total'] = $dt->tbl_dimension_body_material_4_left_width_total;
+
+        $data['body_material_4_right_length'] = $dt->tbl_dimension_body_material_4_right_length;
+        $data['body_material_4_right_length_allowance'] = $dt->tbl_dimension_body_material_4_right_length_allowance;
+        $data['body_material_4_right_length_total'] = $dt->tbl_dimension_body_material_4_right_length_total;
+
+        $data['body_material_4_right_width'] = $dt->tbl_dimension_body_material_4_right_width;
+        $data['body_material_4_right_width_allowance'] = $dt->tbl_dimension_body_material_4_right_width_allowance;
+        $data['body_material_4_right_width_total'] = $dt->tbl_dimension_body_material_4_right_width_total;
+
+        $data['body_material_4_pocket_length'] = $dt->tbl_dimension_body_material_4_pocket_length;
+        $data['body_material_4_pocket_length_allowance'] = $dt->tbl_dimension_body_material_4_pocket_length_allowance;
+        $data['body_material_4_pocket_length_total'] = $dt->tbl_dimension_body_material_4_pocket_length_total;
+
+        $data['body_material_4_pocket_width'] = $dt->tbl_dimension_body_material_4_pocket_width;
+        $data['body_material_4_pocket_width_allowance'] = $dt->tbl_dimension_body_material_4_pocket_width_allowance;
+        $data['body_material_4_pocket_width_total'] = $dt->tbl_dimension_body_material_4_pocket_width_total;
+
+        $data['body_material_4_extra_1_length'] = $dt->tbl_dimension_body_material_4_extra_1_length;
+        $data['body_material_4_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_4_extra_1_length_allowance;
+        $data['body_material_4_extra_1_length_total'] = $dt->tbl_dimension_body_material_4_extra_1_length_total;
+
+        $data['body_material_4_extra_1_width'] = $dt->tbl_dimension_body_material_4_extra_1_width;
+        $data['body_material_4_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_4_extra_1_width_allowance;
+        $data['body_material_4_extra_1_width_total'] = $dt->tbl_dimension_body_material_4_extra_1_width_total;
+
+        $data['body_material_4_extra_2_length'] = $dt->tbl_dimension_body_material_4_extra_2_length;
+        $data['body_material_4_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_4_extra_2_length_allowance;
+        $data['body_material_4_extra_2_length_total'] = $dt->tbl_dimension_body_material_4_extra_2_length_total;
+
+        $data['body_material_4_extra_2_width'] = $dt->tbl_dimension_body_material_4_extra_2_width;
+        $data['body_material_4_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_4_extra_2_width_allowance;
+        $data['body_material_4_extra_2_width_total'] = $dt->tbl_dimension_body_material_4_extra_2_width_total;
+
+        $data['body_material_4_extra_3_length'] = $dt->tbl_dimension_body_material_4_extra_3_length;
+        $data['body_material_4_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_4_extra_3_length_allowance;
+        $data['body_material_4_extra_3_length_total'] = $dt->tbl_dimension_body_material_4_extra_3_length_total;
+
+        $data['body_material_4_extra_3_width'] = $dt->tbl_dimension_body_material_4_extra_3_length_total;
+        $data['body_material_4_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_4_extra_3_width_allowance;
+        $data['body_material_4_extra_3_width_total'] = $dt->tbl_dimension_body_material_4_extra_3_width_total;
+
+        //Dimension for Body Material 5
+        $data['body_material_5_front_length'] = $dt->tbl_dimension_body_material_5_front_length;
+        $data['body_material_5_front_length_allowance'] = $dt->tbl_dimension_body_material_5_front_length_allowance;
+        $data['body_material_5_front_length_total'] = $dt->tbl_dimension_body_material_5_front_length_total;
+
+        $data['body_material_5_front_width'] = $dt->tbl_dimension_body_material_5_front_width;
+        $data['body_material_5_front_width_allowance'] = $dt->tbl_dimension_body_material_5_front_width_allowance;
+        $data['body_material_5_front_width_total'] = $dt->tbl_dimension_body_material_5_front_width_total;
+
+        $data['body_material_5_back_length'] = $dt->tbl_dimension_body_material_5_back_length;
+        $data['body_material_5_back_length_allowance'] = $dt->tbl_dimension_body_material_5_back_length_allowance;
+        $data['body_material_5_back_length_total'] = $dt->tbl_dimension_body_material_5_back_length_total;
+
+        $data['body_material_5_back_width'] = $dt->tbl_dimension_body_material_5_back_width;
+        $data['body_material_5_back_width_allowance'] = $dt->tbl_dimension_body_material_5_back_width_allowance;
+        $data['body_material_5_back_width_total'] = $dt->tbl_dimension_body_material_5_back_width_total;
+
+        $data['body_material_5_top_length'] = $dt->tbl_dimension_body_material_5_top_length;
+        $data['body_material_5_top_length_allowance'] = $dt->tbl_dimension_body_material_5_top_length_allowance;
+        $data['body_material_5_top_length_total'] = $dt->tbl_dimension_body_material_5_top_length_total;
+
+        $data['body_material_5_top_width'] = $dt->tbl_dimension_body_material_5_top_width;
+        $data['body_material_5_top_width_allowance'] = $dt->tbl_dimension_body_material_5_top_width_allowance;
+        $data['body_material_5_top_width_total'] = $dt->tbl_dimension_body_material_5_top_width_total;
+
+        $data['body_material_5_bottom_length'] = $dt->tbl_dimension_body_material_5_bottom_length;
+        $data['body_material_5_bottom_length_allowance'] = $dt->tbl_dimension_body_material_5_bottom_length_allowance;
+        $data['body_material_5_bottom_length_total'] = $dt->tbl_dimension_body_material_5_bottom_length_total;
+
+        $data['body_material_5_bottom_width'] = $dt->tbl_dimension_body_material_5_bottom_width;
+        $data['body_material_5_bottom_width_allowance'] = $dt->tbl_dimension_body_material_5_bottom_width_allowance;
+        $data['body_material_5_bottom_width_total'] = $dt->tbl_dimension_body_material_5_bottom_width_total;
+
+        $data['body_material_5_left_length'] = $dt->tbl_dimension_body_material_5_left_length;
+        $data['body_material_5_left_length_allowance'] = $dt->tbl_dimension_body_material_5_left_length_allowance;
+        $data['body_material_5_left_length_total'] = $dt->tbl_dimension_body_material_5_left_length_total;
+
+        $data['body_material_5_left_width'] = $dt->tbl_dimension_body_material_5_left_width;
+        $data['body_material_5_left_width_allowance'] = $dt->tbl_dimension_body_material_5_left_width_allowance;
+        $data['body_material_5_left_width_total'] = $dt->tbl_dimension_body_material_5_left_width_total;
+
+        $data['body_material_5_right_length'] = $dt->tbl_dimension_body_material_5_right_length;
+        $data['body_material_5_right_length_allowance'] = $dt->tbl_dimension_body_material_5_right_length_allowance;
+        $data['body_material_5_right_length_total'] = $dt->tbl_dimension_body_material_5_right_length_total;
+
+        $data['body_material_5_right_width'] = $dt->tbl_dimension_body_material_5_right_width;
+        $data['body_material_5_right_width_allowance'] = $dt->tbl_dimension_body_material_5_right_width_allowance;
+        $data['body_material_5_right_width_total'] = $dt->tbl_dimension_body_material_5_right_width_total;
+
+        $data['body_material_5_pocket_length'] = $dt->tbl_dimension_body_material_5_pocket_length;
+        $data['body_material_5_pocket_length_allowance'] = $dt->tbl_dimension_body_material_5_pocket_length_allowance;
+        $data['body_material_5_pocket_length_total'] = $dt->tbl_dimension_body_material_5_pocket_length_total;
+
+        $data['body_material_5_pocket_width'] = $dt->tbl_dimension_body_material_5_pocket_width;
+        $data['body_material_5_pocket_width_allowance'] = $dt->tbl_dimension_body_material_5_pocket_width_allowance;
+        $data['body_material_5_pocket_width_total'] = $dt->tbl_dimension_body_material_5_pocket_width_total;
+
+        $data['body_material_5_extra_1_length'] = $dt->tbl_dimension_body_material_5_extra_1_length;
+        $data['body_material_5_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_5_extra_1_length_allowance;
+        $data['body_material_5_extra_1_length_total'] = $dt->tbl_dimension_body_material_5_extra_1_length_total;
+
+        $data['body_material_5_extra_1_width'] = $dt->tbl_dimension_body_material_5_extra_1_width;
+        $data['body_material_5_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_5_extra_1_width_allowance;
+        $data['body_material_5_extra_1_width_total'] = $dt->tbl_dimension_body_material_5_extra_1_width_total;
+
+        $data['body_material_5_extra_2_length'] = $dt->tbl_dimension_body_material_5_extra_2_length;
+        $data['body_material_5_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_5_extra_2_length_allowance;
+        $data['body_material_5_extra_2_length_total'] = $dt->tbl_dimension_body_material_5_extra_2_length_total;
+
+        $data['body_material_5_extra_2_width'] = $dt->tbl_dimension_body_material_5_extra_2_width;
+        $data['body_material_5_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_5_extra_2_width_allowance;
+        $data['body_material_5_extra_2_width_total'] = $dt->tbl_dimension_body_material_5_extra_2_width_total;
+
+        $data['body_material_5_extra_3_length'] = $dt->tbl_dimension_body_material_5_extra_3_length;
+        $data['body_material_5_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_5_extra_3_length_allowance;
+        $data['body_material_5_extra_3_length_total'] = $dt->tbl_dimension_body_material_5_extra_3_length_total;
+
+        $data['body_material_5_extra_3_width'] = $dt->tbl_dimension_body_material_5_extra_3_length_total;
+        $data['body_material_5_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_5_extra_3_width_allowance;
+        $data['body_material_5_extra_3_width_total'] = $dt->tbl_dimension_body_material_5_extra_3_width_total;
+
+        //Dimension for Body Material 6
+        $data['body_material_6_front_length'] = $dt->tbl_dimension_body_material_6_front_length;
+        $data['body_material_6_front_length_allowance'] = $dt->tbl_dimension_body_material_6_front_length_allowance;
+        $data['body_material_6_front_length_total'] = $dt->tbl_dimension_body_material_6_front_length_total;
+
+        $data['body_material_6_front_width'] = $dt->tbl_dimension_body_material_6_front_width;
+        $data['body_material_6_front_width_allowance'] = $dt->tbl_dimension_body_material_6_front_width_allowance;
+        $data['body_material_6_front_width_total'] = $dt->tbl_dimension_body_material_6_front_width_total;
+
+        $data['body_material_6_back_length'] = $dt->tbl_dimension_body_material_6_back_length;
+        $data['body_material_6_back_length_allowance'] = $dt->tbl_dimension_body_material_6_back_length_allowance;
+        $data['body_material_6_back_length_total'] = $dt->tbl_dimension_body_material_6_back_length_total;
+
+        $data['body_material_6_back_width'] = $dt->tbl_dimension_body_material_6_back_width;
+        $data['body_material_6_back_width_allowance'] = $dt->tbl_dimension_body_material_6_back_width_allowance;
+        $data['body_material_6_back_width_total'] = $dt->tbl_dimension_body_material_6_back_width_total;
+
+        $data['body_material_6_top_length'] = $dt->tbl_dimension_body_material_6_top_length;
+        $data['body_material_6_top_length_allowance'] = $dt->tbl_dimension_body_material_6_top_length_allowance;
+        $data['body_material_6_top_length_total'] = $dt->tbl_dimension_body_material_6_top_length_total;
+
+        $data['body_material_6_top_width'] = $dt->tbl_dimension_body_material_6_top_width;
+        $data['body_material_6_top_width_allowance'] = $dt->tbl_dimension_body_material_6_top_width_allowance;
+        $data['body_material_6_top_width_total'] = $dt->tbl_dimension_body_material_6_top_width_total;
+
+        $data['body_material_6_bottom_length'] = $dt->tbl_dimension_body_material_6_bottom_length;
+        $data['body_material_6_bottom_length_allowance'] = $dt->tbl_dimension_body_material_6_bottom_length_allowance;
+        $data['body_material_6_bottom_length_total'] = $dt->tbl_dimension_body_material_6_bottom_length_total;
+
+        $data['body_material_6_bottom_width'] = $dt->tbl_dimension_body_material_6_bottom_width;
+        $data['body_material_6_bottom_width_allowance'] = $dt->tbl_dimension_body_material_6_bottom_width_allowance;
+        $data['body_material_6_bottom_width_total'] = $dt->tbl_dimension_body_material_6_bottom_width_total;
+
+        $data['body_material_6_left_length'] = $dt->tbl_dimension_body_material_6_left_length;
+        $data['body_material_6_left_length_allowance'] = $dt->tbl_dimension_body_material_6_left_length_allowance;
+        $data['body_material_6_left_length_total'] = $dt->tbl_dimension_body_material_6_left_length_total;
+
+        $data['body_material_6_left_width'] = $dt->tbl_dimension_body_material_6_left_width;
+        $data['body_material_6_left_width_allowance'] = $dt->tbl_dimension_body_material_6_left_width_allowance;
+        $data['body_material_6_left_width_total'] = $dt->tbl_dimension_body_material_6_left_width_total;
+
+        $data['body_material_6_right_length'] = $dt->tbl_dimension_body_material_6_right_length;
+        $data['body_material_6_right_length_allowance'] = $dt->tbl_dimension_body_material_6_right_length_allowance;
+        $data['body_material_6_right_length_total'] = $dt->tbl_dimension_body_material_6_right_length_total;
+
+        $data['body_material_6_right_width'] = $dt->tbl_dimension_body_material_6_right_width;
+        $data['body_material_6_right_width_allowance'] = $dt->tbl_dimension_body_material_6_right_width_allowance;
+        $data['body_material_6_right_width_total'] = $dt->tbl_dimension_body_material_6_right_width_total;
+
+        $data['body_material_6_pocket_length'] = $dt->tbl_dimension_body_material_6_pocket_length;
+        $data['body_material_6_pocket_length_allowance'] = $dt->tbl_dimension_body_material_6_pocket_length_allowance;
+        $data['body_material_6_pocket_length_total'] = $dt->tbl_dimension_body_material_6_pocket_length_total;
+
+        $data['body_material_6_pocket_width'] = $dt->tbl_dimension_body_material_6_pocket_width;
+        $data['body_material_6_pocket_width_allowance'] = $dt->tbl_dimension_body_material_6_pocket_width_allowance;
+        $data['body_material_6_pocket_width_total'] = $dt->tbl_dimension_body_material_6_pocket_width_total;
+
+        $data['body_material_6_extra_1_length'] = $dt->tbl_dimension_body_material_6_extra_1_length;
+        $data['body_material_6_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_6_extra_1_length_allowance;
+        $data['body_material_6_extra_1_length_total'] = $dt->tbl_dimension_body_material_6_extra_1_length_total;
+
+        $data['body_material_6_extra_1_width'] = $dt->tbl_dimension_body_material_6_extra_1_width;
+        $data['body_material_6_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_6_extra_1_width_allowance;
+        $data['body_material_6_extra_1_width_total'] = $dt->tbl_dimension_body_material_6_extra_1_width_total;
+
+        $data['body_material_6_extra_2_length'] = $dt->tbl_dimension_body_material_6_extra_2_length;
+        $data['body_material_6_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_6_extra_2_length_allowance;
+        $data['body_material_6_extra_2_length_total'] = $dt->tbl_dimension_body_material_6_extra_2_length_total;
+
+        $data['body_material_6_extra_2_width'] = $dt->tbl_dimension_body_material_6_extra_2_width;
+        $data['body_material_6_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_6_extra_2_width_allowance;
+        $data['body_material_6_extra_2_width_total'] = $dt->tbl_dimension_body_material_6_extra_2_width_total;
+
+        $data['body_material_6_extra_3_length'] = $dt->tbl_dimension_body_material_6_extra_3_length;
+        $data['body_material_6_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_6_extra_3_length_allowance;
+        $data['body_material_6_extra_3_length_total'] = $dt->tbl_dimension_body_material_6_extra_3_length_total;
+
+        $data['body_material_6_extra_3_width'] = $dt->tbl_dimension_body_material_6_extra_3_length_total;
+        $data['body_material_6_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_6_extra_3_width_allowance;
+        $data['body_material_6_extra_3_width_total'] = $dt->tbl_dimension_body_material_6_extra_3_width_total;
+
+        $this->load->view('admin/admin_header_view',$this->data);
+        $this->load->view('admin/admin_home_rev_woven_costing_view', $data);
         $this->load->view('admin/admin_footer_view');
     }
 
@@ -738,6 +1469,14 @@ class Woven extends CI_Controller
         } else {
 
             $woven_dimension_data = array(
+
+                'tbl_dimnesion_body_material_first_extra_1' => $this->input->post('body_material_first_extra_1'),
+                'tbl_dimnesion_body_material_first_extra_2' => $this->input->post('body_material_first_extra_2'),
+                'tbl_dimnesion_body_material_first_extra_3' => $this->input->post('body_material_first_extra_3'),
+                'tbl_dimnesion_body_material_second_extra_1' => $this->input->post('body_material_second_extra_1'),
+                'tbl_dimnesion_body_material_second_extra_2' => $this->input->post('body_material_second_extra_2'),
+                'tbl_dimnesion_body_material_second_extra_3' => $this->input->post('body_material_second_extra_3'),
+
                 //Body Material 1
                 'tbl_dimension_body_material_1_front_length' => $this->input->post('body_material_1_front_length'),
                 'tbl_dimension_body_material_1_front_length_allowance' => $this->input->post('body_material_1_front_length_allowance'),
@@ -1236,6 +1975,7 @@ class Woven extends CI_Controller
             $inserted_dimension_id = $this->db->insert_id();
 
             $woven_costing_data = array(
+
                 'tbl_woven_dimension_id' => $inserted_dimension_id,
                 'tbl_woven_id_name' => $this->input->post('order_id'),
                 'tbl_woven_company_name' => $this->input->post('order_company'),
@@ -1323,6 +2063,10 @@ class Woven extends CI_Controller
                 'tbl_woven_trims_yard_velcro_item_consumption' => $this->input->post('velcro_consumption'),
                 'tbl_woven_trims_yard_velcro_item_rate' => $this->input->post('velcro_consumption_rate'),
                 'tbl_woven_trims_yard_velcro_item_total_cost' => $this->input->post('velcro_consumption_cost'),
+
+                'tbl_woven_trims_yard_extra_1_name' => $this->input->post('extra_trim_yard_extra_1_name'),
+                'tbl_woven_trims_yard_extra_2_name' => $this->input->post('extra_trim_yard_extra_2_name'),
+                'tbl_woven_trims_yard_extra_3_name' => $this->input->post('extra_trim_yard_extra_3_name'),
 
                 'tbl_woven_trims_yard_extra_1_item_cost' => $this->input->post('extra_trim_yard_1_cost'),
                 'tbl_woven_trims_yard_extra_1_item_consumption' => $this->input->post('extra_trim_yard_1_consumption'),
@@ -1578,6 +2322,12 @@ class Woven extends CI_Controller
         $data['woven_trims_yard_velcro_item_rate'] = $dt->tbl_woven_trims_yard_velcro_item_rate;
         $data['woven_trims_yard_velcro_item_total_cost'] = $dt->tbl_woven_trims_yard_velcro_item_total_cost;
 
+
+        $data['extra_trim_yard_extra_1_name'] = $dt->tbl_woven_trims_yard_extra_1_name;
+        $data['extra_trim_yard_extra_2_name'] = $dt->tbl_woven_trims_yard_extra_2_name;
+        $data['extra_trim_yard_extra_3_name'] = $dt->tbl_woven_trims_yard_extra_3_name;
+
+
         $data['woven_trims_yard_extra_1_item_cost'] = $dt->tbl_woven_trims_yard_extra_1_item_cost;
         $data['woven_trims_yard_extra_1_item_consumption'] = $dt->tbl_woven_trims_yard_extra_1_item_consumption;
         $data['woven_trims_yard_extra_1_item_rate'] = $dt->tbl_woven_trims_yard_extra_1_item_rate;
@@ -1700,6 +2450,16 @@ class Woven extends CI_Controller
         //Dimension for Body Material 1
         $data['dimension_id'] = $dt->tbl_dimension_id;
 
+
+        $data['body_material_first_extra_1'] = $dt->tbl_dimnesion_body_material_first_extra_1;
+        $data['body_material_first_extra_2'] = $dt->tbl_dimnesion_body_material_first_extra_2;
+        $data['body_material_first_extra_3'] = $dt->tbl_dimnesion_body_material_first_extra_3;
+        $data['body_material_second_extra_1'] = $dt->tbl_dimnesion_body_material_second_extra_1;
+        $data['body_material_second_extra_2'] = $dt->tbl_dimnesion_body_material_second_extra_2;
+        $data['body_material_second_extra_3'] = $dt->tbl_dimnesion_body_material_second_extra_3;
+
+
+
         $data['body_material_1_front_length'] = $dt->tbl_dimension_body_material_1_front_length;
         $data['body_material_1_front_length_allowance'] = $dt->tbl_dimension_body_material_1_front_length_allowance;
         $data['body_material_1_front_length_total'] = $dt->tbl_dimension_body_material_1_front_length_total;
@@ -1776,7 +2536,7 @@ class Woven extends CI_Controller
         $data['body_material_1_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_1_extra_3_length_allowance;
         $data['body_material_1_extra_3_length_total'] = $dt->tbl_dimension_body_material_1_extra_3_length_total;
 
-        $data['body_material_1_extra_3_length_total'] = $dt->tbl_dimension_body_material_1_extra_3_length_total;
+        $data['body_material_1_extra_3_width'] = $dt->tbl_dimension_body_material_1_extra_3_width;
         $data['body_material_1_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_1_extra_3_width_allowance;
         $data['body_material_1_extra_3_width_total'] = $dt->tbl_dimension_body_material_1_extra_3_width_total;
 
@@ -1857,7 +2617,7 @@ class Woven extends CI_Controller
         $data['body_material_2_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_2_extra_3_length_allowance;
         $data['body_material_2_extra_3_length_total'] = $dt->tbl_dimension_body_material_2_extra_3_length_total;
 
-        $data['body_material_2_extra_3_length_total'] = $dt->tbl_dimension_body_material_2_extra_3_length_total;
+        $data['body_material_2_extra_3_width'] = $dt->tbl_dimension_body_material_2_extra_3_length_total;
         $data['body_material_2_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_2_extra_3_width_allowance;
         $data['body_material_2_extra_3_width_total'] = $dt->tbl_dimension_body_material_2_extra_3_width_total;
 
@@ -1938,9 +2698,995 @@ class Woven extends CI_Controller
         $data['body_material_3_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_3_extra_3_length_allowance;
         $data['body_material_3_extra_3_length_total'] = $dt->tbl_dimension_body_material_3_extra_3_length_total;
 
-        $data['body_material_3_extra_3_length_total'] = $dt->tbl_dimension_body_material_3_extra_3_length_total;
+        $data['body_material_3_extra_3_width'] = $dt->tbl_dimension_body_material_3_extra_3_length_total;
         $data['body_material_3_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_3_extra_3_width_allowance;
         $data['body_material_3_extra_3_width_total'] = $dt->tbl_dimension_body_material_3_extra_3_width_total;
+
+
+        //Dimension for Body Material 4
+        $data['body_material_4_front_length'] = $dt->tbl_dimension_body_material_4_front_length;
+        $data['body_material_4_front_length_allowance'] = $dt->tbl_dimension_body_material_4_front_length_allowance;
+        $data['body_material_4_front_length_total'] = $dt->tbl_dimension_body_material_4_front_length_total;
+
+        $data['body_material_4_front_width'] = $dt->tbl_dimension_body_material_4_front_width;
+        $data['body_material_4_front_width_allowance'] = $dt->tbl_dimension_body_material_4_front_width_allowance;
+        $data['body_material_4_front_width_total'] = $dt->tbl_dimension_body_material_4_front_width_total;
+
+        $data['body_material_4_back_length'] = $dt->tbl_dimension_body_material_4_back_length;
+        $data['body_material_4_back_length_allowance'] = $dt->tbl_dimension_body_material_4_back_length_allowance;
+        $data['body_material_4_back_length_total'] = $dt->tbl_dimension_body_material_4_back_length_total;
+
+        $data['body_material_4_back_width'] = $dt->tbl_dimension_body_material_4_back_width;
+        $data['body_material_4_back_width_allowance'] = $dt->tbl_dimension_body_material_4_back_width_allowance;
+        $data['body_material_4_back_width_total'] = $dt->tbl_dimension_body_material_4_back_width_total;
+
+        $data['body_material_4_top_length'] = $dt->tbl_dimension_body_material_4_top_length;
+        $data['body_material_4_top_length_allowance'] = $dt->tbl_dimension_body_material_4_top_length_allowance;
+        $data['body_material_4_top_length_total'] = $dt->tbl_dimension_body_material_4_top_length_total;
+
+        $data['body_material_4_top_width'] = $dt->tbl_dimension_body_material_4_top_width;
+        $data['body_material_4_top_width_allowance'] = $dt->tbl_dimension_body_material_4_top_width_allowance;
+        $data['body_material_4_top_width_total'] = $dt->tbl_dimension_body_material_4_top_width_total;
+
+        $data['body_material_4_bottom_length'] = $dt->tbl_dimension_body_material_4_bottom_length;
+        $data['body_material_4_bottom_length_allowance'] = $dt->tbl_dimension_body_material_4_bottom_length_allowance;
+        $data['body_material_4_bottom_length_total'] = $dt->tbl_dimension_body_material_4_bottom_length_total;
+
+        $data['body_material_4_bottom_width'] = $dt->tbl_dimension_body_material_4_bottom_width;
+        $data['body_material_4_bottom_width_allowance'] = $dt->tbl_dimension_body_material_4_bottom_width_allowance;
+        $data['body_material_4_bottom_width_total'] = $dt->tbl_dimension_body_material_4_bottom_width_total;
+
+        $data['body_material_4_left_length'] = $dt->tbl_dimension_body_material_4_left_length;
+        $data['body_material_4_left_length_allowance'] = $dt->tbl_dimension_body_material_4_left_length_allowance;
+        $data['body_material_4_left_length_total'] = $dt->tbl_dimension_body_material_4_left_length_total;
+
+        $data['body_material_4_left_width'] = $dt->tbl_dimension_body_material_4_left_width;
+        $data['body_material_4_left_width_allowance'] = $dt->tbl_dimension_body_material_4_left_width_allowance;
+        $data['body_material_4_left_width_total'] = $dt->tbl_dimension_body_material_4_left_width_total;
+
+        $data['body_material_4_right_length'] = $dt->tbl_dimension_body_material_4_right_length;
+        $data['body_material_4_right_length_allowance'] = $dt->tbl_dimension_body_material_4_right_length_allowance;
+        $data['body_material_4_right_length_total'] = $dt->tbl_dimension_body_material_4_right_length_total;
+
+        $data['body_material_4_right_width'] = $dt->tbl_dimension_body_material_4_right_width;
+        $data['body_material_4_right_width_allowance'] = $dt->tbl_dimension_body_material_4_right_width_allowance;
+        $data['body_material_4_right_width_total'] = $dt->tbl_dimension_body_material_4_right_width_total;
+
+        $data['body_material_4_pocket_length'] = $dt->tbl_dimension_body_material_4_pocket_length;
+        $data['body_material_4_pocket_length_allowance'] = $dt->tbl_dimension_body_material_4_pocket_length_allowance;
+        $data['body_material_4_pocket_length_total'] = $dt->tbl_dimension_body_material_4_pocket_length_total;
+
+        $data['body_material_4_pocket_width'] = $dt->tbl_dimension_body_material_4_pocket_width;
+        $data['body_material_4_pocket_width_allowance'] = $dt->tbl_dimension_body_material_4_pocket_width_allowance;
+        $data['body_material_4_pocket_width_total'] = $dt->tbl_dimension_body_material_4_pocket_width_total;
+
+        $data['body_material_4_extra_1_length'] = $dt->tbl_dimension_body_material_4_extra_1_length;
+        $data['body_material_4_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_4_extra_1_length_allowance;
+        $data['body_material_4_extra_1_length_total'] = $dt->tbl_dimension_body_material_4_extra_1_length_total;
+
+        $data['body_material_4_extra_1_width'] = $dt->tbl_dimension_body_material_4_extra_1_width;
+        $data['body_material_4_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_4_extra_1_width_allowance;
+        $data['body_material_4_extra_1_width_total'] = $dt->tbl_dimension_body_material_4_extra_1_width_total;
+
+        $data['body_material_4_extra_2_length'] = $dt->tbl_dimension_body_material_4_extra_2_length;
+        $data['body_material_4_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_4_extra_2_length_allowance;
+        $data['body_material_4_extra_2_length_total'] = $dt->tbl_dimension_body_material_4_extra_2_length_total;
+
+        $data['body_material_4_extra_2_width'] = $dt->tbl_dimension_body_material_4_extra_2_width;
+        $data['body_material_4_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_4_extra_2_width_allowance;
+        $data['body_material_4_extra_2_width_total'] = $dt->tbl_dimension_body_material_4_extra_2_width_total;
+
+        $data['body_material_4_extra_3_length'] = $dt->tbl_dimension_body_material_4_extra_3_length;
+        $data['body_material_4_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_4_extra_3_length_allowance;
+        $data['body_material_4_extra_3_length_total'] = $dt->tbl_dimension_body_material_4_extra_3_length_total;
+
+        $data['body_material_4_extra_3_width'] = $dt->tbl_dimension_body_material_4_extra_3_length_total;
+        $data['body_material_4_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_4_extra_3_width_allowance;
+        $data['body_material_4_extra_3_width_total'] = $dt->tbl_dimension_body_material_4_extra_3_width_total;
+
+        //Dimension for Body Material 5
+        $data['body_material_5_front_length'] = $dt->tbl_dimension_body_material_5_front_length;
+        $data['body_material_5_front_length_allowance'] = $dt->tbl_dimension_body_material_5_front_length_allowance;
+        $data['body_material_5_front_length_total'] = $dt->tbl_dimension_body_material_5_front_length_total;
+
+        $data['body_material_5_front_width'] = $dt->tbl_dimension_body_material_5_front_width;
+        $data['body_material_5_front_width_allowance'] = $dt->tbl_dimension_body_material_5_front_width_allowance;
+        $data['body_material_5_front_width_total'] = $dt->tbl_dimension_body_material_5_front_width_total;
+
+        $data['body_material_5_back_length'] = $dt->tbl_dimension_body_material_5_back_length;
+        $data['body_material_5_back_length_allowance'] = $dt->tbl_dimension_body_material_5_back_length_allowance;
+        $data['body_material_5_back_length_total'] = $dt->tbl_dimension_body_material_5_back_length_total;
+
+        $data['body_material_5_back_width'] = $dt->tbl_dimension_body_material_5_back_width;
+        $data['body_material_5_back_width_allowance'] = $dt->tbl_dimension_body_material_5_back_width_allowance;
+        $data['body_material_5_back_width_total'] = $dt->tbl_dimension_body_material_5_back_width_total;
+
+        $data['body_material_5_top_length'] = $dt->tbl_dimension_body_material_5_top_length;
+        $data['body_material_5_top_length_allowance'] = $dt->tbl_dimension_body_material_5_top_length_allowance;
+        $data['body_material_5_top_length_total'] = $dt->tbl_dimension_body_material_5_top_length_total;
+
+        $data['body_material_5_top_width'] = $dt->tbl_dimension_body_material_5_top_width;
+        $data['body_material_5_top_width_allowance'] = $dt->tbl_dimension_body_material_5_top_width_allowance;
+        $data['body_material_5_top_width_total'] = $dt->tbl_dimension_body_material_5_top_width_total;
+
+        $data['body_material_5_bottom_length'] = $dt->tbl_dimension_body_material_5_bottom_length;
+        $data['body_material_5_bottom_length_allowance'] = $dt->tbl_dimension_body_material_5_bottom_length_allowance;
+        $data['body_material_5_bottom_length_total'] = $dt->tbl_dimension_body_material_5_bottom_length_total;
+
+        $data['body_material_5_bottom_width'] = $dt->tbl_dimension_body_material_5_bottom_width;
+        $data['body_material_5_bottom_width_allowance'] = $dt->tbl_dimension_body_material_5_bottom_width_allowance;
+        $data['body_material_5_bottom_width_total'] = $dt->tbl_dimension_body_material_5_bottom_width_total;
+
+        $data['body_material_5_left_length'] = $dt->tbl_dimension_body_material_5_left_length;
+        $data['body_material_5_left_length_allowance'] = $dt->tbl_dimension_body_material_5_left_length_allowance;
+        $data['body_material_5_left_length_total'] = $dt->tbl_dimension_body_material_5_left_length_total;
+
+        $data['body_material_5_left_width'] = $dt->tbl_dimension_body_material_5_left_width;
+        $data['body_material_5_left_width_allowance'] = $dt->tbl_dimension_body_material_5_left_width_allowance;
+        $data['body_material_5_left_width_total'] = $dt->tbl_dimension_body_material_5_left_width_total;
+
+        $data['body_material_5_right_length'] = $dt->tbl_dimension_body_material_5_right_length;
+        $data['body_material_5_right_length_allowance'] = $dt->tbl_dimension_body_material_5_right_length_allowance;
+        $data['body_material_5_right_length_total'] = $dt->tbl_dimension_body_material_5_right_length_total;
+
+        $data['body_material_5_right_width'] = $dt->tbl_dimension_body_material_5_right_width;
+        $data['body_material_5_right_width_allowance'] = $dt->tbl_dimension_body_material_5_right_width_allowance;
+        $data['body_material_5_right_width_total'] = $dt->tbl_dimension_body_material_5_right_width_total;
+
+        $data['body_material_5_pocket_length'] = $dt->tbl_dimension_body_material_5_pocket_length;
+        $data['body_material_5_pocket_length_allowance'] = $dt->tbl_dimension_body_material_5_pocket_length_allowance;
+        $data['body_material_5_pocket_length_total'] = $dt->tbl_dimension_body_material_5_pocket_length_total;
+
+        $data['body_material_5_pocket_width'] = $dt->tbl_dimension_body_material_5_pocket_width;
+        $data['body_material_5_pocket_width_allowance'] = $dt->tbl_dimension_body_material_5_pocket_width_allowance;
+        $data['body_material_5_pocket_width_total'] = $dt->tbl_dimension_body_material_5_pocket_width_total;
+
+        $data['body_material_5_extra_1_length'] = $dt->tbl_dimension_body_material_5_extra_1_length;
+        $data['body_material_5_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_5_extra_1_length_allowance;
+        $data['body_material_5_extra_1_length_total'] = $dt->tbl_dimension_body_material_5_extra_1_length_total;
+
+        $data['body_material_5_extra_1_width'] = $dt->tbl_dimension_body_material_5_extra_1_width;
+        $data['body_material_5_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_5_extra_1_width_allowance;
+        $data['body_material_5_extra_1_width_total'] = $dt->tbl_dimension_body_material_5_extra_1_width_total;
+
+        $data['body_material_5_extra_2_length'] = $dt->tbl_dimension_body_material_5_extra_2_length;
+        $data['body_material_5_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_5_extra_2_length_allowance;
+        $data['body_material_5_extra_2_length_total'] = $dt->tbl_dimension_body_material_5_extra_2_length_total;
+
+        $data['body_material_5_extra_2_width'] = $dt->tbl_dimension_body_material_5_extra_2_width;
+        $data['body_material_5_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_5_extra_2_width_allowance;
+        $data['body_material_5_extra_2_width_total'] = $dt->tbl_dimension_body_material_5_extra_2_width_total;
+
+        $data['body_material_5_extra_3_length'] = $dt->tbl_dimension_body_material_5_extra_3_length;
+        $data['body_material_5_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_5_extra_3_length_allowance;
+        $data['body_material_5_extra_3_length_total'] = $dt->tbl_dimension_body_material_5_extra_3_length_total;
+
+        $data['body_material_5_extra_3_width'] = $dt->tbl_dimension_body_material_5_extra_3_length_total;
+        $data['body_material_5_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_5_extra_3_width_allowance;
+        $data['body_material_5_extra_3_width_total'] = $dt->tbl_dimension_body_material_5_extra_3_width_total;
+
+        //Dimension for Body Material 6
+        $data['body_material_6_front_length'] = $dt->tbl_dimension_body_material_6_front_length;
+        $data['body_material_6_front_length_allowance'] = $dt->tbl_dimension_body_material_6_front_length_allowance;
+        $data['body_material_6_front_length_total'] = $dt->tbl_dimension_body_material_6_front_length_total;
+
+        $data['body_material_6_front_width'] = $dt->tbl_dimension_body_material_6_front_width;
+        $data['body_material_6_front_width_allowance'] = $dt->tbl_dimension_body_material_6_front_width_allowance;
+        $data['body_material_6_front_width_total'] = $dt->tbl_dimension_body_material_6_front_width_total;
+
+        $data['body_material_6_back_length'] = $dt->tbl_dimension_body_material_6_back_length;
+        $data['body_material_6_back_length_allowance'] = $dt->tbl_dimension_body_material_6_back_length_allowance;
+        $data['body_material_6_back_length_total'] = $dt->tbl_dimension_body_material_6_back_length_total;
+
+        $data['body_material_6_back_width'] = $dt->tbl_dimension_body_material_6_back_width;
+        $data['body_material_6_back_width_allowance'] = $dt->tbl_dimension_body_material_6_back_width_allowance;
+        $data['body_material_6_back_width_total'] = $dt->tbl_dimension_body_material_6_back_width_total;
+
+        $data['body_material_6_top_length'] = $dt->tbl_dimension_body_material_6_top_length;
+        $data['body_material_6_top_length_allowance'] = $dt->tbl_dimension_body_material_6_top_length_allowance;
+        $data['body_material_6_top_length_total'] = $dt->tbl_dimension_body_material_6_top_length_total;
+
+        $data['body_material_6_top_width'] = $dt->tbl_dimension_body_material_6_top_width;
+        $data['body_material_6_top_width_allowance'] = $dt->tbl_dimension_body_material_6_top_width_allowance;
+        $data['body_material_6_top_width_total'] = $dt->tbl_dimension_body_material_6_top_width_total;
+
+        $data['body_material_6_bottom_length'] = $dt->tbl_dimension_body_material_6_bottom_length;
+        $data['body_material_6_bottom_length_allowance'] = $dt->tbl_dimension_body_material_6_bottom_length_allowance;
+        $data['body_material_6_bottom_length_total'] = $dt->tbl_dimension_body_material_6_bottom_length_total;
+
+        $data['body_material_6_bottom_width'] = $dt->tbl_dimension_body_material_6_bottom_width;
+        $data['body_material_6_bottom_width_allowance'] = $dt->tbl_dimension_body_material_6_bottom_width_allowance;
+        $data['body_material_6_bottom_width_total'] = $dt->tbl_dimension_body_material_6_bottom_width_total;
+
+        $data['body_material_6_left_length'] = $dt->tbl_dimension_body_material_6_left_length;
+        $data['body_material_6_left_length_allowance'] = $dt->tbl_dimension_body_material_6_left_length_allowance;
+        $data['body_material_6_left_length_total'] = $dt->tbl_dimension_body_material_6_left_length_total;
+
+        $data['body_material_6_left_width'] = $dt->tbl_dimension_body_material_6_left_width;
+        $data['body_material_6_left_width_allowance'] = $dt->tbl_dimension_body_material_6_left_width_allowance;
+        $data['body_material_6_left_width_total'] = $dt->tbl_dimension_body_material_6_left_width_total;
+
+        $data['body_material_6_right_length'] = $dt->tbl_dimension_body_material_6_right_length;
+        $data['body_material_6_right_length_allowance'] = $dt->tbl_dimension_body_material_6_right_length_allowance;
+        $data['body_material_6_right_length_total'] = $dt->tbl_dimension_body_material_6_right_length_total;
+
+        $data['body_material_6_right_width'] = $dt->tbl_dimension_body_material_6_right_width;
+        $data['body_material_6_right_width_allowance'] = $dt->tbl_dimension_body_material_6_right_width_allowance;
+        $data['body_material_6_right_width_total'] = $dt->tbl_dimension_body_material_6_right_width_total;
+
+        $data['body_material_6_pocket_length'] = $dt->tbl_dimension_body_material_6_pocket_length;
+        $data['body_material_6_pocket_length_allowance'] = $dt->tbl_dimension_body_material_6_pocket_length_allowance;
+        $data['body_material_6_pocket_length_total'] = $dt->tbl_dimension_body_material_6_pocket_length_total;
+
+        $data['body_material_6_pocket_width'] = $dt->tbl_dimension_body_material_6_pocket_width;
+        $data['body_material_6_pocket_width_allowance'] = $dt->tbl_dimension_body_material_6_pocket_width_allowance;
+        $data['body_material_6_pocket_width_total'] = $dt->tbl_dimension_body_material_6_pocket_width_total;
+
+        $data['body_material_6_extra_1_length'] = $dt->tbl_dimension_body_material_6_extra_1_length;
+        $data['body_material_6_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_6_extra_1_length_allowance;
+        $data['body_material_6_extra_1_length_total'] = $dt->tbl_dimension_body_material_6_extra_1_length_total;
+
+        $data['body_material_6_extra_1_width'] = $dt->tbl_dimension_body_material_6_extra_1_width;
+        $data['body_material_6_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_6_extra_1_width_allowance;
+        $data['body_material_6_extra_1_width_total'] = $dt->tbl_dimension_body_material_6_extra_1_width_total;
+
+        $data['body_material_6_extra_2_length'] = $dt->tbl_dimension_body_material_6_extra_2_length;
+        $data['body_material_6_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_6_extra_2_length_allowance;
+        $data['body_material_6_extra_2_length_total'] = $dt->tbl_dimension_body_material_6_extra_2_length_total;
+
+        $data['body_material_6_extra_2_width'] = $dt->tbl_dimension_body_material_6_extra_2_width;
+        $data['body_material_6_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_6_extra_2_width_allowance;
+        $data['body_material_6_extra_2_width_total'] = $dt->tbl_dimension_body_material_6_extra_2_width_total;
+
+        $data['body_material_6_extra_3_length'] = $dt->tbl_dimension_body_material_6_extra_3_length;
+        $data['body_material_6_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_6_extra_3_length_allowance;
+        $data['body_material_6_extra_3_length_total'] = $dt->tbl_dimension_body_material_6_extra_3_length_total;
+
+        $data['body_material_6_extra_3_width'] = $dt->tbl_dimension_body_material_6_extra_3_length_total;
+        $data['body_material_6_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_6_extra_3_width_allowance;
+        $data['body_material_6_extra_3_width_total'] = $dt->tbl_dimension_body_material_6_extra_3_width_total;
+
+        $this->load->view('admin/admin_header_view', $this->data);
+        $this->load->view('admin/admin_home_woven_edit', $data);
+        $this->load->view('admin/admin_footer_view', $data);
+    }
+
+
+    /**
+     *Single Revision View
+     */
+    public function single_woven_revision_view(){
+        $woven_costing_id = $this->uri->segment(3);
+        if ($woven_costing_id == NULL) {
+            redirect('woven/woven_all');
+        }
+
+        $dt = $this->woven_model->edit_woven_costing($woven_costing_id);
+        //var_dump($dt);
+        $data['woven_order_id'] = $dt->tbl_woven_order_id;
+        $data['woven_id_name'] = $dt->tbl_woven_id_name;
+        $data['woven_company_name'] = $dt->tbl_woven_company_name;
+        $data['woven_order_date'] = $dt->tbl_woven_order_date;
+        $data['woven_item_name'] = $dt->tbl_woven_item_name;
+        $data['woven_ref_name'] = $dt->tbl_woven_ref_name;
+
+        $data['woven_order_gsm'] = $dt->tbl_woven_order_gsm;
+        $data['woven_order_color'] = $dt->tbl_woven_order_color;
+        $data['woven_order_usd'] = $dt->tbl_woven_order_usd;
+
+        $data['woven_order_wastage'] = $dt->tbl_woven_order_wastage;
+        $data['woven_order_margin'] = $dt->tbl_woven_order_margin;
+
+        $data['woven_order_quantity'] = $dt->tbl_woven_order_quantity;
+        $data['woven_order_transport'] = $dt->tbl_woven_order_transport;
+        $data['woven_order_bank_doc_charge'] = $dt->tbl_woven_order_bank_doc_charge;
+        $data['woven_total_material_inc_wastage'] = $dt->tbl_order_total_material_inc_wastage;
+
+        $data['woven_order_sewing'] = $dt->tbl_order_sewing;
+        $data['woven_order_overheads'] = $dt->tbl_order_overheads;
+
+        $data['woven_order_total_material_inc_wastage'] = $dt->tbl_order_total_material_inc_wastage;
+        $data['woven_order_total_overhead_and_other_cost'] = $dt->tbl_order_total_overhead_and_other_cost;
+        $data['woven_total_cost'] = $dt->tbl_total_cost;
+        $data['woven_total_price'] = $dt->tbl_total_price;
+
+        //Body Material Name
+        $data['woven_body_material_1_name'] = $dt->tbl_woven_body_material_1_name;
+        $data['woven_body_material_2_name'] = $dt->tbl_woven_body_material_2_name;
+        $data['woven_body_material_3_name'] = $dt->tbl_woven_body_material_3_name;
+        $data['woven_body_material_4_name'] = $dt->tbl_woven_body_material_4_name;
+        $data['woven_body_material_5_name'] = $dt->tbl_woven_body_material_5_name;
+        $data['woven_body_material_6_name'] = $dt->tbl_woven_body_material_6_name;
+
+        //Body Material Roll Width
+        $data['woven_body_material_1_roll_width'] = $dt->tbl_woven_body_material_1_roll_width;
+        $data['woven_body_material_2_roll_width'] = $dt->tbl_woven_body_material_2_roll_width;
+        $data['woven_body_material_3_roll_width'] = $dt->tbl_woven_body_material_3_roll_width;
+        $data['woven_body_material_4_roll_width'] = $dt->tbl_woven_body_material_4_roll_width;
+        $data['woven_body_material_5_roll_width'] = $dt->tbl_woven_body_material_5_roll_width;
+        $data['woven_body_material_6_roll_width'] = $dt->tbl_woven_body_material_6_roll_width;
+
+        //Body Material 1 consumption cost
+        $data['woven_body_material_1_cost'] = $dt->tbl_woven_body_material_1_cost;
+        $data['woven_body_material_1_consumption'] = $dt->tbl_woven_body_material_1_consumption;
+        $data['woven_body_material_1_rate'] = $dt->tbl_woven_body_material_1_rate;
+        $data['woven_body_material_1_total_cost'] = $dt->tbl_woven_body_material_1_total_cost;
+
+        //Body Material 2 consumption cost
+        $data['woven_body_material_2_cost'] = $dt->tbl_woven_body_material_2_cost;
+        $data['woven_body_material_2_consumption'] = $dt->tbl_woven_body_material_2_consumption;
+        $data['woven_body_material_2_rate'] = $dt->tbl_woven_body_material_2_rate;
+        $data['woven_body_material_2_total_cost'] = $dt->tbl_woven_body_material_2_total_cost;
+
+        //Body Material 3 consumption cost
+        $data['woven_body_material_3_cost'] = $dt->tbl_woven_body_material_3_cost;
+        $data['woven_body_material_3_consumption'] = $dt->tbl_woven_body_material_3_consumption;
+        $data['woven_body_material_3_rate'] = $dt->tbl_woven_body_material_3_rate;
+        $data['woven_body_material_3_total_cost'] = $dt->tbl_woven_body_material_3_total_cost;
+
+        //Body Material 4 consumption cost
+        $data['woven_body_material_4_cost'] = $dt->tbl_woven_body_material_4_cost;
+        $data['woven_body_material_4_consumption'] = $dt->tbl_woven_body_material_4_consumption;
+        $data['woven_body_material_4_rate'] = $dt->tbl_woven_body_material_4_rate;
+        $data['woven_body_material_4_total_cost'] = $dt->tbl_woven_body_material_4_total_cost;
+
+        //Body Material 5 consumption cost
+        $data['woven_body_material_5_cost'] = $dt->tbl_woven_body_material_5_cost;
+        $data['woven_body_material_5_consumption'] = $dt->tbl_woven_body_material_5_consumption;
+        $data['woven_body_material_5_rate'] = $dt->tbl_woven_body_material_5_rate;
+        $data['woven_body_material_5_total_cost'] = $dt->tbl_woven_body_material_5_total_cost;
+
+        //Body Material 6 consumption cost
+        $data['woven_body_material_6_cost'] = $dt->tbl_woven_body_material_6_cost;
+        $data['woven_body_material_6_consumption'] = $dt->tbl_woven_body_material_6_consumption;
+        $data['woven_body_material_6_rate'] = $dt->tbl_woven_body_material_6_rate;
+        $data['woven_body_material_6_total_cost'] = $dt->tbl_woven_body_material_6_total_cost;
+
+
+        $data['zipper_cost'] = $dt->tbl_woven_trims_yard_zipper_item_cost;
+        $data['zipper_consumption'] = $dt->tbl_woven_trims_yard_zipper_item_consumption;
+        $data['zipper_consumption_rate'] = $dt->tbl_woven_trims_yard_zipper_item_rate;
+        $data['zipper_consumption_cost'] = $dt->tbl_woven_trims_yard_zipper_item_total_cost;
+
+
+        $data['woven_trims_yard_two_inch_webbing_item_cost'] = $dt->tbl_woven_trims_yard_two_inch_webbing_item_cost;
+        $data['woven_trims_yard_two_inch_webbing_item_consumption'] = $dt->tbl_woven_trims_yard_two_inch_webbing_item_consumption;
+        $data['woven_trims_yard_two_inch_webbing_item_rate'] = $dt->tbl_woven_trims_yard_two_inch_webbing_item_rate;
+        $data['woven_trims_yard_two_inch_webbing_item_total_cost'] = $dt->tbl_woven_trims_yard_two_inch_webbing_item_total_cost;
+
+        $data['woven_trims_yard_one_and_half_inch_webbing_item_cost'] = $dt->tbl_woven_trims_yard_one_and_half_inch_webbing_item_cost;
+        $data['woven_trims_yard_one_and_half_webbing_item_consumption'] = $dt->tbl_woven_trims_yard_one_and_half_webbing_item_consumption;
+        $data['woven_trims_yard_one_and_half_webbing_item_rate'] = $dt->tbl_woven_trims_yard_one_and_half_webbing_item_rate;
+        $data['woven_trims_yard_one_and_half_webbing_item_total_cost'] = $dt->tbl_woven_trims_yard_one_and_half_webbing_item_total_cost;
+
+        $data['woven_trims_yard_velcro_item_cost'] = $dt->tbl_woven_trims_yard_velcro_item_cost;
+        $data['woven_trims_yard_velcro_item_consumption'] = $dt->tbl_woven_trims_yard_velcro_item_consumption;
+        $data['woven_trims_yard_velcro_item_rate'] = $dt->tbl_woven_trims_yard_velcro_item_rate;
+        $data['woven_trims_yard_velcro_item_total_cost'] = $dt->tbl_woven_trims_yard_velcro_item_total_cost;
+
+
+        $data['extra_trim_yard_extra_1_name'] = $dt->tbl_woven_trims_yard_extra_1_name;
+        $data['extra_trim_yard_extra_2_name'] = $dt->tbl_woven_trims_yard_extra_2_name;
+        $data['extra_trim_yard_extra_3_name'] = $dt->tbl_woven_trims_yard_extra_3_name;
+
+
+        $data['woven_trims_yard_extra_1_item_cost'] = $dt->tbl_woven_trims_yard_extra_1_item_cost;
+        $data['woven_trims_yard_extra_1_item_consumption'] = $dt->tbl_woven_trims_yard_extra_1_item_consumption;
+        $data['woven_trims_yard_extra_1_item_rate'] = $dt->tbl_woven_trims_yard_extra_1_item_rate;
+        $data['woven_trims_yard_extra_1_item_total_cost'] = $dt->tbl_woven_trims_yard_extra_1_item_total_cost;
+
+        $data['woven_trims_yard_extra_2_item_cost'] = $dt->tbl_woven_trims_yard_extra_2_item_cost;
+        $data['woven_trims_yard_extra_2_item_consumption'] = $dt->tbl_woven_trims_yard_extra_2_item_consumption;
+        $data['woven_trims_yard_extra_2_item_rate'] = $dt->tbl_woven_trims_yard_extra_2_item_rate;
+        $data['woven_trims_yard_extra_2_item_total_cost'] = $dt->tbl_woven_trims_yard_extra_2_item_total_cost;
+
+        $data['woven_trims_yard_extra_3_item_cost'] = $dt->tbl_woven_trims_yard_extra_3_item_cost;
+        $data['woven_trims_yard_extra_3_item_consumption'] = $dt->tbl_woven_trims_yard_extra_3_item_consumption;
+        $data['woven_trims_yard_extra_3_item_rate'] = $dt->tbl_woven_trims_yard_extra_3_item_rate;
+        $data['woven_trims_yard_extra_3_item_total_cost'] = $dt->tbl_woven_trims_yard_extra_3_item_total_cost;
+
+
+        $data['woven_trims_piece_puller_item_cost'] = $dt->tbl_woven_trims_piece_puller_item_cost;
+        $data['woven_trims_piece_puller_item_consumption'] = $dt->tbl_woven_trims_piece_puller_item_consumption;
+        $data['woven_trims_piece_puller_item_rate'] = $dt->tbl_woven_trims_piece_puller_item_rate;
+        $data['woven_trims_piece_puller_item_total_cost'] = $dt->tbl_woven_trims_piece_puller_item_total_cost;
+
+
+        $data['woven_trims_piece_print_item_cost'] = $dt->tbl_woven_trims_piece_print_item_cost;
+        $data['woven_trims_piece_print_item_consumption'] = $dt->tbl_woven_trims_piece_print_item_consumption;
+        $data['woven_trims_piece_print_item_rate'] = $dt->tbl_woven_trims_piece_print_item_rate;
+        $data['woven_trims_piece_print_item_total_cost'] = $dt->tbl_woven_trims_piece_print_item_total_cost;
+
+        $data['woven_trims_piece_d_buckle_item_cost'] = $dt->tbl_woven_trims_piece_d_buckle_item_cost;
+        $data['woven_trims_piece_d_buckle_item_consumption'] = $dt->tbl_woven_trims_piece_d_buckle_item_consumption;
+        $data['woven_trims_piece_d_buckle_item_rate'] = $dt->tbl_woven_trims_piece_d_buckle_item_rate;
+        $data['woven_trims_piece_d_buckle_item_total_cost'] = $dt->tbl_woven_trims_piece_d_buckle_item_total_cost;
+
+        $data['woven_trims_piece_swivel_hook_item_cost'] = $dt->tbl_woven_trims_piece_swivel_hook_item_cost;
+        $data['woven_trims_piece_swivel_hook_item_consumption'] = $dt->tbl_woven_trims_piece_swivel_hook_item_consumption;
+        $data['woven_trims_piece_swivel_hook_item_rate'] = $dt->tbl_woven_trims_piece_swivel_hook_item_rate;
+        $data['woven_trims_piece_swivel_hook_item_total_cost'] = $dt->tbl_woven_trims_piece_swivel_hook_item_total_cost;
+
+        $data['woven_trims_piece_adjustable_bukle_item_cost'] = $dt->tbl_woven_trims_piece_adjustable_bukle_item_cost;
+        $data['woven_trims_piece_adjustable_bukle_item_consumption'] = $dt->tbl_woven_trims_piece_adjustable_bukle_item_consumption;
+        $data['woven_trims_piece_adjustable_bukle_item_rate'] = $dt->tbl_woven_trims_piece_adjustable_bukle_item_rate;
+        $data['woven_trims_piece_adjustable_bukle_item_total_cost'] = $dt->tbl_woven_trims_piece_adjustable_bukle_item_total_cost;
+
+
+        $data['woven_trims_piece_magnetic_button_item_cost'] = $dt->tbl_woven_trims_piece_magnetic_button_item_cost;
+        $data['woven_trims_piece_magnetic_button_item_consumption'] = $dt->tbl_woven_trims_piece_magnetic_button_item_consumption;
+        $data['woven_trims_piece_magnetic_button_item_rate'] = $dt->tbl_woven_trims_piece_magnetic_button_item_rate;
+        $data['woven_trims_piece_magnetic_button_item_total_cost'] = $dt->tbl_woven_trims_piece_magnetic_button_item_total_cost;
+
+        $data['woven_trims_piece_snap_button_item_cost'] = $dt->tbl_woven_trims_piece_snap_button_item_cost;
+        $data['woven_trims_piece_snap_button_item_consumption'] = $dt->tbl_woven_trims_piece_snap_button_item_consumption;
+        $data['woven_trims_piece_snap_button_item_rate'] = $dt->tbl_woven_trims_piece_snap_button_item_rate;
+        $data['woven_trims_piece_snap_button_item_total_cost'] = $dt->tbl_woven_trims_piece_snap_button_item_total_cost;
+
+        $data['woven_trims_piece_rivet_item_cost'] = $dt->tbl_woven_trims_piece_rivet_item_cost;
+        $data['woven_trims_piece_rivet_item_consumption'] = $dt->tbl_woven_trims_piece_rivet_item_consumption;
+        $data['woven_trims_piece_rivet_item_rate'] = $dt->tbl_woven_trims_piece_rivet_item_rate;
+        $data['woven_trims_piece_rivet_item_total_cost'] = $dt->tbl_woven_trims_piece_rivet_item_total_cost;
+
+        $data['woven_trims_piece_bottom_base_item_cost'] = $dt->tbl_woven_trims_piece_bottom_base_item_cost;
+        $data['woven_trims_piece_bottom_base_item_consumption'] = $dt->tbl_woven_trims_piece_bottom_base_item_consumption;
+        $data['woven_trims_piece_bottom_base_item_rate'] = $dt->tbl_woven_trims_piece_bottom_base_item_rate;
+        $data['woven_trims_piece_bottom_base_item_total_cost'] = $dt->tbl_woven_trims_piece_bottom_base_item_total_cost;
+
+        $data['woven_trims_piece_thread_item_cost'] = $dt->tbl_woven_trims_piece_thread_item_cost;
+        $data['woven_trims_piece_thread_item_consumption'] = $dt->tbl_woven_trims_piece_thread_item_consumption;
+        $data['woven_trims_piece_thread_item_rate'] = $dt->tbl_woven_trims_piece_thread_item_rate;
+        $data['woven_trims_piece_thread_item_total_cost'] = $dt->tbl_woven_trims_piece_thread_item_total_cost;
+
+        $data['woven_trims_piece_tag_item_cost'] = $dt->tbl_woven_trims_piece_tag_item_cost;
+        $data['woven_trims_piece_tag_item_consumption'] = $dt->tbl_woven_trims_piece_tag_item_consumption;
+        $data['woven_trims_piece_tag_item_rate'] = $dt->tbl_woven_trims_piece_tag_item_rate;
+        $data['woven_trims_piece_tag_item_total_cost'] = $dt->tbl_woven_trims_piece_tag_item_total_cost;
+
+        $data['woven_trims_piece_label_item_cost'] = $dt->tbl_woven_trims_piece_label_item_cost;
+        $data['woven_trims_piece_label_item_consumption'] = $dt->tbl_woven_trims_piece_label_item_consumption;
+        $data['woven_trims_piece_label_item_rate'] = $dt->tbl_woven_trims_piece_label_item_rate;
+        $data['woven_trims_piece_label_item_total_cost'] = $dt->tbl_woven_trims_piece_label_item_total_cost;
+
+        $data['woven_trims_piece_packing_item_cost'] = $dt->tbl_woven_trims_piece_packing_item_cost;
+        $data['woven_trims_piece_packing_item_consumption'] = $dt->tbl_woven_trims_piece_packing_item_consumption;
+        $data['woven_trims_piece_packing_item_rate'] = $dt->tbl_woven_trims_piece_packing_item_rate;
+        $data['woven_trims_piece_packing_item_total_cost'] = $dt->tbl_woven_trims_piece_packing_item_total_cost;
+
+        $data['woven_trims_piece_bottom_shoe_item_cost'] = $dt->tbl_woven_trims_piece_bottom_shoe_item_cost;
+        $data['woven_trims_piece_bottom_shoe_item_consumption'] = $dt->tbl_woven_trims_piece_bottom_shoe_item_consumption;
+        $data['woven_trims_piece_bottom_shoe_item_rate'] = $dt->tbl_woven_trims_piece_bottom_shoe_item_rate;
+        $data['woven_trims_piece_bottom_shoe_item_total_cost'] = $dt->tbl_woven_trims_piece_bottom_shoe_item_total_cost;
+
+        $data['woven_trims_piece_extra_1_name'] = $dt->tbl_woven_trims_piece_extra_1_name;
+        $data['woven_trims_piece_extra_1_item_cost'] = $dt->tbl_woven_trims_piece_extra_1_item_cost;
+        $data['woven_trims_piece_extra_1_item_consumption'] = $dt->tbl_woven_trims_piece_extra_1_item_consumption;
+        $data['woven_trims_piece_extra_1_item_rate'] = $dt->tbl_woven_trims_piece_extra_1_item_rate;
+        $data['woven_trims_piece_extra_1_item_total_cost'] = $dt->tbl_woven_trims_piece_extra_1_item_total_cost;
+
+        $data['woven_trims_piece_extra_2_name'] = $dt->tbl_woven_trims_piece_extra_2_name;
+        $data['woven_trims_piece_extra_2_item_cost'] = $dt->tbl_woven_trims_piece_extra_2_item_cost;
+        $data['woven_trims_piece_extra_2_item_consumption'] = $dt->tbl_woven_trims_piece_extra_2_item_consumption;
+        $data['woven_trims_piece_extra_2_item_rate'] = $dt->tbl_woven_trims_piece_extra_2_item_rate;
+        $data['woven_trims_piece_extra_2_item_total_cost'] = $dt->tbl_woven_trims_piece_extra_2_item_total_cost;
+
+        $data['woven_trims_piece_extra_3_name'] = $dt->tbl_woven_trims_piece_extra_3_name;
+        $data['woven_trims_piece_extra_3_item_cost'] = $dt->tbl_woven_trims_piece_extra_3_item_cost;
+        $data['woven_trims_piece_extra_3_item_consumption'] = $dt->tbl_woven_trims_piece_extra_3_item_consumption;
+        $data['woven_trims_piece_extra_3_item_rate'] = $dt->tbl_woven_trims_piece_extra_3_item_rate;
+        $data['woven_trims_piece_extra_3_item_total_cost'] = $dt->tbl_woven_trims_piece_extra_3_item_total_cost;
+
+        $data['woven_trims_piece_extra_4_name'] = $dt->tbl_woven_trims_piece_extra_4_name;
+        $data['woven_trims_piece_extra_4_item_cost'] = $dt->tbl_woven_trims_piece_extra_4_item_cost;
+        $data['woven_trims_piece_extra_4_item_consumption'] = $dt->tbl_woven_trims_piece_extra_4_item_consumption;
+        $data['woven_trims_piece_extra_4_item_rate'] = $dt->tbl_woven_trims_piece_extra_4_item_rate;
+        $data['woven_trims_piece_extra_4_item_total_cost'] = $dt->tbl_woven_trims_piece_extra_4_item_total_cost;
+
+        $data['woven_trims_piece_extra_5_name'] = $dt->tbl_woven_trims_piece_extra_5_name;
+        $data['woven_trims_piece_extra_5_item_cost'] = $dt->tbl_woven_trims_piece_extra_5_item_cost;
+        $data['woven_trims_piece_extra_5_item_consumption'] = $dt->tbl_woven_trims_piece_extra_5_item_consumption;
+        $data['woven_trims_piece_extra_5_item_rate'] = $dt->tbl_woven_trims_piece_extra_5_item_rate;
+        $data['woven_trims_piece_extra_5_item_total_cost'] = $dt->tbl_woven_trims_piece_extra_5_item_total_cost;
+
+
+        //Dimension for Body Material 1
+        $data['dimension_id'] = $dt->tbl_dimension_id;
+
+
+        $data['body_material_first_extra_1'] = $dt->tbl_dimnesion_body_material_first_extra_1;
+        $data['body_material_first_extra_2'] = $dt->tbl_dimnesion_body_material_first_extra_2;
+        $data['body_material_first_extra_3'] = $dt->tbl_dimnesion_body_material_first_extra_3;
+        $data['body_material_second_extra_1'] = $dt->tbl_dimnesion_body_material_second_extra_1;
+        $data['body_material_second_extra_2'] = $dt->tbl_dimnesion_body_material_second_extra_2;
+        $data['body_material_second_extra_3'] = $dt->tbl_dimnesion_body_material_second_extra_3;
+
+
+
+        $data['body_material_1_front_length'] = $dt->tbl_dimension_body_material_1_front_length;
+        $data['body_material_1_front_length_allowance'] = $dt->tbl_dimension_body_material_1_front_length_allowance;
+        $data['body_material_1_front_length_total'] = $dt->tbl_dimension_body_material_1_front_length_total;
+
+        $data['body_material_1_front_width'] = $dt->tbl_dimension_body_material_1_front_width;
+        $data['body_material_1_front_width_allowance'] = $dt->tbl_dimension_body_material_1_front_width_allowance;
+        $data['body_material_1_front_width_total'] = $dt->tbl_dimension_body_material_1_front_width_total;
+
+        $data['body_material_1_back_length'] = $dt->tbl_dimension_body_material_1_back_length;
+        $data['body_material_1_back_length_allowance'] = $dt->tbl_dimension_body_material_1_back_length_allowance;
+        $data['body_material_1_back_length_total'] = $dt->tbl_dimension_body_material_1_back_length_total;
+
+        $data['body_material_1_back_width'] = $dt->tbl_dimension_body_material_1_back_width;
+        $data['body_material_1_back_width_allowance'] = $dt->tbl_dimension_body_material_1_back_width_allowance;
+        $data['body_material_1_back_width_total'] = $dt->tbl_dimension_body_material_1_back_width_total;
+
+        $data['body_material_1_top_length'] = $dt->tbl_dimension_body_material_1_top_length;
+        $data['body_material_1_top_length_allowance'] = $dt->tbl_dimension_body_material_1_top_length_allowance;
+        $data['body_material_1_top_length_total'] = $dt->tbl_dimension_body_material_1_top_length_total;
+
+        $data['body_material_1_top_width'] = $dt->tbl_dimension_body_material_1_top_width;
+        $data['body_material_1_top_width_allowance'] = $dt->tbl_dimension_body_material_1_top_width_allowance;
+        $data['body_material_1_top_width_total'] = $dt->tbl_dimension_body_material_1_top_width_total;
+
+        $data['body_material_1_bottom_length'] = $dt->tbl_dimension_body_material_1_bottom_length;
+        $data['body_material_1_bottom_length_allowance'] = $dt->tbl_dimension_body_material_1_bottom_length_allowance;
+        $data['body_material_1_bottom_length_total'] = $dt->tbl_dimension_body_material_1_bottom_length_total;
+
+        $data['body_material_1_bottom_width'] = $dt->tbl_dimension_body_material_1_bottom_width;
+        $data['body_material_1_bottom_width_allowance'] = $dt->tbl_dimension_body_material_1_bottom_width_allowance;
+        $data['body_material_1_bottom_width_total'] = $dt->tbl_dimension_body_material_1_bottom_width_total;
+
+        $data['body_material_1_left_length'] = $dt->tbl_dimension_body_material_1_left_length;
+        $data['body_material_1_left_length_allowance'] = $dt->tbl_dimension_body_material_1_left_length_allowance;
+        $data['body_material_1_left_length_total'] = $dt->tbl_dimension_body_material_1_left_length_total;
+
+        $data['body_material_1_left_width'] = $dt->tbl_dimension_body_material_1_left_width;
+        $data['body_material_1_left_width_allowance'] = $dt->tbl_dimension_body_material_1_left_width_allowance;
+        $data['body_material_1_left_width_total'] = $dt->tbl_dimension_body_material_1_left_width_total;
+
+        $data['body_material_1_right_length'] = $dt->tbl_dimension_body_material_1_right_length;
+        $data['body_material_1_right_length_allowance'] = $dt->tbl_dimension_body_material_1_right_length_allowance;
+        $data['body_material_1_right_length_total'] = $dt->tbl_dimension_body_material_1_right_length_total;
+
+        $data['body_material_1_right_width'] = $dt->tbl_dimension_body_material_1_right_width;
+        $data['body_material_1_right_width_allowance'] = $dt->tbl_dimension_body_material_1_right_width_allowance;
+        $data['body_material_1_right_width_total'] = $dt->tbl_dimension_body_material_1_right_width_total;
+
+        $data['body_material_1_pocket_length'] = $dt->tbl_dimension_body_material_1_pocket_length;
+        $data['body_material_1_pocket_length_allowance'] = $dt->tbl_dimension_body_material_1_pocket_length_allowance;
+        $data['body_material_1_pocket_length_total'] = $dt->tbl_dimension_body_material_1_pocket_length_total;
+
+        $data['body_material_1_pocket_width'] = $dt->tbl_dimension_body_material_1_pocket_width;
+        $data['body_material_1_pocket_width_allowance'] = $dt->tbl_dimension_body_material_1_pocket_width_allowance;
+        $data['body_material_1_pocket_width_total'] = $dt->tbl_dimension_body_material_1_pocket_width_total;
+
+        $data['body_material_1_extra_1_length'] = $dt->tbl_dimension_body_material_1_extra_1_length;
+        $data['body_material_1_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_1_extra_1_length_allowance;
+        $data['body_material_1_extra_1_length_total'] = $dt->tbl_dimension_body_material_1_extra_1_length_total;
+
+        $data['body_material_1_extra_1_width'] = $dt->tbl_dimension_body_material_1_extra_1_width;
+        $data['body_material_1_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_1_extra_1_width_allowance;
+        $data['body_material_1_extra_1_width_total'] = $dt->tbl_dimension_body_material_1_extra_1_width_total;
+
+        $data['body_material_1_extra_2_length'] = $dt->tbl_dimension_body_material_1_extra_2_length;
+        $data['body_material_1_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_1_extra_2_length_allowance;
+        $data['body_material_1_extra_2_length_total'] = $dt->tbl_dimension_body_material_1_extra_2_length_total;
+
+        $data['body_material_1_extra_2_width'] = $dt->tbl_dimension_body_material_1_extra_2_width;
+        $data['body_material_1_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_1_extra_2_width_allowance;
+        $data['body_material_1_extra_2_width_total'] = $dt->tbl_dimension_body_material_1_extra_2_width_total;
+
+        $data['body_material_1_extra_3_length'] = $dt->tbl_dimension_body_material_1_extra_3_length;
+        $data['body_material_1_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_1_extra_3_length_allowance;
+        $data['body_material_1_extra_3_length_total'] = $dt->tbl_dimension_body_material_1_extra_3_length_total;
+
+        $data['body_material_1_extra_3_width'] = $dt->tbl_dimension_body_material_1_extra_3_width;
+        $data['body_material_1_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_1_extra_3_width_allowance;
+        $data['body_material_1_extra_3_width_total'] = $dt->tbl_dimension_body_material_1_extra_3_width_total;
+
+        //Dimension for Body Material 2
+        $data['body_material_2_front_length'] = $dt->tbl_dimension_body_material_2_front_length;
+        $data['body_material_2_front_length_allowance'] = $dt->tbl_dimension_body_material_2_front_length_allowance;
+        $data['body_material_2_front_length_total'] = $dt->tbl_dimension_body_material_2_front_length_total;
+
+        $data['body_material_2_front_width'] = $dt->tbl_dimension_body_material_2_front_width;
+        $data['body_material_2_front_width_allowance'] = $dt->tbl_dimension_body_material_2_front_width_allowance;
+        $data['body_material_2_front_width_total'] = $dt->tbl_dimension_body_material_2_front_width_total;
+
+        $data['body_material_2_back_length'] = $dt->tbl_dimension_body_material_2_back_length;
+        $data['body_material_2_back_length_allowance'] = $dt->tbl_dimension_body_material_2_back_length_allowance;
+        $data['body_material_2_back_length_total'] = $dt->tbl_dimension_body_material_2_back_length_total;
+
+        $data['body_material_2_back_width'] = $dt->tbl_dimension_body_material_2_back_width;
+        $data['body_material_2_back_width_allowance'] = $dt->tbl_dimension_body_material_2_back_width_allowance;
+        $data['body_material_2_back_width_total'] = $dt->tbl_dimension_body_material_2_back_width_total;
+
+        $data['body_material_2_top_length'] = $dt->tbl_dimension_body_material_2_top_length;
+        $data['body_material_2_top_length_allowance'] = $dt->tbl_dimension_body_material_2_top_length_allowance;
+        $data['body_material_2_top_length_total'] = $dt->tbl_dimension_body_material_2_top_length_total;
+
+        $data['body_material_2_top_width'] = $dt->tbl_dimension_body_material_2_top_width;
+        $data['body_material_2_top_width_allowance'] = $dt->tbl_dimension_body_material_2_top_width_allowance;
+        $data['body_material_2_top_width_total'] = $dt->tbl_dimension_body_material_2_top_width_total;
+
+        $data['body_material_2_bottom_length'] = $dt->tbl_dimension_body_material_2_bottom_length;
+        $data['body_material_2_bottom_length_allowance'] = $dt->tbl_dimension_body_material_2_bottom_length_allowance;
+        $data['body_material_2_bottom_length_total'] = $dt->tbl_dimension_body_material_2_bottom_length_total;
+
+        $data['body_material_2_bottom_width'] = $dt->tbl_dimension_body_material_2_bottom_width;
+        $data['body_material_2_bottom_width_allowance'] = $dt->tbl_dimension_body_material_2_bottom_width_allowance;
+        $data['body_material_2_bottom_width_total'] = $dt->tbl_dimension_body_material_2_bottom_width_total;
+
+        $data['body_material_2_left_length'] = $dt->tbl_dimension_body_material_2_left_length;
+        $data['body_material_2_left_length_allowance'] = $dt->tbl_dimension_body_material_2_left_length_allowance;
+        $data['body_material_2_left_length_total'] = $dt->tbl_dimension_body_material_2_left_length_total;
+
+        $data['body_material_2_left_width'] = $dt->tbl_dimension_body_material_2_left_width;
+        $data['body_material_2_left_width_allowance'] = $dt->tbl_dimension_body_material_2_left_width_allowance;
+        $data['body_material_2_left_width_total'] = $dt->tbl_dimension_body_material_2_left_width_total;
+
+        $data['body_material_2_right_length'] = $dt->tbl_dimension_body_material_2_right_length;
+        $data['body_material_2_right_length_allowance'] = $dt->tbl_dimension_body_material_2_right_length_allowance;
+        $data['body_material_2_right_length_total'] = $dt->tbl_dimension_body_material_2_right_length_total;
+
+        $data['body_material_2_right_width'] = $dt->tbl_dimension_body_material_2_right_width;
+        $data['body_material_2_right_width_allowance'] = $dt->tbl_dimension_body_material_2_right_width_allowance;
+        $data['body_material_2_right_width_total'] = $dt->tbl_dimension_body_material_2_right_width_total;
+
+        $data['body_material_2_pocket_length'] = $dt->tbl_dimension_body_material_2_pocket_length;
+        $data['body_material_2_pocket_length_allowance'] = $dt->tbl_dimension_body_material_2_pocket_length_allowance;
+        $data['body_material_2_pocket_length_total'] = $dt->tbl_dimension_body_material_2_pocket_length_total;
+
+        $data['body_material_2_pocket_width'] = $dt->tbl_dimension_body_material_2_pocket_width;
+        $data['body_material_2_pocket_width_allowance'] = $dt->tbl_dimension_body_material_2_pocket_width_allowance;
+        $data['body_material_2_pocket_width_total'] = $dt->tbl_dimension_body_material_2_pocket_width_total;
+
+        $data['body_material_2_extra_1_length'] = $dt->tbl_dimension_body_material_2_extra_1_length;
+        $data['body_material_2_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_2_extra_1_length_allowance;
+        $data['body_material_2_extra_1_length_total'] = $dt->tbl_dimension_body_material_2_extra_1_length_total;
+
+        $data['body_material_2_extra_1_width'] = $dt->tbl_dimension_body_material_2_extra_1_width;
+        $data['body_material_2_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_2_extra_1_width_allowance;
+        $data['body_material_2_extra_1_width_total'] = $dt->tbl_dimension_body_material_2_extra_1_width_total;
+
+        $data['body_material_2_extra_2_length'] = $dt->tbl_dimension_body_material_2_extra_2_length;
+        $data['body_material_2_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_2_extra_2_length_allowance;
+        $data['body_material_2_extra_2_length_total'] = $dt->tbl_dimension_body_material_2_extra_2_length_total;
+
+        $data['body_material_2_extra_2_width'] = $dt->tbl_dimension_body_material_2_extra_2_width;
+        $data['body_material_2_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_2_extra_2_width_allowance;
+        $data['body_material_2_extra_2_width_total'] = $dt->tbl_dimension_body_material_2_extra_2_width_total;
+
+        $data['body_material_2_extra_3_length'] = $dt->tbl_dimension_body_material_2_extra_3_length;
+        $data['body_material_2_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_2_extra_3_length_allowance;
+        $data['body_material_2_extra_3_length_total'] = $dt->tbl_dimension_body_material_2_extra_3_length_total;
+
+        $data['body_material_2_extra_3_width'] = $dt->tbl_dimension_body_material_2_extra_3_length_total;
+        $data['body_material_2_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_2_extra_3_width_allowance;
+        $data['body_material_2_extra_3_width_total'] = $dt->tbl_dimension_body_material_2_extra_3_width_total;
+
+        //Dimension for Body Material 3
+        $data['body_material_3_front_length'] = $dt->tbl_dimension_body_material_3_front_length;
+        $data['body_material_3_front_length_allowance'] = $dt->tbl_dimension_body_material_3_front_length_allowance;
+        $data['body_material_3_front_length_total'] = $dt->tbl_dimension_body_material_3_front_length_total;
+
+        $data['body_material_3_front_width'] = $dt->tbl_dimension_body_material_3_front_width;
+        $data['body_material_3_front_width_allowance'] = $dt->tbl_dimension_body_material_3_front_width_allowance;
+        $data['body_material_3_front_width_total'] = $dt->tbl_dimension_body_material_3_front_width_total;
+
+        $data['body_material_3_back_length'] = $dt->tbl_dimension_body_material_3_back_length;
+        $data['body_material_3_back_length_allowance'] = $dt->tbl_dimension_body_material_3_back_length_allowance;
+        $data['body_material_3_back_length_total'] = $dt->tbl_dimension_body_material_3_back_length_total;
+
+        $data['body_material_3_back_width'] = $dt->tbl_dimension_body_material_3_back_width;
+        $data['body_material_3_back_width_allowance'] = $dt->tbl_dimension_body_material_3_back_width_allowance;
+        $data['body_material_3_back_width_total'] = $dt->tbl_dimension_body_material_3_back_width_total;
+
+        $data['body_material_3_top_length'] = $dt->tbl_dimension_body_material_3_top_length;
+        $data['body_material_3_top_length_allowance'] = $dt->tbl_dimension_body_material_3_top_length_allowance;
+        $data['body_material_3_top_length_total'] = $dt->tbl_dimension_body_material_3_top_length_total;
+
+        $data['body_material_3_top_width'] = $dt->tbl_dimension_body_material_3_top_width;
+        $data['body_material_3_top_width_allowance'] = $dt->tbl_dimension_body_material_3_top_width_allowance;
+        $data['body_material_3_top_width_total'] = $dt->tbl_dimension_body_material_3_top_width_total;
+
+        $data['body_material_3_bottom_length'] = $dt->tbl_dimension_body_material_3_bottom_length;
+        $data['body_material_3_bottom_length_allowance'] = $dt->tbl_dimension_body_material_3_bottom_length_allowance;
+        $data['body_material_3_bottom_length_total'] = $dt->tbl_dimension_body_material_3_bottom_length_total;
+
+        $data['body_material_3_bottom_width'] = $dt->tbl_dimension_body_material_3_bottom_width;
+        $data['body_material_3_bottom_width_allowance'] = $dt->tbl_dimension_body_material_3_bottom_width_allowance;
+        $data['body_material_3_bottom_width_total'] = $dt->tbl_dimension_body_material_3_bottom_width_total;
+
+        $data['body_material_3_left_length'] = $dt->tbl_dimension_body_material_3_left_length;
+        $data['body_material_3_left_length_allowance'] = $dt->tbl_dimension_body_material_3_left_length_allowance;
+        $data['body_material_3_left_length_total'] = $dt->tbl_dimension_body_material_3_left_length_total;
+
+        $data['body_material_3_left_width'] = $dt->tbl_dimension_body_material_3_left_width;
+        $data['body_material_3_left_width_allowance'] = $dt->tbl_dimension_body_material_3_left_width_allowance;
+        $data['body_material_3_left_width_total'] = $dt->tbl_dimension_body_material_3_left_width_total;
+
+        $data['body_material_3_right_length'] = $dt->tbl_dimension_body_material_3_right_length;
+        $data['body_material_3_right_length_allowance'] = $dt->tbl_dimension_body_material_3_right_length_allowance;
+        $data['body_material_3_right_length_total'] = $dt->tbl_dimension_body_material_3_right_length_total;
+
+        $data['body_material_3_right_width'] = $dt->tbl_dimension_body_material_3_right_width;
+        $data['body_material_3_right_width_allowance'] = $dt->tbl_dimension_body_material_3_right_width_allowance;
+        $data['body_material_3_right_width_total'] = $dt->tbl_dimension_body_material_3_right_width_total;
+
+        $data['body_material_3_pocket_length'] = $dt->tbl_dimension_body_material_3_pocket_length;
+        $data['body_material_3_pocket_length_allowance'] = $dt->tbl_dimension_body_material_3_pocket_length_allowance;
+        $data['body_material_3_pocket_length_total'] = $dt->tbl_dimension_body_material_3_pocket_length_total;
+
+        $data['body_material_3_pocket_width'] = $dt->tbl_dimension_body_material_3_pocket_width;
+        $data['body_material_3_pocket_width_allowance'] = $dt->tbl_dimension_body_material_3_pocket_width_allowance;
+        $data['body_material_3_pocket_width_total'] = $dt->tbl_dimension_body_material_3_pocket_width_total;
+
+        $data['body_material_3_extra_1_length'] = $dt->tbl_dimension_body_material_3_extra_1_length;
+        $data['body_material_3_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_3_extra_1_length_allowance;
+        $data['body_material_3_extra_1_length_total'] = $dt->tbl_dimension_body_material_3_extra_1_length_total;
+
+        $data['body_material_3_extra_1_width'] = $dt->tbl_dimension_body_material_3_extra_1_width;
+        $data['body_material_3_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_3_extra_1_width_allowance;
+        $data['body_material_3_extra_1_width_total'] = $dt->tbl_dimension_body_material_3_extra_1_width_total;
+
+        $data['body_material_3_extra_2_length'] = $dt->tbl_dimension_body_material_3_extra_2_length;
+        $data['body_material_3_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_3_extra_2_length_allowance;
+        $data['body_material_3_extra_2_length_total'] = $dt->tbl_dimension_body_material_3_extra_2_length_total;
+
+        $data['body_material_3_extra_2_width'] = $dt->tbl_dimension_body_material_3_extra_2_width;
+        $data['body_material_3_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_3_extra_2_width_allowance;
+        $data['body_material_3_extra_2_width_total'] = $dt->tbl_dimension_body_material_3_extra_2_width_total;
+
+        $data['body_material_3_extra_3_length'] = $dt->tbl_dimension_body_material_3_extra_3_length;
+        $data['body_material_3_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_3_extra_3_length_allowance;
+        $data['body_material_3_extra_3_length_total'] = $dt->tbl_dimension_body_material_3_extra_3_length_total;
+
+        $data['body_material_3_extra_3_width'] = $dt->tbl_dimension_body_material_3_extra_3_length_total;
+        $data['body_material_3_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_3_extra_3_width_allowance;
+        $data['body_material_3_extra_3_width_total'] = $dt->tbl_dimension_body_material_3_extra_3_width_total;
+
+
+        //Dimension for Body Material 4
+        $data['body_material_4_front_length'] = $dt->tbl_dimension_body_material_4_front_length;
+        $data['body_material_4_front_length_allowance'] = $dt->tbl_dimension_body_material_4_front_length_allowance;
+        $data['body_material_4_front_length_total'] = $dt->tbl_dimension_body_material_4_front_length_total;
+
+        $data['body_material_4_front_width'] = $dt->tbl_dimension_body_material_4_front_width;
+        $data['body_material_4_front_width_allowance'] = $dt->tbl_dimension_body_material_4_front_width_allowance;
+        $data['body_material_4_front_width_total'] = $dt->tbl_dimension_body_material_4_front_width_total;
+
+        $data['body_material_4_back_length'] = $dt->tbl_dimension_body_material_4_back_length;
+        $data['body_material_4_back_length_allowance'] = $dt->tbl_dimension_body_material_4_back_length_allowance;
+        $data['body_material_4_back_length_total'] = $dt->tbl_dimension_body_material_4_back_length_total;
+
+        $data['body_material_4_back_width'] = $dt->tbl_dimension_body_material_4_back_width;
+        $data['body_material_4_back_width_allowance'] = $dt->tbl_dimension_body_material_4_back_width_allowance;
+        $data['body_material_4_back_width_total'] = $dt->tbl_dimension_body_material_4_back_width_total;
+
+        $data['body_material_4_top_length'] = $dt->tbl_dimension_body_material_4_top_length;
+        $data['body_material_4_top_length_allowance'] = $dt->tbl_dimension_body_material_4_top_length_allowance;
+        $data['body_material_4_top_length_total'] = $dt->tbl_dimension_body_material_4_top_length_total;
+
+        $data['body_material_4_top_width'] = $dt->tbl_dimension_body_material_4_top_width;
+        $data['body_material_4_top_width_allowance'] = $dt->tbl_dimension_body_material_4_top_width_allowance;
+        $data['body_material_4_top_width_total'] = $dt->tbl_dimension_body_material_4_top_width_total;
+
+        $data['body_material_4_bottom_length'] = $dt->tbl_dimension_body_material_4_bottom_length;
+        $data['body_material_4_bottom_length_allowance'] = $dt->tbl_dimension_body_material_4_bottom_length_allowance;
+        $data['body_material_4_bottom_length_total'] = $dt->tbl_dimension_body_material_4_bottom_length_total;
+
+        $data['body_material_4_bottom_width'] = $dt->tbl_dimension_body_material_4_bottom_width;
+        $data['body_material_4_bottom_width_allowance'] = $dt->tbl_dimension_body_material_4_bottom_width_allowance;
+        $data['body_material_4_bottom_width_total'] = $dt->tbl_dimension_body_material_4_bottom_width_total;
+
+        $data['body_material_4_left_length'] = $dt->tbl_dimension_body_material_4_left_length;
+        $data['body_material_4_left_length_allowance'] = $dt->tbl_dimension_body_material_4_left_length_allowance;
+        $data['body_material_4_left_length_total'] = $dt->tbl_dimension_body_material_4_left_length_total;
+
+        $data['body_material_4_left_width'] = $dt->tbl_dimension_body_material_4_left_width;
+        $data['body_material_4_left_width_allowance'] = $dt->tbl_dimension_body_material_4_left_width_allowance;
+        $data['body_material_4_left_width_total'] = $dt->tbl_dimension_body_material_4_left_width_total;
+
+        $data['body_material_4_right_length'] = $dt->tbl_dimension_body_material_4_right_length;
+        $data['body_material_4_right_length_allowance'] = $dt->tbl_dimension_body_material_4_right_length_allowance;
+        $data['body_material_4_right_length_total'] = $dt->tbl_dimension_body_material_4_right_length_total;
+
+        $data['body_material_4_right_width'] = $dt->tbl_dimension_body_material_4_right_width;
+        $data['body_material_4_right_width_allowance'] = $dt->tbl_dimension_body_material_4_right_width_allowance;
+        $data['body_material_4_right_width_total'] = $dt->tbl_dimension_body_material_4_right_width_total;
+
+        $data['body_material_4_pocket_length'] = $dt->tbl_dimension_body_material_4_pocket_length;
+        $data['body_material_4_pocket_length_allowance'] = $dt->tbl_dimension_body_material_4_pocket_length_allowance;
+        $data['body_material_4_pocket_length_total'] = $dt->tbl_dimension_body_material_4_pocket_length_total;
+
+        $data['body_material_4_pocket_width'] = $dt->tbl_dimension_body_material_4_pocket_width;
+        $data['body_material_4_pocket_width_allowance'] = $dt->tbl_dimension_body_material_4_pocket_width_allowance;
+        $data['body_material_4_pocket_width_total'] = $dt->tbl_dimension_body_material_4_pocket_width_total;
+
+        $data['body_material_4_extra_1_length'] = $dt->tbl_dimension_body_material_4_extra_1_length;
+        $data['body_material_4_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_4_extra_1_length_allowance;
+        $data['body_material_4_extra_1_length_total'] = $dt->tbl_dimension_body_material_4_extra_1_length_total;
+
+        $data['body_material_4_extra_1_width'] = $dt->tbl_dimension_body_material_4_extra_1_width;
+        $data['body_material_4_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_4_extra_1_width_allowance;
+        $data['body_material_4_extra_1_width_total'] = $dt->tbl_dimension_body_material_4_extra_1_width_total;
+
+        $data['body_material_4_extra_2_length'] = $dt->tbl_dimension_body_material_4_extra_2_length;
+        $data['body_material_4_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_4_extra_2_length_allowance;
+        $data['body_material_4_extra_2_length_total'] = $dt->tbl_dimension_body_material_4_extra_2_length_total;
+
+        $data['body_material_4_extra_2_width'] = $dt->tbl_dimension_body_material_4_extra_2_width;
+        $data['body_material_4_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_4_extra_2_width_allowance;
+        $data['body_material_4_extra_2_width_total'] = $dt->tbl_dimension_body_material_4_extra_2_width_total;
+
+        $data['body_material_4_extra_3_length'] = $dt->tbl_dimension_body_material_4_extra_3_length;
+        $data['body_material_4_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_4_extra_3_length_allowance;
+        $data['body_material_4_extra_3_length_total'] = $dt->tbl_dimension_body_material_4_extra_3_length_total;
+
+        $data['body_material_4_extra_3_width'] = $dt->tbl_dimension_body_material_4_extra_3_length_total;
+        $data['body_material_4_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_4_extra_3_width_allowance;
+        $data['body_material_4_extra_3_width_total'] = $dt->tbl_dimension_body_material_4_extra_3_width_total;
+
+        //Dimension for Body Material 5
+        $data['body_material_5_front_length'] = $dt->tbl_dimension_body_material_5_front_length;
+        $data['body_material_5_front_length_allowance'] = $dt->tbl_dimension_body_material_5_front_length_allowance;
+        $data['body_material_5_front_length_total'] = $dt->tbl_dimension_body_material_5_front_length_total;
+
+        $data['body_material_5_front_width'] = $dt->tbl_dimension_body_material_5_front_width;
+        $data['body_material_5_front_width_allowance'] = $dt->tbl_dimension_body_material_5_front_width_allowance;
+        $data['body_material_5_front_width_total'] = $dt->tbl_dimension_body_material_5_front_width_total;
+
+        $data['body_material_5_back_length'] = $dt->tbl_dimension_body_material_5_back_length;
+        $data['body_material_5_back_length_allowance'] = $dt->tbl_dimension_body_material_5_back_length_allowance;
+        $data['body_material_5_back_length_total'] = $dt->tbl_dimension_body_material_5_back_length_total;
+
+        $data['body_material_5_back_width'] = $dt->tbl_dimension_body_material_5_back_width;
+        $data['body_material_5_back_width_allowance'] = $dt->tbl_dimension_body_material_5_back_width_allowance;
+        $data['body_material_5_back_width_total'] = $dt->tbl_dimension_body_material_5_back_width_total;
+
+        $data['body_material_5_top_length'] = $dt->tbl_dimension_body_material_5_top_length;
+        $data['body_material_5_top_length_allowance'] = $dt->tbl_dimension_body_material_5_top_length_allowance;
+        $data['body_material_5_top_length_total'] = $dt->tbl_dimension_body_material_5_top_length_total;
+
+        $data['body_material_5_top_width'] = $dt->tbl_dimension_body_material_5_top_width;
+        $data['body_material_5_top_width_allowance'] = $dt->tbl_dimension_body_material_5_top_width_allowance;
+        $data['body_material_5_top_width_total'] = $dt->tbl_dimension_body_material_5_top_width_total;
+
+        $data['body_material_5_bottom_length'] = $dt->tbl_dimension_body_material_5_bottom_length;
+        $data['body_material_5_bottom_length_allowance'] = $dt->tbl_dimension_body_material_5_bottom_length_allowance;
+        $data['body_material_5_bottom_length_total'] = $dt->tbl_dimension_body_material_5_bottom_length_total;
+
+        $data['body_material_5_bottom_width'] = $dt->tbl_dimension_body_material_5_bottom_width;
+        $data['body_material_5_bottom_width_allowance'] = $dt->tbl_dimension_body_material_5_bottom_width_allowance;
+        $data['body_material_5_bottom_width_total'] = $dt->tbl_dimension_body_material_5_bottom_width_total;
+
+        $data['body_material_5_left_length'] = $dt->tbl_dimension_body_material_5_left_length;
+        $data['body_material_5_left_length_allowance'] = $dt->tbl_dimension_body_material_5_left_length_allowance;
+        $data['body_material_5_left_length_total'] = $dt->tbl_dimension_body_material_5_left_length_total;
+
+        $data['body_material_5_left_width'] = $dt->tbl_dimension_body_material_5_left_width;
+        $data['body_material_5_left_width_allowance'] = $dt->tbl_dimension_body_material_5_left_width_allowance;
+        $data['body_material_5_left_width_total'] = $dt->tbl_dimension_body_material_5_left_width_total;
+
+        $data['body_material_5_right_length'] = $dt->tbl_dimension_body_material_5_right_length;
+        $data['body_material_5_right_length_allowance'] = $dt->tbl_dimension_body_material_5_right_length_allowance;
+        $data['body_material_5_right_length_total'] = $dt->tbl_dimension_body_material_5_right_length_total;
+
+        $data['body_material_5_right_width'] = $dt->tbl_dimension_body_material_5_right_width;
+        $data['body_material_5_right_width_allowance'] = $dt->tbl_dimension_body_material_5_right_width_allowance;
+        $data['body_material_5_right_width_total'] = $dt->tbl_dimension_body_material_5_right_width_total;
+
+        $data['body_material_5_pocket_length'] = $dt->tbl_dimension_body_material_5_pocket_length;
+        $data['body_material_5_pocket_length_allowance'] = $dt->tbl_dimension_body_material_5_pocket_length_allowance;
+        $data['body_material_5_pocket_length_total'] = $dt->tbl_dimension_body_material_5_pocket_length_total;
+
+        $data['body_material_5_pocket_width'] = $dt->tbl_dimension_body_material_5_pocket_width;
+        $data['body_material_5_pocket_width_allowance'] = $dt->tbl_dimension_body_material_5_pocket_width_allowance;
+        $data['body_material_5_pocket_width_total'] = $dt->tbl_dimension_body_material_5_pocket_width_total;
+
+        $data['body_material_5_extra_1_length'] = $dt->tbl_dimension_body_material_5_extra_1_length;
+        $data['body_material_5_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_5_extra_1_length_allowance;
+        $data['body_material_5_extra_1_length_total'] = $dt->tbl_dimension_body_material_5_extra_1_length_total;
+
+        $data['body_material_5_extra_1_width'] = $dt->tbl_dimension_body_material_5_extra_1_width;
+        $data['body_material_5_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_5_extra_1_width_allowance;
+        $data['body_material_5_extra_1_width_total'] = $dt->tbl_dimension_body_material_5_extra_1_width_total;
+
+        $data['body_material_5_extra_2_length'] = $dt->tbl_dimension_body_material_5_extra_2_length;
+        $data['body_material_5_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_5_extra_2_length_allowance;
+        $data['body_material_5_extra_2_length_total'] = $dt->tbl_dimension_body_material_5_extra_2_length_total;
+
+        $data['body_material_5_extra_2_width'] = $dt->tbl_dimension_body_material_5_extra_2_width;
+        $data['body_material_5_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_5_extra_2_width_allowance;
+        $data['body_material_5_extra_2_width_total'] = $dt->tbl_dimension_body_material_5_extra_2_width_total;
+
+        $data['body_material_5_extra_3_length'] = $dt->tbl_dimension_body_material_5_extra_3_length;
+        $data['body_material_5_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_5_extra_3_length_allowance;
+        $data['body_material_5_extra_3_length_total'] = $dt->tbl_dimension_body_material_5_extra_3_length_total;
+
+        $data['body_material_5_extra_3_width'] = $dt->tbl_dimension_body_material_5_extra_3_length_total;
+        $data['body_material_5_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_5_extra_3_width_allowance;
+        $data['body_material_5_extra_3_width_total'] = $dt->tbl_dimension_body_material_5_extra_3_width_total;
+
+        //Dimension for Body Material 6
+        $data['body_material_6_front_length'] = $dt->tbl_dimension_body_material_6_front_length;
+        $data['body_material_6_front_length_allowance'] = $dt->tbl_dimension_body_material_6_front_length_allowance;
+        $data['body_material_6_front_length_total'] = $dt->tbl_dimension_body_material_6_front_length_total;
+
+        $data['body_material_6_front_width'] = $dt->tbl_dimension_body_material_6_front_width;
+        $data['body_material_6_front_width_allowance'] = $dt->tbl_dimension_body_material_6_front_width_allowance;
+        $data['body_material_6_front_width_total'] = $dt->tbl_dimension_body_material_6_front_width_total;
+
+        $data['body_material_6_back_length'] = $dt->tbl_dimension_body_material_6_back_length;
+        $data['body_material_6_back_length_allowance'] = $dt->tbl_dimension_body_material_6_back_length_allowance;
+        $data['body_material_6_back_length_total'] = $dt->tbl_dimension_body_material_6_back_length_total;
+
+        $data['body_material_6_back_width'] = $dt->tbl_dimension_body_material_6_back_width;
+        $data['body_material_6_back_width_allowance'] = $dt->tbl_dimension_body_material_6_back_width_allowance;
+        $data['body_material_6_back_width_total'] = $dt->tbl_dimension_body_material_6_back_width_total;
+
+        $data['body_material_6_top_length'] = $dt->tbl_dimension_body_material_6_top_length;
+        $data['body_material_6_top_length_allowance'] = $dt->tbl_dimension_body_material_6_top_length_allowance;
+        $data['body_material_6_top_length_total'] = $dt->tbl_dimension_body_material_6_top_length_total;
+
+        $data['body_material_6_top_width'] = $dt->tbl_dimension_body_material_6_top_width;
+        $data['body_material_6_top_width_allowance'] = $dt->tbl_dimension_body_material_6_top_width_allowance;
+        $data['body_material_6_top_width_total'] = $dt->tbl_dimension_body_material_6_top_width_total;
+
+        $data['body_material_6_bottom_length'] = $dt->tbl_dimension_body_material_6_bottom_length;
+        $data['body_material_6_bottom_length_allowance'] = $dt->tbl_dimension_body_material_6_bottom_length_allowance;
+        $data['body_material_6_bottom_length_total'] = $dt->tbl_dimension_body_material_6_bottom_length_total;
+
+        $data['body_material_6_bottom_width'] = $dt->tbl_dimension_body_material_6_bottom_width;
+        $data['body_material_6_bottom_width_allowance'] = $dt->tbl_dimension_body_material_6_bottom_width_allowance;
+        $data['body_material_6_bottom_width_total'] = $dt->tbl_dimension_body_material_6_bottom_width_total;
+
+        $data['body_material_6_left_length'] = $dt->tbl_dimension_body_material_6_left_length;
+        $data['body_material_6_left_length_allowance'] = $dt->tbl_dimension_body_material_6_left_length_allowance;
+        $data['body_material_6_left_length_total'] = $dt->tbl_dimension_body_material_6_left_length_total;
+
+        $data['body_material_6_left_width'] = $dt->tbl_dimension_body_material_6_left_width;
+        $data['body_material_6_left_width_allowance'] = $dt->tbl_dimension_body_material_6_left_width_allowance;
+        $data['body_material_6_left_width_total'] = $dt->tbl_dimension_body_material_6_left_width_total;
+
+        $data['body_material_6_right_length'] = $dt->tbl_dimension_body_material_6_right_length;
+        $data['body_material_6_right_length_allowance'] = $dt->tbl_dimension_body_material_6_right_length_allowance;
+        $data['body_material_6_right_length_total'] = $dt->tbl_dimension_body_material_6_right_length_total;
+
+        $data['body_material_6_right_width'] = $dt->tbl_dimension_body_material_6_right_width;
+        $data['body_material_6_right_width_allowance'] = $dt->tbl_dimension_body_material_6_right_width_allowance;
+        $data['body_material_6_right_width_total'] = $dt->tbl_dimension_body_material_6_right_width_total;
+
+        $data['body_material_6_pocket_length'] = $dt->tbl_dimension_body_material_6_pocket_length;
+        $data['body_material_6_pocket_length_allowance'] = $dt->tbl_dimension_body_material_6_pocket_length_allowance;
+        $data['body_material_6_pocket_length_total'] = $dt->tbl_dimension_body_material_6_pocket_length_total;
+
+        $data['body_material_6_pocket_width'] = $dt->tbl_dimension_body_material_6_pocket_width;
+        $data['body_material_6_pocket_width_allowance'] = $dt->tbl_dimension_body_material_6_pocket_width_allowance;
+        $data['body_material_6_pocket_width_total'] = $dt->tbl_dimension_body_material_6_pocket_width_total;
+
+        $data['body_material_6_extra_1_length'] = $dt->tbl_dimension_body_material_6_extra_1_length;
+        $data['body_material_6_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_6_extra_1_length_allowance;
+        $data['body_material_6_extra_1_length_total'] = $dt->tbl_dimension_body_material_6_extra_1_length_total;
+
+        $data['body_material_6_extra_1_width'] = $dt->tbl_dimension_body_material_6_extra_1_width;
+        $data['body_material_6_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_6_extra_1_width_allowance;
+        $data['body_material_6_extra_1_width_total'] = $dt->tbl_dimension_body_material_6_extra_1_width_total;
+
+        $data['body_material_6_extra_2_length'] = $dt->tbl_dimension_body_material_6_extra_2_length;
+        $data['body_material_6_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_6_extra_2_length_allowance;
+        $data['body_material_6_extra_2_length_total'] = $dt->tbl_dimension_body_material_6_extra_2_length_total;
+
+        $data['body_material_6_extra_2_width'] = $dt->tbl_dimension_body_material_6_extra_2_width;
+        $data['body_material_6_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_6_extra_2_width_allowance;
+        $data['body_material_6_extra_2_width_total'] = $dt->tbl_dimension_body_material_6_extra_2_width_total;
+
+        $data['body_material_6_extra_3_length'] = $dt->tbl_dimension_body_material_6_extra_3_length;
+        $data['body_material_6_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_6_extra_3_length_allowance;
+        $data['body_material_6_extra_3_length_total'] = $dt->tbl_dimension_body_material_6_extra_3_length_total;
+
+        $data['body_material_6_extra_3_width'] = $dt->tbl_dimension_body_material_6_extra_3_length_total;
+        $data['body_material_6_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_6_extra_3_width_allowance;
+        $data['body_material_6_extra_3_width_total'] = $dt->tbl_dimension_body_material_6_extra_3_width_total;
 
         $this->load->view('admin/admin_header_view', $this->data);
         $this->load->view('admin/admin_home_woven_edit', $data);
