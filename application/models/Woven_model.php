@@ -106,12 +106,6 @@ class Woven_model extends CI_Model
         return $data;
     }
 
-
-
-
-
-
-
       function single_revisions_single_woven_costing(){
           $ppnw_costing_id = $this->uri->segment(3);
            $this->db->select('*');

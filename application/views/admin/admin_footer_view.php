@@ -76,7 +76,7 @@
           var data = [{"label":"PPNW", "value":<?php foreach($ppnw_all_count as $ppnw){?><?php echo $ppnw->ppnw_count;?><?php }?>},
               {"label":"Woven", "value":<?php foreach($woven_all_count as $woven){?><?php echo $woven->woven_count;?><?php }?>},
               {"label":"Leather", "value":1},
-              {"label":"Jute", "value":1}];
+              {"label":"Jute", "value":1s}];
 
 
           var vis = d3.select('#chart').append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");

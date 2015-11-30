@@ -360,7 +360,7 @@
                                 </tr>
 
                                 <tr class="danger">
-                                    <td>Extra 1</td>
+                                    <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_extra_1" name="extra_trim_yard_extra_1_name"  placeholder="Extra 1"></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_1_cost" name="extra_trim_yard_1_cost" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_1_consumption" name="extra_trim_yard_1_consumption" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_1_consumption_rate" name="extra_trim_yard_1_consumption_rate" readonly="readonly"></td>
@@ -368,7 +368,7 @@
                                 </tr>
 
                                 <tr class="danger">
-                                    <td>Extra 2</td>
+                                    <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_extra_2" name="extra_trim_yard_extra_2_name"  placeholder="Extra 2"></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_2_cost" name="extra_trim_yard_2_cost" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_2_consumption" name="extra_trim_yard_2_consumption" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_2_consumption_rate" name="extra_trim_yard_2_consumption_rate" readonly="readonly"></td>
@@ -376,7 +376,7 @@
                                 </tr>
 
                                 <tr class="danger">
-                                    <td>Extra 2</td>
+                                    <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_extra_3" name="extra_trim_yard_extra_3_name"  placeholder="Extra 3"></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_3_cost" name="extra_trim_yard_3_cost" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_3_consumption" name="extra_trim_yard_3_consumption" ></td>
                                     <td><input type="text" class="form-control woven-costing" id="extra_trim_yard_3_consumption_rate" name="extra_trim_yard_3_consumption_rate" readonly="readonly"></td>
@@ -1084,7 +1084,7 @@
                                         <td><input type="text" class="form-control woven-costing" id="body_material_6_right_width_total" name="body_material_6_right_width_total" readonly="readonly"></td>
                                     </tr>
                                     <tr>
-                                        <th rowspan="2">Pocet</th>
+                                        <th rowspan="2">Pocket</th>
                                         <td>Length</td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_4_pocket_length" name="body_material_4_pocket_length" ></td>
                                         <td><input type="text" class="form-control woven-costing" id="body_material_4_pocket_length_allowance" name="body_material_4_pocket_length_allowance" ></td>

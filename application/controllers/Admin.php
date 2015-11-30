@@ -10,6 +10,7 @@ class Admin extends CI_Controller
         $this->load->library('ion_auth');
         $this->load->model('ppnw_model');
         $this->load->model('woven_model');
+        $this->load->model('quilt_and_suit_model');
         $this->load->model('admin_model');
         $this->load->model('user_model');
         //$this->load->library('breadcrumb');
@@ -23,6 +24,8 @@ class Admin extends CI_Controller
         $this->data['ppnw_all_count'] = $this->ppnw_model->ppnw_total_count_by_user($username);
 
         $this->data['woven_all_count'] = $this->woven_model->woven_total_count_by_user($username);
+
+        $this->data['quilt_and_suit_all_count'] = $this->quilt_and_suit_model->quilt_and_suit_total_count_by_user($username);
 
         //$all_sess = $this->session->all_userdata();
        // var_dump($all_sess);
@@ -121,6 +124,23 @@ class Admin extends CI_Controller
         } else {
             $this->load->view('admin/admin_header_view', $this->data);
             $this->load->view('admin/admin_home_woven_view', $this->data);
+            $this->load->view('admin/admin_footer_view');
+        }
+    }
+
+    /**
+     * ppnew_add
+     *
+     * This is to show the PPnonwoven page
+     */
+    public function quilt_and_suit_add()
+    {
+        if (!$this->ion_auth->logged_in()) {
+            // redirect them to the login page
+            redirect('login/index', 'refresh');
+        } else {
+            $this->load->view('admin/admin_header_view', $this->data);
+            $this->load->view('admin/admin_home_quilt_and_suit_view', $this->data);
             $this->load->view('admin/admin_footer_view');
         }
     }

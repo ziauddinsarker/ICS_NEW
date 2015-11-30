@@ -1323,6 +1323,8 @@ class Woven extends CI_Controller
 
 
         //All Trims In Yards
+
+
         $this->form_validation->set_rules('zipper_cost', 'Zipper Cost', 'trim|xss_clean');
         $this->form_validation->set_rules('zipper_consumption', 'Zipper Consumption', 'trim|xss_clean');
         $this->form_validation->set_rules('zipper_consumption_rate', 'Zipper Consumption Rate', 'trim|xss_clean');
@@ -2043,7 +2045,11 @@ class Woven extends CI_Controller
                 'tbl_woven_body_material_6_total_cost' => $this->input->post('body_material_6_consumption_cost'),
 
 
-                // All Trims in yard
+                // All Trims in
+                'tbl_woven_trims_yard_extra_1_name' => $this->input->post('extra_trim_yard_extra_1_name'),
+                'tbl_woven_trims_yard_extra_2_name' => $this->input->post('extra_trim_yard_extra_2_name'),
+                'tbl_woven_trims_yard_extra_3_name' => $this->input->post('extra_trim_yard_extra_3_name'),
+
                 'tbl_woven_trims_yard_zipper_item_cost' => $this->input->post('zipper_cost'),
                 'tbl_woven_trims_yard_zipper_item_consumption' => $this->input->post('zipper_consumption'),
                 'tbl_woven_trims_yard_zipper_item_rate' => $this->input->post('zipper_consumption_rate'),
