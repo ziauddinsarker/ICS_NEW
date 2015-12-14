@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Ppnw_model extends CI_Model
+class Woven_simple_model extends CI_Model
 {
     function __construct()
     {
@@ -9,24 +9,18 @@ class Ppnw_model extends CI_Model
         date_default_timezone_set("Asia/Dhaka");
     }
 
-    /**
-     * @param $username
-     * @return mixed
-     * get the costing for particular user
-     * Get All ppnw costing info
-     */
-
-    function gel_all_ppnw_costing($username){
+    //get the costing for particular user
+    //Get All ppnw costing info
+    function gel_all_woven_simple_costing($username){
         $this->db->select('*');
         $this->db->from('costing_by_user');
-        $this->db->join('ppnw_costing', 'costing_by_user.costing_user_ppnw = ppnw_costing.ics_order_id');
+        $this->db->join('woven_simple_costing', 'costing_by_user.costing_user_woven_simple = woven_simple_costing.ics_order_id');
         $this->db->join('users', 'costing_by_user.costing_user_id = users.id');
         $this->db->where('username',$username);
         $query = $this->db->get();
         //$rowcount = $query->num_rows();
         return $query->result();
     }
-
 
 
     /***************************************************************/
@@ -61,15 +55,11 @@ class Ppnw_model extends CI_Model
     }
     /***************************************************************/
 
-
-
-
-
     //get the costing for particular user and particular costing revisions
     //Get All ppnw costing info
-    function all_revisions_single_ppnw_costing($id){
+    function all_revisions_single_woven_simple_costing($id){
         $this->db->select('*');
-        $this->db->from('ppnw_costing_rev');
+        $this->db->from('woven_simple_costing_rev');
         $this->db->where('tbl_ics_order_id',$id);
         $query = $this->db->get();
         return $query->result();
@@ -79,13 +69,12 @@ class Ppnw_model extends CI_Model
      * @param $username
      * @return mixed
      */
-      function gel_total_ppnw_costing($username){
+      function gel_total_woven_simple_costing($username){
            $this->db->select('*');
            $this->db->from('costing_by_user');
-           $this->db->join('ppnw_costing', 'costing_by_user.costing_user_ppnw = ppnw_costing.ics_order_id');
+           $this->db->join('woven_simple_costing', 'costing_by_user.costing_user_woven_simple = woven_simple_costing.ics_order_id');
            $this->db->join('users', 'costing_by_user.costing_user_id = users.id');
            //$this->db->where('username',$username);
-          $query = $this->db-get();
            $total = $this->db->where('username',$username);
            return $query->result($total);
        }
@@ -94,19 +83,19 @@ class Ppnw_model extends CI_Model
      * @param $username
      * @return mixed
      */
-    function get_ppnw_costing_from_revision($id){
+    function get_woven_simple_costing_from_revision($id){
         $this->db->select('tbl_order_rev_id, tbl_ics_order_id');
-        $this->db->from('ppnw_costing_rev');
+        $this->db->from('woven_simple_costing_rev');
         $this->db->where('tbl_order_rev_id',$id);
         $query = $this->db->get();
         return $query->result();
 
     }
 
-      function single_revisions_single_ppnw_costing(){
+      function single_revisions_single_woven_simple_costing(){
           $ppnw_costing_id = $this->uri->segment(3);
            $this->db->select('*');
-           $this->db->from('ppnw_costing_rev');
+           $this->db->from('woven_simple_costing_rev');
            $this->db->where('tbl_order_rev_id',$ppnw_costing_id);
            $query = $this->db->get();
           return $query->result();
@@ -121,8 +110,8 @@ class Ppnw_model extends CI_Model
      * @param $post_id
      * @return mixed
      */
-    function edit_ppnw_costing($ppnw_costing_id) {
-        $data = $this->db->get_where('ppnw_costing', array('ics_order_id' => $ppnw_costing_id))->row();
+    function edit_woven_simple_costing($ppnw_costing_id) {
+        $data = $this->db->get_where('woven_simple_costing', array('ics_order_id' => $ppnw_costing_id))->row();
         return $data;
     }
 
@@ -131,11 +120,11 @@ class Ppnw_model extends CI_Model
     /**
      * @param $id
      */
-    public function ppnw_total_count_by_user($username)
+    public function woven_simple_total_count_by_user($username)
     {
-        $this->db->select('users.id,users.username,COUNT(*) as ppnw_count');
-        $this->db->from('ppnw_costing');
-        $this->db->join('costing_by_user', 'costing_by_user.costing_user_ppnw = ppnw_costing.ics_order_id');
+        $this->db->select('users.id,users.username,COUNT(*) as woven_simple_count');
+        $this->db->from('woven_simple_costing');
+        $this->db->join('costing_by_user', 'costing_by_user.costing_user_woven_simple = woven_simple_costing.ics_order_id');
         $this->db->join('users', 'costing_by_user.costing_user_id = users.id');
         $this->db->where('username', $username);
         $query = $this->db->get();
@@ -148,7 +137,7 @@ class Ppnw_model extends CI_Model
      * @param $data
      * @param $id
      */
-    function update_ppnw_costing($id){
+    function update_woven_simple_costing($id){
 
         $ppnw_update_data = array(
             'tbl_order_id_name' => $this->input->post('order_id'),
@@ -342,7 +331,7 @@ class Ppnw_model extends CI_Model
 
 
         $this->db->where('ics_order_id',$id);
-        $this->db->update('ppnw_costing',$ppnw_update_data);
+        $this->db->update('woven_simple_costing',$ppnw_update_data);
 
 
         //Save Revision Data
@@ -539,7 +528,7 @@ class Ppnw_model extends CI_Model
             'tbl_ics_order_id' => $id,
         );
 
-        $this->db->insert('ppnw_costing_rev',$ppnw_update_rev_data);
+        $this->db->insert('woven_simple_costing_rev',$ppnw_update_rev_data);
 
 
 
@@ -554,11 +543,11 @@ class Ppnw_model extends CI_Model
 
     function show_single_costing_by_user($user_id, $id){
         $this->db->select('*');
-        $this->db->from('ppnw_costing');
-        $this->db->join('costing_by_user','costing_by_user.costing_user_ppnw = ppnw_costing.ics_order_id');
+        $this->db->from('woven_simple_costing');
+        $this->db->join('costing_by_user','costing_by_user.costing_user_woven_simple = woven_simple_costing.ics_order_id');
         $this->db->join('users','costing_by_user.costing_user_id = users.id');
         $this->db->where('users.id', $user_id);
-        $this->db->where('ppnw_costing.ics_order_id', $id);
+        $this->db->where('woven_simple_costing.ics_order_id', $id);
         $query = $this->db->get();
         $result = $query->result();
         return $result;
@@ -577,9 +566,9 @@ class Ppnw_model extends CI_Model
     /**
      * @param $ppnw_costing_id
      */
-    function delete_ppnw_costing($ppnw_costing_id)
+    function delete_woven_simple_costing($ppnw_costing_id)
     {
         $this->db->where('ics_order_id',$ppnw_costing_id);
-        $this->db->delete('ppnw_costing');
+        $this->db->delete('woven_simple_costing');
     }
 }

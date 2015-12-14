@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - ics_new@localhost" uuid="f4d312bf-47f0-4ef6-a455-2a3630165449">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>ics_new.*</schema-pattern>
+      <default-schemas>ics_new.*</default-schemas>
+    </data-source>
+  </component>
+</project>

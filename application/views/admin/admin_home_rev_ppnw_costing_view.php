@@ -20,43 +20,101 @@
             foreach($single_rev as $s_rev) {
 
         ?>
-            <!--Part1 Form Start-->
-        <div class="row" >
-            <div class="part1" >
-                <div class="col-md-2" >
-                    <div class="form-group" >
-                        <label for="order_id" > Order Id:</label >
-                        <input type = "text" class="form-control" name = "order_id" id = "order_id"  value="<?php echo $s_rev->tbl_order_id_name ?>" required >
-                    </div >
-                </div >
 
-                <div class="col-md-2" >
-                    <div class="form-group" >
-                        <label for="order_company" > Company:</label >
-                        <input type = "text" class="form-control" name = "order_company" id = "order_company" value = "<?php echo $s_rev->tbl_company_id ?>" required >
-                    </div >
-                </div >
+        <!-- Part1 Form Start -->
+        <div class="row">
+            <div class="part1">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="order_id">Order Id:</label>
+                        <input type="text" class="form-control woven-simple-costing" name="order_id" id="order_id" placeholder="Order ID" required value="<?php echo $s_rev->tbl_order_id_name ?>" readonly="readonly">
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                <div class="col-md-2" >
-                    <div class="form-group" >
-                        <label for="order_company" > Item Name:</label >
-                        <input type = "text" class="form-control" name = "order_item_name" id = "order_item_name"  value = "<?php echo $s_rev->tbl_item_name ?>" required >
-                    </div >
-                </div >
-                <div class="col-md-2" >
-                    <div class="form-group" >
-                        <label for="order_company" > Reference No:</label >
-                        <input type = "text" class="form-control" name = "order_ref_no" id = "order_ref_no" value = "<?php echo $s_rev->tbl_ref_name ?>" required >
-                    </div >
-                </div >
-                <div class="col-md-2" >
-                    <div class="form-group" >
-                        <label for="order_date" > Date:</label >
-                        <input type = "text" class="form-control" name = "order_date" id = "order_date" value = "<?php echo $s_rev->tbl_order_date ?>" required >
-                    </div >
-                </div >
-            </div >
-        </div >
+        <!-- Part1 Form Start -->
+        <div class="row">
+            <section class="col-md-8">
+                <div class="part1 row">
+
+                    <div class="col-md-2 ">
+                        <div class="form-group">
+                            <label for="order_date">Date:</label>
+                            <input type="text" class="form-control woven-simple-costing" name="order_date" id="order_date" placeholder="Date"  value = "<?php echo $s_rev->tbl_order_date ?>" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-md-offset-1">
+                        <div class="form-group">
+                            <label for="order_company">Company:</label>
+                            <input type="text" class="form-control woven-simple-costing" name="order_company" id="order_company" value = "<?php echo $s_rev->tbl_company_id ?>"  placeholder="Order Company" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="order_item_name">Item Name:</label>
+                            <input type="text" class="form-control woven-simple-costing" name="order_item_name" id="order_item_name"  placeholder="Order Item Name" value = "<?php echo $s_rev->tbl_item_name ?>" required>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="order_ref_no">Reference No.:</label>
+                            <input type="text" class="form-control woven-simple-costing" name="order_ref_no" id="order_ref_no" placeholder="Order Reference No." value = "<?php echo $s_rev->tbl_ref_name ?>" required>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+
+        <div class="main row">
+            <section class="col-md-8">
+
+                <div class="row part4">
+                    <div class="">
+                        <article class="col-md-6 other-cost">
+                            <h3>CM & Others</h3>
+
+                            <div class="form-group">
+                                <label for="order_total_material_inc_wastage">Total Material incl Wastage:</label>
+                                <input type="text" class="form-control woven-simple-costing" id="order_total_material_inc_wastage" name="order_total_material_inc_wastage" value="<?php echo $s_rev->tbl_order_total_material_inc_wastage ?>" readonly="readonly">
+                            </div>
+                            <div class="form-group">
+                                <label for="order_sewing">Sewing:</label>
+                                <input type="text" class="form-control woven-simple-costing" id="order_sewing" name="order_sewing"  value="<?php echo $s_rev->tbl_order_sewing ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="order_overheads">Overheads:</label>
+                                <input type="text" class="form-control woven-simple-costing" id="order_overheads" name="order_overheads" value="<?php echo $s_rev->tbl_order_overheads ?>">
+                            </div>
+                        </article>
+
+                        <article class="col-md-6 grand-total">
+                            <h4>Total Material incl Wastage: <span id="final_material_cost"><?php echo $s_rev->tbl_order_total_material_inc_wastage ?></span></h4>
+
+                            <h4>Total Overhead and Other Cost: <span id="total_overhead_and_other"><?php echo $s_rev->tbl_order_total_overhead_and_other_cost ?></span></h4>
+                            <input type="hidden" class="form-control woven-simple-costing" id="total_overhead_and_other_hidden" name="total_overhead_and_other_hidden">
+
+                            <h4>Total Cost: <span id="total_cost"><?php echo $s_rev->tbl_total_cost ?></span></h4>
+                            <input type="hidden" class="form-control woven-simple-costing" id="total_cost_hidden" name="total_cost_hidden">
+
+                            <h2><b>Price</b>: <span id="final_price"><?php echo $s_rev->tbl_total_price ?></span></h2>
+                            <input type="hidden" class="form-control woven-simple-costing" id="final_price_hidden" name="final_price_hidden">
+                            <!--
+                                 <button class="btn btn-info" type="submit" name="updateppnw" value="updateppnw">Update</button>
+
+                                 <button class="btn btn-info" type="submit" name="submit">save</button>
+                                 <button class="btn btn-info">PRINT</button>
+                                 <button class="btn btn-info">PDF</button>
+                                 -->
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </div>
+
 
 
         <div class="main row" >
@@ -67,7 +125,7 @@
                         <div class="col-md-5" >
                             <div class="form-group" >
                                 <label for="order_gsm" class="small-label" > GSM:</label >
-                                <input type = "text" class="form-control" id = "order_gsm" name = "order_gsm" value = "<?php echo $s_rev->tbl_order_gsm ?>" required >
+                                <input type = "text" class="form-control" id = "order_gsm" name = "order_gsm" value="<?php echo $s_rev->tbl_order_gsm ?>" required >
 
                             </div >
                             <br >
@@ -757,40 +815,6 @@
                 <!-- Article End  -->
             </section>
 
-
-            <aside class="col-md-4">
-                <article class="row grand-total">
-
-                    <h4>Total Material incl Wastage: <span id="final_material_cost"><?php echo $s_rev->tbl_order_total_material_inc_wastage ?></span> </h4>
-                    <h4>Total Overhead and Other Cost: <span id="total_overhead_and_other"><?php echo $s_rev->tbl_order_total_overhead_and_other_cost ?></span></h4>
-                    <h4>Total Cost: <span id="total_cost"><?php echo $s_rev->tbl_total_cost ?></span></h4>
-
-                    <h2><b>Price</b>: <span id="final_price"><?php echo $s_rev->tbl_total_price ?></span></h2>
-
-                    <input type="hidden" name="ppnw-id" value="<?php echo $s_rev->tbl_ics_order_id ?>">
-                    <?php /*
-                    <a href="<?php echo base_url("fpdf_test"); ?>" class="btn btn-info">PDF</a>
-                    */
-                    ?>
-                </article>
-
-                <article class="row other-cost">
-                    <h3>CM & Others</h3>
-
-                    <div class="form-group">
-                        <label for="order_total_material_inc_wastage">Total Material incl Wastage:</label>
-                        <input type="text" class="form-control" id="order_total_material_inc_wastage" name="order_total_material_inc_wastage" value="<?php echo $s_rev->tbl_order_total_material_inc_wastage ?>"disabled>
-                    </div>
-                    <div class="form-group">
-                        <label for="order_sewing">Sewing:</label>
-                        <input type="text" class="form-control" id="order_sewing" name="order_sewing" value="<?php echo $s_rev->tbl_order_sewing ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="order_overheads">Overheads:</label>
-                        <input type="text" class="form-control" id="order_overheads" name="order_overheads" value="<?php echo $s_rev->tbl_order_overheads ?>">
-                    </div>
-                </article>
-            </aside>
         </div>
     </form>
     <!-- foreach end-->

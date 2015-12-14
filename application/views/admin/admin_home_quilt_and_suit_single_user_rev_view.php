@@ -31,7 +31,7 @@
                                 <td><?php echo $quiltandsuit->tbl_modification_date;?></td>
                                  <td><?php echo $quiltandsuit->tbl_quilt_and_suit_order_quantity;?></td>
                                 <td><?php echo $quiltandsuit->tbl_total_price;?></td>
-                                <td><a class="btn btn-default btn-info" href="<?=  base_url()?>woven/single_revision_woven_costing/<?= $quiltandsuit->tbl_quilt_and_suit_order_rev_id;?>">View</a></td>
+                                <td><a class="btn btn-default btn-info" href="<?=  base_url()?>quiltandsuit/single_revision_quilt_and_suit_costing/<?= $quiltandsuit->tbl_quilt_and_suit_order_rev_id;?>">View</a></td>
 
                             </tr>
                         <?php }?>

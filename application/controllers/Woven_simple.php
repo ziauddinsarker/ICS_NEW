@@ -1,88 +1,79 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Ppnw extends CI_Controller
+class woven_simple extends CI_Controller
 {
 
     public function __construct()
     {
         parent::__construct();
         $this->load->library('ion_auth');
-        $this->load->model('ppnw_model');
+        $this->load->model('woven_simple_model');
 
         $username = $this->session->userdata('username');
 
         $this->data['employee'] = $this->admin_model->get_user_employee($username);
-        //$this->data['ppnw_all_costing'] = $this->ppnw_model->gel_all_ppnw_costing();
-        $this->data['ppnw_all_costing'] = $this->ppnw_model->gel_all_ppnw_costing($username);
-        $this->data['ppnw_all_count'] = $this->ppnw_model->ppnw_total_count_by_user($username);
+        $this->data['woven_simple_all_costing'] = $this->woven_simple_model->gel_all_woven_simple_costing($username);
+        $this->data['woven_simple_all_count'] = $this->woven_simple_model->woven_simple_total_count_by_user($username);
     }
 
-    /**
-     * Get All Company name
-     */
-    function get_companys(){
-        $this->load->model('ppnw_model');
-        if (isset($_GET['term'])){
-            $q = strtolower($_GET['term']);
-            $this->ppnw_model->get_company_object($q);
-           // $this->ppnw_model->get_company('Simura');
-        }
-    }
-
-
     /************************************************/
-    /*****************PPNW***************************/
+    /*****************Woven Simple***************************/
     /************************************************/
     /**
-     * Show All PP Nonwovens Costing in a page of a Particular user
+     * Show All Woven Simple Costing in a page of a Particular user
      */
 
-    public function ppnw_all(){
+    public function woven_simple_all(){
         if (!$this->ion_auth->logged_in()) {
             // redirect them to the login page
             redirect('login/index', 'refresh');
         } else {
             $this->load->view('admin/admin_header_view', $this->data);
-            $this->load->view('admin/admin_home_ppnw_all_view', $this->data);
+            $this->load->view('admin/admin_home_woven_simple_all_view', $this->data);
             $this->load->view('admin/admin_footer_view');
         }
     }
 
-
-    public function revision_ppnw_costing($id){
+    /**
+     * @param $id
+     *
+     * Revisions of single Woven Simple costing
+     */
+    public function revision_woven_simple_costing($id){
 
         if (!$this->ion_auth->logged_in()) {
             // redirect them to the login page
             redirect('login/index', 'refresh');
         } else {
-            $this->data['revision_single_ppnw_costing'] = $this->ppnw_model->all_revisions_single_ppnw_costing($id);
+            $this->data['revision_single_woven_simple_costing'] = $this->woven_simple_model->all_revisions_single_woven_simple_costing($id);
             //var_dump($this->data['revision_single_ppnw_costing']);
             $this->load->view('admin/admin_header_view', $this->data);
-            $this->load->view('admin/admin_home_ppnw_single_user_rev_view', $this->data);
+            $this->load->view('admin/admin_home_woven_simple_single_user_rev_view', $this->data);
             $this->load->view('admin/admin_footer_view');
         }
     }
 
 
+
     /**
-     *+Edit the PPNw Costing
+     *Single revision from all revisions of particular woven simple costing
      */
-    public function single_revision_ppnw_costing($id){
-        //$dt = $this->ppnw_model->single_revisions_single_ppnw_costing();
-        $this->data['single_rev'] = $this->ppnw_model->single_revisions_single_ppnw_costing();
+    public function single_revision_woven_simple_costing($id){
+        $this->data['single_rev'] = $this->woven_simple_model->single_revisions_single_woven_simple_costing();
         $this->load->view('admin/admin_header_view', $this->data);
-        $this->load->view('admin/admin_home_rev_ppnw_costing_view', $this->data);
+        $this->load->view('admin/admin_home_rev_woven_simple_costing_view', $this->data);
         $this->load->view('admin/admin_footer_view');
-   }
+    }
+
 
 
     /**
-     * ppnw_costing
+     * Woven Simple Costing
      *
-     * This is for Single PP nonwoven Costing in the admin panel.
+     * This is for Single Woven Simple Costing in the admin panel.
      */
-    public function ppnw_costing()
+    public function woven_simple_costing()
     {
 
         //Create Validation Rules
@@ -275,7 +266,7 @@ class Ppnw extends CI_Controller
             $data['error'] = validation_errors();
             //fail validation
             $this->load->view('admin_header_view');
-            $this->load->view('admin_home_ppnw_view', $data);
+            $this->load->view('admin_home_woven_simple_view', $data);
             $this->load->view('admin_footer_view');
         } else {
 
@@ -468,18 +459,18 @@ class Ppnw extends CI_Controller
 
             );
 
-            $this->db->insert('ppnw_costing', $order_data);
+            $this->db->insert('woven_simple_costing', $order_data);
 
             $insert_id = $this->db->insert_id();
             $user_id = $this->session->userdata('user_id');
 
             $data = array(
                 'costing_user_id' => $user_id ,
-                'costing_user_ppnw' => $insert_id
+                'costing_user_woven_simple' => $insert_id
             );
-            $this->ppnw_model->add_costing_by_user($data);
+            $this->woven_simple_model->add_costing_by_user($data);
 
-            /***********Save First data to revision*****************/
+
             //Save Revision Data
             $ppnw_update_rev_data = array(
                 'tbl_order_id_name' => $this->input->post('order_id'),
@@ -674,8 +665,7 @@ class Ppnw extends CI_Controller
                 'tbl_ics_order_id' => $insert_id,
             );
 
-            $this->db->insert('ppnw_costing_rev',$ppnw_update_rev_data);
-
+            $this->db->insert('woven_simple_costing_rev',$ppnw_update_rev_data);
 
             redirect(base_url('admin'));
         }
@@ -684,13 +674,13 @@ class Ppnw extends CI_Controller
     /**
      *+Edit the PPNw Costing
      */
-    public function edit_ppnw_costing(){
+    public function edit_woven_simple_costing(){
         $ppnw_costing_id = $this->uri->segment(3);
         if ($ppnw_costing_id == NULL) {
-            redirect('ppnw/ppnw_all');
+            redirect('woven_simple/woven_simple_all');
         }
 
-        $dt = $this->ppnw_model->edit_ppnw_costing($ppnw_costing_id);
+        $dt = $this->woven_simple_model->edit_woven_simple_costing($ppnw_costing_id);
 
 
         $data['ics_order_id'] = $dt->ics_order_id;
@@ -884,33 +874,33 @@ class Ppnw extends CI_Controller
         $data['total_price'] = $dt->tbl_total_price;
 
         $this->load->view('admin/admin_header_view', $this->data);
-        $this->load->view('admin/admin_home_ppnw_edit', $data);
+        $this->load->view('admin/admin_home_woven_simple_edit', $data);
         $this->load->view('admin/admin_footer_view', $data);
     }
 
     /**
      * @param null $id
      */
-    public function update_ppnw_costing()
+    public function update_woven_simple_costing()
     {
         if ($this->input->post('updateppnw')) {
             $ppnwId = $this->input->post('ppnw-id');
-            $this->ppnw_model->update_ppnw_costing($ppnwId);
-            redirect('ppnw/ppnw_all');
+            $this->woven_simple_model->update_woven_simple_costing($ppnwId);
+            redirect('woven_simple/woven_simple_all');
         } else{
             $id = $this->input->post('ppnw-id');
-            redirect('ppnw/edit_ppnw_costing/'. $id);
+            redirect('woven_simple/edit_woven_simple_costing/'. $id);
         }
     }
 
 
     /**
-     * @param $ppnw_costing_id
+     * @param $woven_simple_costing_id
      */
 
-    public function delete_ppnw_costing($ppnw_costing_id){
-            $this->ppnw_model->delete_ppnw_costing($ppnw_costing_id);
-            redirect(base_url('ppnw/ppnw_all'));
+    public function delete_woven_simple_costing($woven_simple_costing_id){
+            $this->woven_simple_model->delete_woven_simple_costing($woven_simple_costing_id);
+            redirect(base_url('woven_simple/woven_simple_all'));
     }
 
 }

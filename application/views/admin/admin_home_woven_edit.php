@@ -117,14 +117,14 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group roll-name">
-                                                <input type="text" class="form-control woven-costing" id="body_material_1_name" name="body_material_1_name" placeholder="Material 1" value="<?php echo $woven_body_material_1_name ?>" required>
+                                                <input type="text" class="form-control woven-costing" id="body_material_1_name" name="body_material_1_name" placeholder="Material 1" value="<?php echo $woven_body_material_1_name ?>">
 
                                             </div>
                                         </div>
 
                                         <div class="col-md-2">
                                             <div class="form-group role-width">
-                                                <input type="text" class="form-control woven-costing" id="body_material_1_roll_1" name="body_material_1_roll_1" placeholder="Roll Width" value="<?php echo $woven_body_material_1_roll_width ?>" required>
+                                                <input type="text" class="form-control woven-costing" id="body_material_1_roll_1" name="body_material_1_roll_1" placeholder="Roll Width" value="<?php echo $woven_body_material_1_roll_width ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -132,26 +132,26 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group roll-name">
-                                                <input type="text" class="form-control woven-costing" id="body_material_2_name" name="body_material_2_name" placeholder="Material 2" value="<?php echo $woven_body_material_2_name ?>" required>
+                                                <input type="text" class="form-control woven-costing" id="body_material_2_name" name="body_material_2_name" placeholder="Material 2" value="<?php echo $woven_body_material_2_name ?>">
                                             </div>
                                         </div>
 
                                         <div class="col-md-2">
                                             <div class="form-group role-width">
-                                                <input type="text" class="form-control woven-costing" id="body_material_2_roll_2" name="body_material_2_roll_2"  placeholder="Roll Width" value="<?php echo $woven_body_material_2_roll_width ?>" required>
+                                                <input type="text" class="form-control woven-costing" id="body_material_2_roll_2" name="body_material_2_roll_2"  placeholder="Roll Width" value="<?php echo $woven_body_material_2_roll_width ?>">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group roll-name">
-                                                <input type="text" class="form-control woven-costing" id="body_material_3_name" name="body_material_3_name" placeholder="Material 3" value="<?php echo $woven_body_material_3_name ?>" required>
+                                                <input type="text" class="form-control woven-costing" id="body_material_3_name" name="body_material_3_name" placeholder="Material 3" value="<?php echo $woven_body_material_3_name ?>">
                                             </div>
                                         </div>
 
                                         <div class="col-md-2">
                                             <div class="form-group role-width">
-                                                <input type="text" class="form-control woven-costing" id="body_material_3_roll_3" name="body_material_3_roll_3" placeholder="Roll Width" value="<?php echo $woven_body_material_3_roll_width ?>" required>
+                                                <input type="text" class="form-control woven-costing" id="body_material_3_roll_3" name="body_material_3_roll_3" placeholder="Roll Width" value="<?php echo $woven_body_material_3_roll_width ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -159,13 +159,13 @@
                                      <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group roll-name">
-                                                <input type="text" class="form-control woven-costing" id="body_material_4_name" name="body_material_4_name" placeholder="Material 4" value="<?php echo $woven_body_material_4_name ?>" required>
+                                                <input type="text" class="form-control woven-costing" id="body_material_4_name" name="body_material_4_name" placeholder="Material 4" value="<?php echo $woven_body_material_4_name ?>">
                                             </div>
                                         </div>
 
                                         <div class="col-md-2">
                                             <div class="form-group role-width">
-                                                <input type="text" class="form-control woven-costing" id="body_material_4_roll_4" name="body_material_4_roll_4" placeholder="Roll Width" value="<?php echo $woven_body_material_4_roll_width ?>" required>
+                                                <input type="text" class="form-control woven-costing" id="body_material_4_roll_4" name="body_material_4_roll_4" placeholder="Roll Width" value="<?php echo $woven_body_material_4_roll_width ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -173,13 +173,13 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group roll-name">
-                                                <input type="text" class="form-control woven-costing" id="body_material_5_name" name="body_material_5_name" placeholder="Material 5" value="<?php echo $woven_body_material_5_name ?>" required>
+                                                <input type="text" class="form-control woven-costing" id="body_material_5_name" name="body_material_5_name" placeholder="Material 5" value="<?php echo $woven_body_material_5_name ?>">
                                             </div>
                                         </div>
 
                                         <div class="col-md-2">
                                             <div class="form-group role-width">
-                                                <input type="text" class="form-control woven-costing" id="body_material_5_roll_5" name="body_material_5_roll_5" placeholder="Roll Width" value="<?php echo $woven_body_material_5_roll_width ?>" required>
+                                                <input type="text" class="form-control woven-costing" id="body_material_5_roll_5" name="body_material_5_roll_5" placeholder="Roll Width" value="<?php echo $woven_body_material_5_roll_width ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -187,13 +187,13 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group roll-name">
-                                                <input type="text" class="form-control woven-costing" id="body_material_6_name" name="body_material_6_name" placeholder="Material 6" value="<?php echo $woven_body_material_6_name ?>" required>
+                                                <input type="text" class="form-control woven-costing" id="body_material_6_name" name="body_material_6_name" placeholder="Material 6" value="<?php echo $woven_body_material_6_name ?>">
                                             </div>
                                         </div>
 
                                         <div class="col-md-2">
                                             <div class="form-group role-width">
-                                                <input type="text" class="form-control woven-costing" id="body_material_6_roll_6" name="body_material_6_roll_6" placeholder="Roll Width" value="<?php echo $woven_body_material_6_roll_width ?>" required>
+                                                <input type="text" class="form-control woven-costing" id="body_material_6_roll_6" name="body_material_6_roll_6" placeholder="Roll Width" value="<?php echo $woven_body_material_6_roll_width ?>">
                                             </div>
                                         </div>
                                     </div>

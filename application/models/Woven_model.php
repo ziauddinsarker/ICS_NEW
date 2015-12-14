@@ -33,7 +33,7 @@ class Woven_model extends CI_Model
         $this->db->like('company_name', $q);
         $query = $this->db->get('company');
 
-        var_dump($query);
+        //var_dump($query);
         if($query->num_rows > 0){
             foreach ($query->result_array() as $row){
                 $row_set[] = htmlentities(stripslashes($row['company_name'])); //build an array
@@ -127,18 +127,9 @@ class Woven_model extends CI_Model
     function edit_woven_costing($woven_costing_id) {
         $this->db->select('*');
         $this->db->join('woven_dimension','woven_costing.tbl_woven_dimension_id = woven_dimension.tbl_dimension_id');
-        //$this->db->where('tbl_woven_order_id',$woven_costing_id);
-        //$query = $this->db->get();
-        //$data = $query->result_array();
-        //$query = $this->db->get();
-        //$result = $query->result();
-        //return $result;
-        //return $data;
         $data = $this->db->get_where('woven_costing', array('tbl_woven_order_id' => $woven_costing_id))->row();
         return $data;
     }
-
-
 
 
     /**
@@ -155,6 +146,7 @@ class Woven_model extends CI_Model
         $result = $query->result();
         return $result;
     }
+
 
     /**
      *

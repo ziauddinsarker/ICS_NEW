@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2015-11-25 17:53:59
+Date: 2015-12-02 16:51:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -44,21 +44,27 @@ CREATE TABLE `costing_by_user` (
   `costing_user_woven` int(11) DEFAULT NULL,
   `costing_user_jute` int(11) DEFAULT NULL,
   `costing_user_leather` int(11) DEFAULT NULL,
+  `costing_user_quilt_and_suit` int(11) DEFAULT NULL,
   PRIMARY KEY (`costing_id`),
   KEY `fk_costing_user_id` (`costing_user_id`),
   KEY `fk_costing_user_ppnw_id` (`costing_user_ppnw`),
   KEY `fk_costing_user_woven_id` (`costing_user_woven`),
+  KEY `fk_costing_user_quilt_and_suit_id` (`costing_user_quilt_and_suit`),
   CONSTRAINT `fk_costing_user_id` FOREIGN KEY (`costing_user_id`) REFERENCES `users` (`id`),
   CONSTRAINT `fk_costing_user_ppnw_id` FOREIGN KEY (`costing_user_ppnw`) REFERENCES `ppnw_costing` (`ics_order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_costing_user_quilt_and_suit_id` FOREIGN KEY (`costing_user_quilt_and_suit`) REFERENCES `quilt_and_suit_costing` (`tbl_quilt_and_suit_order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_costing_user_woven_id` FOREIGN KEY (`costing_user_woven`) REFERENCES `woven_costing` (`tbl_woven_order_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of costing_by_user
 -- ----------------------------
-INSERT INTO `costing_by_user` VALUES ('1', '1', '57', null, null, null);
-INSERT INTO `costing_by_user` VALUES ('6', '1', null, '1', null, null);
-INSERT INTO `costing_by_user` VALUES ('7', '1', null, '3', null, null);
+INSERT INTO `costing_by_user` VALUES ('1', '1', '57', null, null, null, null);
+INSERT INTO `costing_by_user` VALUES ('6', '1', null, '1', null, null, null);
+INSERT INTO `costing_by_user` VALUES ('7', '1', null, '3', null, null, null);
+INSERT INTO `costing_by_user` VALUES ('8', '1', null, '4', null, null, null);
+INSERT INTO `costing_by_user` VALUES ('9', '1', null, '5', null, null, null);
+INSERT INTO `costing_by_user` VALUES ('10', '1', null, '6', null, null, null);
 
 -- ----------------------------
 -- Table structure for employee
@@ -354,7 +360,7 @@ CREATE TABLE `ppnw_costing` (
 -- ----------------------------
 -- Records of ppnw_costing
 -- ----------------------------
-INSERT INTO `ppnw_costing` VALUES ('57', 'BBS2015-11-13', 'Bangladesh Book Socaity', 'bncc1', 'BNC13', '2015-11-13', '1', 'Blue', '1', '1', '1', '1', '1', '1', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '44.0000', '0.0000', '0.0000', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0000', '1.0936', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '21.8718', '0.0000', '0.0000', '0.0000');
+INSERT INTO `ppnw_costing` VALUES ('57', 'BBS2015-11-13', 'Bangladesh Book Socaity', 'bncc1', 'BNC13', '2015-11-13', '1', 'Blue', '75', '99', '5', '555', '5', '5', '5.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '44.0000', '0.0000', '0.0000', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0000', '1.0936', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '9.9999', '9.9999', '21.8718', '0.0000', '0.0000', '0.0000');
 
 -- ----------------------------
 -- Table structure for ppnw_costing_rev
@@ -512,7 +518,7 @@ CREATE TABLE `ppnw_costing_rev` (
   `tbl_modification_date` date DEFAULT NULL,
   `tbl_ics_order_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`tbl_order_rev_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of ppnw_costing_rev
@@ -521,6 +527,7 @@ INSERT INTO `ppnw_costing_rev` VALUES ('65', 'BBS2015-11-13', 'Bangladesh Book S
 INSERT INTO `ppnw_costing_rev` VALUES ('66', 'BBS2015-11-13', 'Bangladesh Book Socaity', 'bncc1', 'BNC13', '2015-11-13', '1', 'Blue', '1', '1', '1', '1', '1', '1', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '44.0000', '0.0000', '0.0000', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '21.8718', '4.0000', '25.8718', '26.1305', '02:25:12', '2015-11-13', '57');
 INSERT INTO `ppnw_costing_rev` VALUES ('67', 'NC2015-11-24', 'New Compay', 'NSNF', 'New', '2015-11-24', null, null, '76', '6', '5', '5000', '25000', '25000', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0.2300', '15.0000', '0.2515', '3.7725', null, null, null, null, null, null, null, null, '0.2500', '23.0000', '0.2734', '6.2882', null, null, null, null, '0.2500', '0.2300', '0.2734', '0.0629', '0.2100', '0.2300', '0.2297', '0.0528', '9.9999', '0.2500', '9.9999', '5.7500', '0.2100', '0.2300', '0.2100', '0.0483', null, null, null, null, '0.2100', '0.2300', '0.2100', '0.0483', '0.2300', '0.2100', '0.2300', '0.0483', '0.2300', '0.2100', '0.2300', '0.0483', '0.0210', '0.2300', '0.0210', '0.0048', '0.2300', '0.2500', '0.2300', '0.0575', '0.2300', '0.2300', '0.2300', '0.0529', '0.2100', '0.2300', '0.2100', '0.0483', '0.2300', '0.2100', '0.2300', '0.0483', '0.2500', '0.2500', '0.2500', '0.0625', '0.2500', '0.2300', '0.2500', '0.0575', '0.2500', '0.2700', '0.2500', '0.0675', '0.2000', '0.2300', '55.9669', '0.0000', '0.0000', '0.0000', '12:25:44', '2015-11-24', '7');
 INSERT INTO `ppnw_costing_rev` VALUES ('68', 'BBS2015-11-13', 'Bangladesh Book Socaity', 'bncc1', 'BNC13', '2015-11-13', '1', 'Blue', '1', '1', '1', '1', '1', '1', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '44.0000', '0.0000', '0.0000', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0000', '1.0936', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '21.8718', '0.0000', '0.0000', '0.0000', '05:04:46', '2015-11-25', '57');
+INSERT INTO `ppnw_costing_rev` VALUES ('69', 'BBS2015-11-13', 'Bangladesh Book Socaity', 'bncc1', 'BNC13', '2015-11-13', '1', 'Blue', '75', '99', '5', '555', '5', '5', '5.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '1.00', '2.00', '1.00', '44.0000', '0.0000', '0.0000', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0000', '1.0936', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '1.0000', '9.9999', '9.9999', '21.8718', '0.0000', '0.0000', '0.0000', '11:08:32', '2015-12-01', '57');
 
 -- ----------------------------
 -- Table structure for product
@@ -589,6 +596,635 @@ INSERT INTO `product_details` VALUES ('22', '8', '8036257c301c143c1a1e017c4df688
 INSERT INTO `product_details` VALUES ('23', '10', 'c48657dc4eb42a218ac4d69a007086ad.png', '12.2', '.png', 'C:/xampp/htdocs/ICS_NEW/assets/images/gallery/c48657dc4eb42a218ac4d69a007086ad.png');
 INSERT INTO `product_details` VALUES ('24', '10', 'ef6fa429511ffbf9b6bd547ae68e3f9c.jpg', '318.44', '.jpg', 'C:/xampp/htdocs/ICS_NEW/assets/images/gallery/ef6fa429511ffbf9b6bd547ae68e3f9c.jpg');
 INSERT INTO `product_details` VALUES ('25', '11', '1df50e2ba3e4b1a20a1d62fe2b028b4b.jpg', '489.13', '.jpg', 'C:/xampp/htdocs/ICS_NEW/assets/images/gallery/1df50e2ba3e4b1a20a1d62fe2b028b4b.jpg');
+
+-- ----------------------------
+-- Table structure for quilt_and_suit_costing
+-- ----------------------------
+DROP TABLE IF EXISTS `quilt_and_suit_costing`;
+CREATE TABLE `quilt_and_suit_costing` (
+  `tbl_quilt_and_suit_order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tbl_quilt_and_suit_dimension_id` int(11) DEFAULT NULL,
+  `tbl_quilt_and_suit_id_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_company_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_ref_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_item_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_order_date` date DEFAULT NULL,
+  `tbl_quilt_and_suit_order_usd` decimal(2,0) DEFAULT NULL,
+  `tbl_quilt_and_suit_order_wastage` decimal(2,0) DEFAULT NULL,
+  `tbl_quilt_and_suit_order_margin` decimal(2,0) DEFAULT NULL,
+  `tbl_quilt_and_suit_order_quantity` decimal(7,0) DEFAULT NULL,
+  `tbl_quilt_and_suit_order_transport` decimal(7,0) DEFAULT NULL,
+  `tbl_quilt_and_suit_order_bank_doc_charge` decimal(7,0) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_1_roll_width` int(3) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_2_roll_width` int(3) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_3_roll_width` int(3) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_1_cost` decimal(3,2) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_1_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_1_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_1_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_2_cost` decimal(3,2) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_2_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_2_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_2_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_3_cost` decimal(3,2) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_3_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_3_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_3_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_zipper_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_zipper_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_zipper_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_zipper_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_webbing_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_webbing_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_webbing_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_webbing_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_draw_string_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_draw_string_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_draw_string_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_draw_string_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_velcro_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_velcro_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_velcro_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_velcro_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_1_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_2_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_3_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_1_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_1_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_1_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_1_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_2_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_2_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_2_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_2_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_3_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_3_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_3_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_3_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_puller_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_puller_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_puller_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_puller_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_print_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_print_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_print_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_print_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_eyelet_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_eyelet_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_eyelet_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_eyelet_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_buckle_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_buckle_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_buckle_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_buckle_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_magnetic_button_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_magnetic_button_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_magnetic_button_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_magnetic_button_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_snap_button_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_snap_button_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_snap_button_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_snap_button_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_bottom_base_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_bottom_base_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_bottom_base_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_bottom_base_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_thread_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_thread_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_thread_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_thread_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_tag_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_tag_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_tag_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_tag_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_label_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_label_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_label_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_label_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_packing_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_packing_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_packing_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_packing_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_1_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_1_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_1_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_1_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_1_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_2_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_2_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_2_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_2_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_2_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_3_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_3_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_3_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_3_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_3_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_order_sewing` decimal(5,4) DEFAULT NULL,
+  `tbl_order_overheads` decimal(5,4) DEFAULT NULL,
+  `tbl_order_total_material_inc_wastage` decimal(7,4) DEFAULT NULL,
+  `tbl_order_total_overhead_and_other_cost` decimal(7,4) DEFAULT NULL,
+  `tbl_total_cost` decimal(7,4) DEFAULT NULL,
+  `tbl_total_price` decimal(7,4) DEFAULT NULL,
+  PRIMARY KEY (`tbl_quilt_and_suit_order_id`),
+  KEY `fk_woven_dimension_id` (`tbl_quilt_and_suit_dimension_id`),
+  CONSTRAINT `fk_quilt_and_suit_costing_dimension_id` FOREIGN KEY (`tbl_quilt_and_suit_dimension_id`) REFERENCES `quilt_and_suit_dimension` (`tbl_dimension_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of quilt_and_suit_costing
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for quilt_and_suit_costing_rev
+-- ----------------------------
+DROP TABLE IF EXISTS `quilt_and_suit_costing_rev`;
+CREATE TABLE `quilt_and_suit_costing_rev` (
+  `tbl_quilt_and_suit_order_rev_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tbl_quilt_and_suit_dimension_id` int(11) DEFAULT NULL,
+  `tbl_quilt_and_suit_id_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_company_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_ref_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_item_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_order_date` date DEFAULT NULL,
+  `tbl_quilt_and_suit_order_usd` decimal(2,0) DEFAULT NULL,
+  `tbl_quilt_and_suit_order_wastage` decimal(2,0) DEFAULT NULL,
+  `tbl_quilt_and_suit_order_margin` decimal(2,0) DEFAULT NULL,
+  `tbl_quilt_and_suit_order_quantity` decimal(7,0) DEFAULT NULL,
+  `tbl_quilt_and_suit_order_transport` decimal(7,0) DEFAULT NULL,
+  `tbl_quilt_and_suit_order_bank_doc_charge` decimal(7,0) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_1_roll_width` int(3) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_2_roll_width` int(3) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_3_roll_width` int(3) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_1_cost` decimal(3,2) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_1_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_1_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_1_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_2_cost` decimal(3,2) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_2_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_2_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_2_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_3_cost` decimal(3,2) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_3_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_3_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_body_material_3_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_zipper_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_zipper_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_zipper_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_zipper_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_webbing_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_webbing_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_webbing_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_webbing_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_draw_string_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_draw_string_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_draw_string_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_draw_string_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_velcro_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_velcro_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_velcro_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_velcro_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_1_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_2_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_3_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_1_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_1_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_1_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_1_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_2_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_2_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_2_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_2_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_3_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_3_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_3_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_yard_extra_3_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_puller_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_puller_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_puller_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_puller_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_print_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_print_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_print_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_print_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_eyelet_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_eyelet_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_eyelet_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_eyelet_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_buckle_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_buckle_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_buckle_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_buckle_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_magnetic_button_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_magnetic_button_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_magnetic_button_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_magnetic_button_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_snap_button_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_snap_button_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_snap_button_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_snap_button_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_bottom_base_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_bottom_base_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_bottom_base_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_bottom_base_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_thread_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_thread_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_thread_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_thread_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_tag_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_tag_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_tag_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_tag_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_label_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_label_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_label_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_label_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_packing_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_packing_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_packing_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_packing_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_1_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_1_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_1_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_1_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_1_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_2_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_2_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_2_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_2_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_2_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_3_name` varchar(255) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_3_item_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_3_item_consumption` decimal(6,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_3_item_rate` decimal(5,4) DEFAULT NULL,
+  `tbl_quilt_and_suit_trims_piece_extra_3_item_total_cost` decimal(5,4) DEFAULT NULL,
+  `tbl_order_sewing` decimal(5,4) DEFAULT NULL,
+  `tbl_order_overheads` decimal(5,4) DEFAULT NULL,
+  `tbl_order_total_material_inc_wastage` decimal(7,4) DEFAULT NULL,
+  `tbl_order_total_overhead_and_other_cost` decimal(7,4) DEFAULT NULL,
+  `tbl_total_cost` decimal(7,4) DEFAULT NULL,
+  `tbl_total_price` decimal(7,4) DEFAULT NULL,
+  `tbl_modification_time` time DEFAULT NULL,
+  `tbl_modification_date` date DEFAULT NULL,
+  `tbl_quilt_and_suit_order_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`tbl_quilt_and_suit_order_rev_id`),
+  KEY `fk_woven_dimension_id` (`tbl_quilt_and_suit_dimension_id`),
+  CONSTRAINT `quilt_and_suit_costing_rev_ibfk_1` FOREIGN KEY (`tbl_quilt_and_suit_dimension_id`) REFERENCES `quilt_and_suit_dimension_rev` (`tbl_dimension_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of quilt_and_suit_costing_rev
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for quilt_and_suit_dimension
+-- ----------------------------
+DROP TABLE IF EXISTS `quilt_and_suit_dimension`;
+CREATE TABLE `quilt_and_suit_dimension` (
+  `tbl_dimension_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tbl_dimension_body_material_1_front_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_front_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_front_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_front_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_front_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_front_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_back_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_back_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_back_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_back_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_back_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_back_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_top_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_top_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_top_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_top_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_top_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_top_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_bottom_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_bottom_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_bottom_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_bottom_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_bottom_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_bottom_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_left_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_left_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_left_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_left_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_left_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_left_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_right_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_right_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_right_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_right_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_right_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_right_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_pocket_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_pocket_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_pocket_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_pocket_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_pocket_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_pocket_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_handle_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_handle_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_handle_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_handle_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_handle_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_handle_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_piping_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_piping_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_piping_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_piping_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_piping_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_piping_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_front_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_front_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_front_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_front_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_front_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_front_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_back_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_back_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_back_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_back_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_back_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_back_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_top_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_top_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_top_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_top_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_top_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_top_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_bottom_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_bottom_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_bottom_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_bottom_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_bottom_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_bottom_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_left_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_left_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_left_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_left_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_left_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_left_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_right_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_right_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_handle_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_right_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_right_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_right_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_right_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_handle_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_handle_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_handle_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_handle_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_handle_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_pocket_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_pocket_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_pocket_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_pocket_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_pocket_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_pocket_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_piping_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_piping_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_piping_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_piping_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_piping_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_piping_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_front_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_front_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_front_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_front_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_front_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_front_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_back_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_back_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_back_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_back_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_back_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_back_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_top_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_top_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_top_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_top_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_top_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_top_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_bottom_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_bottom_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_bottom_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_bottom_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_bottom_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_bottom_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_left_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_left_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_left_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_left_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_left_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_left_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_right_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_right_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_right_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_right_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_right_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_right_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_handle_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_handle_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_handle_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_handle_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_handle_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_handle_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_pocket_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_pocket_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_pocket_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_pocket_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_pocket_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_pocket_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_piping_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_piping_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_piping_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_piping_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_piping_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_piping_width_total` decimal(3,2) DEFAULT NULL,
+  PRIMARY KEY (`tbl_dimension_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of quilt_and_suit_dimension
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for quilt_and_suit_dimension_rev
+-- ----------------------------
+DROP TABLE IF EXISTS `quilt_and_suit_dimension_rev`;
+CREATE TABLE `quilt_and_suit_dimension_rev` (
+  `tbl_dimension_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tbl_dimension_body_material_1_front_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_front_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_front_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_front_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_front_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_front_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_back_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_back_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_back_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_back_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_back_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_back_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_top_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_top_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_top_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_top_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_top_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_top_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_bottom_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_bottom_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_bottom_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_bottom_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_bottom_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_bottom_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_left_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_left_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_left_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_left_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_left_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_left_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_right_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_right_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_right_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_right_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_right_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_right_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_handle_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_handle_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_handle_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_handle_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_handle_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_handle_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_pocket_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_pocket_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_pocket_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_pocket_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_pocket_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_pocket_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_piping_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_piping_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_piping_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_piping_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_piping_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_1_piping_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_front_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_front_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_front_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_front_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_front_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_front_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_back_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_back_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_back_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_back_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_back_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_back_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_top_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_top_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_top_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_top_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_top_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_top_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_bottom_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_bottom_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_bottom_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_bottom_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_bottom_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_bottom_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_left_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_left_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_left_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_left_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_left_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_left_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_right_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_right_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_right_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_right_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_right_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_right_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_handle_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_handle_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_handle_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_handle_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_handle_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_handle_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_pocket_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_pocket_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_pocket_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_pocket_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_pocket_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_pocket_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_piping_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_piping_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_piping_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_piping_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_piping_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_2_piping_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_front_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_front_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_front_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_front_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_front_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_front_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_back_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_back_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_back_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_back_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_back_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_back_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_top_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_top_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_top_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_top_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_top_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_top_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_bottom_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_bottom_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_bottom_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_bottom_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_bottom_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_bottom_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_left_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_left_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_left_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_left_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_left_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_left_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_right_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_right_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_right_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_right_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_right_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_right_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_handle_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_handle_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_handle_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_handle_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_handle_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_handle_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_pocket_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_pocket_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_pocket_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_pocket_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_pocket_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_pocket_width_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_piping_length` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_piping_length_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_piping_length_total` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_piping_width` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_piping_width_allowance` decimal(3,2) DEFAULT NULL,
+  `tbl_dimension_body_material_3_piping_width_total` decimal(3,2) DEFAULT NULL,
+  PRIMARY KEY (`tbl_dimension_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of quilt_and_suit_dimension_rev
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for rev_just_post
@@ -683,7 +1319,7 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', '127.0.0.1', 'admin', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', null, null, null, '1268889823', '1448423576', '1', 'Admin', 'istrator', 'ADMIN', '0');
+INSERT INTO `users` VALUES ('1', '127.0.0.1', 'admin', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', null, null, null, '1268889823', '1449026849', '1', 'Admin', 'istrator', 'ADMIN', '0');
 INSERT INTO `users` VALUES ('4', '127.0.0.1', 'timir', '$2y$08$AmclLIpLcaHUy5d/IMJBB.rGfDE7x5tUv/X5iAx0sZCwZCF56sqeu', null, 'timir@simuragroup.com', null, null, null, null, '1443787186', '1446351869', '1', 'Mahibullah', 'Timir', '', '');
 INSERT INTO `users` VALUES ('5', '127.0.0.1', 'rhossain', '$2y$08$hKjjbJpDYWNTomDjaZTTIOOS.symveD0C9ZTOyb9jVx1qXaWNFcjK', null, 'rhossain@simuragroup.com', null, null, null, null, '1444545302', '1444974816', '1', 'Rajib', ' Hossain', 'SIMURA Nonwovens Ltd.', '');
 
@@ -946,7 +1582,7 @@ CREATE TABLE `woven_costing` (
   PRIMARY KEY (`tbl_woven_order_id`),
   KEY `fk_woven_dimension_id` (`tbl_woven_dimension_id`),
   CONSTRAINT `fk_woven_dimension_id` FOREIGN KEY (`tbl_woven_dimension_id`) REFERENCES `woven_dimension` (`tbl_dimension_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of woven_costing
@@ -954,6 +1590,9 @@ CREATE TABLE `woven_costing` (
 INSERT INTO `woven_costing` VALUES ('1', '11', 'SNw2015-11-24', 'Simura Non wovens', 'lwns1', 'asds', '2015-11-24', null, null, '75', '5', '5', '25000', '20000', '10000', 'MT 1', 'MT 2', 'MT 3', 'MT 4', 'MT 5', 'MT 6', '5.00', '5.00', '5.00', '5.00', '5.00', '5.00', '2.45', '2.1200', '0.5359', '1.1361', '1.25', '2.2200', '0.2734', '0.6069', '2.12', '2.2200', '0.4637', '1.0294', '0.25', '2.2200', '0.0547', '0.1214', '2.2500', '2.2200', '0.4921', '1.0925', '2.6900', '2.2200', '0.5884', '1.3062', '0.2500', '12.0000', '0.2734', '3.2808', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '0.2500', '2.0000', '0.2734', '0.5468', 'New Velcro', 'Another', 'Other', '0.2400', '23.0000', '0.2625', '6.0375', '0.2800', '0.2300', '0.3062', '0.0704', '0.2100', '0.2300', '0.2297', '0.0528', '0.0230', '0.2100', '0.0230', '0.0048', '0.2300', '0.2100', '0.2300', '0.0483', '0.2300', '0.2500', '0.2300', '0.0575', '0.5800', '0.5400', '0.5800', '0.1242', '1.0000', '2.0000', '1.0000', '2.0000', '0.5800', '0.5400', '0.5800', '0.3132', '0.5700', '0.5600', '0.5700', '0.3192', '0.5700', '0.5600', '0.5700', '0.3192', '0.5700', '0.5600', '0.5700', '0.3192', '0.0540', '0.5800', '0.0540', '0.0313', '0.5400', '0.2300', '0.5400', '0.1242', '0.5400', '0.2500', '0.5400', '0.1350', '0.8500', '0.5400', '0.8500', '0.4590', '0.5800', '0.5400', '0.5800', '0.3132', 'Buckle', '0.5800', '0.2560', '0.5800', '0.1485', 'Hook', '0.5400', '0.5600', '0.5400', '0.3024', 'New 1', '0.5800', '0.5600', '0.5800', '0.3248', 'ex4', '2.0000', '2.0000', '2.0000', '4.0000', 'ex5', '0.5800', '0.5600', '0.5800', '0.3248', '1.0000', '0.2300', '28.4936', '1.2460', '29.7396', '31.2266');
 INSERT INTO `woven_costing` VALUES ('2', '10', 'NC2015-11-24', 'Another Company', 'snwl1', 'New', '2015-11-24', null, null, '76', '6', '5', null, '25000', '25000', 'Material 1', 'Material 2', 'Material 3', 'Material 4', 'Material 5', 'Material 6', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '2.25', '0.0000', '2.4606', '0.0000', '2.36', '0.0000', '2.5809', '0.0000', '2.36', '0.0000', '2.5809', '0.0000', '2.48', '0.0000', '2.7122', '0.0000', '2.5800', '0.0000', '2.8215', '0.0000', '2.5600', '0.0000', '2.7997', '0.0000', '0.2300', '15.0000', '0.2515', '3.7725', null, null, null, null, null, null, null, null, '0.2500', '23.0000', '0.2734', '6.2882', null, null, null, '0.2500', '0.2300', '0.2734', '0.0629', '0.2100', '0.2300', '0.2297', '0.0528', '0.2300', '0.2100', '0.2515', '0.0528', '9.9999', '0.2500', null, null, '0.2100', '0.2300', null, null, '0.2100', '0.2300', null, null, '0.2100', '0.2300', null, null, null, null, null, null, '0.2300', '0.2100', null, null, '0.2300', '0.2100', null, null, '0.2300', '0.2100', null, null, '0.0210', '0.2300', null, null, '0.2300', '0.2500', null, null, '0.2300', '0.2300', null, null, '0.2100', '0.2300', null, null, '0.2300', '0.2100', null, null, '0.2500', '0.2300', null, null, 'extra 1', '0.2500', '0.2500', '0.2500', '0.0625', 'extra 2', '0.2500', '0.2300', '0.2500', '0.0575', 'extra 3', '0.2500', '0.2700', '0.2500', '0.0675', 'extra 2', null, null, null, null, 'extra 5', '0.2500', '0.2700', '0.2500', '0.0675', '0.2000', '0.2300', '14.3559', '0.4563', '14.8122', '15.5528');
 INSERT INTO `woven_costing` VALUES ('3', '12', 'SNwL2015-11-24', 'Simura Non wovens Limited', 'SNWL-1', 'SNWL1', '2015-11-24', null, null, '76', '5', '5', '25000', '25000', '10000', 'Polyester Fabric', 'Linen', 'New Cotton', 'MT 4', 'MT 5', 'MT 6', '5.00', '5.00', '5.00', '5.00', '5.00', '5.00', '2.36', '2.1200', '0.5162', '1.0943', '1.23', '2.2200', '0.2690', '0.5972', '2.65', '2.2200', '0.5796', '1.2867', '3.56', '2.2200', '0.7787', '1.7287', '2.3600', '2.2200', '0.5162', '1.1460', '2.3500', '2.2200', '0.5140', '1.1411', '0.2500', '12.0000', '0.2734', '3.2808', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '0.2500', '2.0000', '0.2734', '0.5468', '', '', '', '0.2400', '23.0000', '0.2625', '6.0375', '0.2800', '0.2300', '0.3062', '0.0704', '0.2100', '0.2300', '0.2297', '0.0528', '0.0230', '0.2100', '0.0230', '0.0048', '0.2300', '0.2100', '0.2300', '0.0483', '0.2300', '0.2500', '0.2300', '0.0575', '0.5800', '0.5400', '0.5800', '0.1242', '1.0000', '2.0000', '1.0000', '2.0000', '0.5800', '0.5400', '0.5800', '0.3132', '0.5700', '0.5600', '0.5700', '0.3192', '0.5700', '0.5600', '0.5700', '0.3192', '0.5700', '0.5600', '0.5700', '0.3192', '0.0540', '0.5800', '0.0540', '0.0313', '0.5400', '0.2300', '0.5400', '0.1242', '0.5400', '0.2500', '0.5400', '0.1350', '0.8500', '0.5400', '0.8500', '0.4590', '0.5800', '0.5400', '0.5800', '0.3132', 'Buckle', '0.5800', '0.2560', '0.5800', '0.1485', 'Hook', '0.5400', '0.5600', '0.5400', '0.3024', 'New Hook', '0.5800', '0.5600', '0.5800', '0.3248', 'Extra Hook', '0.5800', '0.5600', '0.5800', '0.3248', 'New Label', '0.5800', '0.5600', '0.5800', '0.3248', '0.2100', '0.2540', '26.4213', '0.4824', '26.9037', '28.2489');
+INSERT INTO `woven_costing` VALUES ('4', '13', 'SNW2015-11-26', 'Simura Non Wovens', 'LWNS1', 'Snwl1', '2015-11-26', null, null, '76', '10', '10', '25000', '20000', '10000', 'Polyester Fabric', 'Lining Fabric', 'Foam', 'Extra 1 ', 'Extra 2', 'Extra 3', '1.40', '1.40', '1.00', '1.00', '1.00', '1.00', '1.80', '2.1100', '1.4061', '2.9669', '1.00', '2.1100', '0.7812', '1.6483', '0.50', '2.1100', '0.5468', '1.6483', '0.50', '2.0000', '0.5468', '1.0936', '0.5000', '2.0000', '0.5468', '1.0936', '0.5000', '2.0000', '0.5468', '1.0936', '0.1500', '1.7500', '0.1640', '0.2870', '0.0700', '0.8500', '0.0766', '0.0651', '0.0600', '0.6500', '0.0656', '0.0426', '0.0200', '0.6500', '0.0219', '0.0142', '', '', '', '0.0400', '0.6500', '0.0437', '0.0284', '0.0400', '0.6500', '0.0437', '0.0284', '0.0400', '0.6500', '0.0437', '0.0284', '0.1000', '12.0000', '0.1000', '1.2000', '0.0500', '0.0000', '0.0500', '0.0000', '0.0500', '2.0000', '0.0500', '0.1000', '0.1000', '2.0000', '0.1000', '0.1000', '0.0800', '1.0000', '0.0800', '0.0800', '0.1000', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', '0.2000', '1.0000', '0.2000', '0.2000', '0.0300', '1.0000', '0.0300', '0.0300', '0.0200', '0.0000', '0.0200', '0.0000', '0.0200', '1.0000', '0.0200', '0.0200', '0.0500', '1.0000', '0.0500', '0.0500', '0.2000', '5.0000', '0.2000', '1.0000', 'Extra 1', '0.0100', '5.0000', '0.0100', '0.0500', 'Extra 2', '0.0100', '5.0000', '0.0100', '0.0500', 'Extra 3', '0.0100', '5.0000', '0.0100', '0.0500', 'Extra 4', '0.0100', '5.0000', '0.0100', '0.0500', 'Extra 5', '0.0100', '5.0000', '0.0100', '0.0500', '0.2500', '0.0100', '14.3752', '0.2758', '14.6510', '16.1161');
+INSERT INTO `woven_costing` VALUES ('5', '14', 'SNW2015-11-26', 'Simura Non Wovens', 'LWNS', 'SNWL', '2015-11-26', null, null, '76', '10', '10', '25000', '20000', '10000', 'Polyester Fabric', 'Lining Fabric', 'Foam', 'Extra 1 ', 'Extra 2', 'Extra 3', '1.40', '1.40', '1.00', '1.00', '1.00', '1.00', '1.80', '2.1100', '1.4061', '2.9669', '1.00', '2.1100', '0.7812', '1.5233', '0.50', '2.1000', '0.5468', '1.5233', '0.50', '2.1400', '0.5468', '1.0936', '0.5000', '2.1400', '0.5468', '1.0936', '0.5000', '2.1400', '0.5468', '1.0936', '0.1500', '1.7500', '0.1640', '0.2870', '0.0700', '0.8500', '0.0766', '0.0651', '0.0600', '0.6500', '0.0656', '0.0426', '0.0200', '0.6500', '0.0219', '0.0142', 'Extra 1', 'Extra 2', 'Extra 3', '0.0400', '0.6500', '0.0437', '0.0284', '0.0400', '0.6500', '0.0437', '0.0284', '0.0400', '0.6500', '0.0437', '0.0284', '0.1000', '12.0000', '0.1000', '1.2000', '0.0500', '0.0000', '0.0500', '0.0000', '0.0500', '2.0000', '0.0500', '0.1000', '0.1000', '2.0000', '0.1000', '0.1000', '0.0800', '1.0000', '0.0800', '0.0800', '0.1000', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', '0.2000', '1.0000', '0.2000', '0.2000', '0.0300', '1.0000', '0.0300', '0.0300', '0.0200', '0.0000', '0.0200', '0.0000', '0.0200', '1.0000', '0.0200', '0.0200', '0.0500', '1.0000', '0.0500', '0.0500', '0.2000', '1.0000', '0.2000', '0.2000', 'Extra 1', '0.0100', '5.0000', '0.0100', '0.0500', 'Extra 2', '0.0100', '5.0000', '0.0100', '0.0500', 'Extra 3', '0.0100', '5.0000', '0.0100', '0.0500', 'Extra 4', '0.0100', '5.0000', '0.0100', '0.0500', 'Extra 5', '0.0100', '5.0000', '0.0100', '0.0500', '0.2500', '0.0100', '13.2202', '0.2758', '13.4960', '14.8456');
+INSERT INTO `woven_costing` VALUES ('6', '15', 's2015-11-30', 'sdfs', 'asd', 'asd', '2015-11-30', null, null, '76', '5', '10', '50000', '20000', '10000', null, null, null, null, null, null, '9.99', '9.99', '9.99', null, null, null, '2.00', '0.3900', '0.1500', '0.0585', '1.75', '0.4100', '0.1925', '0.0789', '3.50', '0.3900', '0.3850', '0.0751', null, null, null, null, null, null, null, null, null, null, null, null, '0.0700', '0.7500', '0.0766', '0.0575', null, null, null, null, null, null, null, null, '0.0400', '1.0000', '0.0437', '0.0437', '', '', '', '0.0400', '1.0000', '0.0437', '0.0437', '0.0400', '1.0000', '0.0437', '0.0437', '0.0400', '1.0000', '0.0437', '0.0437', '0.0200', '1.0000', '0.0200', '0.0200', '0.0500', '0.0000', '0.0500', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', null, null, null, null, null, null, null, null, '0.1000', '0.0000', '0.1000', '0.0000', '0.0300', '0.0000', '0.0300', '0.0000', '0.0300', '0.0000', '0.0300', '0.0000', '0.0500', '0.0000', '0.0500', '0.0000', '0.0100', '1.0000', '0.0100', '0.0100', '0.0100', '1.0000', '0.0100', '0.0100', '0.0100', '0.0000', '0.0100', '0.0000', '0.0100', '1.0000', '0.0100', '0.0100', null, null, null, null, '', '0.0100', '1.0000', '0.0100', '0.0100', '', '0.0100', '1.0000', '0.0100', '0.0100', '', '0.0100', '1.0000', '0.0100', '0.0100', null, '0.0100', '1.0000', '0.0100', '0.0100', null, '0.0100', '1.0000', '0.0100', '0.0100', '0.0800', '0.0200', '0.6774', '0.1079', '0.7853', '0.8638');
 
 -- ----------------------------
 -- Table structure for woven_costing_rev
@@ -1135,7 +1774,7 @@ CREATE TABLE `woven_costing_rev` (
   PRIMARY KEY (`tbl_woven_order_rev_id`),
   KEY `fk_woven_dimension_id` (`tbl_woven_dimension_id`),
   CONSTRAINT `fk_woven_dimension_rev_id` FOREIGN KEY (`tbl_woven_dimension_id`) REFERENCES `woven_dimension_rev` (`tbl_dimension_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of woven_costing_rev
@@ -1143,6 +1782,9 @@ CREATE TABLE `woven_costing_rev` (
 INSERT INTO `woven_costing_rev` VALUES ('13', '22', 'SNw2015-11-24', 'Simura Non wovens', 'lwns1', 'asds', '2015-11-24', null, null, '75', '5', '5', '25000', '20000', '10000', 'MT 1', 'MT 2', 'MT 3', 'MT 4', 'MT 5', 'MT 6', '2.00', '1.00', '1.00', '1.00', '1.00', '1.00', '2.45', '2.1200', '1.3397', '2.8402', '1.25', '2.2200', '1.3670', '3.0347', '2.12', '2.2200', '2.3185', '5.1471', '0.25', '2.2200', '0.2734', '0.6069', '2.2500', '2.2200', '2.4606', '5.4625', '2.6900', '2.2200', '2.9418', '6.5308', '0.2500', '12.0000', '0.2734', '3.2808', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '0.2500', '2.0000', '0.2734', '0.5468', 'New Velcro', 'Another', 'Other', '0.2400', '23.0000', '0.2625', '6.0375', '0.2800', '0.2300', '0.3062', '0.0704', '0.2100', '0.2300', '0.2297', '0.0528', '0.0230', '0.2100', '0.0230', '0.0048', '0.2300', '0.2100', '0.2300', '0.0483', '0.2300', '0.2500', '0.2300', '0.0575', '0.5800', '0.5400', '0.5800', '0.1242', '1.0000', '2.0000', '1.0000', '2.0000', '0.5800', '0.5400', '0.5800', '0.3132', '0.5700', '0.5600', '0.5700', '0.3192', '0.5700', '0.5600', '0.5700', '0.3192', '0.5700', '0.5600', '0.5700', '0.3192', '0.0540', '0.5800', '0.0540', '0.0313', '0.5400', '0.2300', '0.5400', '0.1242', '0.5400', '0.2500', '0.5400', '0.1350', '0.8500', '0.5400', '0.8500', '0.4590', '0.5800', '0.5400', '0.5800', '0.3132', 'Buckle', '0.5800', '0.2560', '0.5800', '0.1485', 'Hook', '0.5400', '0.5600', '0.5400', '0.3024', 'New 1', '0.5800', '0.5600', '0.5800', '0.3248', 'ex4', '2.0000', '2.0000', '2.0000', '4.0000', 'ex5', '0.5800', '0.5600', '0.5800', '0.3248', '1.0000', '0.2300', '47.7398', '1.2460', '48.9858', '51.4351', '05:08:02', '2015-11-25', '1');
 INSERT INTO `woven_costing_rev` VALUES ('14', '23', 'SNw2015-11-24', 'Simura Non wovens', 'lwns1', 'asds', '2015-11-24', null, null, '75', '5', '5', '25000', '20000', '10000', 'MT 1', 'MT 2', 'MT 3', 'MT 4', 'MT 5', 'MT 6', '5.00', '5.00', '5.00', '5.00', '5.00', '5.00', '2.45', '2.1200', '0.5359', '1.1361', '1.25', '2.2200', '0.2734', '0.6069', '2.12', '2.2200', '0.4637', '1.0294', '0.25', '2.2200', '0.0547', '0.1214', '2.2500', '2.2200', '0.4921', '1.0925', '2.6900', '2.2200', '0.5884', '1.3062', '0.2500', '12.0000', '0.2734', '3.2808', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '0.2500', '2.0000', '0.2734', '0.5468', 'New Velcro', 'Another', 'Other', '0.2400', '23.0000', '0.2625', '6.0375', '0.2800', '0.2300', '0.3062', '0.0704', '0.2100', '0.2300', '0.2297', '0.0528', '0.0230', '0.2100', '0.0230', '0.0048', '0.2300', '0.2100', '0.2300', '0.0483', '0.2300', '0.2500', '0.2300', '0.0575', '0.5800', '0.5400', '0.5800', '0.1242', '1.0000', '2.0000', '1.0000', '2.0000', '0.5800', '0.5400', '0.5800', '0.3132', '0.5700', '0.5600', '0.5700', '0.3192', '0.5700', '0.5600', '0.5700', '0.3192', '0.5700', '0.5600', '0.5700', '0.3192', '0.0540', '0.5800', '0.0540', '0.0313', '0.5400', '0.2300', '0.5400', '0.1242', '0.5400', '0.2500', '0.5400', '0.1350', '0.8500', '0.5400', '0.8500', '0.4590', '0.5800', '0.5400', '0.5800', '0.3132', 'Buckle', '0.5800', '0.2560', '0.5800', '0.1485', 'Hook', '0.5400', '0.5600', '0.5400', '0.3024', 'New 1', '0.5800', '0.5600', '0.5800', '0.3248', 'ex4', '2.0000', '2.0000', '2.0000', '4.0000', 'ex5', '0.5800', '0.5600', '0.5800', '0.3248', '1.0000', '0.2300', '28.4936', '1.2460', '29.7396', '31.2266', '05:11:32', '2015-11-25', '1');
 INSERT INTO `woven_costing_rev` VALUES ('15', '24', 'SNwL2015-11-24', 'Simura Non wovens Limited', 'SNWL-1', 'SNWL1', '2015-11-24', null, null, '76', '5', '5', '25000', '25000', '10000', 'Polyester Fabric', 'Linen', 'New Cotton', 'MT 4', 'MT 5', 'MT 6', '5.00', '5.00', '5.00', '5.00', '5.00', '5.00', '2.36', '2.1200', '0.5162', '1.0943', '1.23', '2.2200', '0.2690', '0.5972', '2.65', '2.2200', '0.5796', '1.2867', '3.56', '2.2200', '0.7787', '1.7287', '2.3600', '2.2200', '0.5162', '1.1460', '2.3500', '2.2200', '0.5140', '1.1411', '0.2500', '12.0000', '0.2734', '3.2808', '1.0000', '1.0000', '1.0936', '1.0936', '1.0000', '1.0000', '1.0936', '1.0936', '0.2500', '2.0000', '0.2734', '0.5468', '', '', '', '0.2400', '23.0000', '0.2625', '6.0375', '0.2800', '0.2300', '0.3062', '0.0704', '0.2100', '0.2300', '0.2297', '0.0528', '0.0230', '0.2100', '0.0230', '0.0048', '0.2300', '0.2100', '0.2300', '0.0483', '0.2300', '0.2500', '0.2300', '0.0575', '0.5800', '0.5400', '0.5800', '0.1242', '1.0000', '2.0000', '1.0000', '2.0000', '0.5800', '0.5400', '0.5800', '0.3132', '0.5700', '0.5600', '0.5700', '0.3192', '0.5700', '0.5600', '0.5700', '0.3192', '0.5700', '0.5600', '0.5700', '0.3192', '0.0540', '0.5800', '0.0540', '0.0313', '0.5400', '0.2300', '0.5400', '0.1242', '0.5400', '0.2500', '0.5400', '0.1350', '0.8500', '0.5400', '0.8500', '0.4590', '0.5800', '0.5400', '0.5800', '0.3132', 'Buckle', '0.5800', '0.2560', '0.5800', '0.1485', 'Hook', '0.5400', '0.5600', '0.5400', '0.3024', 'New Hook', '0.5800', '0.5600', '0.5800', '0.3248', 'Extra Hook', '0.5800', '0.5600', '0.5800', '0.3248', 'New Label', '0.5800', '0.5600', '0.5800', '0.3248', '0.2100', '0.2540', '26.4213', '0.4824', '26.9037', '28.2489', '05:14:46', '2015-11-25', '3');
+INSERT INTO `woven_costing_rev` VALUES ('16', '25', 'SNW2015-11-26', 'Simura Non Wovens', 'LWNS', 'SNWL', '2015-11-26', null, null, '76', '10', '10', '25000', '20000', '10000', 'Polyester Fabric', 'Lining Fabric', 'Foam', 'Extra 1 ', 'Extra 2', 'Extra 3', '1.40', '1.40', '1.00', '1.00', '1.00', '1.00', '1.80', '2.1100', '1.4061', '2.9669', '1.00', '1.9500', '0.7812', '1.5233', '0.50', '1.9500', '0.5468', '1.5233', '0.50', '2.0000', '0.5468', '1.0936', '0.5000', '2.0000', '0.5468', '1.0936', '0.5000', '2.0000', '0.5468', '1.0936', '0.1500', '1.7500', '0.1640', '0.2870', '0.0700', '0.8500', '0.0766', '0.0651', '0.0600', '0.6500', '0.0656', '0.0426', '0.0200', '0.6500', '0.0219', '0.0142', 'Extra 1', 'Extra 2', 'Extra 3', '0.0400', '0.6500', '0.0437', '0.0284', '0.0400', '0.6500', '0.0437', '0.0284', '0.0400', '0.6500', '0.0437', '0.0284', '0.1000', '12.0000', '0.1000', '1.2000', '0.0500', '0.0000', '0.0500', '0.0000', '0.0500', '2.0000', '0.0500', '0.1000', '0.1000', '2.0000', '0.1000', '0.1000', '0.0800', '1.0000', '0.0800', '0.0800', '0.1000', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', '0.2000', '1.0000', '0.2000', '0.2000', '0.0300', '1.0000', '0.0300', '0.0300', '0.0200', '0.0000', '0.0200', '0.0000', '0.0200', '1.0000', '0.0200', '0.0200', '0.0500', '1.0000', '0.0500', '0.0500', '0.2000', '1.0000', '0.2000', '0.2000', 'Extra 1', '0.0100', '5.0000', '0.0100', '0.0500', 'Extra 2', '0.0100', '5.0000', '0.0100', '0.0500', 'Extra 3', '0.0100', '5.0000', '0.0100', '0.0500', 'Extra 4', '0.0100', '5.0000', '0.0100', '0.0500', 'Extra 5', '0.0100', '5.0000', '0.0100', '0.0500', '0.2500', '0.0100', '13.2202', '0.0000', '0.0000', '0.0000', '10:20:35', '2015-11-26', '5');
+INSERT INTO `woven_costing_rev` VALUES ('17', '26', 'SNW2015-11-26', 'Simura Non Wovens', 'LWNS', 'SNWL', '2015-11-26', null, null, '76', '10', '10', '25000', '20000', '10000', 'Polyester Fabric', 'Lining Fabric', 'Foam', 'Extra 1 ', 'Extra 2', 'Extra 3', '1.40', '1.40', '1.00', '1.00', '1.00', '1.00', '1.80', '2.1100', '1.4061', '2.9669', '1.00', '2.1100', '0.7812', '1.5233', '0.50', '2.1000', '0.5468', '1.5233', '0.50', '2.1400', '0.5468', '1.0936', '0.5000', '2.1400', '0.5468', '1.0936', '0.5000', '2.1400', '0.5468', '1.0936', '0.1500', '1.7500', '0.1640', '0.2870', '0.0700', '0.8500', '0.0766', '0.0651', '0.0600', '0.6500', '0.0656', '0.0426', '0.0200', '0.6500', '0.0219', '0.0142', 'Extra 1', 'Extra 2', 'Extra 3', '0.0400', '0.6500', '0.0437', '0.0284', '0.0400', '0.6500', '0.0437', '0.0284', '0.0400', '0.6500', '0.0437', '0.0284', '0.1000', '12.0000', '0.1000', '1.2000', '0.0500', '0.0000', '0.0500', '0.0000', '0.0500', '2.0000', '0.0500', '0.1000', '0.1000', '2.0000', '0.1000', '0.1000', '0.0800', '1.0000', '0.0800', '0.0800', '0.1000', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', '0.2000', '1.0000', '0.2000', '0.2000', '0.0300', '1.0000', '0.0300', '0.0300', '0.0200', '0.0000', '0.0200', '0.0000', '0.0200', '1.0000', '0.0200', '0.0200', '0.0500', '1.0000', '0.0500', '0.0500', '0.2000', '1.0000', '0.2000', '0.2000', 'Extra 1', '0.0100', '5.0000', '0.0100', '0.0500', 'Extra 2', '0.0100', '5.0000', '0.0100', '0.0500', 'Extra 3', '0.0100', '5.0000', '0.0100', '0.0500', 'Extra 4', '0.0100', '5.0000', '0.0100', '0.0500', 'Extra 5', '0.0100', '5.0000', '0.0100', '0.0500', '0.2500', '0.0100', '13.2202', '0.2758', '13.4960', '14.8456', '10:20:46', '2015-11-26', '5');
+INSERT INTO `woven_costing_rev` VALUES ('18', '27', 'N2015-11-30', 'News', 'New d', 'Another', '2015-11-30', null, null, '76', '5', '10', '50000', '20000', '10000', null, null, null, null, null, null, '9.99', '9.99', '9.99', null, null, null, '2.00', '0.3900', '0.1500', '0.0585', '1.75', '0.4100', '0.1925', '0.0789', '3.50', '0.3900', '0.3850', '0.0751', null, null, null, null, null, null, null, null, null, null, null, null, '0.0700', '0.7500', '0.0766', '0.0575', null, null, null, null, null, null, null, null, '0.0400', '1.0000', '0.0437', '0.0437', '', '', '', '0.0100', '1.0000', '0.0100', '0.0100', '0.0100', '1.0000', '0.0100', '0.0100', '0.0100', '1.0000', '0.0100', '0.0100', '0.0200', '1.0000', '0.0200', '0.0200', '0.0500', '0.0000', '0.0500', '0.0000', '0.1000', '0.0000', '0.1000', '0.0000', null, null, null, null, null, null, null, null, '0.1000', '0.0000', '0.1000', '0.0000', '0.0300', '0.0000', '0.0300', '0.0000', null, null, null, null, '0.0500', '0.0000', '0.0500', '0.0000', '0.0100', '1.0000', '0.0100', '0.0100', '0.0100', '1.0000', '0.0100', '0.0100', '0.0100', '0.0000', '0.0100', '0.0000', '0.0100', '1.0000', '0.0100', '0.0100', null, null, null, null, '', '0.0100', '1.0000', '0.0100', '0.0100', '', '0.0100', '1.0000', '0.0100', '0.0100', '', '0.0100', '1.0000', '0.0100', '0.0100', null, null, null, null, null, null, null, null, null, null, '0.0800', '0.0200', '0.6774', '0.0000', '0.0000', '0.0000', '02:34:04', '2015-11-30', '8');
 
 -- ----------------------------
 -- Table structure for woven_cost_body_material
@@ -1568,7 +2210,7 @@ CREATE TABLE `woven_dimension` (
   `tbl_dimnesion_body_material_second_extra_2` varchar(255) DEFAULT NULL,
   `tbl_dimnesion_body_material_second_extra_3` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`tbl_dimension_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of woven_dimension
@@ -1576,6 +2218,9 @@ CREATE TABLE `woven_dimension` (
 INSERT INTO `woven_dimension` VALUES ('10', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', null, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', null, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', null, null, null, null, null, null);
 INSERT INTO `woven_dimension` VALUES ('11', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', null, '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', null, '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', 'Pocket 1', 'Pocket 2', 'Pocket 3', 'Extra 1', 'Extra 2', 'Extra 3');
 INSERT INTO `woven_dimension` VALUES ('12', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', null, '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', null, '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', 'Pocket 1', 'Pocket 2', 'Pocket 3', 'Extra 1', 'Extra 2', 'Extra 3');
+INSERT INTO `woven_dimension` VALUES ('13', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', null, '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.10', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.10', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.10', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', null, '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '', '', '', '', '', '');
+INSERT INTO `woven_dimension` VALUES ('14', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.00', '0.05', '0.05', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.60', '0.05', '0.65', '0.23', '0.05', '0.28', '0.00', '0.05', '0.05', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', null, '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.60', '0.05', '0.65', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.10', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.60', '0.05', '0.65', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.10', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.00', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.60', '0.05', '0.65', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.10', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.00', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', null, '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.60', '0.05', '0.65', 'Extra 1', 'Extra 2', 'Extra 3', 'Extra 1', 'Extra 2', 'Extra 3');
+INSERT INTO `woven_dimension` VALUES ('15', '0.72', '0.02', '0.74', '0.50', '0.02', '0.52', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0.72', '0.02', '0.74', '0.52', '0.02', '0.54', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0.72', '0.02', '0.74', '0.50', '0.02', '0.52', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for woven_dimension_rev
@@ -1950,7 +2595,7 @@ CREATE TABLE `woven_dimension_rev` (
   `tbl_dimnesion_body_material_second_extra_2` varchar(255) DEFAULT NULL,
   `tbl_dimnesion_body_material_second_extra_3` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`tbl_dimension_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of woven_dimension_rev
@@ -1961,3 +2606,6 @@ INSERT INTO `woven_dimension_rev` VALUES ('21', '0.23', '0.23', '0.46', '0.23', 
 INSERT INTO `woven_dimension_rev` VALUES ('22', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', null, '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', null, '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', 'Pocket 1', 'Pocket 2', 'Pocket 3', 'Extra 1', 'Extra 2', 'Extra 3');
 INSERT INTO `woven_dimension_rev` VALUES ('23', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', null, '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', null, '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', 'Pocket 1', 'Pocket 2', 'Pocket 3', 'Extra 1', 'Extra 2', 'Extra 3');
 INSERT INTO `woven_dimension_rev` VALUES ('24', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', null, '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', null, '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.23', '0.23', '0.46', '0.46', '0.23', '0.69', 'Pocket 1', 'Pocket 2', 'Pocket 3', 'Extra 1', 'Extra 2', 'Extra 3');
+INSERT INTO `woven_dimension_rev` VALUES ('25', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.00', '0.05', '0.05', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.60', '0.05', '0.41', '0.23', '0.05', '0.28', '0.00', '0.05', '0.05', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', null, '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.60', '0.05', '0.41', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.10', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.60', '0.05', '0.41', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.10', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.00', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.60', '0.05', '0.41', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.10', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.00', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', null, '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.60', '0.05', '0.41', 'Extra 1', 'Extra 2', 'Extra 3', 'Extra 1', 'Extra 2', 'Extra 3');
+INSERT INTO `woven_dimension_rev` VALUES ('26', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.00', '0.05', '0.05', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.60', '0.05', '0.65', '0.23', '0.05', '0.28', '0.00', '0.05', '0.05', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', null, '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.60', '0.05', '0.65', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.10', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.60', '0.05', '0.65', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.10', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.00', '0.05', '0.60', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.60', '0.05', '0.65', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.10', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.23', '0.05', '0.28', '0.55', '0.05', '0.60', '0.55', '0.05', '0.60', '0.00', '0.05', '0.41', '0.55', '0.05', '0.60', '0.36', '0.05', null, '0.55', '0.05', '0.60', '0.36', '0.05', '0.41', '0.55', '0.05', '0.60', '0.60', '0.05', '0.65', 'Extra 1', 'Extra 2', 'Extra 3', 'Extra 1', 'Extra 2', 'Extra 3');
+INSERT INTO `woven_dimension_rev` VALUES ('27', '0.72', '0.02', '0.74', '0.50', '0.02', '0.52', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0.50', '0.02', '0.52', '0.52', '0.02', '0.54', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0.02', '0.02', '0.04', '0.50', '0.02', '0.52', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', '0.02', '0.02', '0.04', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);

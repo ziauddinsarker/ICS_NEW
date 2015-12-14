@@ -302,3 +302,8 @@ th {
     padding: 5px;
     width: 80px;
 }
+
+.inv-btn {
+    float: right;
+    margin: 0 0 0 10px;
+}

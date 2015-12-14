@@ -61,6 +61,7 @@ class Quilt_and_suit_model extends CI_Model
     function all_revisions_single_quilt_and_suit_costing($id){
         $this->db->select('*');
         $this->db->from('quilt_and_suit_costing_rev');
+        $this->db->join('quilt_and_suit_dimension_rev','quilt_and_suit_costing_rev.tbl_quilt_and_suit_dimension_id = quilt_and_suit_dimension_rev.tbl_dimension_id');
         $this->db->where('tbl_quilt_and_suit_order_id',$id);
         $query = $this->db->get();
         return $query->result();
@@ -146,21 +147,11 @@ class Quilt_and_suit_model extends CI_Model
     }
 
     /**
-     *
-     * @param $data
-     * @param $id
+     * @param $quilt_and_suit_id
      */
     function update_quilt_and_suit_costing($quilt_and_suit_id){
 
         $dimension_data = array(
-            'tbl_dimnesion_body_material_first_extra_1' => $this->input->post('body_material_first_extra_1'),
-            'tbl_dimnesion_body_material_first_extra_2' => $this->input->post('body_material_first_extra_2'),
-            'tbl_dimnesion_body_material_first_extra_3' => $this->input->post('body_material_first_extra_3'),
-            'tbl_dimnesion_body_material_second_extra_1' => $this->input->post('body_material_second_extra_1'),
-            'tbl_dimnesion_body_material_second_extra_2' => $this->input->post('body_material_second_extra_2'),
-            'tbl_dimnesion_body_material_second_extra_3' => $this->input->post('body_material_second_extra_3'),
-
-
             //Body Material 1
             'tbl_dimension_body_material_1_front_length' => $this->input->post('body_material_1_front_length'),
             'tbl_dimension_body_material_1_front_length_allowance' => $this->input->post('body_material_1_front_length_allowance'),
@@ -210,6 +201,14 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_dimension_body_material_1_right_width_allowance' => $this->input->post('body_material_1_right_width_allowance'),
             'tbl_dimension_body_material_1_right_width_total' => $this->input->post('body_material_1_right_width_total'),
 
+            'tbl_dimension_body_material_1_handle_length' => $this->input->post('body_material_1_handle_length'),
+            'tbl_dimension_body_material_1_handle_length_allowance' => $this->input->post('body_material_1_handle_length_allowance'),
+            'tbl_dimension_body_material_1_handle_length_total' => $this->input->post('body_material_1_handle_length_total'),
+
+            'tbl_dimension_body_material_1_handle_width' => $this->input->post('body_material_1_handle_width'),
+            'tbl_dimension_body_material_1_handle_width_allowance' => $this->input->post('body_material_1_handle_width_allowance'),
+            'tbl_dimension_body_material_1_handle_width_total' => $this->input->post('body_material_1_handle_width_total'),
+
             'tbl_dimension_body_material_1_pocket_length' => $this->input->post('body_material_1_pocket_length'),
             'tbl_dimension_body_material_1_pocket_length_allowance' => $this->input->post('body_material_1_pocket_length_allowance'),
             'tbl_dimension_body_material_1_pocket_length_total' => $this->input->post('body_material_1_pocket_length_total'),
@@ -218,29 +217,14 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_dimension_body_material_1_pocket_width_allowance' => $this->input->post('body_material_1_pocket_width_allowance'),
             'tbl_dimension_body_material_1_pocket_width_total' => $this->input->post('body_material_1_pocket_width_total'),
 
-            'tbl_dimension_body_material_1_extra_1_length' => $this->input->post('body_material_1_extra_1_length'),
-            'tbl_dimension_body_material_1_extra_1_length_allowance' => $this->input->post('body_material_1_extra_1_length_allowance'),
-            'tbl_dimension_body_material_1_extra_1_length_total' => $this->input->post('body_material_1_extra_1_length_total'),
+            'tbl_dimension_body_material_1_piping_length' => $this->input->post('body_material_1_piping_length'),
+            'tbl_dimension_body_material_1_piping_length_allowance' => $this->input->post('body_material_1_piping_length_allowance'),
+            'tbl_dimension_body_material_1_piping_length_total' => $this->input->post('body_material_1_piping_length_total'),
 
-            'tbl_dimension_body_material_1_extra_1_width' => $this->input->post('body_material_1_extra_1_width'),
-            'tbl_dimension_body_material_1_extra_1_width_allowance' => $this->input->post('body_material_1_extra_1_width_allowance'),
-            'tbl_dimension_body_material_1_extra_1_width_total' => $this->input->post('body_material_1_extra_1_width_total'),
+            'tbl_dimension_body_material_1_piping_width' => $this->input->post('body_material_1_piping_width'),
+            'tbl_dimension_body_material_1_piping_width_allowance' => $this->input->post('body_material_1_piping_width_allowance'),
+            'tbl_dimension_body_material_1_piping_width_total' => $this->input->post('body_material_1_piping_width_total'),
 
-            'tbl_dimension_body_material_1_extra_2_length' => $this->input->post('body_material_1_extra_2_length'),
-            'tbl_dimension_body_material_1_extra_2_length_allowance' => $this->input->post('body_material_1_extra_2_length_allowance'),
-            'tbl_dimension_body_material_1_extra_2_length_total' => $this->input->post('body_material_1_extra_2_length_total'),
-
-            'tbl_dimension_body_material_1_extra_2_width' => $this->input->post('body_material_1_extra_2_width'),
-            'tbl_dimension_body_material_1_extra_2_width_allowance' => $this->input->post('body_material_1_extra_2_width_allowance'),
-            'tbl_dimension_body_material_1_extra_2_width_total' => $this->input->post('body_material_1_extra_2_width_total'),
-
-            'tbl_dimension_body_material_1_extra_3_length' => $this->input->post('body_material_1_extra_3_length'),
-            'tbl_dimension_body_material_1_extra_3_length_allowance' => $this->input->post('body_material_1_extra_3_length_allowance'),
-            'tbl_dimension_body_material_1_extra_3_length_total' => $this->input->post('body_material_1_extra_3_length_total'),
-
-            'tbl_dimension_body_material_1_extra_3_width' => $this->input->post('body_material_1_extra_3_width'),
-            'tbl_dimension_body_material_1_extra_3_width_allowance' => $this->input->post('body_material_1_extra_3_width_allowance'),
-            'tbl_dimension_body_material_1_extra_3_width_total' => $this->input->post('body_material_1_extra_3_width_total'),
 
             //Body Material 2
             'tbl_dimension_body_material_2_front_length' => $this->input->post('body_material_2_front_length'),
@@ -291,6 +275,14 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_dimension_body_material_2_right_width_allowance' => $this->input->post('body_material_2_right_width_allowance'),
             'tbl_dimension_body_material_2_right_width_total' => $this->input->post('body_material_2_right_width_total'),
 
+            'tbl_dimension_body_material_2_handle_length' => $this->input->post('body_material_2_handle_length'),
+            'tbl_dimension_body_material_2_handle_length_allowance' => $this->input->post('body_material_2_handle_length_allowance'),
+            'tbl_dimension_body_material_2_handle_length_total' => $this->input->post('body_material_2_handle_length_total'),
+
+            'tbl_dimension_body_material_2_handle_width' => $this->input->post('body_material_2_handle_width'),
+            'tbl_dimension_body_material_2_handle_width_allowance' => $this->input->post('body_material_2_handle_width_allowance'),
+            'tbl_dimension_body_material_2_handle_width_total' => $this->input->post('body_material_2_handle_width_total'),
+
             'tbl_dimension_body_material_2_pocket_length' => $this->input->post('body_material_2_pocket_length'),
             'tbl_dimension_body_material_2_pocket_length_allowance' => $this->input->post('body_material_2_pocket_length_allowance'),
             'tbl_dimension_body_material_2_pocket_length_total' => $this->input->post('body_material_2_pocket_length_total'),
@@ -299,29 +291,13 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_dimension_body_material_2_pocket_width_allowance' => $this->input->post('body_material_2_pocket_width_allowance'),
             'tbl_dimension_body_material_2_pocket_width_total' => $this->input->post('body_material_2_pocket_width_total'),
 
-            'tbl_dimension_body_material_2_extra_1_length' => $this->input->post('body_material_2_extra_1_length'),
-            'tbl_dimension_body_material_2_extra_1_length_allowance' => $this->input->post('body_material_2_extra_1_length_allowance'),
-            'tbl_dimension_body_material_2_extra_1_length_total' => $this->input->post('body_material_2_extra_1_length_total'),
+            'tbl_dimension_body_material_2_piping_length' => $this->input->post('body_material_2_piping_length'),
+            'tbl_dimension_body_material_2_piping_length_allowance' => $this->input->post('body_material_2_piping_length_allowance'),
+            'tbl_dimension_body_material_2_piping_length_total' => $this->input->post('body_material_2_piping_length_total'),
 
-            'tbl_dimension_body_material_2_extra_1_width' => $this->input->post('body_material_2_extra_1_width'),
-            'tbl_dimension_body_material_2_extra_1_width_allowance' => $this->input->post('body_material_2_extra_1_width_allowance'),
-            'tbl_dimension_body_material_2_extra_1_width_total' => $this->input->post('body_material_2_extra_1_width_total'),
-
-            'tbl_dimension_body_material_2_extra_2_length' => $this->input->post('body_material_2_extra_2_length'),
-            'tbl_dimension_body_material_2_extra_2_length_allowance' => $this->input->post('body_material_2_extra_2_length_allowance'),
-            'tbl_dimension_body_material_2_extra_2_length_total' => $this->input->post('body_material_2_extra_2_length_total'),
-
-            'tbl_dimension_body_material_2_extra_2_width' => $this->input->post('body_material_2_extra_2_width'),
-            'tbl_dimension_body_material_2_extra_2_width_allowance' => $this->input->post('body_material_2_extra_2_width_allowance'),
-            'tbl_dimension_body_material_2_extra_2_width_total' => $this->input->post('body_material_2_extra_2_width_total'),
-
-            'tbl_dimension_body_material_2_extra_3_length' => $this->input->post('body_material_2_extra_3_length'),
-            'tbl_dimension_body_material_2_extra_3_length_allowance' => $this->input->post('body_material_2_extra_3_length_allowance'),
-            'tbl_dimension_body_material_2_extra_3_length_total' => $this->input->post('body_material_2_extra_3_length_total'),
-
-            'tbl_dimension_body_material_2_extra_3_width' => $this->input->post('body_material_2_extra_3_width'),
-            'tbl_dimension_body_material_2_extra_3_width_allowance' => $this->input->post('body_material_2_extra_3_width_allowance'),
-            'tbl_dimension_body_material_2_extra_3_width_total' => $this->input->post('body_material_2_extra_3_width_total'),
+            'tbl_dimension_body_material_2_piping_width' => $this->input->post('body_material_2_piping_width'),
+            'tbl_dimension_body_material_2_piping_width_allowance' => $this->input->post('body_material_2_piping_width_allowance'),
+            'tbl_dimension_body_material_2_piping_width_total' => $this->input->post('body_material_2_piping_width_total'),
 
             //Body Material 3
             'tbl_dimension_body_material_3_front_length' => $this->input->post('body_material_3_front_length'),
@@ -372,6 +348,14 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_dimension_body_material_3_right_width_allowance' => $this->input->post('body_material_3_right_width_allowance'),
             'tbl_dimension_body_material_3_right_width_total' => $this->input->post('body_material_3_right_width_total'),
 
+            'tbl_dimension_body_material_3_handle_length' => $this->input->post('body_material_3_handle_length'),
+            'tbl_dimension_body_material_3_handle_length_allowance' => $this->input->post('body_material_3_handle_length_allowance'),
+            'tbl_dimension_body_material_3_handle_length_total' => $this->input->post('body_material_3_handle_length_total'),
+
+            'tbl_dimension_body_material_3_handle_width' => $this->input->post('body_material_3_handle_width'),
+            'tbl_dimension_body_material_3_handle_width_allowance' => $this->input->post('body_material_3_handle_width_allowance'),
+            'tbl_dimension_body_material_3_handle_width_total' => $this->input->post('body_material_3_handle_width_total'),
+
             'tbl_dimension_body_material_3_pocket_length' => $this->input->post('body_material_3_pocket_length'),
             'tbl_dimension_body_material_3_pocket_length_allowance' => $this->input->post('body_material_3_pocket_length_allowance'),
             'tbl_dimension_body_material_3_pocket_length_total' => $this->input->post('body_material_3_pocket_length_total'),
@@ -380,34 +364,16 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_dimension_body_material_3_pocket_width_allowance' => $this->input->post('body_material_3_pocket_width_allowance'),
             'tbl_dimension_body_material_3_pocket_width_total' => $this->input->post('body_material_3_pocket_width_total'),
 
-            'tbl_dimension_body_material_3_extra_1_length' => $this->input->post('body_material_3_extra_1_length'),
-            'tbl_dimension_body_material_3_extra_1_length_allowance' => $this->input->post('body_material_3_extra_1_length_allowance'),
-            'tbl_dimension_body_material_3_extra_1_length_total' => $this->input->post('body_material_3_extra_1_length_total'),
+            'tbl_dimension_body_material_3_piping_length' => $this->input->post('body_material_3_piping_length'),
+            'tbl_dimension_body_material_3_piping_length_allowance' => $this->input->post('body_material_3_piping_length_allowance'),
+            'tbl_dimension_body_material_3_piping_length_total' => $this->input->post('body_material_3_piping_length_total'),
 
-            'tbl_dimension_body_material_3_extra_1_width' => $this->input->post('body_material_3_extra_1_width'),
-            'tbl_dimension_body_material_3_extra_1_width_allowance' => $this->input->post('body_material_3_extra_1_width_allowance'),
-            'tbl_dimension_body_material_3_extra_1_width_total' => $this->input->post('body_material_3_extra_1_width_total'),
+            'tbl_dimension_body_material_3_piping_width' => $this->input->post('body_material_3_piping_width'),
+            'tbl_dimension_body_material_3_piping_width_allowance' => $this->input->post('body_material_3_piping_width_allowance'),
+            'tbl_dimension_body_material_3_piping_width_total' => $this->input->post('body_material_3_piping_width_total'),
 
-            'tbl_dimension_body_material_3_extra_2_length' => $this->input->post('body_material_3_extra_2_length'),
-            'tbl_dimension_body_material_3_extra_2_length_allowance' => $this->input->post('body_material_3_extra_2_length_allowance'),
-            'tbl_dimension_body_material_3_extra_2_length_total' => $this->input->post('body_material_3_extra_2_length_total'),
-
-            'tbl_dimension_body_material_3_extra_2_width' => $this->input->post('body_material_3_extra_2_width'),
-            'tbl_dimension_body_material_3_extra_2_width_allowance' => $this->input->post('body_material_3_extra_2_width_allowance'),
-            'tbl_dimension_body_material_3_extra_2_width_total' => $this->input->post('body_material_3_extra_2_width_total'),
-
-            'tbl_dimension_body_material_3_extra_3_length' => $this->input->post('body_material_3_extra_3_length'),
-            'tbl_dimension_body_material_3_extra_3_length_allowance' => $this->input->post('body_material_3_extra_3_length_allowance'),
-            'tbl_dimension_body_material_3_extra_3_length_total' => $this->input->post('body_material_3_extra_3_length_total'),
-
-            'tbl_dimension_body_material_3_extra_3_width' => $this->input->post('body_material_3_extra_3_width'),
-            'tbl_dimension_body_material_3_extra_3_width_allowance' => $this->input->post('body_material_3_extra_3_width_allowance'),
-            'tbl_dimension_body_material_3_extra_3_width_total' => $this->input->post('body_material_3_extra_3_width_total'),
-
-
-        );
+         );
         $dimension_id = $this->input->post('dimension-id');
-
         $this->db->where('tbl_dimension_id',$dimension_id);
         $this->db->update('quilt_and_suit_dimension',$dimension_data);
 
@@ -438,11 +404,6 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_total_price' => $this->input->post('final_price_hidden'),
 
             //Body Material Name
-            'tbl_quilt_and_suit_body_material_1_name' => $this->input->post('body_material_1_name'),
-            'tbl_quilt_and_suit_body_material_2_name' => $this->input->post('body_material_2_name'),
-            'tbl_quilt_and_suit_body_material_3_name' => $this->input->post('body_material_3_name'),
-
-            //Body Material Name
             'tbl_quilt_and_suit_body_material_1_roll_width' => $this->input->post('body_material_1_roll_1'),
             'tbl_quilt_and_suit_body_material_2_roll_width' => $this->input->post('body_material_2_roll_2'),
             'tbl_quilt_and_suit_body_material_3_roll_width' => $this->input->post('body_material_3_roll_3'),
@@ -470,15 +431,10 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_quilt_and_suit_trims_yard_zipper_item_rate' => $this->input->post('zipper_consumption_rate'),
             'tbl_quilt_and_suit_trims_yard_zipper_item_total_cost' => $this->input->post('zipper_consumption_cost'),
 
-            'tbl_quilt_and_suit_trims_yard_two_inch_webbing_item_cost' => $this->input->post('two_inch_webbing_cost'),
-            'tbl_quilt_and_suit_trims_yard_two_inch_webbing_item_consumption' => $this->input->post('two_inch_webbing_consumption'),
-            'tbl_quilt_and_suit_trims_yard_two_inch_webbing_item_rate' => $this->input->post('two_inch_webbing_consumption_rate'),
-            'tbl_quilt_and_suit_trims_yard_two_inch_webbing_item_total_cost' => $this->input->post('two_inch_webbing_consumption_cost'),
-
-            'tbl_quilt_and_suit_trims_yard_one_and_half_inch_webbing_item_cost' => $this->input->post('one_and_half_inch_webbing_cost'),
-            'tbl_quilt_and_suit_trims_yard_one_and_half_webbing_item_consumption' => $this->input->post('one_and_half_inch_webbing_consumption'),
-            'tbl_quilt_and_suit_trims_yard_one_and_half_webbing_item_rate' => $this->input->post('one_and_half_inch_webbing_consumption_rate'),
-            'tbl_quilt_and_suit_trims_yard_one_and_half_webbing_item_total_cost' => $this->input->post('one_and_half_inch_webbing_consumption_cost'),
+            'tbl_quilt_and_suit_trims_yard_draw_string_item_cost' => $this->input->post('draw_string_cost'),
+            'tbl_quilt_and_suit_trims_yard_draw_string_item_consumption' => $this->input->post('draw_string_consumption'),
+            'tbl_quilt_and_suit_trims_yard_draw_string_item_rate' => $this->input->post('draw_string_consumption_rate'),
+            'tbl_quilt_and_suit_trims_yard_draw_string_item_total_cost' => $this->input->post('draw_string_consumption_cost'),
 
             'tbl_quilt_and_suit_trims_yard_velcro_item_cost' => $this->input->post('velcro_cost'),
             'tbl_quilt_and_suit_trims_yard_velcro_item_consumption' => $this->input->post('velcro_consumption'),
@@ -515,20 +471,16 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_quilt_and_suit_trims_piece_print_item_rate' => $this->input->post('print_consumption_rate'),
             'tbl_quilt_and_suit_trims_piece_print_item_total_cost' => $this->input->post('print_consumption_cost'),
 
-            'tbl_quilt_and_suit_trims_piece_d_buckle_item_cost' => $this->input->post('buckle_cost'),
-            'tbl_quilt_and_suit_trims_piece_d_buckle_item_consumption' => $this->input->post('buckle_consumption'),
-            'tbl_quilt_and_suit_trims_piece_d_buckle_item_rate' => $this->input->post('buckle_consumption_rate'),
-            'tbl_quilt_and_suit_trims_piece_d_buckle_item_total_cost' => $this->input->post('buckle_consumption_cost'),
 
-            'tbl_quilt_and_suit_trims_piece_swivel_hook_item_cost' => $this->input->post('swivel_hook_cost'),
-            'tbl_quilt_and_suit_trims_piece_swivel_hook_item_consumption' => $this->input->post('swivel_hook_consumption'),
-            'tbl_quilt_and_suit_trims_piece_swivel_hook_item_rate' => $this->input->post('swivel_hook_consumption_rate'),
-            'tbl_quilt_and_suit_trims_piece_swivel_hook_item_total_cost' => $this->input->post('swivel_hook_consumption_cost'),
+            'tbl_quilt_and_suit_trims_piece_eyelet_item_cost' => $this->input->post('eyelet_cost'),
+            'tbl_quilt_and_suit_trims_piece_eyelet_item_consumption' => $this->input->post('eyelet_consumption'),
+            'tbl_quilt_and_suit_trims_piece_eyelet_item_rate' => $this->input->post('eyelet_consumption_rate'),
+            'tbl_quilt_and_suit_trims_piece_eyelet_item_total_cost' => $this->input->post('eyelet_consumption_cost'),
 
-            'tbl_quilt_and_suit_trims_piece_adjustable_bukle_item_cost' => $this->input->post('adjustable_buckle_cost'),
-            'tbl_quilt_and_suit_trims_piece_adjustable_bukle_item_consumption' => $this->input->post('adjustable_buckle_consumption'),
-            'tbl_quilt_and_suit_trims_piece_adjustable_bukle_item_rate' => $this->input->post('adjustable_buckle_consumption_rate'),
-            'tbl_quilt_and_suit_trims_piece_adjustable_bukle_item_total_cost' => $this->input->post('adjustable_buckle_consumption_cost'),
+            'tbl_quilt_and_suit_trims_piece_buckle_item_cost' => $this->input->post('buckle_cost'),
+            'tbl_quilt_and_suit_trims_piece_buckle_item_consumption' => $this->input->post('buckle_consumption'),
+            'tbl_quilt_and_suit_trims_piece_buckle_item_rate' => $this->input->post('buckle_consumption_rate'),
+            'tbl_quilt_and_suit_trims_piece_buckle_item_total_cost' => $this->input->post('buckle_consumption_cost'),
 
             'tbl_quilt_and_suit_trims_piece_magnetic_button_item_cost' => $this->input->post('magnetic_button_cost'),
             'tbl_quilt_and_suit_trims_piece_magnetic_button_item_consumption' => $this->input->post('magnetic_button_consumption'),
@@ -539,11 +491,6 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_quilt_and_suit_trims_piece_snap_button_item_consumption' => $this->input->post('snap_button_consumption'),
             'tbl_quilt_and_suit_trims_piece_snap_button_item_rate' => $this->input->post('snap_button_consumption_rate'),
             'tbl_quilt_and_suit_trims_piece_snap_button_item_total_cost' => $this->input->post('snap_button_consumption_cost'),
-
-            'tbl_quilt_and_suit_trims_piece_rivet_item_cost' => $this->input->post('rivet_cost'),
-            'tbl_quilt_and_suit_trims_piece_rivet_item_consumption' => $this->input->post('rivet_consumption'),
-            'tbl_quilt_and_suit_trims_piece_rivet_item_rate' => $this->input->post('rivet_consumption_rate'),
-            'tbl_quilt_and_suit_trims_piece_rivet_item_total_cost' => $this->input->post('rivet_consumption_cost'),
 
             'tbl_quilt_and_suit_trims_piece_bottom_base_item_cost' => $this->input->post('bottom_base_cost'),
             'tbl_quilt_and_suit_trims_piece_bottom_base_item_consumption' => $this->input->post('bottom_base_consumption'),
@@ -570,11 +517,6 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_quilt_and_suit_trims_piece_packing_item_rate' => $this->input->post('packing_consumption_rate'),
             'tbl_quilt_and_suit_trims_piece_packing_item_total_cost' => $this->input->post('packing_consumption_cost'),
 
-            'tbl_quilt_and_suit_trims_piece_bottom_shoe_item_cost' => $this->input->post('bottom_shoe_cost'),
-            'tbl_quilt_and_suit_trims_piece_bottom_shoe_item_consumption' => $this->input->post('bottom_shoe_consumption'),
-            'tbl_quilt_and_suit_trims_piece_bottom_shoe_item_rate' => $this->input->post('bottom_shoe_consumption_rate'),
-            'tbl_quilt_and_suit_trims_piece_bottom_shoe_item_total_cost' => $this->input->post('bottom_shoe_consumption_cost'),
-
             'tbl_quilt_and_suit_trims_piece_extra_1_name' => $this->input->post('extra_1_piece_name'),
             'tbl_quilt_and_suit_trims_piece_extra_1_item_cost' => $this->input->post('extra_1_piece_cost'),
             'tbl_quilt_and_suit_trims_piece_extra_1_item_consumption' => $this->input->post('extra_1_piece_consumption'),
@@ -593,34 +535,13 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_quilt_and_suit_trims_piece_extra_3_item_rate' => $this->input->post('extra_3_piece_consumption_rate'),
             'tbl_quilt_and_suit_trims_piece_extra_3_item_total_cost' => $this->input->post('extra_3_piece_consumption_cost'),
 
-            'tbl_quilt_and_suit_trims_piece_extra_4_name' => $this->input->post('extra_4_piece_name'),
-            'tbl_quilt_and_suit_trims_piece_extra_4_item_cost' => $this->input->post('extra_4_piece_cost'),
-            'tbl_quilt_and_suit_trims_piece_extra_4_item_consumption' => $this->input->post('extra_4_piece_consumption'),
-            'tbl_quilt_and_suit_trims_piece_extra_4_item_rate' => $this->input->post('extra_4_piece_consumption_rate'),
-            'tbl_quilt_and_suit_trims_piece_extra_4_item_total_cost' => $this->input->post('extra_4_piece_consumption_cost'),
-
-            'tbl_quilt_and_suit_trims_piece_extra_5_name' => $this->input->post('extra_5_piece_name'),
-            'tbl_quilt_and_suit_trims_piece_extra_5_item_cost' => $this->input->post('extra_5_piece_cost'),
-            'tbl_quilt_and_suit_trims_piece_extra_5_item_consumption' => $this->input->post('extra_5_piece_consumption'),
-            'tbl_quilt_and_suit_trims_piece_extra_5_item_rate' => $this->input->post('extra_5_piece_consumption_rate'),
-            'tbl_quilt_and_suit_trims_piece_extra_5_item_total_cost' => $this->input->post('extra_5_piece_consumption_cost'),
         );
 
         $this->db->where('tbl_quilt_and_suit_order_id',$quilt_and_suit_id);
         $this->db->update('quilt_and_suit_costing',$quilt_and_suit_update_data);
 
-
-
         //Save Revision Data
         $quilt_and_suit_dimension_rev_data = array(
-            'tbl_dimnesion_body_material_first_extra_1' => $this->input->post('body_material_first_extra_1'),
-            'tbl_dimnesion_body_material_first_extra_2' => $this->input->post('body_material_first_extra_2'),
-            'tbl_dimnesion_body_material_first_extra_3' => $this->input->post('body_material_first_extra_3'),
-            'tbl_dimnesion_body_material_second_extra_1' => $this->input->post('body_material_second_extra_1'),
-            'tbl_dimnesion_body_material_second_extra_2' => $this->input->post('body_material_second_extra_2'),
-            'tbl_dimnesion_body_material_second_extra_3' => $this->input->post('body_material_second_extra_3'),
-
-
             //Body Material 1
             'tbl_dimension_body_material_1_front_length' => $this->input->post('body_material_1_front_length'),
             'tbl_dimension_body_material_1_front_length_allowance' => $this->input->post('body_material_1_front_length_allowance'),
@@ -670,6 +591,14 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_dimension_body_material_1_right_width_allowance' => $this->input->post('body_material_1_right_width_allowance'),
             'tbl_dimension_body_material_1_right_width_total' => $this->input->post('body_material_1_right_width_total'),
 
+            'tbl_dimension_body_material_1_handle_length' => $this->input->post('body_material_1_handle_length'),
+            'tbl_dimension_body_material_1_handle_length_allowance' => $this->input->post('body_material_1_handle_length_allowance'),
+            'tbl_dimension_body_material_1_handle_length_total' => $this->input->post('body_material_1_handle_length_total'),
+
+            'tbl_dimension_body_material_1_handle_width' => $this->input->post('body_material_1_handle_width'),
+            'tbl_dimension_body_material_1_handle_width_allowance' => $this->input->post('body_material_1_handle_width_allowance'),
+            'tbl_dimension_body_material_1_handle_width_total' => $this->input->post('body_material_1_handle_width_total'),
+
             'tbl_dimension_body_material_1_pocket_length' => $this->input->post('body_material_1_pocket_length'),
             'tbl_dimension_body_material_1_pocket_length_allowance' => $this->input->post('body_material_1_pocket_length_allowance'),
             'tbl_dimension_body_material_1_pocket_length_total' => $this->input->post('body_material_1_pocket_length_total'),
@@ -678,29 +607,13 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_dimension_body_material_1_pocket_width_allowance' => $this->input->post('body_material_1_pocket_width_allowance'),
             'tbl_dimension_body_material_1_pocket_width_total' => $this->input->post('body_material_1_pocket_width_total'),
 
-            'tbl_dimension_body_material_1_extra_1_length' => $this->input->post('body_material_1_extra_1_length'),
-            'tbl_dimension_body_material_1_extra_1_length_allowance' => $this->input->post('body_material_1_extra_1_length_allowance'),
-            'tbl_dimension_body_material_1_extra_1_length_total' => $this->input->post('body_material_1_extra_1_length_total'),
+            'tbl_dimension_body_material_1_piping_length' => $this->input->post('body_material_1_piping_length'),
+            'tbl_dimension_body_material_1_piping_length_allowance' => $this->input->post('body_material_1_piping_length_allowance'),
+            'tbl_dimension_body_material_1_piping_length_total' => $this->input->post('body_material_1_piping_length_total'),
 
-            'tbl_dimension_body_material_1_extra_1_width' => $this->input->post('body_material_1_extra_1_width'),
-            'tbl_dimension_body_material_1_extra_1_width_allowance' => $this->input->post('body_material_1_extra_1_width_allowance'),
-            'tbl_dimension_body_material_1_extra_1_width_total' => $this->input->post('body_material_1_extra_1_width_total'),
-
-            'tbl_dimension_body_material_1_extra_2_length' => $this->input->post('body_material_1_extra_2_length'),
-            'tbl_dimension_body_material_1_extra_2_length_allowance' => $this->input->post('body_material_1_extra_2_length_allowance'),
-            'tbl_dimension_body_material_1_extra_2_length_total' => $this->input->post('body_material_1_extra_2_length_total'),
-
-            'tbl_dimension_body_material_1_extra_2_width' => $this->input->post('body_material_1_extra_2_width'),
-            'tbl_dimension_body_material_1_extra_2_width_allowance' => $this->input->post('body_material_1_extra_2_width_allowance'),
-            'tbl_dimension_body_material_1_extra_2_width_total' => $this->input->post('body_material_1_extra_2_width_total'),
-
-            'tbl_dimension_body_material_1_extra_3_length' => $this->input->post('body_material_1_extra_3_length'),
-            'tbl_dimension_body_material_1_extra_3_length_allowance' => $this->input->post('body_material_1_extra_3_length_allowance'),
-            'tbl_dimension_body_material_1_extra_3_length_total' => $this->input->post('body_material_1_extra_3_length_total'),
-
-            'tbl_dimension_body_material_1_extra_3_width' => $this->input->post('body_material_1_extra_3_width'),
-            'tbl_dimension_body_material_1_extra_3_width_allowance' => $this->input->post('body_material_1_extra_3_width_allowance'),
-            'tbl_dimension_body_material_1_extra_3_width_total' => $this->input->post('body_material_1_extra_3_width_total'),
+            'tbl_dimension_body_material_1_piping_width' => $this->input->post('body_material_1_piping_width'),
+            'tbl_dimension_body_material_1_piping_width_allowance' => $this->input->post('body_material_1_piping_width_allowance'),
+            'tbl_dimension_body_material_1_piping_width_total' => $this->input->post('body_material_1_piping_width_total'),
 
             //Body Material 2
             'tbl_dimension_body_material_2_front_length' => $this->input->post('body_material_2_front_length'),
@@ -751,6 +664,14 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_dimension_body_material_2_right_width_allowance' => $this->input->post('body_material_2_right_width_allowance'),
             'tbl_dimension_body_material_2_right_width_total' => $this->input->post('body_material_2_right_width_total'),
 
+            'tbl_dimension_body_material_2_handle_length' => $this->input->post('body_material_2_handle_length'),
+            'tbl_dimension_body_material_2_handle_length_allowance' => $this->input->post('body_material_2_handle_length_allowance'),
+            'tbl_dimension_body_material_2_handle_length_total' => $this->input->post('body_material_2_handle_length_total'),
+
+            'tbl_dimension_body_material_2_handle_width' => $this->input->post('body_material_2_handle_width'),
+            'tbl_dimension_body_material_2_handle_width_allowance' => $this->input->post('body_material_2_handle_width_allowance'),
+            'tbl_dimension_body_material_2_handle_width_total' => $this->input->post('body_material_2_handle_width_total'),
+
             'tbl_dimension_body_material_2_pocket_length' => $this->input->post('body_material_2_pocket_length'),
             'tbl_dimension_body_material_2_pocket_length_allowance' => $this->input->post('body_material_2_pocket_length_allowance'),
             'tbl_dimension_body_material_2_pocket_length_total' => $this->input->post('body_material_2_pocket_length_total'),
@@ -759,29 +680,13 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_dimension_body_material_2_pocket_width_allowance' => $this->input->post('body_material_2_pocket_width_allowance'),
             'tbl_dimension_body_material_2_pocket_width_total' => $this->input->post('body_material_2_pocket_width_total'),
 
-            'tbl_dimension_body_material_2_extra_1_length' => $this->input->post('body_material_2_extra_1_length'),
-            'tbl_dimension_body_material_2_extra_1_length_allowance' => $this->input->post('body_material_2_extra_1_length_allowance'),
-            'tbl_dimension_body_material_2_extra_1_length_total' => $this->input->post('body_material_2_extra_1_length_total'),
+            'tbl_dimension_body_material_2_piping_length' => $this->input->post('body_material_2_piping_length'),
+            'tbl_dimension_body_material_2_piping_length_allowance' => $this->input->post('body_material_2_piping_length_allowance'),
+            'tbl_dimension_body_material_2_piping_length_total' => $this->input->post('body_material_2_piping_length_total'),
 
-            'tbl_dimension_body_material_2_extra_1_width' => $this->input->post('body_material_2_extra_1_width'),
-            'tbl_dimension_body_material_2_extra_1_width_allowance' => $this->input->post('body_material_2_extra_1_width_allowance'),
-            'tbl_dimension_body_material_2_extra_1_width_total' => $this->input->post('body_material_2_extra_1_width_total'),
-
-            'tbl_dimension_body_material_2_extra_2_length' => $this->input->post('body_material_2_extra_2_length'),
-            'tbl_dimension_body_material_2_extra_2_length_allowance' => $this->input->post('body_material_2_extra_2_length_allowance'),
-            'tbl_dimension_body_material_2_extra_2_length_total' => $this->input->post('body_material_2_extra_2_length_total'),
-
-            'tbl_dimension_body_material_2_extra_2_width' => $this->input->post('body_material_2_extra_2_width'),
-            'tbl_dimension_body_material_2_extra_2_width_allowance' => $this->input->post('body_material_2_extra_2_width_allowance'),
-            'tbl_dimension_body_material_2_extra_2_width_total' => $this->input->post('body_material_2_extra_2_width_total'),
-
-            'tbl_dimension_body_material_2_extra_3_length' => $this->input->post('body_material_2_extra_3_length'),
-            'tbl_dimension_body_material_2_extra_3_length_allowance' => $this->input->post('body_material_2_extra_3_length_allowance'),
-            'tbl_dimension_body_material_2_extra_3_length_total' => $this->input->post('body_material_2_extra_3_length_total'),
-
-            'tbl_dimension_body_material_2_extra_3_width' => $this->input->post('body_material_2_extra_3_width'),
-            'tbl_dimension_body_material_2_extra_3_width_allowance' => $this->input->post('body_material_2_extra_3_width_allowance'),
-            'tbl_dimension_body_material_2_extra_3_width_total' => $this->input->post('body_material_2_extra_3_width_total'),
+            'tbl_dimension_body_material_2_piping_width' => $this->input->post('body_material_2_piping_width'),
+            'tbl_dimension_body_material_2_piping_width_allowance' => $this->input->post('body_material_2_piping_width_allowance'),
+            'tbl_dimension_body_material_2_piping_width_total' => $this->input->post('body_material_2_piping_width_total'),
 
             //Body Material 3
             'tbl_dimension_body_material_3_front_length' => $this->input->post('body_material_3_front_length'),
@@ -832,6 +737,14 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_dimension_body_material_3_right_width_allowance' => $this->input->post('body_material_3_right_width_allowance'),
             'tbl_dimension_body_material_3_right_width_total' => $this->input->post('body_material_3_right_width_total'),
 
+            'tbl_dimension_body_material_3_handle_length' => $this->input->post('body_material_3_handle_length'),
+            'tbl_dimension_body_material_3_handle_length_allowance' => $this->input->post('body_material_3_handle_length_allowance'),
+            'tbl_dimension_body_material_3_handle_length_total' => $this->input->post('body_material_3_handle_length_total'),
+
+            'tbl_dimension_body_material_3_handle_width' => $this->input->post('body_material_3_handle_width'),
+            'tbl_dimension_body_material_3_handle_width_allowance' => $this->input->post('body_material_3_handle_width_allowance'),
+            'tbl_dimension_body_material_3_handle_width_total' => $this->input->post('body_material_3_handle_width_total'),
+
             'tbl_dimension_body_material_3_pocket_length' => $this->input->post('body_material_3_pocket_length'),
             'tbl_dimension_body_material_3_pocket_length_allowance' => $this->input->post('body_material_3_pocket_length_allowance'),
             'tbl_dimension_body_material_3_pocket_length_total' => $this->input->post('body_material_3_pocket_length_total'),
@@ -840,35 +753,19 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_dimension_body_material_3_pocket_width_allowance' => $this->input->post('body_material_3_pocket_width_allowance'),
             'tbl_dimension_body_material_3_pocket_width_total' => $this->input->post('body_material_3_pocket_width_total'),
 
-            'tbl_dimension_body_material_3_extra_1_length' => $this->input->post('body_material_3_extra_1_length'),
-            'tbl_dimension_body_material_3_extra_1_length_allowance' => $this->input->post('body_material_3_extra_1_length_allowance'),
-            'tbl_dimension_body_material_3_extra_1_length_total' => $this->input->post('body_material_3_extra_1_length_total'),
+            'tbl_dimension_body_material_3_piping_length' => $this->input->post('body_material_3_piping_length'),
+            'tbl_dimension_body_material_3_piping_length_allowance' => $this->input->post('body_material_3_piping_length_allowance'),
+            'tbl_dimension_body_material_3_piping_length_total' => $this->input->post('body_material_3_piping_length_total'),
 
-            'tbl_dimension_body_material_3_extra_1_width' => $this->input->post('body_material_3_extra_1_width'),
-            'tbl_dimension_body_material_3_extra_1_width_allowance' => $this->input->post('body_material_3_extra_1_width_allowance'),
-            'tbl_dimension_body_material_3_extra_1_width_total' => $this->input->post('body_material_3_extra_1_width_total'),
-
-            'tbl_dimension_body_material_3_extra_2_length' => $this->input->post('body_material_3_extra_2_length'),
-            'tbl_dimension_body_material_3_extra_2_length_allowance' => $this->input->post('body_material_3_extra_2_length_allowance'),
-            'tbl_dimension_body_material_3_extra_2_length_total' => $this->input->post('body_material_3_extra_2_length_total'),
-
-            'tbl_dimension_body_material_3_extra_2_width' => $this->input->post('body_material_3_extra_2_width'),
-            'tbl_dimension_body_material_3_extra_2_width_allowance' => $this->input->post('body_material_3_extra_2_width_allowance'),
-            'tbl_dimension_body_material_3_extra_2_width_total' => $this->input->post('body_material_3_extra_2_width_total'),
-
-            'tbl_dimension_body_material_3_extra_3_length' => $this->input->post('body_material_3_extra_3_length'),
-            'tbl_dimension_body_material_3_extra_3_length_allowance' => $this->input->post('body_material_3_extra_3_length_allowance'),
-            'tbl_dimension_body_material_3_extra_3_length_total' => $this->input->post('body_material_3_extra_3_length_total'),
-
-            'tbl_dimension_body_material_3_extra_3_width' => $this->input->post('body_material_3_extra_3_width'),
-            'tbl_dimension_body_material_3_extra_3_width_allowance' => $this->input->post('body_material_3_extra_3_width_allowance'),
-            'tbl_dimension_body_material_3_extra_3_width_total' => $this->input->post('body_material_3_extra_3_width_total'),
+            'tbl_dimension_body_material_3_piping_width' => $this->input->post('body_material_3_piping_width'),
+            'tbl_dimension_body_material_3_piping_width_allowance' => $this->input->post('body_material_3_piping_width_allowance'),
+            'tbl_dimension_body_material_3_piping_width_total' => $this->input->post('body_material_3_piping_width_total'),
         );
         $this->db->insert('quilt_and_suit_dimension_rev',$quilt_and_suit_dimension_rev_data);
         $inserted_dimension_rev_id = $this->db->insert_id();
 
         $quilt_and_suit_data_rev = array(
-            'tbl_quilt_and_suit_order_id' => $this->input->post('quilt_and_suit-id'),
+            'tbl_quilt_and_suit_order_id' => $this->input->post('quilt-and-suit-id'),
             'tbl_quilt_and_suit_dimension_id' => $inserted_dimension_rev_id,
             'tbl_quilt_and_suit_id_name' => $this->input->post('order_id'),
             'tbl_quilt_and_suit_company_name' => $this->input->post('order_company'),
@@ -894,11 +791,6 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_order_total_overhead_and_other_cost' => $this->input->post('total_overhead_and_other_hidden'),
             'tbl_total_cost' => $this->input->post('total_cost_hidden'),
             'tbl_total_price' => $this->input->post('final_price_hidden'),
-
-            //Body Material Name
-            'tbl_quilt_and_suit_body_material_1_name' => $this->input->post('body_material_1_name'),
-            'tbl_quilt_and_suit_body_material_2_name' => $this->input->post('body_material_2_name'),
-            'tbl_quilt_and_suit_body_material_3_name' => $this->input->post('body_material_3_name'),
 
             //Body Material Name
             'tbl_quilt_and_suit_body_material_1_roll_width' => $this->input->post('body_material_1_roll_1'),
@@ -933,6 +825,11 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_quilt_and_suit_trims_yard_webbing_item_rate' => $this->input->post('webbing_consumption_rate'),
             'tbl_quilt_and_suit_trims_yard_webbing_item_total_cost' => $this->input->post('webbing_consumption_cost'),
 
+            'tbl_quilt_and_suit_trims_yard_draw_string_item_cost' => $this->input->post('draw_string_cost'),
+            'tbl_quilt_and_suit_trims_yard_draw_string_item_consumption' => $this->input->post('draw_string_consumption'),
+            'tbl_quilt_and_suit_trims_yard_draw_string_item_rate' => $this->input->post('draw_string_consumption_rate'),
+            'tbl_quilt_and_suit_trims_yard_draw_string_item_total_cost' => $this->input->post('draw_string_consumption_cost'),
+
             'tbl_quilt_and_suit_trims_yard_velcro_item_cost' => $this->input->post('velcro_cost'),
             'tbl_quilt_and_suit_trims_yard_velcro_item_consumption' => $this->input->post('velcro_consumption'),
             'tbl_quilt_and_suit_trims_yard_velcro_item_rate' => $this->input->post('velcro_consumption_rate'),
@@ -941,7 +838,6 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_quilt_and_suit_trims_yard_extra_1_name' => $this->input->post('extra_trim_yard_extra_1_name'),
             'tbl_quilt_and_suit_trims_yard_extra_2_name' => $this->input->post('extra_trim_yard_extra_2_name'),
             'tbl_quilt_and_suit_trims_yard_extra_3_name' => $this->input->post('extra_trim_yard_extra_3_name'),
-
 
             'tbl_quilt_and_suit_trims_yard_extra_1_item_cost' => $this->input->post('extra_trim_yard_1_cost'),
             'tbl_quilt_and_suit_trims_yard_extra_1_item_consumption' => $this->input->post('extra_trim_yard_1_consumption'),
@@ -967,6 +863,11 @@ class Quilt_and_suit_model extends CI_Model
             'tbl_quilt_and_suit_trims_piece_print_item_consumption' => $this->input->post('print_consumption'),
             'tbl_quilt_and_suit_trims_piece_print_item_rate' => $this->input->post('print_consumption_rate'),
             'tbl_quilt_and_suit_trims_piece_print_item_total_cost' => $this->input->post('print_consumption_cost'),
+
+            'tbl_quilt_and_suit_trims_piece_eyelet_item_cost' => $this->input->post('eyelet_cost'),
+            'tbl_quilt_and_suit_trims_piece_eyelet_item_consumption' => $this->input->post('eyelet_consumption'),
+            'tbl_quilt_and_suit_trims_piece_eyelet_item_rate' => $this->input->post('eyelet_consumption_rate'),
+            'tbl_quilt_and_suit_trims_piece_eyelet_item_total_cost' => $this->input->post('eyelet_consumption_cost'),
 
             'tbl_quilt_and_suit_trims_piece_buckle_item_cost' => $this->input->post('buckle_cost'),
             'tbl_quilt_and_suit_trims_piece_buckle_item_consumption' => $this->input->post('buckle_consumption'),

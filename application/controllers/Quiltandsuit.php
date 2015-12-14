@@ -73,8 +73,8 @@ class Quiltandsuit extends CI_Controller
         $data['quilt_and_suit_item_name'] = $dt->tbl_quilt_and_suit_item_name;
         $data['quilt_and_suit_ref_name'] = $dt->tbl_quilt_and_suit_ref_name;
 
-        $data['quilt_and_suit_order_gsm'] = $dt->tbl_quilt_and_suit_order_gsm;
-        $data['quilt_and_suit_order_color'] = $dt->tbl_quilt_and_suit_order_color;
+        //$data['quilt_and_suit_order_gsm'] = $dt->tbl_quilt_and_suit_order_gsm;
+       // $data['quilt_and_suit_order_color'] = $dt->tbl_quilt_and_suit_order_color;
         $data['quilt_and_suit_order_usd'] = $dt->tbl_quilt_and_suit_order_usd;
 
         $data['quilt_and_suit_order_wastage'] = $dt->tbl_quilt_and_suit_order_wastage;
@@ -124,20 +124,20 @@ class Quiltandsuit extends CI_Controller
         $data['zipper_consumption_cost'] = $dt->tbl_quilt_and_suit_trims_yard_zipper_item_total_cost;
 
 
-        $data['quilt_and_suit_trims_yard_two_inch_webbing_item_cost'] = $dt->tbl_quilt_and_suit_trims_yard_two_inch_webbing_item_cost;
-        $data['quilt_and_suit_trims_yard_two_inch_webbing_item_consumption'] = $dt->tbl_quilt_and_suit_trims_yard_two_inch_webbing_item_consumption;
-        $data['quilt_and_suit_trims_yard_two_inch_webbing_item_rate'] = $dt->tbl_quilt_and_suit_trims_yard_two_inch_webbing_item_rate;
-        $data['quilt_and_suit_trims_yard_two_inch_webbing_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_yard_two_inch_webbing_item_total_cost;
-
-        $data['quilt_and_suit_trims_yard_one_and_half_inch_webbing_item_cost'] = $dt->tbl_quilt_and_suit_trims_yard_one_and_half_inch_webbing_item_cost;
-        $data['quilt_and_suit_trims_yard_one_and_half_webbing_item_consumption'] = $dt->tbl_quilt_and_suit_trims_yard_one_and_half_webbing_item_consumption;
-        $data['quilt_and_suit_trims_yard_one_and_half_webbing_item_rate'] = $dt->tbl_quilt_and_suit_trims_yard_one_and_half_webbing_item_rate;
-        $data['quilt_and_suit_trims_yard_one_and_half_webbing_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_yard_one_and_half_webbing_item_total_cost;
+        $data['quilt_and_suit_trims_yard_webbing_item_cost'] = $dt->tbl_quilt_and_suit_trims_yard_webbing_item_cost;
+        $data['quilt_and_suit_trims_yard_webbing_item_consumption'] = $dt->tbl_quilt_and_suit_trims_yard_webbing_item_consumption;
+        $data['quilt_and_suit_trims_yard_webbing_item_rate'] = $dt->tbl_quilt_and_suit_trims_yard_webbing_item_rate;
+        $data['quilt_and_suit_trims_yard_webbing_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_yard_webbing_item_total_cost;
 
         $data['quilt_and_suit_trims_yard_velcro_item_cost'] = $dt->tbl_quilt_and_suit_trims_yard_velcro_item_cost;
         $data['quilt_and_suit_trims_yard_velcro_item_consumption'] = $dt->tbl_quilt_and_suit_trims_yard_velcro_item_consumption;
         $data['quilt_and_suit_trims_yard_velcro_item_rate'] = $dt->tbl_quilt_and_suit_trims_yard_velcro_item_rate;
         $data['quilt_and_suit_trims_yard_velcro_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_yard_velcro_item_total_cost;
+
+        $data['draw_string_item_cost'] = $dt->tbl_quilt_and_suit_trims_yard_draw_string_item_cost;
+        $data['draw_string_item_consumption'] = $dt->tbl_quilt_and_suit_trims_yard_draw_string_item_consumption;
+        $data['draw_string_item_consumption_rate'] = $dt->tbl_quilt_and_suit_trims_yard_draw_string_item_rate;
+        $data['draw_string_item_consumption_cost'] = $dt->tbl_quilt_and_suit_trims_yard_draw_string_item_total_cost;
 
 
         $data['extra_trim_yard_extra_1_name'] = $dt->tbl_quilt_and_suit_trims_yard_extra_1_name;
@@ -171,6 +171,11 @@ class Quiltandsuit extends CI_Controller
         $data['quilt_and_suit_trims_piece_print_item_consumption'] = $dt->tbl_quilt_and_suit_trims_piece_print_item_consumption;
         $data['quilt_and_suit_trims_piece_print_item_rate'] = $dt->tbl_quilt_and_suit_trims_piece_print_item_rate;
         $data['quilt_and_suit_trims_piece_print_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_piece_print_item_total_cost;
+
+        $data['eyelet_item_cost'] = $dt->tbl_quilt_and_suit_trims_piece_eyelet_item_cost;
+        $data['eyelet_item_consumption'] = $dt->tbl_quilt_and_suit_trims_piece_eyelet_item_consumption;
+        $data['eyelet_item_rate'] = $dt->tbl_quilt_and_suit_trims_piece_eyelet_item_rate;
+        $data['eyelet_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_piece_eyelet_item_total_cost;
 
         $data['quilt_and_suit_trims_piece_buckle_item_cost'] = $dt->tbl_quilt_and_suit_trims_piece_buckle_item_cost;
         $data['quilt_and_suit_trims_piece_buckle_item_consumption'] = $dt->tbl_quilt_and_suit_trims_piece_buckle_item_consumption;
@@ -212,11 +217,6 @@ class Quiltandsuit extends CI_Controller
         $data['quilt_and_suit_trims_piece_packing_item_rate'] = $dt->tbl_quilt_and_suit_trims_piece_packing_item_rate;
         $data['quilt_and_suit_trims_piece_packing_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_piece_packing_item_total_cost;
 
-        $data['quilt_and_suit_trims_piece_bottom_shoe_item_cost'] = $dt->tbl_quilt_and_suit_trims_piece_bottom_shoe_item_cost;
-        $data['quilt_and_suit_trims_piece_bottom_shoe_item_consumption'] = $dt->tbl_quilt_and_suit_trims_piece_bottom_shoe_item_consumption;
-        $data['quilt_and_suit_trims_piece_bottom_shoe_item_rate'] = $dt->tbl_quilt_and_suit_trims_piece_bottom_shoe_item_rate;
-        $data['quilt_and_suit_trims_piece_bottom_shoe_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_piece_bottom_shoe_item_total_cost;
-
         $data['quilt_and_suit_trims_piece_extra_1_name'] = $dt->tbl_quilt_and_suit_trims_piece_extra_1_name;
         $data['quilt_and_suit_trims_piece_extra_1_item_cost'] = $dt->tbl_quilt_and_suit_trims_piece_extra_1_item_cost;
         $data['quilt_and_suit_trims_piece_extra_1_item_consumption'] = $dt->tbl_quilt_and_suit_trims_piece_extra_1_item_consumption;
@@ -235,31 +235,9 @@ class Quiltandsuit extends CI_Controller
         $data['quilt_and_suit_trims_piece_extra_3_item_rate'] = $dt->tbl_quilt_and_suit_trims_piece_extra_3_item_rate;
         $data['quilt_and_suit_trims_piece_extra_3_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_piece_extra_3_item_total_cost;
 
-        $data['quilt_and_suit_trims_piece_extra_4_name'] = $dt->tbl_quilt_and_suit_trims_piece_extra_4_name;
-        $data['quilt_and_suit_trims_piece_extra_4_item_cost'] = $dt->tbl_quilt_and_suit_trims_piece_extra_4_item_cost;
-        $data['quilt_and_suit_trims_piece_extra_4_item_consumption'] = $dt->tbl_quilt_and_suit_trims_piece_extra_4_item_consumption;
-        $data['quilt_and_suit_trims_piece_extra_4_item_rate'] = $dt->tbl_quilt_and_suit_trims_piece_extra_4_item_rate;
-        $data['quilt_and_suit_trims_piece_extra_4_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_piece_extra_4_item_total_cost;
-
-        $data['quilt_and_suit_trims_piece_extra_5_name'] = $dt->tbl_quilt_and_suit_trims_piece_extra_5_name;
-        $data['quilt_and_suit_trims_piece_extra_5_item_cost'] = $dt->tbl_quilt_and_suit_trims_piece_extra_5_item_cost;
-        $data['quilt_and_suit_trims_piece_extra_5_item_consumption'] = $dt->tbl_quilt_and_suit_trims_piece_extra_5_item_consumption;
-        $data['quilt_and_suit_trims_piece_extra_5_item_rate'] = $dt->tbl_quilt_and_suit_trims_piece_extra_5_item_rate;
-        $data['quilt_and_suit_trims_piece_extra_5_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_piece_extra_5_item_total_cost;
-
 
         //Dimension for Body Material 1
         $data['dimension_id'] = $dt->tbl_dimension_id;
-
-
-        $data['body_material_first_extra_1'] = $dt->tbl_dimnesion_body_material_first_extra_1;
-        $data['body_material_first_extra_2'] = $dt->tbl_dimnesion_body_material_first_extra_2;
-        $data['body_material_first_extra_3'] = $dt->tbl_dimnesion_body_material_first_extra_3;
-        $data['body_material_second_extra_1'] = $dt->tbl_dimnesion_body_material_second_extra_1;
-        $data['body_material_second_extra_2'] = $dt->tbl_dimnesion_body_material_second_extra_2;
-        $data['body_material_second_extra_3'] = $dt->tbl_dimnesion_body_material_second_extra_3;
-
-
 
         $data['body_material_1_front_length'] = $dt->tbl_dimension_body_material_1_front_length;
         $data['body_material_1_front_length_allowance'] = $dt->tbl_dimension_body_material_1_front_length_allowance;
@@ -309,6 +287,14 @@ class Quiltandsuit extends CI_Controller
         $data['body_material_1_right_width_allowance'] = $dt->tbl_dimension_body_material_1_right_width_allowance;
         $data['body_material_1_right_width_total'] = $dt->tbl_dimension_body_material_1_right_width_total;
 
+        $data['body_material_1_handle_length'] = $dt->tbl_dimension_body_material_1_handle_length;
+        $data['body_material_1_handle_length_allowance'] = $dt->tbl_dimension_body_material_1_handle_length_allowance;
+        $data['body_material_1_handle_length_total'] = $dt->tbl_dimension_body_material_1_handle_length_total;
+
+        $data['body_material_1_handle_width'] = $dt->tbl_dimension_body_material_1_handle_width;
+        $data['body_material_1_handle_width_allowance'] = $dt->tbl_dimension_body_material_1_handle_width_allowance;
+        $data['body_material_1_handle_width_total'] = $dt->tbl_dimension_body_material_1_handle_width_total;
+
         $data['body_material_1_pocket_length'] = $dt->tbl_dimension_body_material_1_pocket_length;
         $data['body_material_1_pocket_length_allowance'] = $dt->tbl_dimension_body_material_1_pocket_length_allowance;
         $data['body_material_1_pocket_length_total'] = $dt->tbl_dimension_body_material_1_pocket_length_total;
@@ -317,29 +303,13 @@ class Quiltandsuit extends CI_Controller
         $data['body_material_1_pocket_width_allowance'] = $dt->tbl_dimension_body_material_1_pocket_width_allowance;
         $data['body_material_1_pocket_width_total'] = $dt->tbl_dimension_body_material_1_pocket_width_total;
 
-        $data['body_material_1_extra_1_length'] = $dt->tbl_dimension_body_material_1_extra_1_length;
-        $data['body_material_1_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_1_extra_1_length_allowance;
-        $data['body_material_1_extra_1_length_total'] = $dt->tbl_dimension_body_material_1_extra_1_length_total;
+        $data['body_material_1_piping_length'] = $dt->tbl_dimension_body_material_1_piping_length;
+        $data['body_material_1_piping_length_allowance'] = $dt->tbl_dimension_body_material_1_piping_length_allowance;
+        $data['body_material_1_piping_length_total'] = $dt->tbl_dimension_body_material_1_piping_length_total;
 
-        $data['body_material_1_extra_1_width'] = $dt->tbl_dimension_body_material_1_extra_1_width;
-        $data['body_material_1_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_1_extra_1_width_allowance;
-        $data['body_material_1_extra_1_width_total'] = $dt->tbl_dimension_body_material_1_extra_1_width_total;
-
-        $data['body_material_1_extra_2_length'] = $dt->tbl_dimension_body_material_1_extra_2_length;
-        $data['body_material_1_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_1_extra_2_length_allowance;
-        $data['body_material_1_extra_2_length_total'] = $dt->tbl_dimension_body_material_1_extra_2_length_total;
-
-        $data['body_material_1_extra_2_width'] = $dt->tbl_dimension_body_material_1_extra_2_width;
-        $data['body_material_1_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_1_extra_2_width_allowance;
-        $data['body_material_1_extra_2_width_total'] = $dt->tbl_dimension_body_material_1_extra_2_width_total;
-
-        $data['body_material_1_extra_3_length'] = $dt->tbl_dimension_body_material_1_extra_3_length;
-        $data['body_material_1_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_1_extra_3_length_allowance;
-        $data['body_material_1_extra_3_length_total'] = $dt->tbl_dimension_body_material_1_extra_3_length_total;
-
-        $data['body_material_1_extra_3_width'] = $dt->tbl_dimension_body_material_1_extra_3_width;
-        $data['body_material_1_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_1_extra_3_width_allowance;
-        $data['body_material_1_extra_3_width_total'] = $dt->tbl_dimension_body_material_1_extra_3_width_total;
+        $data['body_material_1_piping_width'] = $dt->tbl_dimension_body_material_1_piping_width;
+        $data['body_material_1_piping_width_allowance'] = $dt->tbl_dimension_body_material_1_piping_width_allowance;
+        $data['body_material_1_piping_width_total'] = $dt->tbl_dimension_body_material_1_piping_width_total;
 
         //Dimension for Body Material 2
         $data['body_material_2_front_length'] = $dt->tbl_dimension_body_material_2_front_length;
@@ -390,6 +360,14 @@ class Quiltandsuit extends CI_Controller
         $data['body_material_2_right_width_allowance'] = $dt->tbl_dimension_body_material_2_right_width_allowance;
         $data['body_material_2_right_width_total'] = $dt->tbl_dimension_body_material_2_right_width_total;
 
+        $data['body_material_2_handle_length'] = $dt->tbl_dimension_body_material_2_handle_length;
+        $data['body_material_2_handle_length_allowance'] = $dt->tbl_dimension_body_material_2_handle_length_allowance;
+        $data['body_material_2_handle_length_total'] = $dt->tbl_dimension_body_material_2_handle_length_total;
+
+        $data['body_material_2_handle_width'] = $dt->tbl_dimension_body_material_2_handle_width;
+        $data['body_material_2_handle_width_allowance'] = $dt->tbl_dimension_body_material_2_handle_width_allowance;
+        $data['body_material_2_handle_width_total'] = $dt->tbl_dimension_body_material_2_handle_width_total;
+
         $data['body_material_2_pocket_length'] = $dt->tbl_dimension_body_material_2_pocket_length;
         $data['body_material_2_pocket_length_allowance'] = $dt->tbl_dimension_body_material_2_pocket_length_allowance;
         $data['body_material_2_pocket_length_total'] = $dt->tbl_dimension_body_material_2_pocket_length_total;
@@ -398,29 +376,13 @@ class Quiltandsuit extends CI_Controller
         $data['body_material_2_pocket_width_allowance'] = $dt->tbl_dimension_body_material_2_pocket_width_allowance;
         $data['body_material_2_pocket_width_total'] = $dt->tbl_dimension_body_material_2_pocket_width_total;
 
-        $data['body_material_2_extra_1_length'] = $dt->tbl_dimension_body_material_2_extra_1_length;
-        $data['body_material_2_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_2_extra_1_length_allowance;
-        $data['body_material_2_extra_1_length_total'] = $dt->tbl_dimension_body_material_2_extra_1_length_total;
+        $data['body_material_2_piping_length'] = $dt->tbl_dimension_body_material_2_piping_length;
+        $data['body_material_2_piping_length_allowance'] = $dt->tbl_dimension_body_material_2_piping_length_allowance;
+        $data['body_material_2_piping_length_total'] = $dt->tbl_dimension_body_material_2_piping_length_total;
 
-        $data['body_material_2_extra_1_width'] = $dt->tbl_dimension_body_material_2_extra_1_width;
-        $data['body_material_2_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_2_extra_1_width_allowance;
-        $data['body_material_2_extra_1_width_total'] = $dt->tbl_dimension_body_material_2_extra_1_width_total;
-
-        $data['body_material_2_extra_2_length'] = $dt->tbl_dimension_body_material_2_extra_2_length;
-        $data['body_material_2_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_2_extra_2_length_allowance;
-        $data['body_material_2_extra_2_length_total'] = $dt->tbl_dimension_body_material_2_extra_2_length_total;
-
-        $data['body_material_2_extra_2_width'] = $dt->tbl_dimension_body_material_2_extra_2_width;
-        $data['body_material_2_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_2_extra_2_width_allowance;
-        $data['body_material_2_extra_2_width_total'] = $dt->tbl_dimension_body_material_2_extra_2_width_total;
-
-        $data['body_material_2_extra_3_length'] = $dt->tbl_dimension_body_material_2_extra_3_length;
-        $data['body_material_2_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_2_extra_3_length_allowance;
-        $data['body_material_2_extra_3_length_total'] = $dt->tbl_dimension_body_material_2_extra_3_length_total;
-
-        $data['body_material_2_extra_3_width'] = $dt->tbl_dimension_body_material_2_extra_3_length_total;
-        $data['body_material_2_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_2_extra_3_width_allowance;
-        $data['body_material_2_extra_3_width_total'] = $dt->tbl_dimension_body_material_2_extra_3_width_total;
+        $data['body_material_2_piping_width'] = $dt->tbl_dimension_body_material_2_piping_width;
+        $data['body_material_2_piping_width_allowance'] = $dt->tbl_dimension_body_material_2_piping_width_allowance;
+        $data['body_material_2_piping_width_total'] = $dt->tbl_dimension_body_material_2_piping_width_total;
 
         //Dimension for Body Material 3
         $data['body_material_3_front_length'] = $dt->tbl_dimension_body_material_3_front_length;
@@ -471,6 +433,14 @@ class Quiltandsuit extends CI_Controller
         $data['body_material_3_right_width_allowance'] = $dt->tbl_dimension_body_material_3_right_width_allowance;
         $data['body_material_3_right_width_total'] = $dt->tbl_dimension_body_material_3_right_width_total;
 
+        $data['body_material_3_handle_length'] = $dt->tbl_dimension_body_material_3_handle_length;
+        $data['body_material_3_handle_length_allowance'] = $dt->tbl_dimension_body_material_3_handle_length_allowance;
+        $data['body_material_3_handle_length_total'] = $dt->tbl_dimension_body_material_3_handle_length_total;
+
+        $data['body_material_3_handle_width'] = $dt->tbl_dimension_body_material_3_handle_width;
+        $data['body_material_3_handle_width_allowance'] = $dt->tbl_dimension_body_material_3_handle_width_allowance;
+        $data['body_material_3_handle_width_total'] = $dt->tbl_dimension_body_material_3_handle_width_total;
+
         $data['body_material_3_pocket_length'] = $dt->tbl_dimension_body_material_3_pocket_length;
         $data['body_material_3_pocket_length_allowance'] = $dt->tbl_dimension_body_material_3_pocket_length_allowance;
         $data['body_material_3_pocket_length_total'] = $dt->tbl_dimension_body_material_3_pocket_length_total;
@@ -479,273 +449,13 @@ class Quiltandsuit extends CI_Controller
         $data['body_material_3_pocket_width_allowance'] = $dt->tbl_dimension_body_material_3_pocket_width_allowance;
         $data['body_material_3_pocket_width_total'] = $dt->tbl_dimension_body_material_3_pocket_width_total;
 
-        $data['body_material_3_extra_1_length'] = $dt->tbl_dimension_body_material_3_extra_1_length;
-        $data['body_material_3_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_3_extra_1_length_allowance;
-        $data['body_material_3_extra_1_length_total'] = $dt->tbl_dimension_body_material_3_extra_1_length_total;
-
-        $data['body_material_3_extra_1_width'] = $dt->tbl_dimension_body_material_3_extra_1_width;
-        $data['body_material_3_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_3_extra_1_width_allowance;
-        $data['body_material_3_extra_1_width_total'] = $dt->tbl_dimension_body_material_3_extra_1_width_total;
-
-        $data['body_material_3_extra_2_length'] = $dt->tbl_dimension_body_material_3_extra_2_length;
-        $data['body_material_3_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_3_extra_2_length_allowance;
-        $data['body_material_3_extra_2_length_total'] = $dt->tbl_dimension_body_material_3_extra_2_length_total;
-
-        $data['body_material_3_extra_2_width'] = $dt->tbl_dimension_body_material_3_extra_2_width;
-        $data['body_material_3_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_3_extra_2_width_allowance;
-        $data['body_material_3_extra_2_width_total'] = $dt->tbl_dimension_body_material_3_extra_2_width_total;
-
-        $data['body_material_3_extra_3_length'] = $dt->tbl_dimension_body_material_3_extra_3_length;
-        $data['body_material_3_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_3_extra_3_length_allowance;
-        $data['body_material_3_extra_3_length_total'] = $dt->tbl_dimension_body_material_3_extra_3_length_total;
-
-        $data['body_material_3_extra_3_width'] = $dt->tbl_dimension_body_material_3_extra_3_length_total;
-        $data['body_material_3_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_3_extra_3_width_allowance;
-        $data['body_material_3_extra_3_width_total'] = $dt->tbl_dimension_body_material_3_extra_3_width_total;
-
-
-        //Dimension for Body Material 4
-        $data['body_material_4_front_length'] = $dt->tbl_dimension_body_material_4_front_length;
-        $data['body_material_4_front_length_allowance'] = $dt->tbl_dimension_body_material_4_front_length_allowance;
-        $data['body_material_4_front_length_total'] = $dt->tbl_dimension_body_material_4_front_length_total;
-
-        $data['body_material_4_front_width'] = $dt->tbl_dimension_body_material_4_front_width;
-        $data['body_material_4_front_width_allowance'] = $dt->tbl_dimension_body_material_4_front_width_allowance;
-        $data['body_material_4_front_width_total'] = $dt->tbl_dimension_body_material_4_front_width_total;
-
-        $data['body_material_4_back_length'] = $dt->tbl_dimension_body_material_4_back_length;
-        $data['body_material_4_back_length_allowance'] = $dt->tbl_dimension_body_material_4_back_length_allowance;
-        $data['body_material_4_back_length_total'] = $dt->tbl_dimension_body_material_4_back_length_total;
-
-        $data['body_material_4_back_width'] = $dt->tbl_dimension_body_material_4_back_width;
-        $data['body_material_4_back_width_allowance'] = $dt->tbl_dimension_body_material_4_back_width_allowance;
-        $data['body_material_4_back_width_total'] = $dt->tbl_dimension_body_material_4_back_width_total;
-
-        $data['body_material_4_top_length'] = $dt->tbl_dimension_body_material_4_top_length;
-        $data['body_material_4_top_length_allowance'] = $dt->tbl_dimension_body_material_4_top_length_allowance;
-        $data['body_material_4_top_length_total'] = $dt->tbl_dimension_body_material_4_top_length_total;
-
-        $data['body_material_4_top_width'] = $dt->tbl_dimension_body_material_4_top_width;
-        $data['body_material_4_top_width_allowance'] = $dt->tbl_dimension_body_material_4_top_width_allowance;
-        $data['body_material_4_top_width_total'] = $dt->tbl_dimension_body_material_4_top_width_total;
-
-        $data['body_material_4_bottom_length'] = $dt->tbl_dimension_body_material_4_bottom_length;
-        $data['body_material_4_bottom_length_allowance'] = $dt->tbl_dimension_body_material_4_bottom_length_allowance;
-        $data['body_material_4_bottom_length_total'] = $dt->tbl_dimension_body_material_4_bottom_length_total;
-
-        $data['body_material_4_bottom_width'] = $dt->tbl_dimension_body_material_4_bottom_width;
-        $data['body_material_4_bottom_width_allowance'] = $dt->tbl_dimension_body_material_4_bottom_width_allowance;
-        $data['body_material_4_bottom_width_total'] = $dt->tbl_dimension_body_material_4_bottom_width_total;
-
-        $data['body_material_4_left_length'] = $dt->tbl_dimension_body_material_4_left_length;
-        $data['body_material_4_left_length_allowance'] = $dt->tbl_dimension_body_material_4_left_length_allowance;
-        $data['body_material_4_left_length_total'] = $dt->tbl_dimension_body_material_4_left_length_total;
-
-        $data['body_material_4_left_width'] = $dt->tbl_dimension_body_material_4_left_width;
-        $data['body_material_4_left_width_allowance'] = $dt->tbl_dimension_body_material_4_left_width_allowance;
-        $data['body_material_4_left_width_total'] = $dt->tbl_dimension_body_material_4_left_width_total;
-
-        $data['body_material_4_right_length'] = $dt->tbl_dimension_body_material_4_right_length;
-        $data['body_material_4_right_length_allowance'] = $dt->tbl_dimension_body_material_4_right_length_allowance;
-        $data['body_material_4_right_length_total'] = $dt->tbl_dimension_body_material_4_right_length_total;
-
-        $data['body_material_4_right_width'] = $dt->tbl_dimension_body_material_4_right_width;
-        $data['body_material_4_right_width_allowance'] = $dt->tbl_dimension_body_material_4_right_width_allowance;
-        $data['body_material_4_right_width_total'] = $dt->tbl_dimension_body_material_4_right_width_total;
-
-        $data['body_material_4_pocket_length'] = $dt->tbl_dimension_body_material_4_pocket_length;
-        $data['body_material_4_pocket_length_allowance'] = $dt->tbl_dimension_body_material_4_pocket_length_allowance;
-        $data['body_material_4_pocket_length_total'] = $dt->tbl_dimension_body_material_4_pocket_length_total;
-
-        $data['body_material_4_pocket_width'] = $dt->tbl_dimension_body_material_4_pocket_width;
-        $data['body_material_4_pocket_width_allowance'] = $dt->tbl_dimension_body_material_4_pocket_width_allowance;
-        $data['body_material_4_pocket_width_total'] = $dt->tbl_dimension_body_material_4_pocket_width_total;
-
-        $data['body_material_4_extra_1_length'] = $dt->tbl_dimension_body_material_4_extra_1_length;
-        $data['body_material_4_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_4_extra_1_length_allowance;
-        $data['body_material_4_extra_1_length_total'] = $dt->tbl_dimension_body_material_4_extra_1_length_total;
-
-        $data['body_material_4_extra_1_width'] = $dt->tbl_dimension_body_material_4_extra_1_width;
-        $data['body_material_4_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_4_extra_1_width_allowance;
-        $data['body_material_4_extra_1_width_total'] = $dt->tbl_dimension_body_material_4_extra_1_width_total;
-
-        $data['body_material_4_extra_2_length'] = $dt->tbl_dimension_body_material_4_extra_2_length;
-        $data['body_material_4_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_4_extra_2_length_allowance;
-        $data['body_material_4_extra_2_length_total'] = $dt->tbl_dimension_body_material_4_extra_2_length_total;
-
-        $data['body_material_4_extra_2_width'] = $dt->tbl_dimension_body_material_4_extra_2_width;
-        $data['body_material_4_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_4_extra_2_width_allowance;
-        $data['body_material_4_extra_2_width_total'] = $dt->tbl_dimension_body_material_4_extra_2_width_total;
-
-        $data['body_material_4_extra_3_length'] = $dt->tbl_dimension_body_material_4_extra_3_length;
-        $data['body_material_4_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_4_extra_3_length_allowance;
-        $data['body_material_4_extra_3_length_total'] = $dt->tbl_dimension_body_material_4_extra_3_length_total;
-
-        $data['body_material_4_extra_3_width'] = $dt->tbl_dimension_body_material_4_extra_3_length_total;
-        $data['body_material_4_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_4_extra_3_width_allowance;
-        $data['body_material_4_extra_3_width_total'] = $dt->tbl_dimension_body_material_4_extra_3_width_total;
-
-        //Dimension for Body Material 5
-        $data['body_material_5_front_length'] = $dt->tbl_dimension_body_material_5_front_length;
-        $data['body_material_5_front_length_allowance'] = $dt->tbl_dimension_body_material_5_front_length_allowance;
-        $data['body_material_5_front_length_total'] = $dt->tbl_dimension_body_material_5_front_length_total;
-
-        $data['body_material_5_front_width'] = $dt->tbl_dimension_body_material_5_front_width;
-        $data['body_material_5_front_width_allowance'] = $dt->tbl_dimension_body_material_5_front_width_allowance;
-        $data['body_material_5_front_width_total'] = $dt->tbl_dimension_body_material_5_front_width_total;
-
-        $data['body_material_5_back_length'] = $dt->tbl_dimension_body_material_5_back_length;
-        $data['body_material_5_back_length_allowance'] = $dt->tbl_dimension_body_material_5_back_length_allowance;
-        $data['body_material_5_back_length_total'] = $dt->tbl_dimension_body_material_5_back_length_total;
-
-        $data['body_material_5_back_width'] = $dt->tbl_dimension_body_material_5_back_width;
-        $data['body_material_5_back_width_allowance'] = $dt->tbl_dimension_body_material_5_back_width_allowance;
-        $data['body_material_5_back_width_total'] = $dt->tbl_dimension_body_material_5_back_width_total;
-
-        $data['body_material_5_top_length'] = $dt->tbl_dimension_body_material_5_top_length;
-        $data['body_material_5_top_length_allowance'] = $dt->tbl_dimension_body_material_5_top_length_allowance;
-        $data['body_material_5_top_length_total'] = $dt->tbl_dimension_body_material_5_top_length_total;
-
-        $data['body_material_5_top_width'] = $dt->tbl_dimension_body_material_5_top_width;
-        $data['body_material_5_top_width_allowance'] = $dt->tbl_dimension_body_material_5_top_width_allowance;
-        $data['body_material_5_top_width_total'] = $dt->tbl_dimension_body_material_5_top_width_total;
-
-        $data['body_material_5_bottom_length'] = $dt->tbl_dimension_body_material_5_bottom_length;
-        $data['body_material_5_bottom_length_allowance'] = $dt->tbl_dimension_body_material_5_bottom_length_allowance;
-        $data['body_material_5_bottom_length_total'] = $dt->tbl_dimension_body_material_5_bottom_length_total;
-
-        $data['body_material_5_bottom_width'] = $dt->tbl_dimension_body_material_5_bottom_width;
-        $data['body_material_5_bottom_width_allowance'] = $dt->tbl_dimension_body_material_5_bottom_width_allowance;
-        $data['body_material_5_bottom_width_total'] = $dt->tbl_dimension_body_material_5_bottom_width_total;
-
-        $data['body_material_5_left_length'] = $dt->tbl_dimension_body_material_5_left_length;
-        $data['body_material_5_left_length_allowance'] = $dt->tbl_dimension_body_material_5_left_length_allowance;
-        $data['body_material_5_left_length_total'] = $dt->tbl_dimension_body_material_5_left_length_total;
-
-        $data['body_material_5_left_width'] = $dt->tbl_dimension_body_material_5_left_width;
-        $data['body_material_5_left_width_allowance'] = $dt->tbl_dimension_body_material_5_left_width_allowance;
-        $data['body_material_5_left_width_total'] = $dt->tbl_dimension_body_material_5_left_width_total;
-
-        $data['body_material_5_right_length'] = $dt->tbl_dimension_body_material_5_right_length;
-        $data['body_material_5_right_length_allowance'] = $dt->tbl_dimension_body_material_5_right_length_allowance;
-        $data['body_material_5_right_length_total'] = $dt->tbl_dimension_body_material_5_right_length_total;
-
-        $data['body_material_5_right_width'] = $dt->tbl_dimension_body_material_5_right_width;
-        $data['body_material_5_right_width_allowance'] = $dt->tbl_dimension_body_material_5_right_width_allowance;
-        $data['body_material_5_right_width_total'] = $dt->tbl_dimension_body_material_5_right_width_total;
-
-        $data['body_material_5_pocket_length'] = $dt->tbl_dimension_body_material_5_pocket_length;
-        $data['body_material_5_pocket_length_allowance'] = $dt->tbl_dimension_body_material_5_pocket_length_allowance;
-        $data['body_material_5_pocket_length_total'] = $dt->tbl_dimension_body_material_5_pocket_length_total;
-
-        $data['body_material_5_pocket_width'] = $dt->tbl_dimension_body_material_5_pocket_width;
-        $data['body_material_5_pocket_width_allowance'] = $dt->tbl_dimension_body_material_5_pocket_width_allowance;
-        $data['body_material_5_pocket_width_total'] = $dt->tbl_dimension_body_material_5_pocket_width_total;
-
-        $data['body_material_5_extra_1_length'] = $dt->tbl_dimension_body_material_5_extra_1_length;
-        $data['body_material_5_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_5_extra_1_length_allowance;
-        $data['body_material_5_extra_1_length_total'] = $dt->tbl_dimension_body_material_5_extra_1_length_total;
-
-        $data['body_material_5_extra_1_width'] = $dt->tbl_dimension_body_material_5_extra_1_width;
-        $data['body_material_5_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_5_extra_1_width_allowance;
-        $data['body_material_5_extra_1_width_total'] = $dt->tbl_dimension_body_material_5_extra_1_width_total;
-
-        $data['body_material_5_extra_2_length'] = $dt->tbl_dimension_body_material_5_extra_2_length;
-        $data['body_material_5_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_5_extra_2_length_allowance;
-        $data['body_material_5_extra_2_length_total'] = $dt->tbl_dimension_body_material_5_extra_2_length_total;
-
-        $data['body_material_5_extra_2_width'] = $dt->tbl_dimension_body_material_5_extra_2_width;
-        $data['body_material_5_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_5_extra_2_width_allowance;
-        $data['body_material_5_extra_2_width_total'] = $dt->tbl_dimension_body_material_5_extra_2_width_total;
-
-        $data['body_material_5_extra_3_length'] = $dt->tbl_dimension_body_material_5_extra_3_length;
-        $data['body_material_5_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_5_extra_3_length_allowance;
-        $data['body_material_5_extra_3_length_total'] = $dt->tbl_dimension_body_material_5_extra_3_length_total;
-
-        $data['body_material_5_extra_3_width'] = $dt->tbl_dimension_body_material_5_extra_3_length_total;
-        $data['body_material_5_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_5_extra_3_width_allowance;
-        $data['body_material_5_extra_3_width_total'] = $dt->tbl_dimension_body_material_5_extra_3_width_total;
-
-        //Dimension for Body Material 6
-        $data['body_material_6_front_length'] = $dt->tbl_dimension_body_material_6_front_length;
-        $data['body_material_6_front_length_allowance'] = $dt->tbl_dimension_body_material_6_front_length_allowance;
-        $data['body_material_6_front_length_total'] = $dt->tbl_dimension_body_material_6_front_length_total;
-
-        $data['body_material_6_front_width'] = $dt->tbl_dimension_body_material_6_front_width;
-        $data['body_material_6_front_width_allowance'] = $dt->tbl_dimension_body_material_6_front_width_allowance;
-        $data['body_material_6_front_width_total'] = $dt->tbl_dimension_body_material_6_front_width_total;
-
-        $data['body_material_6_back_length'] = $dt->tbl_dimension_body_material_6_back_length;
-        $data['body_material_6_back_length_allowance'] = $dt->tbl_dimension_body_material_6_back_length_allowance;
-        $data['body_material_6_back_length_total'] = $dt->tbl_dimension_body_material_6_back_length_total;
-
-        $data['body_material_6_back_width'] = $dt->tbl_dimension_body_material_6_back_width;
-        $data['body_material_6_back_width_allowance'] = $dt->tbl_dimension_body_material_6_back_width_allowance;
-        $data['body_material_6_back_width_total'] = $dt->tbl_dimension_body_material_6_back_width_total;
-
-        $data['body_material_6_top_length'] = $dt->tbl_dimension_body_material_6_top_length;
-        $data['body_material_6_top_length_allowance'] = $dt->tbl_dimension_body_material_6_top_length_allowance;
-        $data['body_material_6_top_length_total'] = $dt->tbl_dimension_body_material_6_top_length_total;
-
-        $data['body_material_6_top_width'] = $dt->tbl_dimension_body_material_6_top_width;
-        $data['body_material_6_top_width_allowance'] = $dt->tbl_dimension_body_material_6_top_width_allowance;
-        $data['body_material_6_top_width_total'] = $dt->tbl_dimension_body_material_6_top_width_total;
-
-        $data['body_material_6_bottom_length'] = $dt->tbl_dimension_body_material_6_bottom_length;
-        $data['body_material_6_bottom_length_allowance'] = $dt->tbl_dimension_body_material_6_bottom_length_allowance;
-        $data['body_material_6_bottom_length_total'] = $dt->tbl_dimension_body_material_6_bottom_length_total;
-
-        $data['body_material_6_bottom_width'] = $dt->tbl_dimension_body_material_6_bottom_width;
-        $data['body_material_6_bottom_width_allowance'] = $dt->tbl_dimension_body_material_6_bottom_width_allowance;
-        $data['body_material_6_bottom_width_total'] = $dt->tbl_dimension_body_material_6_bottom_width_total;
-
-        $data['body_material_6_left_length'] = $dt->tbl_dimension_body_material_6_left_length;
-        $data['body_material_6_left_length_allowance'] = $dt->tbl_dimension_body_material_6_left_length_allowance;
-        $data['body_material_6_left_length_total'] = $dt->tbl_dimension_body_material_6_left_length_total;
-
-        $data['body_material_6_left_width'] = $dt->tbl_dimension_body_material_6_left_width;
-        $data['body_material_6_left_width_allowance'] = $dt->tbl_dimension_body_material_6_left_width_allowance;
-        $data['body_material_6_left_width_total'] = $dt->tbl_dimension_body_material_6_left_width_total;
-
-        $data['body_material_6_right_length'] = $dt->tbl_dimension_body_material_6_right_length;
-        $data['body_material_6_right_length_allowance'] = $dt->tbl_dimension_body_material_6_right_length_allowance;
-        $data['body_material_6_right_length_total'] = $dt->tbl_dimension_body_material_6_right_length_total;
-
-        $data['body_material_6_right_width'] = $dt->tbl_dimension_body_material_6_right_width;
-        $data['body_material_6_right_width_allowance'] = $dt->tbl_dimension_body_material_6_right_width_allowance;
-        $data['body_material_6_right_width_total'] = $dt->tbl_dimension_body_material_6_right_width_total;
-
-        $data['body_material_6_pocket_length'] = $dt->tbl_dimension_body_material_6_pocket_length;
-        $data['body_material_6_pocket_length_allowance'] = $dt->tbl_dimension_body_material_6_pocket_length_allowance;
-        $data['body_material_6_pocket_length_total'] = $dt->tbl_dimension_body_material_6_pocket_length_total;
-
-        $data['body_material_6_pocket_width'] = $dt->tbl_dimension_body_material_6_pocket_width;
-        $data['body_material_6_pocket_width_allowance'] = $dt->tbl_dimension_body_material_6_pocket_width_allowance;
-        $data['body_material_6_pocket_width_total'] = $dt->tbl_dimension_body_material_6_pocket_width_total;
-
-        $data['body_material_6_extra_1_length'] = $dt->tbl_dimension_body_material_6_extra_1_length;
-        $data['body_material_6_extra_1_length_allowance'] = $dt->tbl_dimension_body_material_6_extra_1_length_allowance;
-        $data['body_material_6_extra_1_length_total'] = $dt->tbl_dimension_body_material_6_extra_1_length_total;
-
-        $data['body_material_6_extra_1_width'] = $dt->tbl_dimension_body_material_6_extra_1_width;
-        $data['body_material_6_extra_1_width_allowance'] = $dt->tbl_dimension_body_material_6_extra_1_width_allowance;
-        $data['body_material_6_extra_1_width_total'] = $dt->tbl_dimension_body_material_6_extra_1_width_total;
-
-        $data['body_material_6_extra_2_length'] = $dt->tbl_dimension_body_material_6_extra_2_length;
-        $data['body_material_6_extra_2_length_allowance'] = $dt->tbl_dimension_body_material_6_extra_2_length_allowance;
-        $data['body_material_6_extra_2_length_total'] = $dt->tbl_dimension_body_material_6_extra_2_length_total;
-
-        $data['body_material_6_extra_2_width'] = $dt->tbl_dimension_body_material_6_extra_2_width;
-        $data['body_material_6_extra_2_width_allowance'] = $dt->tbl_dimension_body_material_6_extra_2_width_allowance;
-        $data['body_material_6_extra_2_width_total'] = $dt->tbl_dimension_body_material_6_extra_2_width_total;
-
-        $data['body_material_6_extra_3_length'] = $dt->tbl_dimension_body_material_6_extra_3_length;
-        $data['body_material_6_extra_3_length_allowance'] = $dt->tbl_dimension_body_material_6_extra_3_length_allowance;
-        $data['body_material_6_extra_3_length_total'] = $dt->tbl_dimension_body_material_6_extra_3_length_total;
-
-        $data['body_material_6_extra_3_width'] = $dt->tbl_dimension_body_material_6_extra_3_length_total;
-        $data['body_material_6_extra_3_width_allowance'] = $dt->tbl_dimension_body_material_6_extra_3_width_allowance;
-        $data['body_material_6_extra_3_width_total'] = $dt->tbl_dimension_body_material_6_extra_3_width_total;
+        $data['body_material_3_piping_length'] = $dt->tbl_dimension_body_material_3_piping_length;
+        $data['body_material_3_piping_length_allowance'] = $dt->tbl_dimension_body_material_3_piping_length_allowance;
+        $data['body_material_3_piping_length_total'] = $dt->tbl_dimension_body_material_3_piping_length_total;
+
+        $data['body_material_3_piping_width'] = $dt->tbl_dimension_body_material_3_piping_width;
+        $data['body_material_3_piping_width_allowance'] = $dt->tbl_dimension_body_material_3_piping_width_allowance;
+        $data['body_material_3_piping_width_total'] = $dt->tbl_dimension_body_material_3_piping_width_total;
 
         $this->load->view('admin/admin_header_view',$this->data);
         $this->load->view('admin/admin_home_rev_quilt_and_suit_costing_view', $data);
@@ -821,6 +531,14 @@ class Quiltandsuit extends CI_Controller
         $this->form_validation->set_rules('body_material_1_right_width_allowance', 'Order Bank Document', 'trim|xss_clean');
         $this->form_validation->set_rules('body_material_1_right_width_total', 'Order Bank Document', 'trim|xss_clean');
 
+        $this->form_validation->set_rules('body_material_1_handle_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_handle_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_handle_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_1_handle_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_handle_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_handle_width_total', 'Order Bank Document', 'trim|xss_clean');
+
         $this->form_validation->set_rules('body_material_1_pocket_length', 'Order Bank Document', 'trim|xss_clean');
         $this->form_validation->set_rules('body_material_1_pocket_length_allowance', 'Order Bank Document', 'trim|xss_clean');
         $this->form_validation->set_rules('body_material_1_pocket_length_total', 'Order Bank Document', 'trim|xss_clean');
@@ -828,6 +546,14 @@ class Quiltandsuit extends CI_Controller
         $this->form_validation->set_rules('body_material_1_pocket_width', 'Order Bank Document', 'trim|xss_clean');
         $this->form_validation->set_rules('body_material_1_pocket_width_allowance', 'Order Bank Document', 'trim|xss_clean');
         $this->form_validation->set_rules('body_material_1_pocket_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_1_piping_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_piping_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_piping_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_1_piping_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_piping_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_1_piping_width_total', 'Order Bank Document', 'trim|xss_clean');
 
         //Body Material 2
         $this->form_validation->set_rules('body_material_2_front_length', 'Body Material 1 Front Length', 'trim|xss_clean');
@@ -874,6 +600,14 @@ class Quiltandsuit extends CI_Controller
         $this->form_validation->set_rules('body_material_2_right_width_allowance', 'Order Bank Document', 'trim|xss_clean');
         $this->form_validation->set_rules('body_material_2_right_width_total', 'Order Bank Document', 'trim|xss_clean');
 
+        $this->form_validation->set_rules('body_material_2_handle_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_handle_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_handle_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_handle_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_handle_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_handle_width_total', 'Order Bank Document', 'trim|xss_clean');
+
         $this->form_validation->set_rules('body_material_2_pocket_length', 'Order Bank Document', 'trim|xss_clean');
         $this->form_validation->set_rules('body_material_2_pocket_length_allowance', 'Order Bank Document', 'trim|xss_clean');
         $this->form_validation->set_rules('body_material_2_pocket_length_total', 'Order Bank Document', 'trim|xss_clean');
@@ -881,6 +615,14 @@ class Quiltandsuit extends CI_Controller
         $this->form_validation->set_rules('body_material_2_pocket_width', 'Order Bank Document', 'trim|xss_clean');
         $this->form_validation->set_rules('body_material_2_pocket_width_allowance', 'Order Bank Document', 'trim|xss_clean');
         $this->form_validation->set_rules('body_material_2_pocket_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_piping_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_piping_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_piping_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_2_piping_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_piping_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_2_piping_width_total', 'Order Bank Document', 'trim|xss_clean');
 
         //Body Material 3
         $this->form_validation->set_rules('body_material_3_front_length', 'Body Material 1 Front Length', 'trim|xss_clean');
@@ -927,6 +669,14 @@ class Quiltandsuit extends CI_Controller
         $this->form_validation->set_rules('body_material_3_right_width_allowance', 'Order Bank Document', 'trim|xss_clean');
         $this->form_validation->set_rules('body_material_3_right_width_total', 'Order Bank Document', 'trim|xss_clean');
 
+        $this->form_validation->set_rules('body_material_3_handle_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_handle_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_handle_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_handle_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_handle_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_handle_width_total', 'Order Bank Document', 'trim|xss_clean');
+
         $this->form_validation->set_rules('body_material_3_pocket_length', 'Order Bank Document', 'trim|xss_clean');
         $this->form_validation->set_rules('body_material_3_pocket_length_allowance', 'Order Bank Document', 'trim|xss_clean');
         $this->form_validation->set_rules('body_material_3_pocket_length_total', 'Order Bank Document', 'trim|xss_clean');
@@ -934,6 +684,14 @@ class Quiltandsuit extends CI_Controller
         $this->form_validation->set_rules('body_material_3_pocket_width', 'Order Bank Document', 'trim|xss_clean');
         $this->form_validation->set_rules('body_material_3_pocket_width_allowance', 'Order Bank Document', 'trim|xss_clean');
         $this->form_validation->set_rules('body_material_3_pocket_width_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_piping_length', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_piping_length_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_piping_length_total', 'Order Bank Document', 'trim|xss_clean');
+
+        $this->form_validation->set_rules('body_material_3_piping_width', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_piping_width_allowance', 'Order Bank Document', 'trim|xss_clean');
+        $this->form_validation->set_rules('body_material_3_piping_width_total', 'Order Bank Document', 'trim|xss_clean');
 
          //All Materials
         $this->form_validation->set_rules('body_material_1_cost', 'Body Material Cost', 'trim|xss_clean');
@@ -1122,6 +880,14 @@ class Quiltandsuit extends CI_Controller
                 'tbl_dimension_body_material_1_right_width_allowance' => $this->input->post('body_material_1_right_width_allowance'),
                 'tbl_dimension_body_material_1_right_width_total' => $this->input->post('body_material_1_right_width_total'),
 
+                'tbl_dimension_body_material_1_handle_length' => $this->input->post('body_material_1_handle_length'),
+                'tbl_dimension_body_material_1_handle_length_allowance' => $this->input->post('body_material_1_handle_length_allowance'),
+                'tbl_dimension_body_material_1_handle_length_total' => $this->input->post('body_material_1_handle_length_total'),
+
+                'tbl_dimension_body_material_1_handle_width' => $this->input->post('body_material_1_handle_width'),
+                'tbl_dimension_body_material_1_handle_width_allowance' => $this->input->post('body_material_1_handle_width_allowance'),
+                'tbl_dimension_body_material_1_handle_width_total' => $this->input->post('body_material_1_handle_width_total'),
+
                 'tbl_dimension_body_material_1_pocket_length' => $this->input->post('body_material_1_pocket_length'),
                 'tbl_dimension_body_material_1_pocket_length_allowance' => $this->input->post('body_material_1_pocket_length_allowance'),
                 'tbl_dimension_body_material_1_pocket_length_total' => $this->input->post('body_material_1_pocket_length_total'),
@@ -1129,6 +895,14 @@ class Quiltandsuit extends CI_Controller
                 'tbl_dimension_body_material_1_pocket_width' => $this->input->post('body_material_1_pocket_width'),
                 'tbl_dimension_body_material_1_pocket_width_allowance' => $this->input->post('body_material_1_pocket_width_allowance'),
                 'tbl_dimension_body_material_1_pocket_width_total' => $this->input->post('body_material_1_pocket_width_total'),
+
+                'tbl_dimension_body_material_1_piping_length' => $this->input->post('body_material_1_piping_length'),
+                'tbl_dimension_body_material_1_piping_length_allowance' => $this->input->post('body_material_1_piping_length_allowance'),
+                'tbl_dimension_body_material_1_piping_length_total' => $this->input->post('body_material_1_piping_length_total'),
+
+                'tbl_dimension_body_material_1_piping_width' => $this->input->post('body_material_1_piping_width'),
+                'tbl_dimension_body_material_1_piping_width_allowance' => $this->input->post('body_material_1_piping_width_allowance'),
+                'tbl_dimension_body_material_1_piping_width_total' => $this->input->post('body_material_1_piping_width_total'),
 
                  //Body Material 2
                 'tbl_dimension_body_material_2_front_length' => $this->input->post('body_material_2_front_length'),
@@ -1179,6 +953,14 @@ class Quiltandsuit extends CI_Controller
                 'tbl_dimension_body_material_2_right_width_allowance' => $this->input->post('body_material_2_right_width_allowance'),
                 'tbl_dimension_body_material_2_right_width_total' => $this->input->post('body_material_2_right_width_total'),
 
+                'tbl_dimension_body_material_2_handle_length' => $this->input->post('body_material_2_handle_length'),
+                'tbl_dimension_body_material_2_handle_length_allowance' => $this->input->post('body_material_2_handle_length_allowance'),
+                'tbl_dimension_body_material_2_handle_length_total' => $this->input->post('body_material_2_handle_length_total'),
+
+                'tbl_dimension_body_material_2_handle_width' => $this->input->post('body_material_2_handle_width'),
+                'tbl_dimension_body_material_2_handle_width_allowance' => $this->input->post('body_material_2_handle_width_allowance'),
+                'tbl_dimension_body_material_2_handle_width_total' => $this->input->post('body_material_2_handle_width_total'),
+
                 'tbl_dimension_body_material_2_pocket_length' => $this->input->post('body_material_2_pocket_length'),
                 'tbl_dimension_body_material_2_pocket_length_allowance' => $this->input->post('body_material_2_pocket_length_allowance'),
                 'tbl_dimension_body_material_2_pocket_length_total' => $this->input->post('body_material_2_pocket_length_total'),
@@ -1186,6 +968,14 @@ class Quiltandsuit extends CI_Controller
                 'tbl_dimension_body_material_2_pocket_width' => $this->input->post('body_material_2_pocket_width'),
                 'tbl_dimension_body_material_2_pocket_width_allowance' => $this->input->post('body_material_2_pocket_width_allowance'),
                 'tbl_dimension_body_material_2_pocket_width_total' => $this->input->post('body_material_2_pocket_width_total'),
+
+                'tbl_dimension_body_material_2_piping_length' => $this->input->post('body_material_2_piping_length'),
+                'tbl_dimension_body_material_2_piping_length_allowance' => $this->input->post('body_material_2_piping_length_allowance'),
+                'tbl_dimension_body_material_2_piping_length_total' => $this->input->post('body_material_2_piping_length_total'),
+
+                'tbl_dimension_body_material_2_piping_width' => $this->input->post('body_material_2_piping_width'),
+                'tbl_dimension_body_material_2_piping_width_allowance' => $this->input->post('body_material_2_piping_width_allowance'),
+                'tbl_dimension_body_material_2_piping_width_total' => $this->input->post('body_material_2_piping_width_total'),
 
                 //Body material 3
                 'tbl_dimension_body_material_3_front_length' => $this->input->post('body_material_3_front_length'),
@@ -1236,6 +1026,14 @@ class Quiltandsuit extends CI_Controller
                 'tbl_dimension_body_material_3_right_width_allowance' => $this->input->post('body_material_3_right_width_allowance'),
                 'tbl_dimension_body_material_3_right_width_total' => $this->input->post('body_material_3_right_width_total'),
 
+                'tbl_dimension_body_material_3_handle_length' => $this->input->post('body_material_3_handle_length'),
+                'tbl_dimension_body_material_3_handle_length_allowance' => $this->input->post('body_material_3_handle_length_allowance'),
+                'tbl_dimension_body_material_3_handle_length_total' => $this->input->post('body_material_3_handle_length_total'),
+
+                'tbl_dimension_body_material_3_handle_width' => $this->input->post('body_material_3_handle_width'),
+                'tbl_dimension_body_material_3_handle_width_allowance' => $this->input->post('body_material_3_handle_width_allowance'),
+                'tbl_dimension_body_material_3_handle_width_total' => $this->input->post('body_material_3_handle_width_total'),
+
                 'tbl_dimension_body_material_3_pocket_length' => $this->input->post('body_material_3_pocket_length'),
                 'tbl_dimension_body_material_3_pocket_length_allowance' => $this->input->post('body_material_3_pocket_length_allowance'),
                 'tbl_dimension_body_material_3_pocket_length_total' => $this->input->post('body_material_3_pocket_length_total'),
@@ -1243,6 +1041,15 @@ class Quiltandsuit extends CI_Controller
                 'tbl_dimension_body_material_3_pocket_width' => $this->input->post('body_material_3_pocket_width'),
                 'tbl_dimension_body_material_3_pocket_width_allowance' => $this->input->post('body_material_3_pocket_width_allowance'),
                 'tbl_dimension_body_material_3_pocket_width_total' => $this->input->post('body_material_3_pocket_width_total'),
+
+                'tbl_dimension_body_material_3_piping_length' => $this->input->post('body_material_3_piping_length'),
+                'tbl_dimension_body_material_3_piping_length_allowance' => $this->input->post('body_material_3_piping_length_allowance'),
+                'tbl_dimension_body_material_3_piping_length_total' => $this->input->post('body_material_3_piping_length_total'),
+
+                'tbl_dimension_body_material_3_piping_width' => $this->input->post('body_material_3_piping_width'),
+                'tbl_dimension_body_material_3_piping_width_allowance' => $this->input->post('body_material_3_piping_width_allowance'),
+                'tbl_dimension_body_material_3_piping_width_total' => $this->input->post('body_material_3_piping_width_total'),
+
             );
 
 
@@ -1303,6 +1110,11 @@ class Quiltandsuit extends CI_Controller
                 'tbl_quilt_and_suit_trims_yard_webbing_item_rate' => $this->input->post('webbing_consumption_rate'),
                 'tbl_quilt_and_suit_trims_yard_webbing_item_total_cost' => $this->input->post('webbing_consumption_cost'),
 
+                'tbl_quilt_and_suit_trims_yard_draw_string_item_cost' => $this->input->post('draw_string_cost'),
+                'tbl_quilt_and_suit_trims_yard_draw_string_item_consumption' => $this->input->post('draw_string_consumption'),
+                'tbl_quilt_and_suit_trims_yard_draw_string_item_rate' => $this->input->post('draw_string_consumption_rate'),
+                'tbl_quilt_and_suit_trims_yard_draw_string_item_total_cost' => $this->input->post('draw_string_consumption_cost'),
+
                 'tbl_quilt_and_suit_trims_yard_velcro_item_cost' => $this->input->post('velcro_cost'),
                 'tbl_quilt_and_suit_trims_yard_velcro_item_consumption' => $this->input->post('velcro_consumption'),
                 'tbl_quilt_and_suit_trims_yard_velcro_item_rate' => $this->input->post('velcro_consumption_rate'),
@@ -1334,6 +1146,11 @@ class Quiltandsuit extends CI_Controller
                 'tbl_quilt_and_suit_trims_piece_print_item_consumption' => $this->input->post('print_consumption'),
                 'tbl_quilt_and_suit_trims_piece_print_item_rate' => $this->input->post('print_consumption_rate'),
                 'tbl_quilt_and_suit_trims_piece_print_item_total_cost' => $this->input->post('print_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_piece_eyelet_item_cost' => $this->input->post('eyelet_cost'),
+                'tbl_quilt_and_suit_trims_piece_eyelet_item_consumption' => $this->input->post('eyelet_consumption'),
+                'tbl_quilt_and_suit_trims_piece_eyelet_item_rate' => $this->input->post('eyelet_consumption_rate'),
+                'tbl_quilt_and_suit_trims_piece_eyelet_item_total_cost' => $this->input->post('eyelet_consumption_cost'),
 
                 'tbl_quilt_and_suit_trims_piece_buckle_item_cost' => $this->input->post('buckle_cost'),
                 'tbl_quilt_and_suit_trims_piece_buckle_item_consumption' => $this->input->post('buckle_consumption'),
@@ -1405,14 +1222,192 @@ class Quiltandsuit extends CI_Controller
 
             $this->db->insert('quilt_and_suit_costing', $quilt_and_suit_costing_data);
 
-            $insert_id = $this->db->insert_id();
+            $inserted_id = $this->db->insert_id();
             $user_id = $this->session->userdata('user_id');
 
             $data = array(
                 'costing_user_id' => $user_id ,
-                'costing_user_quilt_and_suit' => $insert_id
+                'costing_user_quilt_and_suit' => $inserted_id
             );
             $this->quilt_and_suit_model->add_costing_by_user($data);
+            $insert_id = $this->db->insert_id();
+
+
+            /*********Add costing to revision***********/
+            $this->db->insert('quilt_and_suit_dimension_rev', $quilt_and_suit_dimension_data);
+            $dimension_id = $this->db->insert_id();
+            $quilt_and_suit_data_rev = array(
+                'tbl_quilt_and_suit_order_id' => $inserted_id,
+                'tbl_quilt_and_suit_dimension_id' => $dimension_id,
+                'tbl_quilt_and_suit_id_name' => $this->input->post('order_id'),
+                'tbl_quilt_and_suit_company_name' => $this->input->post('order_company'),
+                'tbl_quilt_and_suit_order_date' => $this->input->post('order_date'),
+                'tbl_quilt_and_suit_item_name' => $this->input->post('order_item_name'),
+                'tbl_quilt_and_suit_ref_name' => $this->input->post('order_ref_no'),
+
+                // 'tbl_quilt_and_suit_order_gsm' => $this->input->post('quilt_and_suit_order_gsm'),
+                //'tbl_quilt_and_suit_order_color' => $this->input->post('quilt_and_suit_order_color'),
+                'tbl_quilt_and_suit_order_usd' => $this->input->post('order_usd'),
+
+                'tbl_quilt_and_suit_order_wastage' => $this->input->post('order_wastage'),
+                'tbl_quilt_and_suit_order_margin' => $this->input->post('order_margin'),
+
+                'tbl_quilt_and_suit_order_quantity' => $this->input->post('order_quantity'),
+                'tbl_quilt_and_suit_order_transport' => $this->input->post('order_transport'),
+                'tbl_quilt_and_suit_order_bank_doc_charge' => $this->input->post('order_bank_document'),
+
+                'tbl_order_sewing' => $this->input->post('order_sewing'),
+                'tbl_order_overheads' => $this->input->post('order_overheads'),
+
+                'tbl_order_total_material_inc_wastage' => $this->input->post('order_total_material_inc_wastage'),
+                'tbl_order_total_overhead_and_other_cost' => $this->input->post('total_overhead_and_other_hidden'),
+                'tbl_total_cost' => $this->input->post('total_cost_hidden'),
+                'tbl_total_price' => $this->input->post('final_price_hidden'),
+
+                //Body Material Name
+                'tbl_quilt_and_suit_body_material_1_roll_width' => $this->input->post('body_material_1_roll_1'),
+                'tbl_quilt_and_suit_body_material_2_roll_width' => $this->input->post('body_material_2_roll_2'),
+                'tbl_quilt_and_suit_body_material_3_roll_width' => $this->input->post('body_material_3_roll_3'),
+
+                //Body Material 1 consumption cost
+                'tbl_quilt_and_suit_body_material_1_cost' => $this->input->post('body_material_1_cost'),
+                'tbl_quilt_and_suit_body_material_1_consumption' => $this->input->post('body_material_1_consumption'),
+                'tbl_quilt_and_suit_body_material_1_rate' => $this->input->post('body_material_1_consumption_rate'),
+                'tbl_quilt_and_suit_body_material_1_total_cost' => $this->input->post('body_material_1_consumption_cost'),
+
+                //Body Material 2 consumption cost
+                'tbl_quilt_and_suit_body_material_2_cost' => $this->input->post('body_material_2_cost'),
+                'tbl_quilt_and_suit_body_material_2_consumption' => $this->input->post('body_material_2_consumption'),
+                'tbl_quilt_and_suit_body_material_2_rate' => $this->input->post('body_material_2_consumption_rate'),
+                'tbl_quilt_and_suit_body_material_2_total_cost' => $this->input->post('body_material_2_consumption_cost'),
+
+                //Body Material 3 consumption cost
+                'tbl_quilt_and_suit_body_material_3_cost' => $this->input->post('body_material_3_cost'),
+                'tbl_quilt_and_suit_body_material_3_consumption' => $this->input->post('body_material_3_consumption'),
+                'tbl_quilt_and_suit_body_material_3_rate' => $this->input->post('body_material_3_consumption_rate'),
+                'tbl_quilt_and_suit_body_material_3_total_cost' => $this->input->post('body_material_3_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_yard_zipper_item_cost' => $this->input->post('zipper_cost'),
+                'tbl_quilt_and_suit_trims_yard_zipper_item_consumption' => $this->input->post('zipper_consumption'),
+                'tbl_quilt_and_suit_trims_yard_zipper_item_rate' => $this->input->post('zipper_consumption_rate'),
+                'tbl_quilt_and_suit_trims_yard_zipper_item_total_cost' => $this->input->post('zipper_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_yard_webbing_item_cost' => $this->input->post('webbing_cost'),
+                'tbl_quilt_and_suit_trims_yard_webbing_item_consumption' => $this->input->post('webbing_consumption'),
+                'tbl_quilt_and_suit_trims_yard_webbing_item_rate' => $this->input->post('webbing_consumption_rate'),
+                'tbl_quilt_and_suit_trims_yard_webbing_item_total_cost' => $this->input->post('webbing_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_yard_draw_string_item_cost' => $this->input->post('draw_string_cost'),
+                'tbl_quilt_and_suit_trims_yard_draw_string_item_consumption' => $this->input->post('draw_string_consumption'),
+                'tbl_quilt_and_suit_trims_yard_draw_string_item_rate' => $this->input->post('draw_string_consumption_rate'),
+                'tbl_quilt_and_suit_trims_yard_draw_string_item_total_cost' => $this->input->post('draw_string_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_yard_velcro_item_cost' => $this->input->post('velcro_cost'),
+                'tbl_quilt_and_suit_trims_yard_velcro_item_consumption' => $this->input->post('velcro_consumption'),
+                'tbl_quilt_and_suit_trims_yard_velcro_item_rate' => $this->input->post('velcro_consumption_rate'),
+                'tbl_quilt_and_suit_trims_yard_velcro_item_total_cost' => $this->input->post('velcro_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_yard_extra_1_name' => $this->input->post('extra_trim_yard_extra_1_name'),
+                'tbl_quilt_and_suit_trims_yard_extra_2_name' => $this->input->post('extra_trim_yard_extra_2_name'),
+                'tbl_quilt_and_suit_trims_yard_extra_3_name' => $this->input->post('extra_trim_yard_extra_3_name'),
+
+                'tbl_quilt_and_suit_trims_yard_extra_1_item_cost' => $this->input->post('extra_trim_yard_1_cost'),
+                'tbl_quilt_and_suit_trims_yard_extra_1_item_consumption' => $this->input->post('extra_trim_yard_1_consumption'),
+                'tbl_quilt_and_suit_trims_yard_extra_1_item_rate' => $this->input->post('extra_trim_yard_1_consumption_rate'),
+                'tbl_quilt_and_suit_trims_yard_extra_1_item_total_cost' => $this->input->post('extra_trim_yard_1_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_yard_extra_2_item_cost' => $this->input->post('extra_trim_yard_2_cost'),
+                'tbl_quilt_and_suit_trims_yard_extra_2_item_consumption' => $this->input->post('extra_trim_yard_2_consumption'),
+                'tbl_quilt_and_suit_trims_yard_extra_2_item_rate' => $this->input->post('extra_trim_yard_2_consumption_rate'),
+                'tbl_quilt_and_suit_trims_yard_extra_2_item_total_cost' => $this->input->post('extra_trim_yard_2_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_yard_extra_3_item_cost' => $this->input->post('extra_trim_yard_3_cost'),
+                'tbl_quilt_and_suit_trims_yard_extra_3_item_consumption' => $this->input->post('extra_trim_yard_3_consumption'),
+                'tbl_quilt_and_suit_trims_yard_extra_3_item_rate' => $this->input->post('extra_trim_yard_3_consumption_rate'),
+                'tbl_quilt_and_suit_trims_yard_extra_3_item_total_cost' => $this->input->post('extra_trim_yard_3_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_piece_puller_item_cost' => $this->input->post('puller_cost'),
+                'tbl_quilt_and_suit_trims_piece_puller_item_consumption' => $this->input->post('puller_consumption'),
+                'tbl_quilt_and_suit_trims_piece_puller_item_rate' => $this->input->post('puller_consumption_rate'),
+                'tbl_quilt_and_suit_trims_piece_puller_item_total_cost' => $this->input->post('puller_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_piece_print_item_cost' => $this->input->post('print_cost'),
+                'tbl_quilt_and_suit_trims_piece_print_item_consumption' => $this->input->post('print_consumption'),
+                'tbl_quilt_and_suit_trims_piece_print_item_rate' => $this->input->post('print_consumption_rate'),
+                'tbl_quilt_and_suit_trims_piece_print_item_total_cost' => $this->input->post('print_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_piece_eyelet_item_cost' => $this->input->post('eyelet_cost'),
+                'tbl_quilt_and_suit_trims_piece_eyelet_item_consumption' => $this->input->post('eyelet_consumption'),
+                'tbl_quilt_and_suit_trims_piece_eyelet_item_rate' => $this->input->post('eyelet_consumption_rate'),
+                'tbl_quilt_and_suit_trims_piece_eyelet_item_total_cost' => $this->input->post('eyelet_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_piece_buckle_item_cost' => $this->input->post('buckle_cost'),
+                'tbl_quilt_and_suit_trims_piece_buckle_item_consumption' => $this->input->post('buckle_consumption'),
+                'tbl_quilt_and_suit_trims_piece_buckle_item_rate' => $this->input->post('buckle_consumption_rate'),
+                'tbl_quilt_and_suit_trims_piece_buckle_item_total_cost' => $this->input->post('buckle_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_piece_magnetic_button_item_cost' => $this->input->post('magnetic_button_cost'),
+                'tbl_quilt_and_suit_trims_piece_magnetic_button_item_consumption' => $this->input->post('magnetic_button_consumption'),
+                'tbl_quilt_and_suit_trims_piece_magnetic_button_item_rate' => $this->input->post('magnetic_button_consumption_rate'),
+                'tbl_quilt_and_suit_trims_piece_magnetic_button_item_total_cost' => $this->input->post('magnetic_button_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_piece_snap_button_item_cost' => $this->input->post('snap_button_cost'),
+                'tbl_quilt_and_suit_trims_piece_snap_button_item_consumption' => $this->input->post('snap_button_consumption'),
+                'tbl_quilt_and_suit_trims_piece_snap_button_item_rate' => $this->input->post('snap_button_consumption_rate'),
+                'tbl_quilt_and_suit_trims_piece_snap_button_item_total_cost' => $this->input->post('snap_button_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_piece_bottom_base_item_cost' => $this->input->post('bottom_base_cost'),
+                'tbl_quilt_and_suit_trims_piece_bottom_base_item_consumption' => $this->input->post('bottom_base_consumption'),
+                'tbl_quilt_and_suit_trims_piece_bottom_base_item_rate' => $this->input->post('bottom_base_consumption_rate'),
+                'tbl_quilt_and_suit_trims_piece_bottom_base_item_total_cost' => $this->input->post('bottom_base_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_piece_thread_item_cost' => $this->input->post('thread_cost'),
+                'tbl_quilt_and_suit_trims_piece_thread_item_consumption' => $this->input->post('thread_consumption'),
+                'tbl_quilt_and_suit_trims_piece_thread_item_rate' => $this->input->post('thread_consumption_rate'),
+                'tbl_quilt_and_suit_trims_piece_thread_item_total_cost' => $this->input->post('thread_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_piece_tag_item_cost' => $this->input->post('tag_cost'),
+                'tbl_quilt_and_suit_trims_piece_tag_item_consumption' => $this->input->post('tag_consumption'),
+                'tbl_quilt_and_suit_trims_piece_tag_item_rate' => $this->input->post('tag_consumption_rate'),
+                'tbl_quilt_and_suit_trims_piece_tag_item_total_cost' => $this->input->post('tag_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_piece_label_item_cost' => $this->input->post('label_cost'),
+                'tbl_quilt_and_suit_trims_piece_label_item_consumption' => $this->input->post('label_consumption'),
+                'tbl_quilt_and_suit_trims_piece_label_item_rate' => $this->input->post('label_consumption_rate'),
+                'tbl_quilt_and_suit_trims_piece_label_item_total_cost' => $this->input->post('label_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_piece_packing_item_cost' => $this->input->post('packing_cost'),
+                'tbl_quilt_and_suit_trims_piece_packing_item_consumption' => $this->input->post('packing_consumption'),
+                'tbl_quilt_and_suit_trims_piece_packing_item_rate' => $this->input->post('packing_consumption_rate'),
+                'tbl_quilt_and_suit_trims_piece_packing_item_total_cost' => $this->input->post('packing_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_piece_extra_1_name' => $this->input->post('extra_1_piece_name'),
+                'tbl_quilt_and_suit_trims_piece_extra_1_item_cost' => $this->input->post('extra_1_piece_cost'),
+                'tbl_quilt_and_suit_trims_piece_extra_1_item_consumption' => $this->input->post('extra_1_piece_consumption'),
+                'tbl_quilt_and_suit_trims_piece_extra_1_item_rate' => $this->input->post('extra_1_piece_consumption_rate'),
+                'tbl_quilt_and_suit_trims_piece_extra_1_item_total_cost' => $this->input->post('extra_1_piece_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_piece_extra_2_name' => $this->input->post('extra_2_piece_name'),
+                'tbl_quilt_and_suit_trims_piece_extra_2_item_cost' => $this->input->post('extra_2_piece_cost'),
+                'tbl_quilt_and_suit_trims_piece_extra_2_item_consumption' => $this->input->post('extra_2_piece_consumption'),
+                'tbl_quilt_and_suit_trims_piece_extra_2_item_rate' => $this->input->post('extra_2_piece_consumption_rate'),
+                'tbl_quilt_and_suit_trims_piece_extra_2_item_total_cost' => $this->input->post('extra_2_piece_consumption_cost'),
+
+                'tbl_quilt_and_suit_trims_piece_extra_3_name' => $this->input->post('extra_3_piece_name'),
+                'tbl_quilt_and_suit_trims_piece_extra_3_item_cost' => $this->input->post('extra_3_piece_cost'),
+                'tbl_quilt_and_suit_trims_piece_extra_3_item_consumption' => $this->input->post('extra_3_piece_consumption'),
+                'tbl_quilt_and_suit_trims_piece_extra_3_item_rate' => $this->input->post('extra_3_piece_consumption_rate'),
+                'tbl_quilt_and_suit_trims_piece_extra_3_item_total_cost' => $this->input->post('extra_3_piece_consumption_cost'),
+
+                'tbl_modification_date' => date("Y-m-d"),
+                'tbl_modification_time' => date("h:i:sa"),
+            );
+            $this->db->insert('quilt_and_suit_costing_rev',$quilt_and_suit_data_rev);
+
+
+
+
+
 
             redirect(base_url('admin'));
         }
@@ -1486,40 +1481,49 @@ class Quiltandsuit extends CI_Controller
         $data['webbing_item_consumption_rate'] = $dt->tbl_quilt_and_suit_trims_yard_webbing_item_rate;
         $data['webbing_item_consumption_cost'] = $dt->tbl_quilt_and_suit_trims_yard_webbing_item_total_cost;
 
+        $data['draw_string_item_cost'] = $dt->tbl_quilt_and_suit_trims_yard_draw_string_item_cost;
+        $data['draw_string_item_consumption'] = $dt->tbl_quilt_and_suit_trims_yard_draw_string_item_consumption;
+        $data['draw_string_item_consumption_rate'] = $dt->tbl_quilt_and_suit_trims_yard_draw_string_item_rate;
+        $data['draw_string_item_consumption_cost'] = $dt->tbl_quilt_and_suit_trims_yard_draw_string_item_total_cost;
+
         $data['velcro_item_cost'] = $dt->tbl_quilt_and_suit_trims_yard_velcro_item_cost;
         $data['velcro_item_consumption'] = $dt->tbl_quilt_and_suit_trims_yard_velcro_item_consumption;
         $data['velcro_item_rate'] = $dt->tbl_quilt_and_suit_trims_yard_velcro_item_rate;
         $data['velcro_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_yard_velcro_item_total_cost;
 
-        $data['extra_trim_yard_extra_1_name'] = $dt->tbl_quilt_and_suit_trims_yard_extra_1_name;
-        $data['extra_trim_yard_extra_2_name'] = $dt->tbl_quilt_and_suit_trims_yard_extra_2_name;
-        $data['extra_trim_yard_extra_3_name'] = $dt->tbl_quilt_and_suit_trims_yard_extra_3_name;
+        $data['trim_yard_extra_1_name'] = $dt->tbl_quilt_and_suit_trims_yard_extra_1_name;
+        $data['trim_yard_extra_2_name'] = $dt->tbl_quilt_and_suit_trims_yard_extra_2_name;
+        $data['trim_yard_extra_3_name'] = $dt->tbl_quilt_and_suit_trims_yard_extra_3_name;
 
-        $data['extra_1_item_cost'] = $dt->tbl_quilt_and_suit_trims_yard_extra_1_item_cost;
-        $data['extra_1_item_consumption'] = $dt->tbl_quilt_and_suit_trims_yard_extra_1_item_consumption;
-        $data['extra_1_item_rate'] = $dt->tbl_quilt_and_suit_trims_yard_extra_1_item_rate;
-        $data['extra_1_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_yard_extra_1_item_total_cost;
+        $data['trim_yard_extra_1_item_cost'] = $dt->tbl_quilt_and_suit_trims_yard_extra_1_item_cost;
+        $data['trim_yard_extra_1_item_consumption'] = $dt->tbl_quilt_and_suit_trims_yard_extra_1_item_consumption;
+        $data['trim_yard_extra_1_item_rate'] = $dt->tbl_quilt_and_suit_trims_yard_extra_1_item_rate;
+        $data['trim_yard_extra_1_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_yard_extra_1_item_total_cost;
 
-        $data['extra_2_item_cost'] = $dt->tbl_quilt_and_suit_trims_yard_extra_2_item_cost;
-        $data['extra_2_item_consumption'] = $dt->tbl_quilt_and_suit_trims_yard_extra_2_item_consumption;
-        $data['extra_2_item_rate'] = $dt->tbl_quilt_and_suit_trims_yard_extra_2_item_rate;
-        $data['extra_2_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_yard_extra_2_item_total_cost;
+        $data['trim_yard_extra_2_item_cost'] = $dt->tbl_quilt_and_suit_trims_yard_extra_2_item_cost;
+        $data['trim_yard_extra_2_item_consumption'] = $dt->tbl_quilt_and_suit_trims_yard_extra_2_item_consumption;
+        $data['trim_yard_extra_2_item_rate'] = $dt->tbl_quilt_and_suit_trims_yard_extra_2_item_rate;
+        $data['trim_yard_extra_2_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_yard_extra_2_item_total_cost;
 
-        $data['extra_3_item_cost'] = $dt->tbl_quilt_and_suit_trims_yard_extra_3_item_cost;
-        $data['extra_3_item_consumption'] = $dt->tbl_quilt_and_suit_trims_yard_extra_3_item_consumption;
-        $data['extra_3_item_rate'] = $dt->tbl_quilt_and_suit_trims_yard_extra_3_item_rate;
-        $data['extra_3_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_yard_extra_3_item_total_cost;
+        $data['trim_yard_extra_3_item_cost'] = $dt->tbl_quilt_and_suit_trims_yard_extra_3_item_cost;
+        $data['trim_yard_extra_3_item_consumption'] = $dt->tbl_quilt_and_suit_trims_yard_extra_3_item_consumption;
+        $data['trim_yard_extra_3_item_rate'] = $dt->tbl_quilt_and_suit_trims_yard_extra_3_item_rate;
+        $data['trim_yard_extra_3_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_yard_extra_3_item_total_cost;
 
         $data['puller_item_cost'] = $dt->tbl_quilt_and_suit_trims_piece_puller_item_cost;
         $data['puller_item_consumption'] = $dt->tbl_quilt_and_suit_trims_piece_puller_item_consumption;
         $data['puller_item_rate'] = $dt->tbl_quilt_and_suit_trims_piece_puller_item_rate;
         $data['puller_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_piece_puller_item_total_cost;
 
-
         $data['print_item_cost'] = $dt->tbl_quilt_and_suit_trims_piece_print_item_cost;
         $data['print_item_consumption'] = $dt->tbl_quilt_and_suit_trims_piece_print_item_consumption;
         $data['print_item_rate'] = $dt->tbl_quilt_and_suit_trims_piece_print_item_rate;
         $data['print_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_piece_print_item_total_cost;
+
+        $data['eyelet_item_cost'] = $dt->tbl_quilt_and_suit_trims_piece_eyelet_item_cost;
+        $data['eyelet_item_consumption'] = $dt->tbl_quilt_and_suit_trims_piece_eyelet_item_consumption;
+        $data['eyelet_item_rate'] = $dt->tbl_quilt_and_suit_trims_piece_eyelet_item_rate;
+        $data['eyelet_item_total_cost'] = $dt->tbl_quilt_and_suit_trims_piece_eyelet_item_total_cost;
 
         $data['buckle_item_cost'] = $dt->tbl_quilt_and_suit_trims_piece_buckle_item_cost;
         $data['buckle_item_consumption'] = $dt->tbl_quilt_and_suit_trims_piece_buckle_item_consumption;
@@ -1631,6 +1635,14 @@ class Quiltandsuit extends CI_Controller
         $data['body_material_1_right_width_allowance'] = $dt->tbl_dimension_body_material_1_right_width_allowance;
         $data['body_material_1_right_width_total'] = $dt->tbl_dimension_body_material_1_right_width_total;
 
+        $data['body_material_1_handle_length'] = $dt->tbl_dimension_body_material_1_handle_length;
+        $data['body_material_1_handle_length_allowance'] = $dt->tbl_dimension_body_material_1_handle_length_allowance;
+        $data['body_material_1_handle_length_total'] = $dt->tbl_dimension_body_material_1_handle_length_total;
+
+        $data['body_material_1_handle_width'] = $dt->tbl_dimension_body_material_1_handle_width;
+        $data['body_material_1_handle_width_allowance'] = $dt->tbl_dimension_body_material_1_handle_width_allowance;
+        $data['body_material_1_handle_width_total'] = $dt->tbl_dimension_body_material_1_handle_width_total;
+
         $data['body_material_1_pocket_length'] = $dt->tbl_dimension_body_material_1_pocket_length;
         $data['body_material_1_pocket_length_allowance'] = $dt->tbl_dimension_body_material_1_pocket_length_allowance;
         $data['body_material_1_pocket_length_total'] = $dt->tbl_dimension_body_material_1_pocket_length_total;
@@ -1638,6 +1650,14 @@ class Quiltandsuit extends CI_Controller
         $data['body_material_1_pocket_width'] = $dt->tbl_dimension_body_material_1_pocket_width;
         $data['body_material_1_pocket_width_allowance'] = $dt->tbl_dimension_body_material_1_pocket_width_allowance;
         $data['body_material_1_pocket_width_total'] = $dt->tbl_dimension_body_material_1_pocket_width_total;
+
+        $data['body_material_1_piping_length'] = $dt->tbl_dimension_body_material_1_piping_length;
+        $data['body_material_1_piping_length_allowance'] = $dt->tbl_dimension_body_material_1_piping_length_allowance;
+        $data['body_material_1_piping_length_total'] = $dt->tbl_dimension_body_material_1_piping_length_total;
+
+        $data['body_material_1_piping_width'] = $dt->tbl_dimension_body_material_1_piping_width;
+        $data['body_material_1_piping_width_allowance'] = $dt->tbl_dimension_body_material_1_piping_width_allowance;
+        $data['body_material_1_piping_width_total'] = $dt->tbl_dimension_body_material_1_piping_width_total;
 
         //Dimension for Body Material 2
         $data['body_material_2_front_length'] = $dt->tbl_dimension_body_material_2_front_length;
@@ -1688,6 +1708,14 @@ class Quiltandsuit extends CI_Controller
         $data['body_material_2_right_width_allowance'] = $dt->tbl_dimension_body_material_2_right_width_allowance;
         $data['body_material_2_right_width_total'] = $dt->tbl_dimension_body_material_2_right_width_total;
 
+        $data['body_material_2_handle_length'] = $dt->tbl_dimension_body_material_2_handle_length;
+        $data['body_material_2_handle_length_allowance'] = $dt->tbl_dimension_body_material_2_handle_length_allowance;
+        $data['body_material_2_handle_length_total'] = $dt->tbl_dimension_body_material_2_handle_length_total;
+
+        $data['body_material_2_handle_width'] = $dt->tbl_dimension_body_material_2_handle_width;
+        $data['body_material_2_handle_width_allowance'] = $dt->tbl_dimension_body_material_2_handle_width_allowance;
+        $data['body_material_2_handle_width_total'] = $dt->tbl_dimension_body_material_2_handle_width_total;
+
         $data['body_material_2_pocket_length'] = $dt->tbl_dimension_body_material_2_pocket_length;
         $data['body_material_2_pocket_length_allowance'] = $dt->tbl_dimension_body_material_2_pocket_length_allowance;
         $data['body_material_2_pocket_length_total'] = $dt->tbl_dimension_body_material_2_pocket_length_total;
@@ -1695,6 +1723,14 @@ class Quiltandsuit extends CI_Controller
         $data['body_material_2_pocket_width'] = $dt->tbl_dimension_body_material_2_pocket_width;
         $data['body_material_2_pocket_width_allowance'] = $dt->tbl_dimension_body_material_2_pocket_width_allowance;
         $data['body_material_2_pocket_width_total'] = $dt->tbl_dimension_body_material_2_pocket_width_total;
+
+        $data['body_material_2_piping_length'] = $dt->tbl_dimension_body_material_2_piping_length;
+        $data['body_material_2_piping_length_allowance'] = $dt->tbl_dimension_body_material_2_piping_length_allowance;
+        $data['body_material_2_piping_length_total'] = $dt->tbl_dimension_body_material_2_piping_length_total;
+
+        $data['body_material_2_piping_width'] = $dt->tbl_dimension_body_material_2_piping_width;
+        $data['body_material_2_piping_width_allowance'] = $dt->tbl_dimension_body_material_2_piping_width_allowance;
+        $data['body_material_2_piping_width_total'] = $dt->tbl_dimension_body_material_2_piping_width_total;
 
         //Dimension for Body Material 3
         $data['body_material_3_front_length'] = $dt->tbl_dimension_body_material_3_front_length;
@@ -1745,6 +1781,14 @@ class Quiltandsuit extends CI_Controller
         $data['body_material_3_right_width_allowance'] = $dt->tbl_dimension_body_material_3_right_width_allowance;
         $data['body_material_3_right_width_total'] = $dt->tbl_dimension_body_material_3_right_width_total;
 
+        $data['body_material_3_handle_length'] = $dt->tbl_dimension_body_material_3_handle_length;
+        $data['body_material_3_handle_length_allowance'] = $dt->tbl_dimension_body_material_3_handle_length_allowance;
+        $data['body_material_3_handle_length_total'] = $dt->tbl_dimension_body_material_3_handle_length_total;
+
+        $data['body_material_3_handle_width'] = $dt->tbl_dimension_body_material_3_handle_width;
+        $data['body_material_3_handle_width_allowance'] = $dt->tbl_dimension_body_material_3_handle_width_allowance;
+        $data['body_material_3_handle_width_total'] = $dt->tbl_dimension_body_material_3_handle_width_total;
+
         $data['body_material_3_pocket_length'] = $dt->tbl_dimension_body_material_3_pocket_length;
         $data['body_material_3_pocket_length_allowance'] = $dt->tbl_dimension_body_material_3_pocket_length_allowance;
         $data['body_material_3_pocket_length_total'] = $dt->tbl_dimension_body_material_3_pocket_length_total;
@@ -1752,6 +1796,14 @@ class Quiltandsuit extends CI_Controller
         $data['body_material_3_pocket_width'] = $dt->tbl_dimension_body_material_3_pocket_width;
         $data['body_material_3_pocket_width_allowance'] = $dt->tbl_dimension_body_material_3_pocket_width_allowance;
         $data['body_material_3_pocket_width_total'] = $dt->tbl_dimension_body_material_3_pocket_width_total;
+
+        $data['body_material_3_piping_length'] = $dt->tbl_dimension_body_material_3_piping_length;
+        $data['body_material_3_piping_length_allowance'] = $dt->tbl_dimension_body_material_3_piping_length_allowance;
+        $data['body_material_3_piping_length_total'] = $dt->tbl_dimension_body_material_3_piping_length_total;
+
+        $data['body_material_3_piping_width'] = $dt->tbl_dimension_body_material_3_piping_width;
+        $data['body_material_3_piping_width_allowance'] = $dt->tbl_dimension_body_material_3_piping_width_allowance;
+        $data['body_material_3_piping_width_total'] = $dt->tbl_dimension_body_material_3_piping_width_total;
 
 
         $this->load->view('admin/admin_header_view', $this->data);
@@ -2045,6 +2097,14 @@ class Quiltandsuit extends CI_Controller
         $data['body_material_1_right_width_allowance'] = $dt->tbl_dimension_body_material_1_right_width_allowance;
         $data['body_material_1_right_width_total'] = $dt->tbl_dimension_body_material_1_right_width_total;
 
+        $data['body_material_1_handle_length'] = $dt->tbl_dimension_body_material_1_handle_length;
+        $data['body_material_1_handle_length_allowance'] = $dt->tbl_dimension_body_material_1_handle_length_allowance;
+        $data['body_material_1_handle_length_total'] = $dt->tbl_dimension_body_material_1_handle_length_total;
+
+        $data['body_material_1_handle_width'] = $dt->tbl_dimension_body_material_1_handle_width;
+        $data['body_material_1_handle_width_allowance'] = $dt->tbl_dimension_body_material_1_handle_width_allowance;
+        $data['body_material_1_handle_width_total'] = $dt->tbl_dimension_body_material_1_handle_width_total;
+
         $data['body_material_1_pocket_length'] = $dt->tbl_dimension_body_material_1_pocket_length;
         $data['body_material_1_pocket_length_allowance'] = $dt->tbl_dimension_body_material_1_pocket_length_allowance;
         $data['body_material_1_pocket_length_total'] = $dt->tbl_dimension_body_material_1_pocket_length_total;
@@ -2125,6 +2185,14 @@ class Quiltandsuit extends CI_Controller
         $data['body_material_2_right_width'] = $dt->tbl_dimension_body_material_2_right_width;
         $data['body_material_2_right_width_allowance'] = $dt->tbl_dimension_body_material_2_right_width_allowance;
         $data['body_material_2_right_width_total'] = $dt->tbl_dimension_body_material_2_right_width_total;
+
+        $data['body_material_2_handle_length'] = $dt->tbl_dimension_body_material_2_handle_length;
+        $data['body_material_2_handle_length_allowance'] = $dt->tbl_dimension_body_material_2_handle_length_allowance;
+        $data['body_material_2_handle_length_total'] = $dt->tbl_dimension_body_material_2_handle_length_total;
+
+        $data['body_material_2_handle_width'] = $dt->tbl_dimension_body_material_2_handle_width;
+        $data['body_material_2_handle_width_allowance'] = $dt->tbl_dimension_body_material_2_handle_width_allowance;
+        $data['body_material_2_handle_width_total'] = $dt->tbl_dimension_body_material_2_handle_width_total;
 
         $data['body_material_2_pocket_length'] = $dt->tbl_dimension_body_material_2_pocket_length;
         $data['body_material_2_pocket_length_allowance'] = $dt->tbl_dimension_body_material_2_pocket_length_allowance;
@@ -2207,6 +2275,14 @@ class Quiltandsuit extends CI_Controller
         $data['body_material_3_right_width_allowance'] = $dt->tbl_dimension_body_material_3_right_width_allowance;
         $data['body_material_3_right_width_total'] = $dt->tbl_dimension_body_material_3_right_width_total;
 
+        $data['body_material_3_handle_length'] = $dt->tbl_dimension_body_material_3_handle_length;
+        $data['body_material_3_handle_length_allowance'] = $dt->tbl_dimension_body_material_3_handle_length_allowance;
+        $data['body_material_3_handle_length_total'] = $dt->tbl_dimension_body_material_3_handle_length_total;
+
+        $data['body_material_3_handle_width'] = $dt->tbl_dimension_body_material_3_handle_width;
+        $data['body_material_3_handle_width_allowance'] = $dt->tbl_dimension_body_material_3_handle_width_allowance;
+        $data['body_material_3_handle_width_total'] = $dt->tbl_dimension_body_material_3_handle_width_total;
+
         $data['body_material_3_pocket_length'] = $dt->tbl_dimension_body_material_3_pocket_length;
         $data['body_material_3_pocket_length_allowance'] = $dt->tbl_dimension_body_material_3_pocket_length_allowance;
         $data['body_material_3_pocket_length_total'] = $dt->tbl_dimension_body_material_3_pocket_length_total;
@@ -2252,7 +2328,7 @@ class Quiltandsuit extends CI_Controller
         if ($this->input->post('updatequiltandsuit')) {
             $quiltandsuitId = $this->input->post('quilt-and-suit-id');
             $this->quilt_and_suit_model->update_quilt_and_suit_costing($quiltandsuitId);
-            redirect('quiltandsuit/quiltandsuit_all');
+            redirect('quiltandsuit/quilt_and_suit_all');
         } else{
             $id = $this->input->post('quilt-and-suit-id');
             redirect('quiltandsuit/edit_quilt_and_suit_costing/'. $id);

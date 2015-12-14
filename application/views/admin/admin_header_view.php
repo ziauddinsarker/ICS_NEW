@@ -12,10 +12,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <link href="<?php echo base_url("assets/css/bootstrap.min.css"); ?>" rel="stylesheet" type="text/css" />
-
     <link href="<?php echo base_url("assets/css/jquery-ui.min.css"); ?>" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url("assets/css/jquery-ui.theme.min.css"); ?>" rel="stylesheet" type="text/css" />
-
 
     <!-- Ionicons -->
     <link rel="stylesheet" href="<?php echo base_url("assets/css/font-awesome.min.css")?>">
@@ -23,7 +21,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url("assets/dist/css/AdminLTE.min.css")?>">
-
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
@@ -89,7 +86,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
               */ ?>
               <li class="user user-menu">
-                <a href="<?php base_url() ?>/ICS_NEW/login/logout" class="btn">Sign out</a>
+                <a href="<?php base_url() ?>/ics/login/logout" class="btn">Sign out</a>
               </li>
             
             </ul>
@@ -143,14 +140,58 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu">
-            <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="<?=  base_url()?>admin/ppnw_add"><i class="fa fa-link"></i> <span>PPNW</span></a></li>
-            <li><a href="<?=  base_url()?>admin/woven_add"><i class="fa fa-link"></i> <span>Woven</span></a></li>
-            <li><a href="<?=  base_url()?>admin/quilt_and_suit_add"><i class="fa fa-link"></i> <span>Quilt & Suit Covers</span></a></li>
-            <li><a href="#"><i class="fa fa-link"></i> <span>Jute</span></a></li>
-            <li><a href="#"><i class="fa fa-link"></i> <span>Leather</span></a></li>
+            <?php
+            $group = $this->ion_auth->get_users_groups()->row()->name;
+            //var_dump($group);
+            if(!($group == 'admin' || $group == 'merchandiser')) {
+            }else{
+            ?>
+              <li><a href="<?=  base_url()?>admin/ppnw_add"><i class="fa fa-th-list"></i> <span>PPNW</span></a></li>
+              <li><a href="<?=  base_url()?>admin/woven_simple_add"><i class="fa fa-th-list"></i> <span>Woven Simple</span></a></li>
+              <li><a href="<?=  base_url()?>admin/woven_add"><i class="fa fa-th-list"></i> <span>Woven</span></a></li>
+              <li><a href="<?=  base_url()?>admin/quilt_and_suit_add"><i class="fa fa-th-list"></i> <span>Quilt & Suit Covers</span></a></li>
+            <?php } ?>
 
-          </ul><!-- /.sidebar-menu -->
+            <?php
+              $group = $this->ion_auth->get_users_groups()->row()->name;
+
+            //var_dump($group);
+              if(!($group == 'admin' || $group == 'sales')) {
+              }else{
+             ?>
+            <li class="treeview">
+              <a href="#" marked="1">
+                <i class="fa fa-cog"></i> <span>Add Variable</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="<?=  base_url()?>inventory/get_category" marked="1"><i class="fa fa-circle-o"></i> Category</a></li>
+                <li><a href="<?=  base_url()?>inventory/add_product_name" marked="1"><i class="fa fa-circle-o"></i> Product Name</a></li>
+                <li><a href="<?=  base_url()?>inventory/add_product_code" marked="1"><i class="fa fa-circle-o"></i> Product Code</a></li>
+                <li><a href="<?=  base_url()?>inventory/add_product_color" marked="1"><i class="fa fa-circle-o"></i> Color</a></li>
+                <li><a href="<?=  base_url()?>inventory/add_product_fabric" marked="1"><i class="fa fa-circle-o"></i> Fabric Details</a></li>
+              </ul>
+            </li>
+
+
+            <li class="treeview">
+              <a href="#" marked="1">
+                <i class="fa fa-edit"></i> <span>Inventory</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="<?=  base_url()?>inventory" marked="1"><i class="fa fa-circle-o"></i> All Inventory</a></li>
+                <li><a href="<?=  base_url()?>inventory/get_category" marked="1"><i class="fa fa-circle-o"></i> All Product Category</a></li>
+                <li><a href="<?=  base_url()?>inventory/all_products" marked="1"><i class="fa fa-circle-o"></i> All Product</a></li>
+              </ul>
+            </li>
+			<li><a href="<?=  base_url()?>inventory/add_product"><i class="fa fa-th-list"></i> <span>Add Product<span></a></li>
+			<li><a href="<?=  base_url()?>inventory/add_to_inventory"><i class="fa fa-th-list"></i> <span>Add Inventory<span></a></li>
+			<li><a href="<?=  base_url()?>inventory/invoice"><i class="fa fa-th-list"></i> <span>Invoice<span></a></li>
+
+
+             <?php } ?>
+</ul>
         </section>
         <!-- /.sidebar -->
       </aside>

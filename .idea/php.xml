@@ -3,7 +3,7 @@
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings />
-      <phpunit_by_deployment server_id="4a587b88-d435-4851-bfed-fd02ac161902" />
+      <phpunit_by_deployment server_id="4a587b88-d435-4851-bfed-fd02ac161902" load_method="PHPUNIT_PHAR" custom_loader_path="" phpunit_phar_path="C:\xampp\php\phpunit.phar" />
     </phpunit_settings>
   </component>
 </project>

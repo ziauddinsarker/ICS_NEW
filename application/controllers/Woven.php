@@ -820,8 +820,6 @@ class Woven extends CI_Controller
         $this->form_validation->set_rules('order_transport', 'Order Transport', 'trim|xss_clean');
         $this->form_validation->set_rules('order_bank_document', 'Order Bank Document', 'trim|xss_clean');
 
-
-
         //Body Material 1
         $this->form_validation->set_rules('body_material_1_front_length', 'Body Material 1 Front Length', 'trim|xss_clean');
         $this->form_validation->set_rules('body_material_1_front_length_allowance', 'Body Material 1 Front Length Allowance', 'trim|xss_clean');
@@ -1471,7 +1469,6 @@ class Woven extends CI_Controller
         } else {
 
             $woven_dimension_data = array(
-
                 'tbl_dimnesion_body_material_first_extra_1' => $this->input->post('body_material_first_extra_1'),
                 'tbl_dimnesion_body_material_first_extra_2' => $this->input->post('body_material_first_extra_2'),
                 'tbl_dimnesion_body_material_first_extra_3' => $this->input->post('body_material_first_extra_3'),
@@ -1640,8 +1637,6 @@ class Woven extends CI_Controller
                 'tbl_dimension_body_material_2_extra_3_width' => $this->input->post('body_material_2_extra_3_width'),
                 'tbl_dimension_body_material_2_extra_3_width_allowance' => $this->input->post('body_material_2_extra_3_width_allowance'),
                 'tbl_dimension_body_material_2_extra_3_width_total' => $this->input->post('body_material_2_extra_3_width_total'),
-
-
 
                 //Body material 3
                 'tbl_dimension_body_material_3_front_length' => $this->input->post('body_material_3_front_length'),
@@ -2203,14 +2198,261 @@ class Woven extends CI_Controller
 
             $this->db->insert('woven_costing', $woven_costing_data);
 
-            $insert_id = $this->db->insert_id();
+            $inserted_id = $this->db->insert_id();
             $user_id = $this->session->userdata('user_id');
 
             $data = array(
                 'costing_user_id' => $user_id ,
-                'costing_user_woven' => $insert_id
+                'costing_user_woven' => $inserted_id
             );
             $this->woven_model->add_costing_by_user($data);
+
+
+            /*******Add Data to revision*****************/
+
+            $this->db->insert('woven_dimension_rev', $woven_dimension_data);
+            $insert_id = $this->db->insert_id();
+            $woven_data_rev = array(
+                'tbl_woven_order_id' => $inserted_id,
+                'tbl_woven_dimension_id' => $insert_id,
+                'tbl_woven_id_name' => $this->input->post('order_id'),
+                'tbl_woven_company_name' => $this->input->post('order_company'),
+                'tbl_woven_order_date' => $this->input->post('order_date'),
+                'tbl_woven_item_name' => $this->input->post('order_item_name'),
+                'tbl_woven_ref_name' => $this->input->post('order_ref_no'),
+
+                // 'tbl_woven_order_gsm' => $this->input->post('woven_order_gsm'),
+                //'tbl_woven_order_color' => $this->input->post('woven_order_color'),
+                'tbl_woven_order_usd' => $this->input->post('order_usd'),
+
+                'tbl_woven_order_wastage' => $this->input->post('order_wastage'),
+                'tbl_woven_order_margin' => $this->input->post('order_margin'),
+
+                'tbl_woven_order_quantity' => $this->input->post('order_quantity'),
+                'tbl_woven_order_transport' => $this->input->post('order_transport'),
+                'tbl_woven_order_bank_doc_charge' => $this->input->post('order_bank_document'),
+
+                'tbl_order_sewing' => $this->input->post('order_sewing'),
+                'tbl_order_overheads' => $this->input->post('order_overheads'),
+
+                'tbl_order_total_material_inc_wastage' => $this->input->post('order_total_material_inc_wastage'),
+                'tbl_order_total_overhead_and_other_cost' => $this->input->post('total_overhead_and_other_hidden'),
+                'tbl_total_cost' => $this->input->post('total_cost_hidden'),
+                'tbl_total_price' => $this->input->post('final_price_hidden'),
+
+                //Body Material Name
+                'tbl_woven_body_material_1_name' => $this->input->post('body_material_1_name'),
+                'tbl_woven_body_material_2_name' => $this->input->post('body_material_2_name'),
+                'tbl_woven_body_material_3_name' => $this->input->post('body_material_3_name'),
+                'tbl_woven_body_material_4_name' => $this->input->post('body_material_4_name'),
+                'tbl_woven_body_material_5_name' => $this->input->post('body_material_5_name'),
+                'tbl_woven_body_material_6_name' => $this->input->post('body_material_6_name'),
+
+                //Body Material Name
+                'tbl_woven_body_material_1_roll_width' => $this->input->post('body_material_1_roll_1'),
+                'tbl_woven_body_material_2_roll_width' => $this->input->post('body_material_2_roll_2'),
+                'tbl_woven_body_material_3_roll_width' => $this->input->post('body_material_3_roll_3'),
+                'tbl_woven_body_material_4_roll_width' => $this->input->post('body_material_4_roll_4'),
+                'tbl_woven_body_material_5_roll_width' => $this->input->post('body_material_5_roll_5'),
+                'tbl_woven_body_material_6_roll_width' => $this->input->post('body_material_6_roll_6'),
+
+                //Body Material 1 consumption cost
+                'tbl_woven_body_material_1_cost' => $this->input->post('body_material_1_cost'),
+                'tbl_woven_body_material_1_consumption' => $this->input->post('body_material_1_consumption'),
+                'tbl_woven_body_material_1_rate' => $this->input->post('body_material_1_consumption_rate'),
+                'tbl_woven_body_material_1_total_cost' => $this->input->post('body_material_1_consumption_cost'),
+
+                //Body Material 2 consumption cost
+                'tbl_woven_body_material_2_cost' => $this->input->post('body_material_2_cost'),
+                'tbl_woven_body_material_2_consumption' => $this->input->post('body_material_2_consumption'),
+                'tbl_woven_body_material_2_rate' => $this->input->post('body_material_2_consumption_rate'),
+                'tbl_woven_body_material_2_total_cost' => $this->input->post('body_material_2_consumption_cost'),
+
+                //Body Material 3 consumption cost
+                'tbl_woven_body_material_3_cost' => $this->input->post('body_material_3_cost'),
+                'tbl_woven_body_material_3_consumption' => $this->input->post('body_material_3_consumption'),
+                'tbl_woven_body_material_3_rate' => $this->input->post('body_material_3_consumption_rate'),
+                'tbl_woven_body_material_3_total_cost' => $this->input->post('body_material_3_consumption_cost'),
+
+                //Body Material 4 consumption cost
+                'tbl_woven_body_material_4_cost' => $this->input->post('body_material_4_cost'),
+                'tbl_woven_body_material_4_consumption' => $this->input->post('body_material_4_consumption'),
+                'tbl_woven_body_material_4_rate' => $this->input->post('body_material_4_consumption_rate'),
+                'tbl_woven_body_material_4_total_cost' => $this->input->post('body_material_4_consumption_cost'),
+
+                //Body Material 5 consumption cost
+                'tbl_woven_body_material_5_cost' => $this->input->post('body_material_5_cost'),
+                'tbl_woven_body_material_5_consumption' => $this->input->post('body_material_5_consumption'),
+                'tbl_woven_body_material_5_rate' => $this->input->post('body_material_5_consumption_rate'),
+                'tbl_woven_body_material_5_total_cost' => $this->input->post('body_material_5_consumption_cost'),
+
+                //Body Material 6 consumption cost
+                'tbl_woven_body_material_6_cost' => $this->input->post('body_material_6_cost'),
+                'tbl_woven_body_material_6_consumption' => $this->input->post('body_material_6_consumption'),
+                'tbl_woven_body_material_6_rate' => $this->input->post('body_material_6_consumption_rate'),
+                'tbl_woven_body_material_6_total_cost' => $this->input->post('body_material_6_consumption_cost'),
+
+                'tbl_woven_trims_yard_zipper_item_cost' => $this->input->post('zipper_cost'),
+                'tbl_woven_trims_yard_zipper_item_consumption' => $this->input->post('zipper_consumption'),
+                'tbl_woven_trims_yard_zipper_item_rate' => $this->input->post('zipper_consumption_rate'),
+                'tbl_woven_trims_yard_zipper_item_total_cost' => $this->input->post('zipper_consumption_cost'),
+
+                'tbl_woven_trims_yard_two_inch_webbing_item_cost' => $this->input->post('two_inch_webbing_cost'),
+                'tbl_woven_trims_yard_two_inch_webbing_item_consumption' => $this->input->post('two_inch_webbing_consumption'),
+                'tbl_woven_trims_yard_two_inch_webbing_item_rate' => $this->input->post('two_inch_webbing_consumption_rate'),
+                'tbl_woven_trims_yard_two_inch_webbing_item_total_cost' => $this->input->post('two_inch_webbing_consumption_cost'),
+
+                'tbl_woven_trims_yard_one_and_half_inch_webbing_item_cost' => $this->input->post('one_and_half_inch_webbing_cost'),
+                'tbl_woven_trims_yard_one_and_half_webbing_item_consumption' => $this->input->post('one_and_half_inch_webbing_consumption'),
+                'tbl_woven_trims_yard_one_and_half_webbing_item_rate' => $this->input->post('one_and_half_inch_webbing_consumption_rate'),
+                'tbl_woven_trims_yard_one_and_half_webbing_item_total_cost' => $this->input->post('one_and_half_inch_webbing_consumption_cost'),
+
+                'tbl_woven_trims_yard_velcro_item_cost' => $this->input->post('velcro_cost'),
+                'tbl_woven_trims_yard_velcro_item_consumption' => $this->input->post('velcro_consumption'),
+                'tbl_woven_trims_yard_velcro_item_rate' => $this->input->post('velcro_consumption_rate'),
+                'tbl_woven_trims_yard_velcro_item_total_cost' => $this->input->post('velcro_consumption_cost'),
+
+                'tbl_woven_trims_yard_extra_1_name' => $this->input->post('extra_trim_yard_extra_1_name'),
+                'tbl_woven_trims_yard_extra_2_name' => $this->input->post('extra_trim_yard_extra_2_name'),
+                'tbl_woven_trims_yard_extra_3_name' => $this->input->post('extra_trim_yard_extra_3_name'),
+
+
+                'tbl_woven_trims_yard_extra_1_item_cost' => $this->input->post('extra_trim_yard_1_cost'),
+                'tbl_woven_trims_yard_extra_1_item_consumption' => $this->input->post('extra_trim_yard_1_consumption'),
+                'tbl_woven_trims_yard_extra_1_item_rate' => $this->input->post('extra_trim_yard_1_consumption_rate'),
+                'tbl_woven_trims_yard_extra_1_item_total_cost' => $this->input->post('extra_trim_yard_1_consumption_cost'),
+
+                'tbl_woven_trims_yard_extra_2_item_cost' => $this->input->post('extra_trim_yard_2_cost'),
+                'tbl_woven_trims_yard_extra_2_item_consumption' => $this->input->post('extra_trim_yard_2_consumption'),
+                'tbl_woven_trims_yard_extra_2_item_rate' => $this->input->post('extra_trim_yard_2_consumption_rate'),
+                'tbl_woven_trims_yard_extra_2_item_total_cost' => $this->input->post('extra_trim_yard_2_consumption_cost'),
+
+                'tbl_woven_trims_yard_extra_3_item_cost' => $this->input->post('extra_trim_yard_3_cost'),
+                'tbl_woven_trims_yard_extra_3_item_consumption' => $this->input->post('extra_trim_yard_3_consumption'),
+                'tbl_woven_trims_yard_extra_3_item_rate' => $this->input->post('extra_trim_yard_3_consumption_rate'),
+                'tbl_woven_trims_yard_extra_3_item_total_cost' => $this->input->post('extra_trim_yard_3_consumption_cost'),
+
+                'tbl_woven_trims_piece_puller_item_cost' => $this->input->post('puller_cost'),
+                'tbl_woven_trims_piece_puller_item_consumption' => $this->input->post('puller_consumption'),
+                'tbl_woven_trims_piece_puller_item_rate' => $this->input->post('puller_consumption_rate'),
+                'tbl_woven_trims_piece_puller_item_total_cost' => $this->input->post('puller_consumption_cost'),
+
+                'tbl_woven_trims_piece_print_item_cost' => $this->input->post('print_cost'),
+                'tbl_woven_trims_piece_print_item_consumption' => $this->input->post('print_consumption'),
+                'tbl_woven_trims_piece_print_item_rate' => $this->input->post('print_consumption_rate'),
+                'tbl_woven_trims_piece_print_item_total_cost' => $this->input->post('print_consumption_cost'),
+
+                'tbl_woven_trims_piece_d_buckle_item_cost' => $this->input->post('buckle_cost'),
+                'tbl_woven_trims_piece_d_buckle_item_consumption' => $this->input->post('buckle_consumption'),
+                'tbl_woven_trims_piece_d_buckle_item_rate' => $this->input->post('buckle_consumption_rate'),
+                'tbl_woven_trims_piece_d_buckle_item_total_cost' => $this->input->post('buckle_consumption_cost'),
+
+                'tbl_woven_trims_piece_swivel_hook_item_cost' => $this->input->post('swivel_hook_cost'),
+                'tbl_woven_trims_piece_swivel_hook_item_consumption' => $this->input->post('swivel_hook_consumption'),
+                'tbl_woven_trims_piece_swivel_hook_item_rate' => $this->input->post('swivel_hook_consumption_rate'),
+                'tbl_woven_trims_piece_swivel_hook_item_total_cost' => $this->input->post('swivel_hook_consumption_cost'),
+
+                'tbl_woven_trims_piece_adjustable_bukle_item_cost' => $this->input->post('adjustable_buckle_cost'),
+                'tbl_woven_trims_piece_adjustable_bukle_item_consumption' => $this->input->post('adjustable_buckle_consumption'),
+                'tbl_woven_trims_piece_adjustable_bukle_item_rate' => $this->input->post('adjustable_buckle_consumption_rate'),
+                'tbl_woven_trims_piece_adjustable_bukle_item_total_cost' => $this->input->post('adjustable_buckle_consumption_cost'),
+
+                'tbl_woven_trims_piece_magnetic_button_item_cost' => $this->input->post('magnetic_button_cost'),
+                'tbl_woven_trims_piece_magnetic_button_item_consumption' => $this->input->post('magnetic_button_consumption'),
+                'tbl_woven_trims_piece_magnetic_button_item_rate' => $this->input->post('magnetic_button_consumption_rate'),
+                'tbl_woven_trims_piece_magnetic_button_item_total_cost' => $this->input->post('magnetic_button_consumption_cost'),
+
+                'tbl_woven_trims_piece_snap_button_item_cost' => $this->input->post('snap_button_cost'),
+                'tbl_woven_trims_piece_snap_button_item_consumption' => $this->input->post('snap_button_consumption'),
+                'tbl_woven_trims_piece_snap_button_item_rate' => $this->input->post('snap_button_consumption_rate'),
+                'tbl_woven_trims_piece_snap_button_item_total_cost' => $this->input->post('snap_button_consumption_cost'),
+
+                'tbl_woven_trims_piece_rivet_item_cost' => $this->input->post('rivet_cost'),
+                'tbl_woven_trims_piece_rivet_item_consumption' => $this->input->post('rivet_consumption'),
+                'tbl_woven_trims_piece_rivet_item_rate' => $this->input->post('rivet_consumption_rate'),
+                'tbl_woven_trims_piece_rivet_item_total_cost' => $this->input->post('rivet_consumption_cost'),
+
+                'tbl_woven_trims_piece_bottom_base_item_cost' => $this->input->post('bottom_base_cost'),
+                'tbl_woven_trims_piece_bottom_base_item_consumption' => $this->input->post('bottom_base_consumption'),
+                'tbl_woven_trims_piece_bottom_base_item_rate' => $this->input->post('bottom_base_consumption_rate'),
+                'tbl_woven_trims_piece_bottom_base_item_total_cost' => $this->input->post('bottom_base_consumption_cost'),
+
+                'tbl_woven_trims_piece_thread_item_cost' => $this->input->post('thread_cost'),
+                'tbl_woven_trims_piece_thread_item_consumption' => $this->input->post('thread_consumption'),
+                'tbl_woven_trims_piece_thread_item_rate' => $this->input->post('thread_consumption_rate'),
+                'tbl_woven_trims_piece_thread_item_total_cost' => $this->input->post('thread_consumption_cost'),
+
+                'tbl_woven_trims_piece_tag_item_cost' => $this->input->post('tag_cost'),
+                'tbl_woven_trims_piece_tag_item_consumption' => $this->input->post('tag_consumption'),
+                'tbl_woven_trims_piece_tag_item_rate' => $this->input->post('tag_consumption_rate'),
+                'tbl_woven_trims_piece_tag_item_total_cost' => $this->input->post('tag_consumption_cost'),
+
+                'tbl_woven_trims_piece_label_item_cost' => $this->input->post('label_cost'),
+                'tbl_woven_trims_piece_label_item_consumption' => $this->input->post('label_consumption'),
+                'tbl_woven_trims_piece_label_item_rate' => $this->input->post('label_consumption_rate'),
+                'tbl_woven_trims_piece_label_item_total_cost' => $this->input->post('label_consumption_cost'),
+
+                'tbl_woven_trims_piece_packing_item_cost' => $this->input->post('packing_cost'),
+                'tbl_woven_trims_piece_packing_item_consumption' => $this->input->post('packing_consumption'),
+                'tbl_woven_trims_piece_packing_item_rate' => $this->input->post('packing_consumption_rate'),
+                'tbl_woven_trims_piece_packing_item_total_cost' => $this->input->post('packing_consumption_cost'),
+
+                'tbl_woven_trims_piece_bottom_shoe_item_cost' => $this->input->post('bottom_shoe_cost'),
+                'tbl_woven_trims_piece_bottom_shoe_item_consumption' => $this->input->post('bottom_shoe_consumption'),
+                'tbl_woven_trims_piece_bottom_shoe_item_rate' => $this->input->post('bottom_shoe_consumption_rate'),
+                'tbl_woven_trims_piece_bottom_shoe_item_total_cost' => $this->input->post('bottom_shoe_consumption_cost'),
+
+                'tbl_woven_trims_piece_extra_1_name' => $this->input->post('extra_1_piece_name'),
+                'tbl_woven_trims_piece_extra_1_item_cost' => $this->input->post('extra_1_piece_cost'),
+                'tbl_woven_trims_piece_extra_1_item_consumption' => $this->input->post('extra_1_piece_consumption'),
+                'tbl_woven_trims_piece_extra_1_item_rate' => $this->input->post('extra_1_piece_consumption_rate'),
+                'tbl_woven_trims_piece_extra_1_item_total_cost' => $this->input->post('extra_1_piece_consumption_cost'),
+
+                'tbl_woven_trims_piece_extra_2_name' => $this->input->post('extra_2_piece_name'),
+                'tbl_woven_trims_piece_extra_2_item_cost' => $this->input->post('extra_2_piece_cost'),
+                'tbl_woven_trims_piece_extra_2_item_consumption' => $this->input->post('extra_2_piece_consumption'),
+                'tbl_woven_trims_piece_extra_2_item_rate' => $this->input->post('extra_2_piece_consumption_rate'),
+                'tbl_woven_trims_piece_extra_2_item_total_cost' => $this->input->post('extra_2_piece_consumption_cost'),
+
+                'tbl_woven_trims_piece_extra_3_name' => $this->input->post('extra_3_piece_name'),
+                'tbl_woven_trims_piece_extra_3_item_cost' => $this->input->post('extra_3_piece_cost'),
+                'tbl_woven_trims_piece_extra_3_item_consumption' => $this->input->post('extra_3_piece_consumption'),
+                'tbl_woven_trims_piece_extra_3_item_rate' => $this->input->post('extra_3_piece_consumption_rate'),
+                'tbl_woven_trims_piece_extra_3_item_total_cost' => $this->input->post('extra_3_piece_consumption_cost'),
+
+                'tbl_woven_trims_piece_extra_4_name' => $this->input->post('extra_4_piece_name'),
+                'tbl_woven_trims_piece_extra_4_item_cost' => $this->input->post('extra_4_piece_cost'),
+                'tbl_woven_trims_piece_extra_4_item_consumption' => $this->input->post('extra_4_piece_consumption'),
+                'tbl_woven_trims_piece_extra_4_item_rate' => $this->input->post('extra_4_piece_consumption_rate'),
+                'tbl_woven_trims_piece_extra_4_item_total_cost' => $this->input->post('extra_4_piece_consumption_cost'),
+
+                'tbl_woven_trims_piece_extra_5_name' => $this->input->post('extra_5_piece_name'),
+                'tbl_woven_trims_piece_extra_5_item_cost' => $this->input->post('extra_5_piece_cost'),
+                'tbl_woven_trims_piece_extra_5_item_consumption' => $this->input->post('extra_5_piece_consumption'),
+                'tbl_woven_trims_piece_extra_5_item_rate' => $this->input->post('extra_5_piece_consumption_rate'),
+                'tbl_woven_trims_piece_extra_5_item_total_cost' => $this->input->post('extra_5_piece_consumption_cost'),
+                'tbl_modification_date' => date("Y-m-d"),
+                'tbl_modification_time' => date("h:i:sa"),
+            );
+            $this->db->insert('woven_costing_rev',$woven_data_rev);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             redirect(base_url('admin'));
         }

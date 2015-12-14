@@ -1,4 +1,3 @@
-
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <a class="btn btn-default btn-info" href="<?php echo base_url("admin"); ?>">Back</a>
@@ -39,20 +38,20 @@
                         <div class="col-md-4 col-md-offset-1">
                             <div class="form-group">
                                 <label for="order_company">Company:</label>
-                                <input type="text" class="form-control quilt-and-suit-costing" name="order_company" id="order_company" placeholder="Order Company" required>
+                                <input type="text" class="form-control quilt-and-suit-costing" name="order_company" id="order_company" placeholder="Company Name" required>
                             </div>
                         </div>
 
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="order_item_name">Item Name:</label>
-                                <input type="text" class="form-control quilt-and-suit-costing" name="order_item_name" id="order_item_name"  placeholder="Order Item Name" required>
+                                <input type="text" class="form-control quilt-and-suit-costing" name="order_item_name" id="order_item_name"  placeholder="Item Name" required>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="order_ref_no">Reference No.:</label>
-                                <input type="text" class="form-control quilt-and-suit-costing" name="order_ref_no" id="order_ref_no" placeholder="Order Reference No." required>
+                                <input type="text" class="form-control quilt-and-suit-costing" name="order_ref_no" id="order_ref_no" placeholder="Reference No." required>
                             </div>
                         </div>
 
@@ -94,10 +93,12 @@
                                         <h2><b>Price</b>: <span id="final_price"></span></h2>
                                         <input type="hidden" class="form-control quilt-and-suit-costing" id="final_price_hidden" name="final_price_hidden">
 
-
                                         <button class="btn btn-info" type="submit" name="submit">save</button>
+										
+										<!--
                                         <button class="btn btn-info">PRINT</button>
                                         <button class="btn btn-info">PDF</button>
+										-->									
                                     </article>
                                     </div>
                                 </div>
@@ -117,7 +118,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group role-width">
-                                                <input type="text" class="form-control quilt-and-suit-costing" id="body_material_1_roll_1" name="body_material_1_roll_1" required>
+                                                <input type="text" class="form-control quilt-and-suit-costing" id="body_material_1_roll_1" name="body_material_1_roll_1" >
                                             </div>
                                         </div>
                                     </div>
@@ -129,7 +130,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group role-width">
-                                                <input type="text" class="form-control quilt-and-suit-costing" id="body_material_2_roll_2" name="body_material_2_roll_2" required>
+                                                <input type="text" class="form-control quilt-and-suit-costing" id="body_material_2_roll_2" name="body_material_2_roll_2">
                                             </div>
                                         </div>
                                     </div>
@@ -140,7 +141,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group role-width">
-                                                <input type="text" class="form-control quilt-and-suit-costing" id="body_material_3_roll_3" name="body_material_3_roll_3" required>
+                                                <input type="text" class="form-control quilt-and-suit-costing" id="body_material_3_roll_3" name="body_material_3_roll_3">
                                             </div>
                                         </div>
                                     </div>
@@ -179,7 +180,7 @@
                                     <br>
                                     <div class="form-group">
                                         <label for="order_usd" class="small-label"> USD:</label>
-                                        <input type="text" class="form-control quilt-and-suit-costing" id="order_usd" name="order_usd"required>
+                                        <input type="text" class="form-control quilt-and-suit-costing" id="order_usd" name="order_usd" required>
                                     </div>
                                 </div>
                             </div>
@@ -211,22 +212,21 @@
                                 <tbody>
                                 <tr class="success">
                                     <td>GSM PPNW:</td>
-
-                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_1_cost" name="body_material_1_cost"required></td>
+                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_1_cost" name="body_material_1_cost" ></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_1_consumption" name="body_material_1_consumption" readonly="readonly"></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_1_consumption_rate" name="body_material_1_consumption_rate" readonly="readonly"></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_1_consumption_cost" name="body_material_1_consumption_cost" readonly="readonly"></td>
                                 </tr>
                                 <tr class="success">
                                     <td>GSM Clear LDPE/PVC</td>
-                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_2_cost" name="body_material_2_cost" required></td>
+                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_2_cost" name="body_material_2_cost" ></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_2_consumption" name="body_material_2_consumption" readonly="readonly"></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_2_consumption_rate" name="body_material_2_consumption_rate" readonly="readonly"></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_2_consumption_cost" name="body_material_2_consumption_cost" readonly="readonly"></td>
                                 </tr>
                                 <tr class="success">
                                     <td>GSM Coloured LDPE/PVC</td>
-                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_3_cost" name="body_material_3_cost"required></td>
+                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_3_cost" name="body_material_3_cost"></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_3_consumption" name="body_material_3_consumption" readonly="readonly"></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_3_consumption_rate" name="body_material_3_consumption_rate" readonly="readonly"></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_3_consumption_cost" name="body_material_3_consumption_cost" readonly="readonly"></td>
@@ -272,14 +272,6 @@
                                 </tr>
 
                                 <tr class="danger">
-                                    <td>Draw String</td>
-                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="draw_string_cost" name="draw_string_cost" ></td>
-                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="draw_string_consumption" name="draw_string_consumption" ></td>
-                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="draw_string_consumption_rate" name="draw_string_consumption_rate" readonly="readonly"></td>
-                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="draw_string_consumption_cost" name="draw_string_consumption_cost" readonly="readonly"></td>
-                                </tr>
-
-                                <tr class="danger">
                                     <td>Velcro</td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="velcro_cost" name="velcro_cost" ></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="velcro_consumption" name="velcro_consumption" ></td>
@@ -288,7 +280,17 @@
                                 </tr>
 
                                 <tr class="danger">
-                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_trim_yard_extra_1_name" name="extra_trim_yard_extra_1_name"  placeholder="Extra 1"></td>
+                                    <td>Draw String</td>
+                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="draw_string_cost" name="draw_string_cost" ></td>
+                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="draw_string_consumption" name="draw_string_consumption" ></td>
+                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="draw_string_consumption_rate" name="draw_string_consumption_rate" readonly="readonly"></td>
+                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="draw_string_consumption_cost" name="draw_string_consumption_cost" readonly="readonly"></td>
+                                </tr>
+
+
+
+                                <tr class="danger">
+                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_trim_yard_extra_1" name="extra_trim_yard_extra_1_name"  placeholder="Extra 1"></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_trim_yard_1_cost" name="extra_trim_yard_1_cost" ></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_trim_yard_1_consumption" name="extra_trim_yard_1_consumption" ></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_trim_yard_1_consumption_rate" name="extra_trim_yard_1_consumption_rate" readonly="readonly"></td>
@@ -296,7 +298,7 @@
                                 </tr>
 
                                 <tr class="danger">
-                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_trim_yard_extra_2_name" name="extra_trim_yard_extra_2_name"  placeholder="Extra 2"></td>
+                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_trim_yard_extra_2" name="extra_trim_yard_extra_2_name"  placeholder="Extra 2"></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_trim_yard_2_cost" name="extra_trim_yard_2_cost" ></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_trim_yard_2_consumption" name="extra_trim_yard_2_consumption" ></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_trim_yard_2_consumption_rate" name="extra_trim_yard_2_consumption_rate" readonly="readonly"></td>
@@ -304,7 +306,7 @@
                                 </tr>
 
                                 <tr class="danger">
-                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_trim_yard_extra_3_name" name="extra_trim_yard_extra_3_name"  placeholder="Extra 3"></td>
+                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_trim_yard_extra_3" name="extra_trim_yard_extra_3_name"  placeholder="Extra 3"></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_trim_yard_3_cost" name="extra_trim_yard_3_cost" ></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_trim_yard_3_consumption" name="extra_trim_yard_3_consumption" ></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_trim_yard_3_consumption_rate" name="extra_trim_yard_3_consumption_rate" readonly="readonly"></td>
@@ -425,7 +427,7 @@
                                 </tr>
 
                                 <tr class="info">
-                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_1_piece_name" placeholder="Extra 1"name="extra_1_piece_name" ></td>
+                                    <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_1_piece_name" placeholder="Extra 1" name="extra_1_piece_name" ></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_1_piece_cost" name="extra_1_piece_cost" ></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_1_piece_consumption" name="extra_1_piece_consumption" ></td>
                                     <td><input type="text" class="form-control quilt-and-suit-costing" id="extra_1_piece_consumption_rate" name="extra_1_piece_consumption_rate" readonly="readonly"></td>
@@ -462,9 +464,9 @@
                                     <tr>
                                         <th></th>
                                         <td></td>
-                                        <td colspan="3"><span class="body_material_1_name_text"></span></td>
-                                        <td colspan="3"><span class="body_material_2_name_text"></span></td>
-                                        <td colspan="3"><span class="body_material_3_name_text"></span></td>
+                                        <td colspan="3"><span class="body_material_1_name_text">GSM PPNW</span></td>
+                                        <td colspan="3"><span class="body_material_2_name_text">GSM Clear LDPE/PVC</span></td>
+                                        <td colspan="3"><span class="body_material_3_name_text">GSM Coloured LDPE/PVC</span></td>
                                     </tr>
                                     <tr>
                                         <th colspan="2">Dimension:</th>
@@ -502,7 +504,7 @@
 
                                         <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_2_front_width" name="body_material_2_front_width" ></td>
                                         <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_2_front_width_allowance" name="body_material_2_front_width_allowance" ></td>
-                                        <td><input type="text" class="form-control" id="body_material_2_front_width_total" name="body_material_2_front_width_total" readonly="readonly"></td>
+                                        <td><input type="text" class="form-control quilt-and-suit-costing"  id="body_material_2_front_width_total" name="body_material_2_front_width_total" readonly="readonly"></td>
 
                                         <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_3_front_width" name="body_material_3_front_width" ></td>
                                         <td><input type="text" class="form-control quilt-and-suit-costing" id="body_material_3_front_width_allowance" name="body_material_3_front_width_allowance" ></td>
