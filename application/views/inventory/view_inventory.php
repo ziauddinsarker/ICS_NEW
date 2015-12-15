@@ -19,7 +19,7 @@
         <?php foreach($inventorys as $inventory){ ?>
             <tr>
                 <td><?php echo $i++; ?></td>
-                <td><?php echo $inventory->product_sku;?></td>
+                <td><?php echo $inventory->product_code;?></td>
                 <td><?php echo $inventory->product_name ;?></td>
                 <td><?php echo $inventory->product_sold ;?></td>
                 <td><?php echo $inventory->product_left ;?></td>

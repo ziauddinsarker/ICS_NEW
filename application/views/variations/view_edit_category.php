@@ -1,9 +1,6 @@
-<div class="row">
-
-</div>
-
-<div class="row">
-    <div class="col-sm-4 col-md-4 col-md-offset-2">
+<section class="content">
+    <div class="row">
+        <div class="col-md-8 col-sm-16 col-xs-18">
         <div>
             <h1 class="page-header">Edit Product Category</h1>
         </div>
@@ -14,7 +11,7 @@
                 <tbody class="detail">
                 <tr>
                     <input type="hidden" name="category-id" value="<?php echo $category_id; ?>">
-                    <td class="no">Category Name<input type="text" class="form-control quantity" name="category" placeholder="Enter New Category Name" value="<?php echo $category_name; ?>">
+                    <td class="no">Category Name<input type="text" class="form-control quantity" name="category" placeholder="Enter Category Name" value="<?php echo $product_category_name; ?>">
 
                     </td>
                 </tr>
@@ -25,4 +22,4 @@
 
     </div>
 </div>
-
+</section>

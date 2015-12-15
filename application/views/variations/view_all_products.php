@@ -11,6 +11,8 @@
             <th>No.</th>
             <th>Product Name</th>
             <th>Product SKU</th>
+            <th>Fabric</th>
+            <th>Color</th>
             <th>Quantity Price</th>
             <th> Category</th>
             <th></th>
@@ -21,10 +23,12 @@
             <tr>
                 <td><?php echo $i++; ?></td>
                 <td><?php echo $product->product_name;?></td>
-                <td><?php echo $product->product_sku ;?></td>
+                <td><?php echo $product->product_code ;?></td>
+                <td><?php echo $product->product_fabric_name ;?></td>
+                <td><?php echo $product->product_color ;?></td>
                 <td><?php echo $product->product_price ;?></td>
-                <td><?php echo $product->category_name ;?></td>
-                <td><a class="btn btn-default" href="<?php base_url();?>edit_product/<?php echo $product->product_id ;?>">Edit</a>  <a class="btn btn-default" href="<?php base_url();?>delete_product/<?php echo $product->product_id ;?>">Delete</a></td>
+                <td><?php echo $product->product_category_name ;?></td>
+                <td><a class="btn btn-default" href="<?php base_url();?>edit_product/<?php echo $product->id ;?>">Edit</a>  <a class="btn btn-default" href="<?php base_url();?>delete_product/<?php echo $product->id ;?>">Delete</a></td>
             </tr>
         <?php }  ?>
         </tbody>

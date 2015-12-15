@@ -1,6 +1,7 @@
 <section class="content">
 <div class="row">
     <div class="col-md-8 col-sm-16 col-xs-18">
+        <a class="btn btn-default" href="<?=  base_url()?>inventory/all_categories">All Categries</a>
         <div>
             <h1 class="page-header">Add Product Category</h1>
         </div>

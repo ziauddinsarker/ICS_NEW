@@ -9,79 +9,97 @@ class Inventory extends CI_Controller {
 		$this->load->model('user_model');
 		$this->load->library('ion_auth');
 		
-		$this->load->model('ppnw_model');
-		$this->load->model('woven_simple_model');
-        $this->load->model('woven_model');
-		$this->load->model('quilt_and_suit_model');
-		
-		$username = $this->session->userdata('username');
-		
-		$this->data['ppnw_all_count'] = $this->ppnw_model->ppnw_total_count_by_user($username);
-		$this->data['woven_simple_all_count'] = $this->woven_simple_model->woven_simple_total_count_by_user($username);
-        $this->data['woven_all_count'] = $this->woven_model->woven_total_count_by_user($username);
-		
-		
 		$this->load->model('inventory_model');
 		$data['product'] = $this->inventory_model->get_product();
 		$this->data['inventorys'] = $this->inventory_model->get_inventory();
 
 		$username = $this->session->userdata('username');
 		$this->data['employee'] = $this->admin_model->get_user_employee($username);
-
-		$user_id = $this->session->userdata('user_id');
-		$this->data['todos'] = $this->admin_model->get_todo($user_id);
-
 	}
+
 
 	/**
 	 * Inventory Index
 	 */
 	public function index()
 	{
-
 		$this->load->view('admin/admin_header_view',$this->data);
 		$this->load->view('inventory/view_inventory',$this->data);
 		$this->load->view('admin/admin_footer_view',$this->data);
 	}
 
-	/****************Product**********************/
 
+	public function email_check()
+	{
+		// allow only Ajax request
+		if ($this->input->is_ajax_request()) {
+			// grab the email value from the post variable.
+			$email = $this->input->post('email');
+			// check in database - table name : tbl_users  , Field name in the table : email
+			if (!$this->form_validation->is_unique($email, 'tbl_users.email')) {
+				// set the json object as output
+				$this->output->set_content_type('application/json')->set_output(json_encode(array('message' => 'The email is already taken, choose another one')));
+			}
+		}
+	}
+
+	/****************Product**********************/
+	/**
+	 * Get all Products from Database
+	 */
 	function all_products(){
 		$this->data['products'] = $this->inventory_model->all_products();
+		//var_dump($this->data['products']);
 		$this->load->view('admin/admin_header_view',$this->data);
-		$this->load->view('inventory/view_all_products',$this->data);
+		$this->load->view('variations/view_all_products',$this->data);
 		$this->load->view('admin/admin_footer_view',$this->data);
 	}
 
+	/**
+	 * Show  Add New Product Page
+	 */
 	function add_product(){
+		$data['name'] = $this->inventory_model->get_product_name();
+		//$data['code'] = $this->inventory_model->get_product_code();
+		$data['color'] = $this->inventory_model->get_product_color();
+		$data['fabric'] = $this->inventory_model->get_product_fabric();
 		$data['category'] = $this->inventory_model->get_product_category();
 		$this->load->view('admin/admin_header_view',$this->data);
-		$this->load->view('inventory/view_add_product',$data);
+		$this->load->view('variations/view_add_product',$data);
 		$this->load->view('admin/admin_footer_view',$this->data);
 	}
 
+	/**
+	 * Save Product from Add New Product Page
+	 */
 	function save_to_products(){
 		$this->form_validation->set_rules('name', 'Product Name', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('sku', 'Product SKU', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('code', 'Product SKU', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('fabric', 'Product Fabric', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('color', 'Fabric Color', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('price', 'Product Price', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('price', 'Product Category', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('category', 'Product Category', 'trim|required|xss_clean');
 		if($this->form_validation->run() == FALSE)
 		{
 			$data['error'] = validation_errors();
 			//fail validation
-			$this->load->view('inventory/view_header');
-			$this->load->view('inventory/view_add_product');
+			$this->load->view('admin/admin_header_view',$this->data);
+			$this->load->view('variations/view_add_product');
 			$this->load->view('admin/admin_footer_view',$this->data);
 		}
 		else
 		{
 			$product_name = $this->input->post('name');
-			$product_sku = $this->input->post('sku');
+			$product_code = $this->input->post('code');
+			$product_fabric = $this->input->post('fabric');
+			$product_color = $this->input->post('color');
 			$product_price= $this->input->post('price');
 			$product_category = $this->input->post('category');
 			$product_data = array(
 				'product_name' => $product_name,
-				'product_sku' => $product_sku,
+				'product_code' => $product_code,
+				'product_fabric' => $product_fabric,
+				'product_color' => $product_color,
 				'product_price' => $product_price,
 				'product_category' => $product_category,
 			);
@@ -90,8 +108,14 @@ class Inventory extends CI_Controller {
 		}
 	}
 
-
+	/**
+	 * Edit product from a product List
+	 */
 	function edit_product(){
+		$data['name'] = $this->inventory_model->get_product_name();
+		$data['code'] = $this->inventory_model->get_product_code();
+		$data['color'] = $this->inventory_model->get_product_color();
+		$data['fabric'] = $this->inventory_model->get_product_fabric();
 		$data['category'] = $this->inventory_model->get_product_category();
 
 		$product_id = $this->uri->segment(3);
@@ -103,16 +127,20 @@ class Inventory extends CI_Controller {
 		//var_dump($dt);
 		$data['product_id'] = $dt->id;
 		$data['product_name'] = $dt->product_name;
-		$data['product_sku'] = $dt->product_sku;
+		$data['product_code'] = $dt->product_code;
+		$data['product_fabric'] = $dt->product_fabric;
+		$data['product_color'] = $dt->product_color;
 		$data['product_price'] = $dt->product_price;
 		$data['product_category'] = $dt->product_category;
 
 		$this->load->view('admin/admin_header_view',$this->data);
-		$this->load->view('inventory/view_edit_product',$data);
+		$this->load->view('variations/view_edit_product',$data);
 		$this->load->view('admin/admin_footer_view',$this->data);
 	}
 
-
+	/**
+	 *Update a product from product list
+	 */
 	function update_product(){
 		if ($this->input->post('update')) {
 			$productId = $this->input->post('product-id');
@@ -124,17 +152,20 @@ class Inventory extends CI_Controller {
 		}
 	}
 
-
+	/**+
+	 * @param $product_id
+	 * Delete a product from a product List
+	 */
 	public function delete_product($product_id){
-		$this->inventory_model->delete_category($product_id);
-		redirect(base_url('inventory/get_category'));
+		$this->inventory_model->delete_product($product_id);
+		redirect(base_url('inventory/all_products'));
 	}
 
 	/**************** Product Category**********************/
 
 	function add_product_category(){
 		$this->load->view('admin/admin_header_view',$this->data);
-		$this->load->view('inventory/view_add_category');
+		$this->load->view('variations/view_add_category');
 		$this->load->view('admin/admin_footer_view',$this->data);
 	}
 
@@ -152,17 +183,17 @@ class Inventory extends CI_Controller {
 		{
 			$product_category = $this->input->post('category');
 			$product_data = array(
-				'category_name' => $product_category,
+				'product_category_name' => $product_category,
 			);
 			$this->db->insert('tbl_product_category', $product_data);
-			redirect('inventory/get_category');
+			redirect('inventory/all_categories');
 		}
 	}
 
-	function get_category(){
-		$this->data['categories'] = $this->inventory_model->get_categories();
+	function all_categories(){
+		$this->data['categories'] = $this->inventory_model->get_all_categories();
 		$this->load->view('admin/admin_header_view',$this->data);
-		$this->load->view('inventory/view_all_categories',$this->data);
+		$this->load->view('variations/view_all_categories',$this->data);
 		$this->load->view('admin/admin_footer_view',$this->data);
 	}
 
@@ -171,15 +202,15 @@ class Inventory extends CI_Controller {
 
 		$category_id = $this->uri->segment(3);
 		if ($category_id == NULL) {
-			redirect('inventory/get_category');
+			redirect('inventory/all_categories');
 		}
 
 		$dt = $this->inventory_model->edit_category($category_id);
-		$data['category_name'] = $dt->category_name;
+		$data['product_category_name'] = $dt->product_category_name;
 		$data['category_id'] = $dt->id;
 
 		$this->load->view('admin/admin_header_view',$this->data);
-		$this->load->view('inventory/view_edit_category',$data);
+		$this->load->view('variations/view_edit_category',$data);
 		$this->load->view('admin/admin_footer_view',$this->data);
 	}
 
@@ -188,7 +219,7 @@ class Inventory extends CI_Controller {
 		if ($this->input->post('update')) {
 			$catId = $this->input->post('category-id');
 			$this->inventory_model->update_category($catId);
-			redirect('inventory/get_category');
+			redirect('inventory/all_categories');
 		} else{
 			$id = $this->input->post('category-id');
 			redirect('inventory/edit_product_category/'. $id);
@@ -198,9 +229,290 @@ class Inventory extends CI_Controller {
 
 	public function delete_product_category($category_id){
 		$this->inventory_model->delete_category($category_id);
-		redirect(base_url('inventory/get_category'));
+		redirect(base_url('inventory/all_categories'));
 	}
 
+	/**************** Product Name Start**********************/
+
+	function all_product_name(){
+		$this->data['product_name'] = $this->inventory_model->get_all_product_name();
+		$this->load->view('admin/admin_header_view',$this->data);
+		$this->load->view('variations/view_all_product_name',$this->data);
+		$this->load->view('admin/admin_footer_view',$this->data);
+	}
+
+	function add_product_name(){
+		$this->load->view('admin/admin_header_view',$this->data);
+		$this->load->view('variations/view_add_product_name');
+		$this->load->view('admin/admin_footer_view',$this->data);
+	}
+
+	function save_to_product_name(){
+		$this->form_validation->set_rules('product-name', 'Product Name', 'trim|required|xss_clean');
+		if($this->form_validation->run() == FALSE)
+		{
+			$data['error'] = validation_errors();
+			//fail validation
+			$this->load->view('admin/admin_header_view',$this->data);
+			$this->load->view('variations/view_add_product_name');
+			$this->load->view('admin/admin_footer_view',$this->data);
+		}
+		else
+		{
+			$product_name = $this->input->post('product-name');
+			$product_data = array(
+				'product_name' => $product_name,
+			);
+			$this->db->insert('tbl_product_name', $product_data);
+			redirect('inventory/all_product_name');
+		}
+	}
+
+	function edit_product_name(){
+
+		$product_name_id = $this->uri->segment(3);
+		if ($product_name_id == NULL) {
+			redirect('variations/get_all_product_name');
+		}
+
+		$dt = $this->inventory_model->edit_product_name($product_name_id);
+		$data['product_name'] = $dt->product_name;
+		$data['product_name_id'] = $dt->id;
+
+		$this->load->view('admin/admin_header_view',$this->data);
+		$this->load->view('variations/view_edit_product_name',$data);
+		$this->load->view('admin/admin_footer_view',$this->data);
+	}
+
+	function update_product_name(){
+		if ($this->input->post('update')) {
+			$productNameId = $this->input->post('product-name-id');
+			$this->inventory_model->update_product_name($productNameId);
+			redirect('inventory/all_product_name');
+		} else{
+			$id = $this->input->post('product-name-id');
+			redirect('inventory/edit_product_name/'. $id);
+		}
+	}
+
+	public function delete_product_name($product_name_id){
+		$this->inventory_model->delete_product_name($product_name_id);
+		redirect('inventory/all_product_name');
+	}
+	/********************Product Name End***************************/
+
+	/********************* Product Code Start***********************/
+	function all_product_code(){
+		$this->data['product_code'] = $this->inventory_model->get_all_product_code();
+		$this->load->view('admin/admin_header_view',$this->data);
+		$this->load->view('variations/view_all_product_code',$this->data);
+		$this->load->view('admin/admin_footer_view',$this->data);
+	}
+
+	function add_product_code(){
+		$this->load->view('admin/admin_header_view',$this->data);
+		$this->load->view('variations/view_add_product_code');
+		$this->load->view('admin/admin_footer_view',$this->data);
+	}
+
+
+	function save_to_product_code(){
+		$this->form_validation->set_rules('product-code', 'Product Code', 'trim|required|xss_clean');
+		if($this->form_validation->run() == FALSE)
+		{
+			$data['error'] = validation_errors();
+			//fail validation
+			$this->load->view('admin/admin_header_view',$this->data);
+			$this->load->view('variations/view_add_product_code');
+			$this->load->view('admin/admin_footer_view',$this->data);
+		}
+		else
+		{
+			$product_code = $this->input->post('product-code');
+			$product_data = array(
+				'product_code' => $product_code,
+			);
+			$this->db->insert('tbl_product_code', $product_data);
+			redirect('inventory/all_product_code');
+		}
+	}
+
+	function edit_product_code(){
+
+		$product_code_id = $this->uri->segment(3);
+		if ($product_code_id == NULL) {
+			redirect('inventory/all_product_code');
+		}
+
+		$dt = $this->inventory_model->edit_product_code($product_code_id);
+		$data['product_code'] = $dt->product_code;
+		$data['product_code_id'] = $dt->id;
+
+		$this->load->view('admin/admin_header_view',$this->data);
+		$this->load->view('variations/view_edit_product_code',$data);
+		$this->load->view('admin/admin_footer_view',$this->data);
+	}
+
+
+	function update_product_code(){
+		if ($this->input->post('update')) {
+			$productCodeId = $this->input->post('product-code-id');
+			$this->inventory_model->update_product_code($productCodeId);
+			redirect('inventory/all_product_code');
+		} else{
+			$id = $this->input->post('product-code-id');
+			redirect('inventory/edit_product_code/'. $id);
+		}
+	}
+
+
+	public function delete_product_code($product_code_id){
+		$this->inventory_model->delete_product_code($product_code_id);
+		redirect('inventory/all_product_code');
+	}
+	/********************Product Code End***************************/
+
+	/********************* Product Color Start***********************/
+	function all_product_color(){
+		$this->data['product_color'] = $this->inventory_model->get_all_product_color();
+		$this->load->view('admin/admin_header_view',$this->data);
+		$this->load->view('variations/view_all_product_color',$this->data);
+		$this->load->view('admin/admin_footer_view',$this->data);
+	}
+
+	function add_product_color(){
+		$this->load->view('admin/admin_header_view',$this->data);
+		$this->load->view('variations/view_add_product_color');
+		$this->load->view('admin/admin_footer_view',$this->data);
+	}
+
+
+	function save_to_product_color(){
+		$this->form_validation->set_rules('product-color', 'Product Color', 'trim|required|xss_clean');
+		if($this->form_validation->run() == FALSE)
+		{
+			$data['error'] = validation_errors();
+			//fail validation
+			$this->load->view('admin/admin_header_view',$this->data);
+			$this->load->view('variations/view_add_product_color');
+			$this->load->view('admin/admin_footer_view',$this->data);
+		}
+		else
+		{
+			$product_color = $this->input->post('product-color');
+			$product_data = array(
+				'product_color' => $product_color,
+			);
+			$this->db->insert('tbl_product_color', $product_data);
+			redirect('inventory/all_product_color');
+		}
+	}
+
+	function edit_product_color(){
+
+		$product_code_id = $this->uri->segment(3);
+		if ($product_code_id == NULL) {
+			redirect('inventory/all_product_color');
+		}
+
+		$dt = $this->inventory_model->edit_product_color($product_code_id);
+		$data['product_color'] = $dt->product_color;
+		$data['product_color_id'] = $dt->id;
+
+		$this->load->view('admin/admin_header_view',$this->data);
+		$this->load->view('variations/view_edit_product_color',$data);
+		$this->load->view('admin/admin_footer_view',$this->data);
+	}
+
+
+	function update_product_color(){
+		if ($this->input->post('update')) {
+			$productCodeId = $this->input->post('product-color-id');
+			$this->inventory_model->update_product_color($productCodeId);
+			redirect('inventory/all_product_color');
+		} else{
+			$id = $this->input->post('product-color-id');
+			redirect('inventory/edit_product_color/'. $id);
+		}
+	}
+
+
+	public function delete_product_color($product_color_id){
+		$this->inventory_model->delete_product_color($product_color_id);
+		redirect('inventory/all_product_color');
+	}
+	/********************Product Color End***************************/
+
+	/********************* Product Fabric Start***********************/
+	function all_product_fabric(){
+		$this->data['product_fabric'] = $this->inventory_model->get_all_product_fabric();
+		$this->load->view('admin/admin_header_view',$this->data);
+		$this->load->view('variations/view_all_product_fabric',$this->data);
+		$this->load->view('admin/admin_footer_view',$this->data);
+	}
+
+	function add_product_fabric(){
+		$this->load->view('admin/admin_header_view',$this->data);
+		$this->load->view('variations/view_add_product_fabric');
+		$this->load->view('admin/admin_footer_view',$this->data);
+	}
+
+
+	function save_to_product_fabric(){
+		$this->form_validation->set_rules('product-fabric', 'Product Fabric', 'trim|required|xss_clean');
+		if($this->form_validation->run() == FALSE)
+		{
+			$data['error'] = validation_errors();
+			//fail validation
+			$this->load->view('admin/admin_header_view',$this->data);
+			$this->load->view('variations/view_add_product_fabric');
+			$this->load->view('admin/admin_footer_view',$this->data);
+		}
+		else
+		{
+			$product_fabric = $this->input->post('product-fabric');
+			$product_data = array(
+				'product_fabric_name' => $product_fabric,
+			);
+			$this->db->insert('tbl_product_fabric', $product_data);
+			redirect('inventory/all_product_fabric');
+		}
+	}
+
+	function edit_product_fabric(){
+
+		$product_fabric_id = $this->uri->segment(3);
+		if ($product_fabric_id == NULL) {
+			redirect('inventory/all_product_fabric');
+		}
+
+		$dt = $this->inventory_model->edit_product_fabric($product_fabric_id);
+		$data['product_fabric'] = $dt->product_fabric_name;
+		$data['product_fabric_id'] = $dt->id;
+
+		$this->load->view('admin/admin_header_view',$this->data);
+		$this->load->view('variations/view_edit_product_fabric',$data);
+		$this->load->view('admin/admin_footer_view',$this->data);
+	}
+
+
+	function update_product_fabric(){
+		if ($this->input->post('update')) {
+			$productFabricId = $this->input->post('product-fabric-id');
+			$this->inventory_model->update_product_fabric($productFabricId);
+			redirect('inventory/all_product_fabric');
+		} else{
+			$id = $this->input->post('product-fabric-id');
+			redirect('inventory/edit_product_fabric/'. $id);
+		}
+	}
+
+
+	public function delete_product_fabric($product_fabric_id){
+		$this->inventory_model->delete_product_fabric($product_fabric_id);
+		redirect('inventory/all_product_fabric');
+	}
+	/********************Product Color End***************************/
 
 	/****************Inventory*******************/
 	/**
@@ -298,9 +610,8 @@ class Inventory extends CI_Controller {
 	
 	/****************Invoice***************/
 	public function invoice(){
-		$data['product'] = $this->inventory_model->get_product();
 		$this->load->view('admin/admin_header_view',$this->data);
-		$this->load->view('inventory/view_invoice',$data);
+		$this->load->view('inventory/view_invoice');
 		$this->load->view('admin/admin_footer_view',$this->data);
 	}
 

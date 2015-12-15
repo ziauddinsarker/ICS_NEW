@@ -2,6 +2,7 @@
 <section class="content">
 <div class="row">
     <div class="col-md-4 col-sm-8 col-xs-18">
+        <a href="<?php base_url('inventory/')?>"
         <div>
             <h1 class="page-header">Add to Inventory</h1>
         </div>

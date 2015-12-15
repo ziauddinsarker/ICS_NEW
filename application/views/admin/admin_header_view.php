@@ -165,7 +165,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu" style="display: none;">
-                <li><a href="<?=  base_url()?>inventory/get_category" marked="1"><i class="fa fa-circle-o"></i> Category</a></li>
+                <li><a href="<?=  base_url()?>inventory/add_product_category" marked="1"><i class="fa fa-circle-o"></i> Category</a></li>
                 <li><a href="<?=  base_url()?>inventory/add_product_name" marked="1"><i class="fa fa-circle-o"></i> Product Name</a></li>
                 <li><a href="<?=  base_url()?>inventory/add_product_code" marked="1"><i class="fa fa-circle-o"></i> Product Code</a></li>
                 <li><a href="<?=  base_url()?>inventory/add_product_color" marked="1"><i class="fa fa-circle-o"></i> Color</a></li>
@@ -187,7 +187,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </li>
 			<li><a href="<?=  base_url()?>inventory/add_product"><i class="fa fa-th-list"></i> <span>Add Product<span></a></li>
 			<li><a href="<?=  base_url()?>inventory/add_to_inventory"><i class="fa fa-th-list"></i> <span>Add Inventory<span></a></li>
-			<li><a href="<?=  base_url()?>inventory/invoice"><i class="fa fa-th-list"></i> <span>Invoice<span></a></li>
+			<li><a href="<?=  base_url()?>inventory/invoice"><i class="fa fa-th-list"></i> <span>New Invoice<span></a></li>
 
 
              <?php } ?>
