@@ -5,13 +5,26 @@
         <div>
             <h1 class="page-header">Add Product Category</h1>
         </div>
+        <?php if(validation_errors()) { ?>
+            <div class="alert alert-warning">
+                <?php echo validation_errors(); ?>
+            </div>
+        <?php } ?>
+
+
+        <?php if($this->session->flashdata('item')) { ?>
+            <div class="alert alert-success">
+                <?php echo $this->session->flashdata('item'); ?>
+            </div>
+        <?php } ?>
+
         <form  role="form" action="<?=  base_url()?>inventory/save_to_product_category" method="post">
             <table class="table table-bordered table-hover">
 
 
                 <tbody class="detail">
                 <tr>
-                    <td class="no">Category Name<input type="text" class="form-control quantity" name="category" placeholder="Enter New Category Name">
+                    <td class="no">Category Name<input type="text" class="form-control variations" name="category" value="<?php echo set_value('category'); ?>" placeholder="Enter New Category Name">
                     </td>
                 </tr>
                 </tbody>

@@ -18,13 +18,14 @@
 
     <!-- Bootstrap 3.3.5 -->
     <script src="<?php echo base_url("assets/js/bootstrap.min.js")?> "></script>
+     <script src="<?php echo site_url(); ?>assets/Bootstrap-3-Typeahead-master/bootstrap3-typeahead.min.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo base_url("assets/dist/js/app.min.js")?> "></script>
       <!--
       <script src="<?php //echo base_url('assets/js/angular.min.js'); ?>"></script>
-      -->
+      <script src="<?php //echo base_url('assets/js/typeahead.bundle.js'); ?>"></script>-->
+
       <script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
-      <script src="<?php echo base_url('assets/js/typeahead.bundle.js'); ?>"></script>
       <script src="<?php echo base_url('assets/js/d3.min.js'); ?>"></script>
       <script src="<?php echo base_url('assets/js/bootstrap-sortable.js'); ?>"></script>
       <script src="<?php echo base_url('assets/js/moment.min.js'); ?>"></script>
@@ -32,8 +33,39 @@
       <script src="<?php echo base_url('assets/js/html2canvas.js'); ?>"></script>
 
 
+
       <script src="<?php echo base_url('assets/js/main.js'); ?>"></script>
 
+      <script>
+          $(document).ready(function(e){
+              var site_url = "<?php echo site_url(); ?>";
+              var input = $("input[id=pcode]");
+
+              $.get(site_url+'inventory/json_search_product', function(data){
+                  input.typeahead({
+                      source: data,
+                      minLength: 1,
+                  });
+              }, 'json');
+
+              input.change(function(){
+                  var current = input.typeahead("getActive");
+                  $('#product_id').val(current.id);
+                  $('#price').val(current.price);
+                  $('#pcode').val(current.pcode);
+              });
+          });
+      </script>
+
+
+
+     <script>
+        window.setTimeout(function() {
+            $("#success_message").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 2000);
+     </script>
 	  
 	 <script type="text/javascript">
         $(document).ready(function(){
@@ -81,17 +113,18 @@
             var n = ($('.detail tr').length-0)+1;
             var tr = '<tr>'+
                 '<td class="no">' + n + '</td>'+
-                '<td><input type="text" class="form-control productname" name="productname[]"></td>'+
+                '<td colspan="4"><input type="text" class="form-control code" id="pcode" name="code[]"></td>' +
                 '<td><input type="text" class="form-control quantity" name="quantity[]"></td>'+
                 '<td><input type="text" class="form-control price" name="price[]"></td>'+
                 '<td><input type="text" class="form-control discount" name="discount[]"></td>'+
+                '<td><input type="text" class="form-control discount-amount" name="discount-amount[]"></td>'+
                 '<td><input type="text" class="form-control amount" name="amount[]"></td>'+
-                '<td><a href="#" class="remove">Delete</a> </td>'+
-                '<td></td>'+
+                '<td><a href="#" class="btn btn-primary remove"><i class="fa fa-times"></i></a> </td>'+
                 '</tr>';
 
             $('.detail').append(tr);
         }
+
 
 
 
@@ -114,10 +147,10 @@
 
 
     </script>
-	  
-	  
-	  
-	  
+
+
+
+
       <script>
 
           $(function(){

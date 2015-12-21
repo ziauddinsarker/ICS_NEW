@@ -10,9 +10,10 @@ class Ppnw_model extends CI_Model
     }
 
     /**
+     * @author Ziauddin
      * @param $username
      * @return mixed
-     * get the costing for particular user
+     * Get the costing for particular user
      * Get All ppnw costing info
      */
 
@@ -23,7 +24,6 @@ class Ppnw_model extends CI_Model
         $this->db->join('users', 'costing_by_user.costing_user_id = users.id');
         $this->db->where('username',$username);
         $query = $this->db->get();
-        //$rowcount = $query->num_rows();
         return $query->result();
     }
 
@@ -31,6 +31,7 @@ class Ppnw_model extends CI_Model
 
     /***************************************************************/
     /**
+     * @author ziauddin
      * @param $q
      */
     function get_company($q){

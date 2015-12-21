@@ -2,7 +2,7 @@
 <section class="content-header">
     <?php
     $url = htmlspecialchars($_SERVER['HTTP_REFERER']);
-    echo "<a class='btn btn-default btn-info' href='$url'>Back</a>";
+    echo "<a class='btn btn-default btn-info' href='$url'><i class='fa fa-arrow-left fa-lg'></i></a>";
     ?>
     <a class="btn btn-default" href="<?php echo base_url("ppnw/ppnw_all"); ?>">All PPNW</a>
     <h1>Revisioned PP Nonwoven Costing</h1>

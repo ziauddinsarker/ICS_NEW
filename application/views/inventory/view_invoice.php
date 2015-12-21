@@ -1,6 +1,19 @@
 <section class="content">
 <div class="row">
     <div class="col-md-12 col-sm-16 col-xs-18">
+
+<!--
+		<form action="" method="POST" role="form">
+			<legend>Search Porducts</legend>
+
+			<div class="form-group">
+				<input type="hidden" class="form-control" name="product_id" id="product_id">
+				<input type="text" class="form-control" name="product_price" id="product_price" placeholder="Product Price" autocomplete="off">
+				<input type="text" class="form-control" name="product_code" id="product_code" placeholder="Product Code" autocomplete="off">
+			</div>
+
+		</form>
+-->
     <div>
         <h1 class="page-header">Invoice</h1>
     </div>
@@ -41,7 +54,7 @@
 				<div class="form-group">
 					<label for="invoice-no" class="control-label col-xs-2">Invoice</label>
 					<div class="col-xs-10">
-						<input type="text" name="invoice-no" class="form-control" placeholder="Invoice No.">
+						<input type="text" name="invoice-no" class="form-control" placeholder="Invoice No." value="<?php echo $invoiceno?>">
 					</div>
 				</div>
 				
@@ -54,36 +67,32 @@
 			</div>
         </div> 
     </div>
-<div class="col-md-7">
-       <table class="table table-bordered table-hover">
+<div class="col-md-9">
+       <table class="table table-bordered table-hover invtable">
         <thead>
             <th>No</th>
-            <th>Product ID</th>
+            <th colspan="4">Product ID</th>
             <th>Quantity</th>
             <th>Unit Price</th>
             <th>Discount</th>
+            <th>Discount Amount</th>
             <th>Total</th>
-            <th><input type="button" value="+" id="add" class="btn btn-primary"></th>
+            <th><a id="add" class="btn btn-primary" href="#"><i class="fa fa-plus"></i></a></th>
         </thead>
         <tbody class="detail">
         <tr>
             <td class="no">1</td>
-			<td class="no"><?php
-				$attributes = 'class="form-control" id="form-product"';
-				echo form_dropdown('productname',$product,set_value('product'),$attributes);
-				?>
-			</td>
-            <!--<td><input type="text" class="form-control productname" name="productname[]"></td>-->
-
+            <td colspan="4"><input type="text" class="form-control code " id="pcode" name="code[]"></td>
             <td><input type="text" class="form-control quantity" name="quantity[]"></td>
-            <td><input type="text" class="form-control price" name="price[]"></td>
+            <td><input type="text" class="form-control price" id="price" name="price[]"></td>
             <td><input type="text" class="form-control discount" name="discount[]"></td>
+            <td><input type="text" class="form-control discount-amount" name="discount-amount[]"></td>
             <td><input type="text" class="form-control amount" name="amount[]" readonly="readonly"></td>
-            <td><a href="#" class="remove">Delete</a> </td>
+            <td><a href="#" class="btn btn-primary remove"><i class="fa fa-times"></i></a></td>
         </tr>
         </tbody>
         <tfoot>
-            <th colspan="3"></th>
+            <th colspan="6"></th>
             <th >Total</th>
             <th style="text-align: center; background: silver;" colspan="3" ><span class="total"></span> tk</th>
         </tfoot>

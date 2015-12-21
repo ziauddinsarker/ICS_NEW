@@ -128,7 +128,7 @@ class Admin extends CI_Controller
             redirect('login/index', 'refresh');
         } else {
             $this->load->view('admin/admin_header_view', $this->data);
-            $this->load->view('admin/admin_home_ppnw_view', $this->data);
+            $this->load->view('admin/ppnw/admin_home_ppnw_view', $this->data);
             $this->load->view('admin/admin_footer_view');
         }
     }

@@ -169,6 +169,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li><a href="<?=  base_url()?>inventory/add_product_name" marked="1"><i class="fa fa-circle-o"></i> Product Name</a></li>
                 <li><a href="<?=  base_url()?>inventory/add_product_code" marked="1"><i class="fa fa-circle-o"></i> Product Code</a></li>
                 <li><a href="<?=  base_url()?>inventory/add_product_color" marked="1"><i class="fa fa-circle-o"></i> Color</a></li>
+                <li><a href="<?=  base_url()?>inventory/add_product_size" marked="1"><i class="fa fa-circle-o"></i>Size</a></li>
                 <li><a href="<?=  base_url()?>inventory/add_product_fabric" marked="1"><i class="fa fa-circle-o"></i> Fabric Details</a></li>
               </ul>
             </li>

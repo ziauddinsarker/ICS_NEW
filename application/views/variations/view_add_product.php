@@ -1,3 +1,6 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 <section class="content">
 <div class="row">
     <div class="col-md-8 col-sm-16 col-xs-18">
@@ -5,6 +8,21 @@
         <div>
             <h1 class="page-header">Add Product</h1>
         </div>
+
+
+        <?php if(validation_errors()) { ?>
+            <div class="alert alert-warning">
+                <?php echo validation_errors(); ?>
+            </div>
+        <?php } ?>
+
+
+        <?php if($this->session->flashdata('item')) { ?>
+            <div class="alert alert-success">
+                <?php echo $this->session->flashdata('item'); ?>
+            </div>
+        <?php } ?>
+
 
         <form  role="form" action="<?=  base_url()?>inventory/save_to_products" method="post">
 
@@ -23,7 +41,7 @@
                 <div class="form-group">
                     <label for="code" class="control-label col-xs-2">Product Code</label>
                         <div class="col-xs-10">
-                            <input type="text" class="form-control full" name="code" placeholder="Enter Unit Price">
+                            <input type="text" class="form-control full" name="code" placeholder="Enter Product Code">
                         </div>
                 </div>
 

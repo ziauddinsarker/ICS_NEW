@@ -1,7 +1,16 @@
 <!-- Content Header (Page header) -->
+<?php if($this->session->flashdata('flashSuccess')):?>
+    <div id="success_message" class="alert alert-success fade in" style="width:400px">
+        <span><?=$this->session->flashdata('flashSuccess')?></span>
+    </div>
+<?php endif ?>
 <section class="content-header">
-    <a class="btn btn-default btn-info" href="<?php echo base_url("ppnw/ppnw_all"); ?>">Back</a>
-    <h1>Update PP Nonwoven Costing</h1>
+
+
+    <a class="btn btn-default btn-info" href="<?php echo base_url("ppnw/ppnw_all"); ?>"><i class="fa fa-arrow-left fa-lg"></i></a>
+
+
+    <h1>New PP Nonwoven Costing</h1>
 </section>
 
 <!-- Main content -->
@@ -9,7 +18,7 @@
     <!-- Fetching All Details of Selected Student From Database And Showing In a Form -->
 
     <!-- Form Start -->
-    <form class="form-inline add-new-ppnw-form" role="form" action="<?=  base_url()?>ppnw/update_ppnw_costing" method="post">
+    <form class="form-inline add-new-ppnw-form" role="form" action="<?=  base_url()?>ppnw/ppnw_costing" method="post">
         <!-- Part1 Form Start -->
 
         <!-- Part1 Form Start -->
@@ -95,7 +104,7 @@
                             <input type="hidden" class="form-control woven-simple-costing" id="final_price_hidden" name="final_price_hidden" value="<?php echo $total_price ?>">
 
                             <input type="hidden" name="ppnw-id" value="<?php echo $ics_order_id ?>">
-                            <button class="btn btn-info" type="submit" name="updateppnw" value="updateppnw">Update</button>
+                            <button class="btn btn-info" type="submit" name="updateppnw" value="updateppnw">Save</button>
                             <!--
                             <button class="btn btn-info" type="submit" name="submit">save</button>
                             <button class="btn btn-info">PRINT</button>

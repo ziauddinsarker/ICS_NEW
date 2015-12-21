@@ -307,3 +307,18 @@ th {
     float: right;
     margin: 0 0 0 10px;
 }
+.form-control.variations[type="text"] {
+    width: 220px;
+}
+
+.variations[type="select"] {
+    width: 220px;
+}
+
+.invtable th{
+    background: #bce8f1;
+}
+
+.invtable th,.invtable td{
+    text-align: left;
+}

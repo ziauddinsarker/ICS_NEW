@@ -1,7 +1,7 @@
 
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <a class="btn btn-default btn-info" href="<?php echo base_url("admin"); ?>">Back</a>
+            <a class="btn btn-default btn-info" href="<?php echo base_url("admin"); ?>"><i class="fa fa-arrow-left fa-lg"></i></a>
             <a class="btn btn-default btn-info" href="<?php echo base_url("ppnw/ppnw_all"); ?>">All PPNW</a>
           <h1>
             PP Nonwoven Costing
@@ -95,7 +95,7 @@
                                         <input type="hidden" class="form-control ppnw-costing" id="final_price_hidden" name="final_price_hidden">
 
 
-                                        <button class="btn btn-info" type="submit" name="submit">save</button>
+                                        <button class="btn btn-info" type="submit" name="submit">Save</button>
 										<!--
                                         <button class="btn btn-info">PRINT</button>
                                         <button class="btn btn-info">PDF</button>
@@ -795,6 +795,14 @@
 
 
 
+                </div>
+                <div class="row">
+                    <div class="col-md-8 col-xs-2">
+                        <div class="form-group">
+                            <label for="comment">Comment:</label>
+                            <textarea class="form-control" rows="3" cols="123" id="comment"></textarea>
+                        </div>
+                    </div>
                 </div>
             </form>
 

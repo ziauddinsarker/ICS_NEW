@@ -9,12 +9,34 @@ class Inventory_model extends CI_Model
             $this->load->library('fpdf_gen');
         }
 
+    function get_all_products(){
+        $this->db->select('tbl_product.id,tbl_product_name.product_name,tbl_product.product_code,tbl_product_color.product_color,tbl_product_fabric.product_fabric_name,tbl_product.product_price,tbl_product_category.product_category_name');
+        $this->db->select('tbl_product.id as product_id');
+        $this->db->from('tbl_product');
+        $this->db->join('tbl_product_name','tbl_product.product_name = tbl_product_name.id');
+        $this->db->join('tbl_product_color','tbl_product.product_color = tbl_product_color.id');
+        $this->db->join('tbl_product_fabric','tbl_product.product_fabric = tbl_product_fabric.id');
+        $this->db->join('tbl_product_category','tbl_product.product_category = tbl_product_category.id');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function get_all_p(){
+        $this->db->select('tbl_product.id,tbl_product_name.product_name,tbl_product.product_code,tbl_product.product_price');
+        $this->db->select('tbl_product.id as product_id');
+        $this->db->from('tbl_product');
+        $this->db->join('tbl_product_name','tbl_product.product_name = tbl_product_name.id');
+        $this->db->join('tbl_product_color','tbl_product.product_color = tbl_product_color.id');
+        $this->db->join('tbl_product_fabric','tbl_product.product_fabric = tbl_product_fabric.id');
+        $this->db->join('tbl_product_category','tbl_product.product_category = tbl_product_category.id');
+        $query = $this->db->get();
+        return $query->result();
+    }
 
     /*******************Products*********************/
          function all_products()
         {
-            $this->db->select('tbl_product.id,tbl_product_name.product_name,tbl_product.product_code,tbl_product_color.product_color,tbl_product_fabric.product_fabric_name,tbl_product.product_price,tbl_product_category.product_category_name');
-            $this->db->select('tbl_product.id as product_id');
+            $this->db->select('tbl_product.id as product_id,tbl_product_name.product_name,tbl_product.product_code,tbl_product_color.product_color,tbl_product_fabric.product_fabric_name,tbl_product.product_price,tbl_product_category.product_category_name');
             $this->db->from('tbl_product');
             $this->db->join('tbl_product_name','tbl_product.product_name = tbl_product_name.id');
             $this->db->join('tbl_product_color','tbl_product.product_color = tbl_product_color.id');
@@ -23,7 +45,6 @@ class Inventory_model extends CI_Model
             $query = $this->db->get();
             return $query->result();
         }
-
 
         function edit_product($product_id) {
             $this->db->join('tbl_product_category','tbl_product.product_category = tbl_product_category.id');
@@ -65,7 +86,7 @@ class Inventory_model extends CI_Model
             $result = $query->result();
 
             //array to store department id & department name
-            $product_name_id = array('-SELECT-');
+            $product_name_id = array('');
             $product_name = array('-SELECT-');
 
             for ($i = 0; $i < count($result); $i++) {
@@ -87,7 +108,7 @@ class Inventory_model extends CI_Model
             $result = $query->result();
 
             //array to store department id & department name
-            $code_id = array('-SELECT-');
+            $code_id = array('');
             $code_name = array('-SELECT-');
 
             for ($i = 0; $i < count($result); $i++) {
@@ -109,7 +130,7 @@ class Inventory_model extends CI_Model
             $result = $query->result();
 
             //array to store department id & department name
-            $color_id = array('-SELECT-');
+            $color_id = array('');
             $color_name = array('-SELECT-');
 
             for ($i = 0; $i < count($result); $i++) {
@@ -128,7 +149,7 @@ class Inventory_model extends CI_Model
             $result = $query->result();
 
             //array to store department id & department name
-            $fabric_id = array('-SELECT-');
+            $fabric_id = array('');
             $fabric_name = array('-SELECT-');
 
             for ($i = 0; $i < count($result); $i++) {
@@ -147,7 +168,7 @@ class Inventory_model extends CI_Model
             $result = $query->result();
 
             //array to store department id & department name
-            $category_id = array('-SELECT-');
+            $category_id = array('');
             $category_name = array('-SELECT-');
 
             for ($i = 0; $i < count($result); $i++) {
@@ -347,8 +368,8 @@ class Inventory_model extends CI_Model
             $result = $query->result();
 
             //array to store department id & department name
-            $product_id = array('-SELECT-');
-            $product_name = array('-SELECT PRODUCT-');
+            $product_id = array('');
+            $product_name = array('-SELECT-');
 
             for ($i = 0; $i < count($result); $i++) {
                 array_push($product_id, $result[$i]->id);
