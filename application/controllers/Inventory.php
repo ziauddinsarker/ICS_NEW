@@ -11,6 +11,7 @@ class Inventory extends CI_Controller {
 		
 		$this->load->model('inventory_model');
 		$data['product'] = $this->inventory_model->get_product();
+		$data['product_code'] = $this->inventory_model->get_product_code();
 		$this->data['inventorys'] = $this->inventory_model->get_inventory();
 
 		$username = $this->session->userdata('username');
@@ -799,42 +800,52 @@ class Inventory extends CI_Controller {
 	}
 
 	public function invoice(){
-
 		$data['invoiceno'] = $this->invoice_number();
 		//var_dump($data['invoiceno']);
-		$data['product'] = $this->inventory_model->get_product();
-		$data['productss'] = $this->inventory_model->all_products();
+		$data['product'] = $this->inventory_model->get_product_code();
+		$data['products_codes'] = $this->inventory_model->get_product_code();
+
+		$data['products'] = $this->inventory_model->all_products();
+
 		$this->load->view('admin/admin_header_view',$this->data);
 		$this->load->view('inventory/view_invoice',$data);
 		$this->load->view('admin/admin_footer_view',$this->data);
 	}
 
 	function save_invoice(){
+		$customer_data = array(
+			'customer_name' => $this->input->post('name'),
+			'customer_phone' => $this->input->post('phone'),
+			'customer_email' => $this->input->post('email'),
+			'customer_address' => $this->input->post('address'),
+		);
+		$this->db->insert('tbl_customer', $customer_data);
+		$customer_id = $this->db->insert_id();
 
-			$order_data = array(
-				'name' => $this->input->post('name'),
-				'location' => $this->input->post('location'),
-			);
-			$this->db->insert('tbl_order', $order_data);
-			$order_id = $this->db->insert_id();
-
-		//var_dump('Order Id' . $order_id);
-		//$count = count($this->input->post('productname'));
-				//var_dump('Product :' . $count);
-
-
-			for ($i = 0; $i < count($this->input->post('productname')); $i++){
+		for ($i = 0; $i < count($this->input->post('productcode')); $i++){
 				$order_detail = array(
-					'order_id' => $order_id,
-					'product_name' => $this->input->post('productname')[$i],
+					'product_code' => $this->input->post('productcode')[$i],
 					'quantity' => $this->input->post('quantity')[$i],
 					'price' => $this->input->post('price')[$i],
 					'discount' => $this->input->post('discount')[$i],
+					'discount_amount' => $this->input->post('discountamount')[$i],
 					'amount' => $this->input->post('amount')[$i],
+					'date' => $this->input->post('date')[$i]
 				);
 
 				$this->db->insert('tbl_orderdetail', $order_detail);
+				$order_id = $this->db->insert_id();
+
+
+				$order_data = array(
+					'order_id' => $order_id,
+					'customer_id' => $customer_id
+				);
+
+				$this->db->insert('tbl_order', $order_data);
 			}
+
+
 
 		//PDF output
 		$this->fpdf->SetTitle("ICS - PDF Output");
@@ -874,6 +885,7 @@ class Inventory extends CI_Controller {
 		 * Content
 		 *
 		 */
+
 		$this->fpdf->cell(10,6,'#',1,0,'C',1);
 		$this->fpdf->cell(45,6,'Product ID',1,0,'C',1);
 		$this->fpdf->cell(15,6,'Quantity',1,0,'C',1);
@@ -886,10 +898,13 @@ class Inventory extends CI_Controller {
 		/**
 		 * SQL
 		 */
+
 		$this->db->select('*');
-		$this->db->from('tbl_order');
-		$this->db->join('tbl_orderdetail','tbl_order.id = tbl_orderdetail.order_id');
-		$this->db->where('tbl_order.id',$order_id);
+		$this->db->from('tbl_customer');
+		$this->db->join('tbl_order','tbl_order.customer_id = tbl_customer.id');
+		$this->db->join('tbl_orderdetail','tbl_order.order_id = tbl_orderdetail.id');
+		$this->db->join('tbl_product_code','tbl_product_code.id = tbl_orderdetail.product_code');
+		$this->db->where('customer_id',38);
 		$query = $this->db->get('');
 		$result = $query->result();
 		//var_dump($result);
@@ -908,12 +923,16 @@ class Inventory extends CI_Controller {
 			$this->fpdf->cell(40,6,$row->amount,1,0,1);
 		}
 
+
 		$this->db->select('*');
 		$this->db->select('SUM(price) AS subtotal, SUM(discount) AS totaldiscount');
-		$this->db->from('tbl_order');
-		$this->db->join('tbl_orderdetail','tbl_order.id = tbl_orderdetail.order_id');
-		$this->db->where('tbl_order.id',15);
+		$this->db->from('tbl_customer');
+		$this->db->join('tbl_order','tbl_order.customer_id = tbl_customer.id');
+		$this->db->join('tbl_orderdetail','tbl_order.order_id = tbl_orderdetail.id');
+		$this->db->join('tbl_product_code','tbl_product_code.id = tbl_orderdetail.product_code');
+		$this->db->where('customer_id',38);
 		$query = $this->db->get('');
+
 		$result = $query->result();
 		foreach($result as $row) {
 
@@ -933,6 +952,8 @@ class Inventory extends CI_Controller {
 
 		}
 
+
+
 // Position at 1.5 cm from bottom
 		$this->fpdf->SetY(-35);
 		// Arial italic 8
@@ -943,14 +964,13 @@ class Inventory extends CI_Controller {
 		/**
 		 * Footer
 		 */
-		$this->fpdf->AliasNbPages();
-		$this->fpdf->SetFont('Times','',12);
+			//$this->fpdf->AliasNbPages();
+			//$this->fpdf->SetFont('Times','',12);
 
 		//Open PDF on same page
-		//$this->fpdf->Output("Invoice.pdf", "I");
+		$this->fpdf->Output("Invoice.pdf", "I");
 
-
-		$this->fpdf->Output("Invoice.pdf",'F');
+			//$this->fpdf->Output("Invoice.pdf",'F');
 
 		//Save Invoice to Local Computer
 		//$this->fpdf->Output("Invoice.pdf",'D');
@@ -960,7 +980,9 @@ class Inventory extends CI_Controller {
 		//echo $this->fpdf->Output('ics.pdf','D');
 
 
-		redirect('home/invoice', 'refresh');
+
+
+		//redirect('inventory/invoice', 'refresh');
 	}
 
 

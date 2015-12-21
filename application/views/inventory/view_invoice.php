@@ -47,7 +47,7 @@
 				<div class="form-group">
 					<label for="date" class="control-label col-xs-2">Date</label>
 					<div class="col-xs-10">
-						<input type="text" name="date" class="form-control" value="<?php echo date('d/m/Y'); ?>" readonly="readonly">
+						<input type="text" name="date" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly="readonly">
 					</div>
 				</div>
 				
@@ -61,7 +61,7 @@
 				<div class="form-group">
 					<label for="location" class="control-label col-xs-2">Address</label>
 					<div class="col-xs-10">
-						<input type="text" name="location" class="form-control" placeholder="Address">
+						<input type="text" name="address" class="form-control" placeholder="Address">
 					</div>
 				</div>
 			</div>
@@ -74,7 +74,7 @@
             <th colspan="4">Product ID</th>
             <th>Quantity</th>
             <th>Unit Price</th>
-            <th>Discount</th>
+            <th>Discount (%)</th>
             <th>Discount Amount</th>
             <th>Total</th>
             <th><a id="add" class="btn btn-primary" href="#"><i class="fa fa-plus"></i></a></th>
@@ -82,11 +82,17 @@
         <tbody class="detail">
         <tr>
             <td class="no">1</td>
-            <td colspan="4"><input type="text" class="form-control code " id="pcode" name="code[]"></td>
+            <td colspan="4">
+				<?php
+				$attributes = 'class="form-control"';
+				echo form_dropdown('productcode[]',$product,set_value('productcode'),$attributes);
+				?>
+				<!--<input type="text" class="form-control code " id="pcode" name="code[]">-->
+			</td>
             <td><input type="text" class="form-control quantity" name="quantity[]"></td>
             <td><input type="text" class="form-control price" id="price" name="price[]"></td>
             <td><input type="text" class="form-control discount" name="discount[]"></td>
-            <td><input type="text" class="form-control discount-amount" name="discount-amount[]"></td>
+            <td><input type="text" class="form-control discount-amount" name="discountamount[]"></td>
             <td><input type="text" class="form-control amount" name="amount[]" readonly="readonly"></td>
             <td><a href="#" class="btn btn-primary remove"><i class="fa fa-times"></i></a></td>
         </tr>

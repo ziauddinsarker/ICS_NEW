@@ -37,8 +37,9 @@
       <script src="<?php echo base_url('assets/js/main.js'); ?>"></script>
 
       <script>
+          /*
           $(document).ready(function(e){
-              var site_url = "<?php echo site_url(); ?>";
+              var site_url = "<?php //echo site_url(); ?>";
               var input = $("input[id=pcode]");
 
               $.get(site_url+'inventory/json_search_product', function(data){
@@ -55,6 +56,7 @@
                   $('#pcode').val(current.pcode);
               });
           });
+          */
       </script>
 
 
@@ -78,8 +80,19 @@
                 var qty = tr.find('.quantity').val();
                 var price = tr.find('.price').val();
                 var amt = qty * price;
+
                 //Discount option if needed
                 var dis = tr.find('.discount').val();
+
+                var disamount = (qty * price * dis)/100;
+                tr.find('.discount-amount').val(disamount);
+
+                //var discountamount =  tr.find('.discount-amount').val();
+               // var percentage = (discountamount/price)/100;
+                //tr.find('.discount').val(percentage);
+                //var dis = tr.find('.discount').val();
+
+
                 var amt = (qty * price) - (qty * price * dis)/100;
                 tr.find('.amount').val(amt);
 
@@ -113,19 +126,28 @@
             var n = ($('.detail tr').length-0)+1;
             var tr = '<tr>'+
                 '<td class="no">' + n + '</td>'+
-                '<td colspan="4"><input type="text" class="form-control code" id="pcode" name="code[]"></td>' +
+                '<td colspan="4">'+
+                '<select class="form-control" name="productcode[]">'+
+                    <?php foreach ($products as $row):
+                    {
+                    ?>
+                '<option value="<?php echo $row->product_id; ?>"><?php echo $row->product_code; ?></option>'+
+
+                <?php
+                    }
+                endforeach; ?>
+                '</select>'+
+                '</td>' +
                 '<td><input type="text" class="form-control quantity" name="quantity[]"></td>'+
                 '<td><input type="text" class="form-control price" name="price[]"></td>'+
                 '<td><input type="text" class="form-control discount" name="discount[]"></td>'+
-                '<td><input type="text" class="form-control discount-amount" name="discount-amount[]"></td>'+
+                '<td><input type="text" class="form-control discount-amount" name="discountamount[]"></td>'+
                 '<td><input type="text" class="form-control amount" name="amount[]"></td>'+
                 '<td><a href="#" class="btn btn-primary remove"><i class="fa fa-times"></i></a> </td>'+
                 '</tr>';
 
             $('.detail').append(tr);
         }
-
-
 
 
 

@@ -99,7 +99,7 @@ class Inventory_model extends CI_Model
         /**
          * @return array
          */
-        function get_product_code()
+      /*  function get_product_code()
         {
             $this->db->select('id,product_code');
             $this->db->from('tbl_product_code');
@@ -117,7 +117,7 @@ class Inventory_model extends CI_Model
             }
             return $doc_specility_result = array_combine($code_id, $code_name);
         }
-
+*/
         /**
          * @return array
          */
@@ -376,6 +376,33 @@ class Inventory_model extends CI_Model
                 array_push($product_name, $result[$i]->product_name);
             }
             return $doc_specility_result = array_combine($product_id, $product_name);
+        }
+
+    /**
+         * @return array|bool
+         */
+
+        function get_product_code()
+        {
+            $this->db->select('tbl_product.id,tbl_product.product_code,tbl_product_name.product_name');
+            $this->db->from('tbl_product');
+            $this->db->join('tbl_product_name','tbl_product.product_name = tbl_product_name.id');
+            $this->db->join('tbl_product_color','tbl_product.product_color = tbl_product_color.id');
+            $this->db->join('tbl_product_fabric','tbl_product.product_fabric = tbl_product_fabric.id');
+            $this->db->join('tbl_product_category','tbl_product.product_category = tbl_product_category.id');
+            $this->db->order_by('product_name', 'ASC');
+            $query = $this->db->get();
+            $result = $query->result();
+
+            //array to store department id & department name
+            $product_id = array('');
+            $product_code = array('-SELECT-');
+
+            for ($i = 0; $i < count($result); $i++) {
+                array_push($product_id, $result[$i]->id);
+                array_push($product_code, $result[$i]->product_code);
+            }
+            return $doc_specility_result = array_combine($product_id, $product_code);
         }
 
 
