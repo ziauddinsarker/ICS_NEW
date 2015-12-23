@@ -4,8 +4,8 @@
     <div>
         <h1 class="page-header">Inventory</h1>
     </div>
-    <a class="btn btn-default" href="<?php base_url();?>inventory/add_to_inventory">Add New Product to Inventory</a>
-    <a class="btn btn-default" href="<?php base_url();?>inventory/add_product_category">Add Category</a>
+    <a class="btn btn-default" href="<?php base_url();?>add_to_inventory">Add New Product to Inventory</a>
+    <a class="btn btn-default" href="<?php base_url();?>add_product_category">Add Category</a>
     <table class="table table-bordered table-hover">
         <thead>
             <th>No.</th>

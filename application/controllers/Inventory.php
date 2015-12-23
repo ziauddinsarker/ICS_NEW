@@ -1,4 +1,4 @@
- <?php
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Inventory extends CI_Controller {
@@ -765,14 +765,26 @@ class Inventory extends CI_Controller {
 		//Get Today's Date
 		$today = date("dmy");
 
-		//Get Total Order
+		/*
+		$this->db->select('tbl_customer.id AS customerid,tbl_orderdetail.date as date');
+		$this->db->from('tbl_customer');
+		$this->db->join('tbl_order','tbl_order ON tbl_order.customer_id = tbl_customer.id');
+		$this->db->join('tbl_orderdetail','tbl_order.order_id = tbl_orderdetail.id');
+		$this->db->join('tbl_product','tbl_product.id = tbl_orderdetail.product_code');
+		$this->db->group_by('customerid');
+		*/
 		$this->db->select('id');
 		$this->db->from('tbl_order');
 		$query = $this->db->get();
 
-		foreach ($query->result() as $row)
-		{
-			$totalInvoice  = ($row->id);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result() as $row)
+			{
+				$totalInvoice  = $row->id;
+			}
+		} else {
+			$firstinvoiceno = "SIN-".$today."-1-1";
+			return $firstinvoiceno;
 		}
 
 		//$prefix
@@ -790,7 +802,7 @@ class Inventory extends CI_Controller {
 
 		foreach ($query->result() as $row)
 		{
-			$idonly  = ($row->last)+1;
+			$idonly  = $row->last;
 		}
 
 		return $prefix.substr($leadingzeros, 0, (-strlen($idonly))).$idonly;
@@ -800,16 +812,21 @@ class Inventory extends CI_Controller {
 	}
 
 	public function invoice(){
-		$data['invoiceno'] = $this->invoice_number();
-		//var_dump($data['invoiceno']);
-		$data['product'] = $this->inventory_model->get_product_code();
-		$data['products_codes'] = $this->inventory_model->get_product_code();
+		if (!$this->ion_auth->logged_in()) {
+			// redirect them to the login page
+			redirect('login/index', 'refresh');
+		} else {
+			$data['invoiceno'] = $this->invoice_number();
+			//var_dump($data['invoiceno']);
+			$data['product'] = $this->inventory_model->get_product_code();
+			$data['products_codes'] = $this->inventory_model->get_product_code();
 
-		$data['products'] = $this->inventory_model->all_products();
+			$data['products'] = $this->inventory_model->all_products();
 
-		$this->load->view('admin/admin_header_view',$this->data);
-		$this->load->view('inventory/view_invoice',$data);
-		$this->load->view('admin/admin_footer_view',$this->data);
+			$this->load->view('admin/admin_header_view', $this->data);
+			$this->load->view('inventory/view_invoice', $data);
+			$this->load->view('admin/admin_footer_view', $this->data);
+		}
 	}
 
 	function save_invoice(){
@@ -824,18 +841,18 @@ class Inventory extends CI_Controller {
 
 		for ($i = 0; $i < count($this->input->post('productcode')); $i++){
 				$order_detail = array(
+					'invoice_no' => $this->input->post('invoice-no'),
 					'product_code' => $this->input->post('productcode')[$i],
 					'quantity' => $this->input->post('quantity')[$i],
 					'price' => $this->input->post('price')[$i],
 					'discount' => $this->input->post('discount')[$i],
 					'discount_amount' => $this->input->post('discountamount')[$i],
 					'amount' => $this->input->post('amount')[$i],
-					'date' => $this->input->post('date')[$i]
+					'date' => date("Y-m-d"),
 				);
 
 				$this->db->insert('tbl_orderdetail', $order_detail);
 				$order_id = $this->db->insert_id();
-
 
 				$order_data = array(
 					'order_id' => $order_id,
@@ -846,16 +863,29 @@ class Inventory extends CI_Controller {
 			}
 
 
-
 		//PDF output
 		$this->fpdf->SetTitle("ICS - PDF Output");
 		//Set Font for Header
-		$this->fpdf->Ln(12);
+
+		// Logo
+		//$this->fpdf->Image(base_url('assets/images/simura.png'),10,6,30);
+			// Arial bold 15
+		//$this->fpdf->SetFont('Arial','B',15);
+			// Move to the right
+		//$this->fpdf->Cell(80);
+		// Add page with a grid and default spacing (5mm)
+
+
+
+
+		$this->fpdf->Ln(15);
 		$this->fpdf->setFont('Arial','',30);
 		$this->fpdf->setFillColor(255,255,255);
-		$this->fpdf->cell(200,0,"SIMURA",0,0,'C',1);
-		$this->fpdf->cell(100,6,' ',0,1,'C',1);
+		//$this->fpdf->cell(200,0,"SIMURA",0,0,'C',1);
+		//$this->fpdf->cell(100,6,' ',0,1,'C',1);
 
+		$this->fpdf->Image(base_url('assets/images/simura.png'),10,15,40);
+		$this->fpdf->Cell(80);
 		$this->fpdf->cell(100,5,' ',0,1,'C',1);
 		$this->fpdf->SetFontSize(15);
 		$this->fpdf->SetFillColor(200,220,255);
@@ -864,13 +894,13 @@ class Inventory extends CI_Controller {
 		$this->fpdf->cell(100,6,' ',0,1,'L',1);
 		$this->fpdf->setFont('Arial','',10);
 		$this->fpdf->setFillColor(255,255,255);
-		$this->fpdf->cell(50,6,"Customer Name:",0,0,'L',1);
-		$this->fpdf->cell(116,6,"Date : " . date('d/m/Y'),0,1,'R',1);
+		$this->fpdf->cell(70,6,"Customer Name: ". $this->input->post('name'),0,0,'L',1);
+		$this->fpdf->cell(90,6,"Date : " . date('d/m/Y'),0,1,'R',1);
 
-		$this->fpdf->cell(50,6,"Phone:",0,0,'L',1);
-		$this->fpdf->cell(125,6,"Invoice No. : Inv-00000",0,1,'R',1);
+		$this->fpdf->cell(50,6,"Phone: " . $this->input->post('phone'),0,0,'L',1);
+		$this->fpdf->cell(136,6,"Invoice No. : " . $this->invoice_number(),0,1,'R',1);
 
-		$this->fpdf->cell(100,6,"Email :",0,0,'L',1);
+		$this->fpdf->cell(100,6,"Email : " . $this->input->post('email'),0,0,'L',1);
 
 		$this->fpdf->Ln(12);
 		$this->fpdf->setFont('Arial','',14);
@@ -887,12 +917,12 @@ class Inventory extends CI_Controller {
 		 */
 
 		$this->fpdf->cell(10,6,'#',1,0,'C',1);
-		$this->fpdf->cell(45,6,'Product ID',1,0,'C',1);
-		$this->fpdf->cell(15,6,'Quantity',1,0,'C',1);
-		$this->fpdf->cell(25,6,'Unit Price',1,0,'C',1);
-		$this->fpdf->cell(25,6,'Discount (%)',1,0,'C',1);
-		$this->fpdf->cell(35,6,'Discount (BDT)',1,0,'C',1);
-		$this->fpdf->cell(40,6,'Total',1,0,'C',1);
+		$this->fpdf->cell(90,6,'Product ID',1,0,'C',1);
+		$this->fpdf->cell(25,6,'Quantity',1,0,'C',1);
+		$this->fpdf->cell(30,6,'Unit Price',1,0,'C',1);
+		//$this->fpdf->cell(25,6,'Discount (%)',1,0,'C',1);
+		//$this->fpdf->cell(35,6,'Discount (BDT)',1,0,'C',1);
+		$this->fpdf->cell(40,6,'Total (bdt)',1,0,'C',1);
 
 
 		/**
@@ -903,8 +933,8 @@ class Inventory extends CI_Controller {
 		$this->db->from('tbl_customer');
 		$this->db->join('tbl_order','tbl_order.customer_id = tbl_customer.id');
 		$this->db->join('tbl_orderdetail','tbl_order.order_id = tbl_orderdetail.id');
-		$this->db->join('tbl_product_code','tbl_product_code.id = tbl_orderdetail.product_code');
-		$this->db->where('customer_id',38);
+		$this->db->join('tbl_product','tbl_product.id = tbl_orderdetail.product_code');
+		$this->db->where('customer_id',$customer_id);
 		$query = $this->db->get('');
 		$result = $query->result();
 		//var_dump($result);
@@ -915,51 +945,83 @@ class Inventory extends CI_Controller {
 			$id++;
 			$this->fpdf->Ln(6);
 			$this->fpdf->cell(10,6,$id,1,0,1);
-			$this->fpdf->cell(45,6,$row->product_name,1,0,1);
-			$this->fpdf->cell(15,6,$row->quantity,1,0,1);
-			$this->fpdf->cell(25,6,$row->price,1,0,1);
-			$this->fpdf->cell(25,6,$row->discount.'%',1,0,1);
-			$this->fpdf->cell(35,6,$row->discount_amount,1,0,1);
+
+			$this->fpdf->cell(90,6,$row->product_code,1,0,1);
+			$this->fpdf->cell(25,6,$row->quantity,1,0,1);
+			$this->fpdf->cell(30,6,$row->price,1,0,1);
+			//$this->fpdf->cell(25,6,$row->discount.'%',1,0,1);
+			//$this->fpdf->cell(35,6,$row->discount_amount,1,0,1);
 			$this->fpdf->cell(40,6,$row->amount,1,0,1);
 		}
 
 
-		$this->db->select('*');
-		$this->db->select('SUM(price) AS subtotal, SUM(discount) AS totaldiscount');
+		$this->db->select('SUM(amount) AS subtotal, SUM(discount_amount) AS totaldiscount');
 		$this->db->from('tbl_customer');
 		$this->db->join('tbl_order','tbl_order.customer_id = tbl_customer.id');
 		$this->db->join('tbl_orderdetail','tbl_order.order_id = tbl_orderdetail.id');
-		$this->db->join('tbl_product_code','tbl_product_code.id = tbl_orderdetail.product_code');
-		$this->db->where('customer_id',38);
+		$this->db->join('tbl_product','tbl_product.id = tbl_orderdetail.product_code');
+		$this->db->where('customer_id',$customer_id);
 		$query = $this->db->get('');
 
 		$result = $query->result();
 		foreach($result as $row) {
 
 			$this->fpdf->Ln(6);
-			$this->fpdf->Cell(120);
-			$this->fpdf->cell(35, 6, 'Subtotal', 1, 0, 1);
-			$this->fpdf->cell(40, 6, $row->subtotal.'.00', 1, 0, 1);
+			$this->fpdf->Cell(125);
+			$this->fpdf->cell(30, 6, 'Subtotal', 1, 0, 1);
+			$this->fpdf->cell(40, 6, $row->subtotal, 1, 0,1);
 			$this->fpdf->Ln(6);
-			$this->fpdf->Cell(120);
-			$this->fpdf->cell(35, 6, 'Discount', 1, 0, 1);
-			$this->fpdf->cell(40, 6, $row->totaldiscount.'.00', 1, 0, 1);
+			$this->fpdf->Cell(125);
+			$this->fpdf->cell(30, 6, 'Discount', 1, 0, 1);
+			$this->fpdf->cell(40, 6, $row->totaldiscount, 1, 0,1);
 			$this->fpdf->Ln(6);
-			$this->fpdf->Cell(120);
-			$this->fpdf->cell(35, 6, 'Grand Total', 1, 0, 1);
-			$this->fpdf->cell(40, 6, ($row->subtotal - $row->totaldiscount).'.00', 1, 0, 1);
-
-
+			$this->fpdf->Cell(125);
+			$this->fpdf->cell(30, 6, 'Grand Total', 1, 0, 1);
+			$this->fpdf->cell(40, 6, ($row->subtotal - $row->totaldiscount).".00", 1, 0,1);
 		}
 
+		$this->fpdf->Ln(20);
+		//$this->fpdf->Cell(10);
+		$this->fpdf->Cell(0,10,'In Word: '.$this->input->post('inword'),0,0,'L');
 
-
-// Position at 1.5 cm from bottom
-		$this->fpdf->SetY(-35);
+		//$this->fpdf->SetY(-52);
 		// Arial italic 8
-		$this->fpdf->SetFont('Arial','I',8);
+		//$this->fpdf->SetFont('Arial','',8);
 		// Page number
-		$this->fpdf->Cell(0,10,'Thank You For Our Business',0,0,'C');
+		//$this->fpdf->Cell(0,10,'Corporate Office: 109, Masjid Road, Old  D.O.H.S, Banani, Dhaka-1206',0,0,'L');
+		//$this->fpdf->SetY(-48);
+		//$this->fpdf->Cell(0,10,'Outlet-01: 24, Malitola Road(1st Floor), Dhaka - 1100',0,0,'L');
+		//$this->fpdf->SetY(-44);
+		//$this->fpdf->Cell(0,10,'Phone: +8802 8713301-04',0,0,'L');
+
+		$this->fpdf->SetY(-50);
+		//$this->fpdf->SetLineWidth(0.5);
+		//$this->fpdf->Line(250, 227, 0, 227);
+
+		$this->fpdf->SetLineWidth(0.1);
+		$this->fpdf->SetDash(2,2); //5mm on, 5mm off
+		$this->fpdf->Line(250, 227, 0, 227);
+
+
+
+
+
+
+		//$this->fpdf->SetY(-80);
+		$this->fpdf->Image(base_url('assets/images/simcoupon.png'),30,230,150);
+
+
+
+		// Position at 1.5 cm from bottom
+		//$this->fpdf->SetY(-31);
+		// Arial italic 8
+		//$this->fpdf->SetFont('Arial','',12);
+		// Page number
+		//$this->fpdf->Cell(0,10,'Thank You For Our Business',0,0,'C');
+
+		//$this->fpdf->SetY(-31);
+		//$this->fpdf->SetFont('Arial','',8);
+		//$this->fpdf->Cell(0,10,'Corporate Office: 109, Masjid Road, Old  D.O.H.S, Banani, Dhaka-1206',0,0,'L');
 
 		/**
 		 * Footer
@@ -970,7 +1032,7 @@ class Inventory extends CI_Controller {
 		//Open PDF on same page
 		$this->fpdf->Output("Invoice.pdf", "I");
 
-			//$this->fpdf->Output("Invoice.pdf",'F');
+		//$this->fpdf->Output("Invoice.pdf",'F');
 
 		//Save Invoice to Local Computer
 		//$this->fpdf->Output("Invoice.pdf",'D');
@@ -979,13 +1041,7 @@ class Inventory extends CI_Controller {
 
 		//echo $this->fpdf->Output('ics.pdf','D');
 
-
-
-
 		//redirect('inventory/invoice', 'refresh');
 	}
-
-
-
 
 }

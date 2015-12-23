@@ -1,5 +1,8 @@
-<div class="row">
-    <div class="col-sm-8 col-md-8 col-md-offset-2">
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-8 col-sm-16 col-xs-18">
         <div>
             <h1 class="page-header">Edit Product</h1>
         </div>
@@ -20,10 +23,7 @@
                     <div class="form-group">
                         <label for="code" class="control-label col-xs-2">Product Code</label>
                         <div class="col-xs-10">
-                            <?php
-                            $attributes = 'class="form-control" id="form-code"';
-                            echo form_dropdown('code',$code,$product_code,$attributes);
-                            ?>
+                            <input type="text" class="form-control full" name="price" placeholder="Enter Unit Price" value="<?php echo $product_code; ?>">
                         </div>
                     </div>
 
@@ -72,10 +72,7 @@
                 </div>
                 <div class="col-md-4"></div>
         </form>
-
-
-
     </div>
 </div>
-
+</section>
 

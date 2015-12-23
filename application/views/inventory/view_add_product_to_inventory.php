@@ -2,7 +2,7 @@
 <section class="content">
 <div class="row">
     <div class="col-md-4 col-sm-8 col-xs-18">
-        <a class="btn btn-default" href="<?php base_url('inventory')?>">View All Inventory</a>
+        <a class="btn btn-default" href="<?php base_url() ?>index">View All Inventory</a>
         <div>
             <h1 class="page-header">Add to Inventory</h1>
         </div>

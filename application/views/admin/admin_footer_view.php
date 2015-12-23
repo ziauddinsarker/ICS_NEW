@@ -75,17 +75,35 @@
                 addnewrow();
             });
 
-            $('.detail').delegate('.quantity,.price,.discount','keyup',function(){
+            $('.detail').delegate('.quantity,.price,.discount,.discount-amount,.inword','keyup',function(){
                 var tr = $(this).parent().parent();
                 var qty = tr.find('.quantity').val();
                 var price = tr.find('.price').val();
                 var amt = qty * price;
 
-                //Discount option if needed
-                var dis = tr.find('.discount').val();
+                //Discount Amount  if needed
+                var discamount = tr.find('.discount-amount').val();
+                var percent = tr.find('.discount').val();
+                //console.log(discamount);
+                if(discamount > 0){
+                    var disc = (discamount/(qty * price))*100;
+                    tr.find('.discount').val((disc).toFixed(2));
+                }
+/*
+                if(percent > 0){
+                    var disamount = (qty * price * percent)/100;
+                    tr.find('.discount-amount').val(disamount);
+                }
+*/
 
-                var disamount = (qty * price * dis)/100;
-                tr.find('.discount-amount').val(disamount);
+
+                //Discount option if needed
+                //var dis = tr.find('.discount').val();
+
+                //var disamount = (qty * price * dis)/100;
+               // tr.find('.discount-amount').val(disamount);
+
+
 
                 //var discountamount =  tr.find('.discount-amount').val();
                // var percentage = (discountamount/price)/100;
@@ -93,12 +111,25 @@
                 //var dis = tr.find('.discount').val();
 
 
-                var amt = (qty * price) - (qty * price * dis)/100;
+               //var amt = (qty * price) - (qty * price * dis)/100;
+               var amt = qty * price;
                 tr.find('.amount').val(amt);
 
-                total();
+                subtotal();
+                discount();
 
-                $('.inWord').html(inWords(total()));
+                var total = gsubtotal - gdiscount;
+                $('.total').html(total);
+                $('.inWord').html(inWords(gsubtotal - gdiscount));
+
+                var inw = inWords(gsubtotal - gdiscount);
+                console.log(inw);
+                //("#inword").txt(inw);
+                //tr.find('.inword').val(inw);
+                document.getElementById("inword").value = inw;
+
+
+
 
             });
 
@@ -111,14 +142,32 @@
         /**
          * Total Amount
          */
-        function total(){
+        function subtotal(){
             var t = 0;
             $('.amount').each(function (i,e) {
                 var amt = $(this).val()-0;
                 t += amt;
             });
+
+            gsubtotal = t;
+
             $('.inWord').html(inWords(t));
-            $('.total').html(t);
+            $('.subtotal').html(t);
+        }
+
+        /**
+         * Total Amount
+         */
+        function discount(){
+            var t = 0;
+            $('.discount-amount').each(function (i,e) {
+                var disc = $(this).val()- 0;
+                t += disc;
+            });
+
+            gdiscount = t;
+
+            $('.discount').html(t);
         }
 
 
@@ -140,8 +189,8 @@
                 '</td>' +
                 '<td><input type="text" class="form-control quantity" name="quantity[]"></td>'+
                 '<td><input type="text" class="form-control price" name="price[]"></td>'+
-                '<td><input type="text" class="form-control discount" name="discount[]"></td>'+
                 '<td><input type="text" class="form-control discount-amount" name="discountamount[]"></td>'+
+                '<td><input type="text" class="form-control discount" name="discount[]"></td>'+
                 '<td><input type="text" class="form-control amount" name="amount[]"></td>'+
                 '<td><a href="#" class="btn btn-primary remove"><i class="fa fa-times"></i></a> </td>'+
                 '</tr>';

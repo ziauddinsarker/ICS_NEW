@@ -47,7 +47,7 @@
 				<div class="form-group">
 					<label for="date" class="control-label col-xs-2">Date</label>
 					<div class="col-xs-10">
-						<input type="text" name="date" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly="readonly">
+						<input type="text" name="order_date" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly="readonly">
 					</div>
 				</div>
 				
@@ -74,8 +74,8 @@
             <th colspan="4">Product ID</th>
             <th>Quantity</th>
             <th>Unit Price</th>
+			<th>Discount Amount</th>
             <th>Discount (%)</th>
-            <th>Discount Amount</th>
             <th>Total</th>
             <th><a id="add" class="btn btn-primary" href="#"><i class="fa fa-plus"></i></a></th>
         </thead>
@@ -91,19 +91,32 @@
 			</td>
             <td><input type="text" class="form-control quantity" name="quantity[]"></td>
             <td><input type="text" class="form-control price" id="price" name="price[]"></td>
+			<td><input type="text" class="form-control discount-amount" name="discountamount[]"></td>
             <td><input type="text" class="form-control discount" name="discount[]"></td>
-            <td><input type="text" class="form-control discount-amount" name="discountamount[]"></td>
             <td><input type="text" class="form-control amount" name="amount[]" readonly="readonly"></td>
             <td><a href="#" class="btn btn-primary remove"><i class="fa fa-times"></i></a></td>
         </tr>
         </tbody>
         <tfoot>
-            <th colspan="6"></th>
+            <th class="no-style" colspan="8"></th>
             <th >Total</th>
-            <th style="text-align: center; background: silver;" colspan="3" ><span class="total"></span> tk</th>
+            <th style="text-align: center; background: silver;" colspan="1" ><span class="total"></span> tk</th>
         </tfoot>
+		   <tfoot>
+		   <th class="no-style" colspan="8"></th>
+		   <th >Subtotal</th>
+		   <th style="text-align: center; background: silver;" colspan="1" ><span class="subtotal"></span> tk</th>
+		   </tfoot>
+		<tfoot>
+            <th class="no-style" colspan="8"></th>
+            <th >Discount</th>
+            <th style="text-align: center; background: silver;" colspan="1" ><span class="discount"></span> tk</th>
+        </tfoot>
+
     </table>
-        <div><b>In Words :</b> <span class="inWord"></span></div>
+        <div><b>In Words :</b> <span class="inWord"></span>
+			<input type="hidden" class="form-control " id="inword" name="inword">
+		</div>
 
     <input type="submit" class="btn btn-primary inv-btn" name="save" value="Save">
     <input type="submit" class="btn btn-primary inv-btn" name="print" value="Print" formtarget="_blank">

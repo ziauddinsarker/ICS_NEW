@@ -167,7 +167,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <ul class="treeview-menu" style="display: none;">
                 <li><a href="<?=  base_url()?>inventory/add_product_category" marked="1"><i class="fa fa-circle-o"></i> Category</a></li>
                 <li><a href="<?=  base_url()?>inventory/add_product_name" marked="1"><i class="fa fa-circle-o"></i> Product Name</a></li>
-                <li><a href="<?=  base_url()?>inventory/add_product_code" marked="1"><i class="fa fa-circle-o"></i> Product Code</a></li>
+                <!--<li><a href="<?php  //base_url() ?>inventory/add_product_code" marked="1"><i class="fa fa-circle-o"></i> Product Code</a></li>-->
                 <li><a href="<?=  base_url()?>inventory/add_product_color" marked="1"><i class="fa fa-circle-o"></i> Color</a></li>
                 <li><a href="<?=  base_url()?>inventory/add_product_size" marked="1"><i class="fa fa-circle-o"></i>Size</a></li>
                 <li><a href="<?=  base_url()?>inventory/add_product_fabric" marked="1"><i class="fa fa-circle-o"></i> Fabric Details</a></li>
@@ -175,17 +175,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </li>
 
 
-            <li class="treeview">
+          <!-- <li class="treeview">
               <a href="#" marked="1">
                 <i class="fa fa-edit"></i> <span>Inventory</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu" style="display: none;">
-                <li><a href="<?=  base_url()?>inventory" marked="1"><i class="fa fa-circle-o"></i> All Inventory</a></li>
-                <li><a href="<?=  base_url()?>inventory/get_category" marked="1"><i class="fa fa-circle-o"></i> All Product Category</a></li>
-                <li><a href="<?=  base_url()?>inventory/all_products" marked="1"><i class="fa fa-circle-o"></i> All Product</a></li>
+                <li><a href="<?php  //base_url()?>inventory" marked="1"><i class="fa fa-circle-o"></i> All Inventory</a></li>
+                <li><a href="<?php  //base_url()?>inventory/get_category" marked="1"><i class="fa fa-circle-o"></i> All Product Category</a></li>
+                <li><a href="<?php  //base_url()?>inventory/all_products" marked="1"><i class="fa fa-circle-o"></i> All Product</a></li>
               </ul>
             </li>
+
+            -->
 			<li><a href="<?=  base_url()?>inventory/add_product"><i class="fa fa-th-list"></i> <span>Add Product<span></a></li>
 			<li><a href="<?=  base_url()?>inventory/add_to_inventory"><i class="fa fa-th-list"></i> <span>Add Inventory<span></a></li>
 			<li><a href="<?=  base_url()?>inventory/invoice"><i class="fa fa-th-list"></i> <span>New Invoice<span></a></li>

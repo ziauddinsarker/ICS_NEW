@@ -322,3 +322,8 @@ th {
 .invtable th,.invtable td{
     text-align: left;
 }
+
+
+th.no-style {
+    background: #fff none repeat scroll 0 0;
+}

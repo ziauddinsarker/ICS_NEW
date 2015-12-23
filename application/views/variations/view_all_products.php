@@ -28,7 +28,7 @@
                 <td><?php echo $product->product_color ;?></td>
                 <td><?php echo $product->product_price ;?></td>
                 <td><?php echo $product->product_category_name ;?></td>
-                <td><a class="btn btn-default" href="<?php base_url();?>edit_product/<?php echo $product->id ;?>">Edit</a>  <a class="btn btn-default" href="<?php base_url();?>delete_product/<?php echo $product->id ;?>">Delete</a></td>
+                <td><a class="btn btn-default" href="<?php base_url();?>edit_product/<?php echo $product->product_id ;?>">Edit</a>  <a class="btn btn-default" href="<?php base_url();?>delete_product/<?php echo $product->product_id ;?>">Delete</a></td>
             </tr>
         <?php }  ?>
         </tbody>
