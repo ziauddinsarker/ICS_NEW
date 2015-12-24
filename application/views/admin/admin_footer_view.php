@@ -58,7 +58,64 @@
           });
           */
       </script>
+      <script>
+          /*
+          $(document).ready(function() {
+              // On change of the dropdown do the ajax
+              $("#proCode").change(function() {
+                  $.ajax({
+                      // Change the link to the file you are using
+                      url: '<?php base_url()?>json_search_product',
+                      type: 'post',
+                      // This just sends the value of the dropdown
+                      data: { client: $(this).val() },
+                      success: function(response) {
+                          // Parse the jSON that is returned
+                          // Using conditions here would probably apply
+                          // incase nothing is returned
+                          var Vals    =   JSON.parse(response);
 
+                          var productCode = $("#proCode").val();
+
+                          for(i = 0; i < Vals.length; i++) {
+
+                              if(Vals[i].pcode === productCode){
+                                  //$("input[name='kk']").val(Vals[0].price);
+                                  //$("input[name='kk']").val(Vals[i].price);
+                                  //console.log(Vals[i]);
+                              }else{
+                                  $("input[id='price']").val(Vals[i].price);
+                                  //$("input[name='kk']").val(Vals[i].price);
+                                  //console.log(Vals[i]);
+                                  break;
+                              }
+
+                             // console.log(Vals[i].price);
+                          }
+
+/*
+                          var hasTag = function(productCode) {
+                              var i = null;
+                              for (i = 0; tags.length > i; i += 1) {
+                                  if (Vals[i].pcode === productCode) {
+                                      return true;
+                                  }
+                              }
+
+                              return false;
+                          };
+
+                          */
+                // These are the inputs that will populate
+                         //$("input[name='kk']").val(Vals[0].id);
+                          //console.log(Vals.price)
+          /*
+                      }
+                  });
+              });
+          });
+          */
+      </script>
 
 
      <script>

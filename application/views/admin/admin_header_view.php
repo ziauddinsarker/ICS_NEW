@@ -185,12 +185,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li><a href="<?php  //base_url()?>inventory/get_category" marked="1"><i class="fa fa-circle-o"></i> All Product Category</a></li>
                 <li><a href="<?php  //base_url()?>inventory/all_products" marked="1"><i class="fa fa-circle-o"></i> All Product</a></li>
               </ul>
-            </li>
-
-            -->
+            </li> -->
 			<li><a href="<?=  base_url()?>inventory/add_product"><i class="fa fa-th-list"></i> <span>Add Product<span></a></li>
 			<li><a href="<?=  base_url()?>inventory/add_to_inventory"><i class="fa fa-th-list"></i> <span>Add Inventory<span></a></li>
 			<li><a href="<?=  base_url()?>inventory/invoice"><i class="fa fa-th-list"></i> <span>New Invoice<span></a></li>
+                <li class="treeview">
+                  <a href="#" marked="1">
+                    <i class="fa fa-cog"></i> <span>Invoice</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </a>
+                  <ul class="treeview-menu" style="display: none;">
+                    <li><a href="<?=  base_url()?>inventory/invoice" marked="1"><i class="fa fa-circle-o"></i> New Invoice</a></li>
+                    <li><a href="<?=  base_url()?>inventory/all_invoice" marked="1"><i class="fa fa-circle-o"></i> All Invoice</a></li>
+                    <li><a href="<?=  base_url()?>inventory/all_invoice_daily_summery" marked="1"><i class="fa fa-circle-o"></i> Daily Summary</a></li>
+                  </ul>
+                </li>
 
 
              <?php } ?>

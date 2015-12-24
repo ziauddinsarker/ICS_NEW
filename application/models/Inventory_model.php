@@ -329,6 +329,72 @@ class Inventory_model extends CI_Model
         }
 
 
+    /*******************Product Fabric*********************/
+         function get_all_invoice($offset, $limit)
+        {
+            $this->db->select('*');
+            $this->db->select('SUM(quantity)as quantity ,SUM(amount) as subtotal,sum(discount_amount) as totalDiscount,(SUM(amount)-sum(discount_amount)) as total');
+            $this->db->from('tbl_customer');
+            $this->db->join('tbl_order','tbl_order.customer_id = tbl_customer.id');
+            $this->db->join('tbl_orderdetail','tbl_order.order_id = tbl_orderdetail.id');
+            $this->db->join('tbl_product','tbl_product.id = tbl_orderdetail.product_code');
+            $this->db->group_by('customer_id');
+            $this->db->limit($offset, $limit);
+            $query = $this->db->get();
+            return $query->result();
+        }
+
+        function count_all_invoice()
+        {
+            $this->db->select('*');
+            //$this->db->select('SUM(quantity)as quantity ,SUM(amount) as subtotal,sum(discount_amount) as totalDiscount,(SUM(amount)-sum(discount_amount)) as total');
+            $this->db->from('tbl_customer');
+            $this->db->join('tbl_order','tbl_order.customer_id = tbl_customer.id');
+            $this->db->join('tbl_orderdetail','tbl_order.order_id = tbl_orderdetail.id');
+            $this->db->join('tbl_product','tbl_product.id = tbl_orderdetail.product_code');
+            $this->db->group_by('customer_id');
+            $norow = $this->db->count_all('tbl_customer');
+           // $query = $this->db->get();
+            return $norow;
+        }
+
+        function get_daily_summary()
+        {
+            $today = date("y-m-d");
+            $this->db->select('*');
+            $this->db->select('sum(tbl_orderdetail.quantity) as totalquantity,tbl_orderdetail.date,tbl_product.product_code,tbl_orderdetail.price,COUNT(tbl_product.product_code) as totalsale,(tbl_orderdetail.price * COUNT(tbl_product.product_code)) as  subtotal,SUM(discount_amount) as discount,(tbl_orderdetail.price * COUNT(tbl_product.product_code) - (SUM(discount_amount))) as  total');
+            $this->db->from('tbl_orderdetail');
+            $this->db->join('tbl_product','tbl_product.id = tbl_orderdetail.product_code');
+            $this->db->group_by('tbl_product.product_code');
+            $this->db->where('date',$today);
+            $query = $this->db->get();
+            return $query->result();
+        }
+
+
+
+
+        function edit_invoice($product_fabric_id) {
+            $data = $this->db->get_where('tbl_product_fabric', array('id' => $product_fabric_id))->row();
+            return $data;
+        }
+
+
+        function update_invoice($product_fabric_id) {
+            $category_update_data = array(
+                'product_fabric_name' => $this->input->post('product-fabric'),
+            );
+            $this->db->where('id', $product_fabric_id);
+            $this->db->update('tbl_product_fabric', $category_update_data);
+        }
+
+        function delete_invoice($product_fabric_id)
+        {
+            $this->db->where('id',$product_fabric_id);
+            $this->db->delete('tbl_product_fabric');
+        }
+
+
         /***************Inventory**************************/
         /**
          * @return mixed

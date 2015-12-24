@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2015-12-21 18:02:30
+Date: 2015-12-24 16:59:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1327,16 +1327,12 @@ CREATE TABLE `tbl_customer` (
   `customer_email` varchar(255) DEFAULT NULL,
   `customer_address` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_customer
 -- ----------------------------
-INSERT INTO `tbl_customer` VALUES ('38', 'Ziauddin', '01720223388', 'ziauddin.sarker@gmail.com', '109 Masjid Road');
-INSERT INTO `tbl_customer` VALUES ('39', 'Ziauddin', '01720223388', 'ziauddin.sarker@gmail.com', '109 Masjid Road');
-INSERT INTO `tbl_customer` VALUES ('40', 'Ziauddin', '01720223388', 'ziauddin.sarker@gmail.com', '109 Masjid Road');
-INSERT INTO `tbl_customer` VALUES ('41', null, null, null, null);
-INSERT INTO `tbl_customer` VALUES ('42', null, null, null, null);
+INSERT INTO `tbl_customer` VALUES ('1', 'Md. Ziauddin Sarker', '01720223388', 'ziauddin.sarker@gmail.com', '');
 
 -- ----------------------------
 -- Table structure for tbl_inventory
@@ -1351,11 +1347,12 @@ CREATE TABLE `tbl_inventory` (
   PRIMARY KEY (`id`),
   KEY `fk_product` (`product_id`),
   CONSTRAINT `fk_product` FOREIGN KEY (`product_id`) REFERENCES `tbl_product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_inventory
 -- ----------------------------
+INSERT INTO `tbl_inventory` VALUES ('2', '37', '600', null, null);
 
 -- ----------------------------
 -- Table structure for tbl_order
@@ -1370,20 +1367,12 @@ CREATE TABLE `tbl_order` (
   KEY `fk_customer_id` (`customer_id`),
   CONSTRAINT `fk_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `tbl_customer` (`id`),
   CONSTRAINT `fk_order_id` FOREIGN KEY (`order_id`) REFERENCES `tbl_orderdetail` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_order
 -- ----------------------------
-INSERT INTO `tbl_order` VALUES ('39', '52', '38');
-INSERT INTO `tbl_order` VALUES ('40', '53', '38');
-INSERT INTO `tbl_order` VALUES ('41', '54', '38');
-INSERT INTO `tbl_order` VALUES ('42', '55', '39');
-INSERT INTO `tbl_order` VALUES ('43', '56', '39');
-INSERT INTO `tbl_order` VALUES ('44', '57', '39');
-INSERT INTO `tbl_order` VALUES ('45', '58', '40');
-INSERT INTO `tbl_order` VALUES ('46', '59', '40');
-INSERT INTO `tbl_order` VALUES ('47', '60', '40');
+INSERT INTO `tbl_order` VALUES ('1', '1', '1');
 
 -- ----------------------------
 -- Table structure for tbl_orderdetail
@@ -1393,27 +1382,21 @@ CREATE TABLE `tbl_orderdetail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `product_code` int(11) DEFAULT NULL,
   `quantity` int(2) DEFAULT NULL,
-  `price` decimal(10,0) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
   `discount` int(11) DEFAULT NULL,
   `discount_amount` decimal(8,2) DEFAULT NULL,
   `amount` decimal(8,2) DEFAULT NULL,
   `date` date DEFAULT NULL,
+  `invoice_no` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fk_product_code` (`product_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_orderdetail
 -- ----------------------------
-INSERT INTO `tbl_orderdetail` VALUES ('52', '26', '1', '650', '10', '65.00', '585.00', '0000-00-00');
-INSERT INTO `tbl_orderdetail` VALUES ('53', '27', '10', '350', '5', '175.00', '3325.00', '0000-00-00');
-INSERT INTO `tbl_orderdetail` VALUES ('54', '31', '5', '50', '10', '25.00', '225.00', '0000-00-00');
-INSERT INTO `tbl_orderdetail` VALUES ('55', '26', '1', '650', '10', '65.00', '585.00', '0000-00-00');
-INSERT INTO `tbl_orderdetail` VALUES ('56', '27', '10', '350', '5', '175.00', '3325.00', '0000-00-00');
-INSERT INTO `tbl_orderdetail` VALUES ('57', '31', '5', '50', '10', '25.00', '225.00', '0000-00-00');
-INSERT INTO `tbl_orderdetail` VALUES ('58', '26', '1', '650', '10', '65.00', '585.00', '0000-00-00');
-INSERT INTO `tbl_orderdetail` VALUES ('59', '27', '10', '350', '5', '175.00', '3325.00', '0000-00-00');
-INSERT INTO `tbl_orderdetail` VALUES ('60', '31', '5', '50', '10', '25.00', '225.00', '0000-00-00');
+INSERT INTO `tbl_orderdetail` VALUES ('1', '40', '5', '500.00', '1', '20.00', '2500.00', '2015-12-24', 'SIN-241215-4-0004', '0000-00-00 00:00:00');
 
 -- ----------------------------
 -- Table structure for tbl_product
@@ -1437,14 +1420,15 @@ CREATE TABLE `tbl_product` (
   CONSTRAINT `fk_product_color` FOREIGN KEY (`product_color`) REFERENCES `tbl_product_color` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_product_fabric` FOREIGN KEY (`product_fabric`) REFERENCES `tbl_product_fabric` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_product_name` FOREIGN KEY (`product_name`) REFERENCES `tbl_product_name` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_product
 -- ----------------------------
-INSERT INTO `tbl_product` VALUES ('26', '24', 'WBO-00', '17', '18', '120', '20');
-INSERT INTO `tbl_product` VALUES ('27', '30', 'WPB-12', '17', '19', '2323', '24');
-INSERT INTO `tbl_product` VALUES ('31', '25', 'WPI-OI', '19', '17', '345', '20');
+INSERT INTO `tbl_product` VALUES ('37', '24', 'WPB-001', '20', '18', '450', '20');
+INSERT INTO `tbl_product` VALUES ('38', '32', 'WPB-002', '20', '18', '450', '20');
+INSERT INTO `tbl_product` VALUES ('39', '27', 'WPB-003', '19', '18', '650', '20');
+INSERT INTO `tbl_product` VALUES ('40', '24', 'WPLB-00001-15-AA', '20', '18', '1250', '20');
 
 -- ----------------------------
 -- Table structure for tbl_product_category
@@ -1619,7 +1603,7 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', '127.0.0.1', 'admin', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', null, null, null, null, '1268889823', '1450669432', '1', 'Admin', 'istrator', 'ADMIN', '0');
+INSERT INTO `users` VALUES ('1', '127.0.0.1', 'admin', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', null, null, null, null, '1268889823', '1450931451', '1', 'Admin', 'istrator', 'ADMIN', '0');
 INSERT INTO `users` VALUES ('4', '127.0.0.1', 'timir', '$2y$08$AmclLIpLcaHUy5d/IMJBB.rGfDE7x5tUv/X5iAx0sZCwZCF56sqeu', null, 'timir@simuragroup.com', null, null, null, null, '1443787186', '1446351869', '1', 'Mahibullah', 'Timir', '', '');
 INSERT INTO `users` VALUES ('5', '127.0.0.1', 'rhossain', '$2y$08$hKjjbJpDYWNTomDjaZTTIOOS.symveD0C9ZTOyb9jVx1qXaWNFcjK', null, 'rhossain@simuragroup.com', null, null, null, null, '1444545302', '1444974816', '1', 'Rajib', ' Hossain', 'SIMURA Nonwovens Ltd.', '0120');
 INSERT INTO `users` VALUES ('6', '::1', 'xyz', '$2y$08$uSPxWhuUDXhB03HCa3IWU.T9uhfBkBG71TfWin9zR9NSptDmHkneq', null, 'ziauddin.sarker@gmail.com', null, null, null, null, '1449989639', '1449989669', '1', 'asf', 'asdf', 'asdf', '021455454');

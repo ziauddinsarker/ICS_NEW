@@ -68,6 +68,7 @@
         </div> 
     </div>
 <div class="col-md-9">
+	<input type="text" class="form-control quantity" name="kk" placeholder="Quantity">
        <table class="table table-bordered table-hover invtable">
         <thead>
             <th>No</th>
@@ -84,13 +85,13 @@
             <td class="no">1</td>
             <td colspan="4">
 				<?php
-				$attributes = 'class="form-control"';
+				$attributes = 'class="form-control" id="proCode"';
 				echo form_dropdown('productcode[]',$product,set_value('productcode'),$attributes);
 				?>
 				<!--<input type="text" class="form-control code " id="pcode" name="code[]">-->
 			</td>
             <td><input type="text" class="form-control quantity" name="quantity[]"></td>
-            <td><input type="text" class="form-control price" id="price" name="price[]"></td>
+            <td><input type="text" class="form-control price" value="" id="price" name="price[]"></td>
 			<td><input type="text" class="form-control discount-amount" name="discountamount[]"></td>
             <td><input type="text" class="form-control discount" name="discount[]"></td>
             <td><input type="text" class="form-control amount" name="amount[]" readonly="readonly"></td>

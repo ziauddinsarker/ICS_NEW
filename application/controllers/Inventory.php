@@ -8,6 +8,7 @@ class Inventory extends CI_Controller {
 		$this->load->model('admin_model');
 		$this->load->model('user_model');
 		$this->load->library('ion_auth');
+		$this->load->library('pagination');
 		
 		$this->load->model('inventory_model');
 		$data['product'] = $this->inventory_model->get_product();
@@ -28,6 +29,10 @@ class Inventory extends CI_Controller {
 		$this->load->view('inventory/view_inventory',$this->data);
 		$this->load->view('admin/admin_footer_view',$this->data);
 	}
+
+
+
+
 
 
 	public function json_search_product()
@@ -761,6 +766,74 @@ class Inventory extends CI_Controller {
 	/****************Invoice***************/
 
 
+
+	public function all_invoice($offset = 0){
+		// Config setup
+		$config['base_url'] = base_url().'/inventory/all_invoice/';
+		//$config['total_rows']= $this->db->count_all('brand');
+		$config['total_rows']= $this->inventory_model->count_all_invoice();
+
+		$config['per_page'] = 10;
+		// I added this extra one to control the number of links to show up at each page.
+		$config['num_links'] = 10;
+		/******************************/
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = false;
+		$config['last_link'] = false;
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['prev_link'] = '&laquo';
+		$config['prev_tag_open'] = '<li class="prev">';
+		$config['prev_tag_close'] = '</li>';
+		$config['next_link'] = '&raquo';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a href="#">';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+
+		/******************************/
+		// Initialize
+		$this->pagination->initialize($config);
+
+
+		if (!$this->ion_auth->logged_in()) {
+			// redirect them to the login page
+			redirect('login/index', 'refresh');
+		} else {
+			//$data['total_rows']= $this->inventory_model->count_all_invoice();
+			//var_dump($data['total_rows']);
+			$this->data['invoices'] = $this->inventory_model->get_all_invoice(10,$offset);
+			$this->data['count_invoice'] = $this->inventory_model->count_all_invoice();
+			$this->load->view('admin/admin_header_view',$this->data);
+			$this->load->view('inventory/view_all_invoice',$this->data);
+			$this->load->view('admin/admin_footer_view',$this->data);
+
+
+
+
+
+
+
+		}
+	}
+
+	public function all_invoice_daily_summery(){
+		if (!$this->ion_auth->logged_in()) {
+			// redirect them to the login page
+			redirect('login/index', 'refresh');
+		} else {
+			$this->data['daily_summary'] = $this->inventory_model->get_daily_summary();
+			$this->load->view('admin/admin_header_view',$this->data);
+			$this->load->view('inventory/view_daily_summary',$this->data);
+			$this->load->view('admin/admin_footer_view',$this->data);
+		}
+	}
+
 	public function invoice_number(){
 		//Get Today's Date
 		$today = date("dmy");
@@ -783,7 +856,7 @@ class Inventory extends CI_Controller {
 				$totalInvoice  = $row->id;
 			}
 		} else {
-			$firstinvoiceno = "SIN-".$today."-1-1";
+			$firstinvoiceno = "SIN-".$today."-1-0001";
 			return $firstinvoiceno;
 		}
 
