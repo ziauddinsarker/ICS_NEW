@@ -5,7 +5,11 @@
         <h1 class="page-header">All Invoice</h1>
     </div>
     <a class="btn btn-default" href="<?php base_url();?>invoice">New Invoice</a>
+    <div id="totalsalebar"></div>
     <h3>Total Invoice: <?php echo $count_invoice; ?></h3>
+    <form class="form-inline" role="form" action="<?=  base_url()?>inventory/gettotalreport" method="post">
+        <input type="submit" value="Get Report">
+    </form>
     <table class="table table-bordered table-hover">
         <thead>
             <th>SI No.</th>

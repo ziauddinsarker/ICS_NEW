@@ -24,13 +24,8 @@ class Admin extends CI_Controller
         $user_id = $this->session->userdata('user_id');
         $this->data['todos'] = $this->admin_model->get_todo($user_id);
 
-
-
         //$groups = $this->ion_auth->groups()->result();
         //var_dump($groups);
-
-
-
 
         $this->data['ppnw_all_count'] = $this->ppnw_model->ppnw_total_count_by_user($username);
         $this->data['woven_simple_all_count'] = $this->woven_simple_model->woven_simple_total_count_by_user($username);
@@ -74,7 +69,9 @@ class Admin extends CI_Controller
         }
     }
 
-
+    /**
+     * Online user check
+     */
 
     function online(){
         if (isset($username)){ #If the user is logged in, good for the, if not, they become an ip address
@@ -118,8 +115,6 @@ class Admin extends CI_Controller
 
 
 
-
-    +
     public function user_profile(){
         $username = $this->session->userdata('username');
         $this->user_model->get_singl_user_info($username);

@@ -2,10 +2,22 @@
 <div class="row">
 <div class="col-md-8 col-sm-16 col-xs-18">
     <div>
-        <h1 class="page-header">Daily Summery</h1>
-        <h3>Today: <?php echo date("d-m-y");?></h3>
+        <!--
+        <a class="btn btn-default" href="<?php //base_url();?>invoice">New Invoice</a>
+        -->
+        <h1 class="page-header">Daily Summary</h1>
+        <form class="form-inline" role="form" action="<?=  base_url()?>inventory/all_invoice_daily_summary" method="post">
+            <input type="text" class="form-control" value="<?php echo $show_date ?>" name="date" id="date" placeholder="Date" onchange="this.form.submit()" required>
+            <noscript><input type="submit" value="Submit"></noscript>
+        </form>
+
+        <form class="form-inline" role="form" action="<?=  base_url()?>inventory/getreport" method="post">
+            <input type="hidden" class="form-control" name="datereport" id="datereport" value="<?php echo $show_date ?>">
+            <input type="submit" value="Get Report">
+        </form>
+
     </div>
-    <a class="btn btn-default" href="<?php base_url();?>invoice">New Invoice</a>
+
     <table class="table table-bordered table-hover">
         <thead>
             <th>SI No.</th>
@@ -33,8 +45,18 @@
                 <!--
                 <td><a class="btn btn-default" href="<?php // base_url();?>edit_product/<?php //echo $inv->customer_id ;?>">Edit</a>  <a class="btn btn-default" href="<?php //base_url();?>delete_product/<?php //echo $inv->customer_id ;?>">Delete</a></td>
                 -->
+
             </tr>
+
         <?php }  ?>
+
+        <h4>Showing data for : <?php if(!$show_date ==  ''){
+                echo $show_date;
+            }else {
+                $date = date("Y-m-d");
+                echo $date;
+            }
+            ?></h4>
         </tbody>
     </table>
 </div>

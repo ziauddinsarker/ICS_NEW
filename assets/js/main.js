@@ -9,7 +9,7 @@ $('.add-new-ppnw-form').on('keyup keypress', function(e) {
 
 
 $(document).ready(function(){
-  $("#order_date").datepicker({dateFormat : 'yy-mm-dd'});
+  $("#order_date, #date, #datereport").datepicker({dateFormat : 'yy-mm-dd'});
 });
 
 

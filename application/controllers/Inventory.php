@@ -1,7 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
 class Inventory extends CI_Controller {
+	
+	var $file_path;
 	public function __construct()
 	{
 		parent::__construct();
@@ -12,11 +15,15 @@ class Inventory extends CI_Controller {
 		
 		$this->load->model('inventory_model');
 		$data['product'] = $this->inventory_model->get_product();
+		$data['sells_person'] = $this->inventory_model->get_sells_person();
+		//var_dump($data['sells_person']);
 		$data['product_code'] = $this->inventory_model->get_product_code();
 		$this->data['inventorys'] = $this->inventory_model->get_inventory();
 
 		$username = $this->session->userdata('username');
 		$this->data['employee'] = $this->admin_model->get_user_employee($username);
+
+		$this->file_path = realpath(APPPATH . '../assets');
 	}
 
 
@@ -44,12 +51,32 @@ class Inventory extends CI_Controller {
 			$data[] = array(
 				'id' => $value->product_id,
 				'pcode' => $value->product_code,
-				'name' => $value->product_name,
+				//'name' => $value->product_name,
 				'price' => $value->product_price
 
 			);
 		}
 		echo json_encode($data);
+	}
+
+	public function json_all_invoice(){
+		$limit = 0;
+		$offset  = 0;
+		$query = $this->inventory_model->get_all_invoice($limit, $offset);
+
+		$data = array();
+		foreach ($query as $key => $value)
+		{
+			$data[] = array(
+				//'id' => $value->product_id,
+				'date' => $value->date,
+				//'name' => $value->product_name,
+				'total' => $value->total
+
+			);
+		}
+		echo json_encode($data);
+
 	}
 
 
@@ -809,6 +836,8 @@ class Inventory extends CI_Controller {
 			//var_dump($data['total_rows']);
 			$this->data['invoices'] = $this->inventory_model->get_all_invoice(10,$offset);
 			$this->data['count_invoice'] = $this->inventory_model->count_all_invoice();
+
+
 			$this->load->view('admin/admin_header_view',$this->data);
 			$this->load->view('inventory/view_all_invoice',$this->data);
 			$this->load->view('admin/admin_footer_view',$this->data);
@@ -822,17 +851,81 @@ class Inventory extends CI_Controller {
 		}
 	}
 
-	public function all_invoice_daily_summery(){
+	public function all_invoice_daily_summary(){
 		if (!$this->ion_auth->logged_in()) {
 			// redirect them to the login page
 			redirect('login/index', 'refresh');
 		} else {
-			$this->data['daily_summary'] = $this->inventory_model->get_daily_summary();
+			$date = $this->input->post('date');
+			$this->data['show_date'] = $this->input->post('date');
+			$this->data['daily_summary'] = $this->inventory_model->get_daily_summary($date);
 			$this->load->view('admin/admin_header_view',$this->data);
 			$this->load->view('inventory/view_daily_summary',$this->data);
 			$this->load->view('admin/admin_footer_view',$this->data);
 		}
 	}
+
+
+
+	/**
+	 * Get Report in CSV format
+	 */
+	function getreport() {
+		$this->load->dbutil();
+		//get the object
+		$date = $this->input->post('datereport');
+		if ($date == ''){
+			$date = date('Y-m-d');
+		}else{
+			$date = $this->input->post('datereport');
+		}
+		$report = $this->inventory_model->getCSV($date);
+
+		$delimiter = ",";
+		$newline = "\r\n";
+		$new_report = $this->dbutil->csv_from_result($report, $delimiter, $newline);
+		// write file
+		write_file($this->file_path . '/csv_file.csv', $new_report);
+		//force download from server
+		$this->load->helper('download');
+		$data = file_get_contents($this->file_path . '/csv_file.csv');
+		$name = 'Daily-summary-'.$date.'.csv';
+		force_download($name, $data);
+	}
+
+
+	/**
+	 * Get Total Report in CSV format
+	 */
+	function gettotalreport() {
+		$this->load->dbutil();
+		//get the object
+		/*
+			$date = $this->input->post('datereport');
+			if ($date == ''){
+				$date = date('Y-m-d');
+			}else{
+				$date = $this->input->post('datereport');
+			}
+		*/
+
+		$report = $this->inventory_model->gettotalCSV();
+
+		$delimiter = ",";
+		$newline = "\r\n";
+		$new_report = $this->dbutil->csv_from_result($report, $delimiter, $newline);
+		// write file
+		write_file($this->file_path . '/csv_file.csv', $new_report);
+		//force download from server
+		$this->load->helper('download');
+		$data = file_get_contents($this->file_path . '/csv_file.csv');
+		$name = 'Daily-summary-'.date('Y-m-d').'.csv';
+		force_download($name, $data);
+	}
+
+
+
+
 
 	public function invoice_number(){
 		//Get Today's Date
@@ -867,15 +960,21 @@ class Inventory extends CI_Controller {
 		$leadingzeros = '0000';
 
 		//Get Last Id
-		$this->db->select('MAX(id) as last');
-		$this->db->from('tbl_order');
-		$this->db->order_by('id', "ASC");
+		//$this->db->select('MAX(id) as last');
+		//$this->db->from('tbl_order');
+		//$this->db->order_by('id', "ASC");
+		//$this->db->limit(1);
+		//$query = $this->db->get();
+		//
+		//Get Last Id
+		$this->db->select('*');
+		$this->db->from('tbl_orderdetail');
 		$this->db->limit(1);
 		$query = $this->db->get();
 
 		foreach ($query->result() as $row)
 		{
-			$idonly  = $row->last;
+			$idonly  = $row->date;
 		}
 
 		return $prefix.substr($leadingzeros, 0, (-strlen($idonly))).$idonly;
@@ -884,14 +983,74 @@ class Inventory extends CI_Controller {
 
 	}
 
+	function invno(){
+		//Today
+		$today = date("dmy");
+		$total_invoice = $this->inventory_model->count_all_invoice();
+		$leadingzeros = '0000';
+		$total_invoice = $total_invoice + 1;
+
+		//Query for maximum date in orderdails for last order date
+		$this->db->select('max(date) as date');
+		$this->db->from('tbl_orderdetail');
+		$querymaxdate = $this->db->get();
+
+		foreach ($querymaxdate->result() as $row) {
+			$lastdate = $row->date;
+		}
+
+		//var_dump($lastdate);
+
+		$this->db->select('COUNT(date)as date,tbl_product.product_code,tbl_customer.customer_name');
+		$this->db->from('tbl_customer');
+		$this->db->join('tbl_order','tbl_order.customer_id = tbl_customer.id');
+		$this->db->join('tbl_orderdetail','tbl_order.order_id = tbl_orderdetail.id');
+		$this->db->join('tbl_product','tbl_product.id = tbl_orderdetail.product_code');
+		$this->db->group_by('invoice_no');
+		$querytotalselltoday = $this->db->get();
+
+		if ($querytotalselltoday->num_rows() > 0) {
+			$total_today = $querytotalselltoday->num_rows();
+
+			$todaydate = date('Y-m-d');
+
+			if ($todaydate == $lastdate) {
+				$total_today = $total_today + 1;
+			}else {
+				$total_today = 1;
+			}
+
+		}else{
+			$total_today = 1;
+		}
+
+		//Check if there is no invoice in total invoice
+		if($total_invoice == 0 ){
+			$total_invoice = 1;
+
+			$firstinvoiceno = "SIN-".$today."-1-".substr($leadingzeros, 0, (-strlen($total_invoice))).$total_invoice;
+			return $firstinvoiceno;
+		}else{
+			$total_invoice = $total_invoice;
+
+			$firstinvoiceno = "SIN-".$today."-".$total_today."-".substr($leadingzeros, 0, (-strlen($total_invoice))).$total_invoice;
+			return $firstinvoiceno;
+		}
+	}
+
+
 	public function invoice(){
 		if (!$this->ion_auth->logged_in()) {
 			// redirect them to the login page
 			redirect('login/index', 'refresh');
 		} else {
-			$data['invoiceno'] = $this->invoice_number();
+
+			//$data['invoiceno'] = $this->invoice_number();
+			$data['invoiceno'] = $this->invno();
+
 			//var_dump($data['invoiceno']);
 			$data['product'] = $this->inventory_model->get_product_code();
+			$data['sells_person_drop_down'] = $this->inventory_model->get_sells_person();
 			$data['products_codes'] = $this->inventory_model->get_product_code();
 
 			$data['products'] = $this->inventory_model->all_products();
@@ -908,6 +1067,7 @@ class Inventory extends CI_Controller {
 			'customer_phone' => $this->input->post('phone'),
 			'customer_email' => $this->input->post('email'),
 			'customer_address' => $this->input->post('address'),
+			'sell_by' => $this->input->post('sellsperson'),
 		);
 		$this->db->insert('tbl_customer', $customer_data);
 		$customer_id = $this->db->insert_id();
@@ -921,11 +1081,13 @@ class Inventory extends CI_Controller {
 					'discount' => $this->input->post('discount')[$i],
 					'discount_amount' => $this->input->post('discountamount')[$i],
 					'amount' => $this->input->post('amount')[$i],
+
 					'date' => date("Y-m-d"),
 				);
 
 				$this->db->insert('tbl_orderdetail', $order_detail);
 				$order_id = $this->db->insert_id();
+
 
 				$order_data = array(
 					'order_id' => $order_id,
@@ -1075,16 +1237,8 @@ class Inventory extends CI_Controller {
 		$this->fpdf->SetDash(2,2); //5mm on, 5mm off
 		$this->fpdf->Line(250, 227, 0, 227);
 
-
-
-
-
-
 		//$this->fpdf->SetY(-80);
 		$this->fpdf->Image(base_url('assets/images/simcoupon.png'),30,230,150);
-
-
-
 		// Position at 1.5 cm from bottom
 		//$this->fpdf->SetY(-31);
 		// Arial italic 8

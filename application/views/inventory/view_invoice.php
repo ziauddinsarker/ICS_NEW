@@ -17,10 +17,49 @@
     <div>
         <h1 class="page-header">Invoice</h1>
     </div>
+		<!--
+		<div style="top: 2970px; right: 0px;" id="rightDiv">
+
+			<p>online service</p>
+
+
+
+			<a href="skype:nizam.simura?call" marked="1">
+				<img border="0" alt="Skype: Nizam" src="/images/skype.gif">
+			</a>
+
+			<a href="skype:sales-wifiezcast?call" marked="1">
+				<img border="0" alt="Skype: sales-wifiezcast" src="/images/skype.gif">
+			</a>
+
+
+		</div>
+
+
+		-->
     <form  role="form" action="<?=  base_url()?>inventory/save_invoice" method="post">
+
     <div class="box-body">
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+
+				<?php
+				$attributes = 'class="form-control"';
+				echo '<label for="phone" class="control-label col-xs-2">Sells Person</label>';
+				echo '<div class="col-xs-10">';
+				echo form_dropdown('sellsperson',$sells_person_drop_down,set_value('sellsperson'),$attributes);
+				?>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
         <div class="row">
 			<div class="col-md-4">
+
 				<div class="form-group">
 					<label for="name" class="control-label col-xs-2">Name</label>
 					<div class="col-xs-10">
@@ -68,7 +107,6 @@
         </div> 
     </div>
 <div class="col-md-9">
-	<input type="text" class="form-control quantity" name="kk" placeholder="Quantity">
        <table class="table table-bordered table-hover invtable">
         <thead>
             <th>No</th>
@@ -118,6 +156,8 @@
         <div><b>In Words :</b> <span class="inWord"></span>
 			<input type="hidden" class="form-control " id="inword" name="inword">
 		</div>
+
+
 
     <input type="submit" class="btn btn-primary inv-btn" name="save" value="Save">
     <input type="submit" class="btn btn-primary inv-btn" name="print" value="Print" formtarget="_blank">

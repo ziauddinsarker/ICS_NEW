@@ -330,7 +330,7 @@ class Inventory_model extends CI_Model
 
 
     /*******************Product Fabric*********************/
-         function get_all_invoice($offset, $limit)
+        function get_all_invoice($offset, $limit)
         {
             $this->db->select('*');
             $this->db->select('SUM(quantity)as quantity ,SUM(amount) as subtotal,sum(discount_amount) as totalDiscount,(SUM(amount)-sum(discount_amount)) as total');
@@ -358,19 +358,102 @@ class Inventory_model extends CI_Model
             return $norow;
         }
 
-        function get_daily_summary()
+        function get_daily_summary( $date = null)
         {
-            $today = date("y-m-d");
+            if(!isset($date)) {
+                $date = date("y-m-d");
+            }else{
+                $date = $date;
+            }
             $this->db->select('*');
-            $this->db->select('sum(tbl_orderdetail.quantity) as totalquantity,tbl_orderdetail.date,tbl_product.product_code,tbl_orderdetail.price,COUNT(tbl_product.product_code) as totalsale,(tbl_orderdetail.price * COUNT(tbl_product.product_code)) as  subtotal,SUM(discount_amount) as discount,(tbl_orderdetail.price * COUNT(tbl_product.product_code) - (SUM(discount_amount))) as  total');
+            $this->db->select('tbl_orderdetail.date,
+                                tbl_product.product_code,
+                                sum(tbl_orderdetail.quantity) as totalquantity,
+                                tbl_orderdetail.price,
+                                ((tbl_orderdetail.price * COUNT(tbl_product.product_code))*sum(tbl_orderdetail.quantity)) as  subtotal,
+                                (SUM(discount_amount)*sum(tbl_orderdetail.quantity)) as discount,
+                                ((tbl_orderdetail.price * COUNT(tbl_product.product_code) - (SUM(discount_amount)))*sum(tbl_orderdetail.quantity)) as  total');
             $this->db->from('tbl_orderdetail');
             $this->db->join('tbl_product','tbl_product.id = tbl_orderdetail.product_code');
             $this->db->group_by('tbl_product.product_code');
-            $this->db->where('date',$today);
+            $this->db->where('date',$date);
             $query = $this->db->get();
             return $query->result();
         }
 
+        function get_daily_summary_report($date = null){
+            if(!isset($date)) {
+                $date = date("y-m-d");
+            }else{
+                $date = $date;
+            }
+            $this->db->select('*');
+            $this->db->select('tbl_orderdetail.date,
+                                tbl_product.product_code,
+                                sum(tbl_orderdetail.quantity) as totalquantity,
+                                tbl_orderdetail.price,
+                                ((tbl_orderdetail.price * COUNT(tbl_product.product_code))*sum(tbl_orderdetail.quantity)) as  subtotal,
+                                (SUM(discount_amount)*sum(tbl_orderdetail.quantity)) as discount,
+                                ((tbl_orderdetail.price * COUNT(tbl_product.product_code) - (SUM(discount_amount)))*sum(tbl_orderdetail.quantity)) as  total');
+            //$this->db->from('tbl_orderdetail');
+            $this->db->join('tbl_product','tbl_product.id = tbl_orderdetail.product_code');
+            $this->db->group_by('tbl_product.product_code');
+            $this->db->where('date',$date);
+            $query = $this->db->get('tbl_orderdetail');
+            return $query;
+        }
+
+        /**
+         * @param string $date
+         * @return mixed
+         * Get CSV for daily summary
+         */
+        function getCSV($date = '') {
+            if(!isset($date)) {
+                $date = date("y-m-d");
+            }else{
+                $date = $date;
+            }
+
+            $sql = "SELECT
+                    tbl_orderdetail.date,
+                    tbl_product.product_code,
+                    sum(tbl_orderdetail.quantity) as totalquantity,
+                    tbl_orderdetail.price,
+                    ((tbl_orderdetail.price * COUNT(tbl_product.product_code))*sum(tbl_orderdetail.quantity)) as  subtotal,
+                    (SUM(discount_amount)*sum(tbl_orderdetail.quantity)) as discount,
+                    ((tbl_orderdetail.price * COUNT(tbl_product.product_code) - (SUM(discount_amount)))*sum(tbl_orderdetail.quantity)) as  total
+                    FROM
+                        tbl_orderdetail
+                    INNER JOIN tbl_product ON tbl_product.id = tbl_orderdetail.product_code
+                    WHERE
+                    tbl_orderdetail.date = '" . $date ."'
+                    GROUP BY
+                    tbl_orderdetail.product_code";
+
+            return $this->db->query($sql);
+        }
+
+        /**
+         * @return mixed
+         * get All invoice in CSV format
+         */
+        function gettotalCSV()
+        {
+            $sql = "SELECT
+                    date ,tbl_product.product_code,tbl_customer.customer_name,SUM(quantity)as quantity ,
+                    SUM(amount) as subtotal,
+                    sum(discount_amount) as totalDiscount,
+                    (SUM(amount)-sum(discount_amount)) as total
+                    FROM
+                    tbl_customer
+                    INNER JOIN tbl_order ON tbl_order.customer_id = tbl_customer.id
+                    INNER JOIN tbl_orderdetail ON tbl_order.order_id = tbl_orderdetail.id
+                    INNER JOIN tbl_product ON tbl_product.id = tbl_orderdetail.product_code
+                    GROUP BY
+                    customer_id";
+            return $this->db->query($sql);
+        }
 
 
 
@@ -442,6 +525,25 @@ class Inventory_model extends CI_Model
                 array_push($product_name, $result[$i]->product_name);
             }
             return $doc_specility_result = array_combine($product_id, $product_name);
+        }
+
+        function get_sells_person()
+        {
+            $this->db->select('tbl_sells_person.id,tbl_sells_person.sells_person_name');
+            $this->db->from('tbl_sells_person');
+            $this->db->order_by('sells_person_name', 'ASC');
+            $query = $this->db->get();
+            $result = $query->result();
+
+            //array to store department id & department name
+            $person_id = array('');
+            $person_name = array('-SELECT-');
+
+            for ($i = 0; $i < count($result); $i++) {
+                array_push($person_id, $result[$i]->id);
+                array_push($person_name, $result[$i]->sells_person_name);
+            }
+            return $doc_specility_result = array_combine($person_id, $person_name);
         }
 
     /**

@@ -59,7 +59,7 @@
           */
       </script>
       <script>
-          /*
+
           $(document).ready(function() {
               // On change of the dropdown do the ajax
               $("#proCode").change(function() {
@@ -75,18 +75,19 @@
                           // incase nothing is returned
                           var Vals    =   JSON.parse(response);
 
-                          var productCode = $("#proCode").val();
+                          var productCode = $("#proCode option:selected").val();
+
+                          console.log(productCode);
 
                           for(i = 0; i < Vals.length; i++) {
-
-                              if(Vals[i].pcode === productCode){
-                                  //$("input[name='kk']").val(Vals[0].price);
-                                  //$("input[name='kk']").val(Vals[i].price);
-                                  //console.log(Vals[i]);
+                              console.log(Vals[i].id);
+                              if(Vals[i].id === productCode){
+                                  $("input[id='price']").val(Vals[i].price);
                               }else{
                                   $("input[id='price']").val(Vals[i].price);
-                                  //$("input[name='kk']").val(Vals[i].price);
-                                  //console.log(Vals[i]);
+
+                                  console.log(Vals[i].pcode);
+                                  console.log(Vals[i].price);
                                   break;
                               }
 
@@ -109,12 +110,12 @@
                 // These are the inputs that will populate
                          //$("input[name='kk']").val(Vals[0].id);
                           //console.log(Vals.price)
-          /*
+
                       }
                   });
               });
           });
-          */
+
       </script>
 
 
@@ -233,7 +234,7 @@
             var tr = '<tr>'+
                 '<td class="no">' + n + '</td>'+
                 '<td colspan="4">'+
-                '<select class="form-control" name="productcode[]">'+
+                '<select id ="pcode'+ n +'" class="form-control" name="productcode[]">'+
                     <?php foreach ($products as $row):
                     {
                     ?>
@@ -354,6 +355,81 @@
       </script>
 
 
+
+
+      <script>
+
+          var margin = {top: 20, right: 20, bottom: 70, left: 50},
+              width = 600 - margin.left - margin.right,
+              height = 450 - margin.top - margin.bottom;
+
+          var x = d3.scale.ordinal()
+              .rangeRoundBands([0, width], .05);
+
+          var y = d3.scale.linear()
+              .range([height, 0]);
+
+          var xAxis = d3.svg.axis()
+              .scale(x)
+              .orient("bottom");
+
+          var yAxis = d3.svg.axis()
+              .scale(y)
+              .orient("left")
+              .ticks(20);
+
+          var svg = d3.select("#totalsalebar").append("svg")
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+              .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+          d3.json("<?php base_url()?>json_all_invoice", function(error, data) {
+              x.domain(data.map(function(d) { return d.date; }));
+              y.domain([0, d3.max(data, function(d) { return d.total; })]);
+
+              svg.append("g")
+                  .attr("class", "x axis")
+                  .attr("transform", "translate(0," + height + ")")
+                  .call(xAxis)
+                  .selectAll("text")
+                  .style("text-anchor", "end")
+                  .attr("dx", "-.8em")
+                  .attr("dy", "-.55em")
+                  .attr("transform", "rotate(-90)" );
+
+              svg.append("g")
+                  .attr("class", "y axis")
+                  .call(yAxis)
+                  .append("text")
+                  .attr("transform", "rotate(-90)")
+                  .attr("y", 6)
+                  .attr("dy", ".71em")
+                  .style("text-anchor", "end")
+                  .text("Value (tk)");
+
+              svg.selectAll(".bar")
+                  .data(data)
+                  .enter().append("rect")
+                  .style("fill", "steelblue")
+                  .attr("x", function(d) { return x(d.date); })
+                  .attr("width", x.rangeBand())
+                  .attr("y", function(d) { return y(d.total); })
+                  .attr("height", function(d) { return height - y(d.total); });
+
+
+          });
+
+          function type(d) {
+              d.fpprob = +d.fpprob;
+              return d;
+          }
+
+      </script>
+
+
+
+
       <script>
           /*$(document).ready(function(e){
               var site_url = "<?php //echo site_url(); ?>";
@@ -423,9 +499,5 @@
 
       }
 </script>
-
-
-
-
   </body>
 </html>
