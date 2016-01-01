@@ -104,9 +104,32 @@
 
                                 <span class="info-box-text">Today Sell</span>
                                   <span class="info-box-number">
-                                       <?php foreach($ppnw_all_count as $ppnw){?>
-                                           <td><?php echo $ppnw->ppnw_count;?></td>
-                                       <?php }?>
+
+                                      <?php
+                                      echo $total_invoice_today;
+                                      ?>
+
+                                  </span>
+
+                            </div><!-- /.info-box-content -->
+                        </a>
+                    </div><!-- /.info-box -->
+                </div><!-- /.col -->
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <a href="<?php base_url() ?>ppnw/ppnw_all/">
+                            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+
+                            <div class="info-box-content">
+
+                                <span class="info-box-text">Total Sell</span>
+                                  <span class="info-box-number">
+
+                                      <?php
+                                      echo $total_rows;
+                                      ?>
+
                                   </span>
 
                             </div><!-- /.info-box-content -->

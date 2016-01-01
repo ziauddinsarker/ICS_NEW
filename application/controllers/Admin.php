@@ -14,6 +14,7 @@ class Admin extends CI_Controller
         $this->load->model('quilt_and_suit_model');
         $this->load->model('admin_model');
         $this->load->model('user_model');
+        $this->load->model('inventory_model');
         //$this->load->library('breadcrumb');
 		$this->load->library(array('ion_auth','form_validation'));
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
@@ -33,6 +34,11 @@ class Admin extends CI_Controller
         $this->data['woven_all_count'] = $this->woven_model->woven_total_count_by_user($username);
 
         $this->data['quilt_and_suit_all_count'] = $this->quilt_and_suit_model->quilt_and_suit_total_count_by_user($username);
+
+        $this->data['total_invoice_today']= $this->inventory_model->count_daily_invoice();
+        $this->data['total_rows']= $this->inventory_model->count_all_invoice();
+
+
 
         $all_sess = $this->session->all_userdata();
         //var_dump($all_sess);

@@ -800,6 +800,7 @@ class Inventory extends CI_Controller {
 		//$config['total_rows']= $this->db->count_all('brand');
 		$config['total_rows']= $this->inventory_model->count_all_invoice();
 
+
 		$config['per_page'] = 10;
 		// I added this extra one to control the number of links to show up at each page.
 		$config['num_links'] = 10;
@@ -841,12 +842,6 @@ class Inventory extends CI_Controller {
 			$this->load->view('admin/admin_header_view',$this->data);
 			$this->load->view('inventory/view_all_invoice',$this->data);
 			$this->load->view('admin/admin_footer_view',$this->data);
-
-
-
-
-
-
 
 		}
 	}
@@ -988,6 +983,7 @@ class Inventory extends CI_Controller {
 		$today = date("dmy");
 		$total_invoice = $this->inventory_model->count_all_invoice();
 		$leadingzeros = '0000';
+		$dailyleadingzeros = '000';
 		$total_invoice = $total_invoice + 1;
 
 		//Query for maximum date in orderdails for last order date
@@ -1000,6 +996,7 @@ class Inventory extends CI_Controller {
 		}
 
 		//var_dump($lastdate);
+		$todaydate = date('Y-m-d');
 
 		$this->db->select('COUNT(date)as date,tbl_product.product_code,tbl_customer.customer_name');
 		$this->db->from('tbl_customer');
@@ -1007,13 +1004,12 @@ class Inventory extends CI_Controller {
 		$this->db->join('tbl_orderdetail','tbl_order.order_id = tbl_orderdetail.id');
 		$this->db->join('tbl_product','tbl_product.id = tbl_orderdetail.product_code');
 		$this->db->group_by('invoice_no');
+		$this->db->where('date',$todaydate);
 		$querytotalselltoday = $this->db->get();
 
+		$total_today = $querytotalselltoday->num_rows();
+
 		if ($querytotalselltoday->num_rows() > 0) {
-			$total_today = $querytotalselltoday->num_rows();
-
-			$todaydate = date('Y-m-d');
-
 			if ($todaydate == $lastdate) {
 				$total_today = $total_today + 1;
 			}else {
@@ -1033,7 +1029,7 @@ class Inventory extends CI_Controller {
 		}else{
 			$total_invoice = $total_invoice;
 
-			$firstinvoiceno = "SIN-".$today."-".$total_today."-".substr($leadingzeros, 0, (-strlen($total_invoice))).$total_invoice;
+			$firstinvoiceno = "SIN-".$today."-". substr($dailyleadingzeros, 0, (-strlen($total_today))).$total_today ."-".substr($leadingzeros, 0, (-strlen($total_invoice))).$total_invoice;
 			return $firstinvoiceno;
 		}
 	}
@@ -1081,19 +1077,16 @@ class Inventory extends CI_Controller {
 					'discount' => $this->input->post('discount')[$i],
 					'discount_amount' => $this->input->post('discountamount')[$i],
 					'amount' => $this->input->post('amount')[$i],
-
 					'date' => date("Y-m-d"),
 				);
 
 				$this->db->insert('tbl_orderdetail', $order_detail);
 				$order_id = $this->db->insert_id();
 
-
 				$order_data = array(
 					'order_id' => $order_id,
 					'customer_id' => $customer_id
 				);
-
 				$this->db->insert('tbl_order', $order_data);
 			}
 
@@ -1110,9 +1103,6 @@ class Inventory extends CI_Controller {
 		//$this->fpdf->Cell(80);
 		// Add page with a grid and default spacing (5mm)
 
-
-
-
 		$this->fpdf->Ln(15);
 		$this->fpdf->setFont('Arial','',30);
 		$this->fpdf->setFillColor(255,255,255);
@@ -1120,11 +1110,11 @@ class Inventory extends CI_Controller {
 		//$this->fpdf->cell(100,6,' ',0,1,'C',1);
 
 		$this->fpdf->Image(base_url('assets/images/simura.png'),10,15,40);
-		$this->fpdf->Cell(80);
+		$this->fpdf->Cell(35);
 		$this->fpdf->cell(100,5,' ',0,1,'C',1);
 		$this->fpdf->SetFontSize(15);
-		$this->fpdf->SetFillColor(200,220,255);
-		$this->fpdf->cell(95,6,"Invoice",0,0,'R',1);
+		$this->fpdf->SetFillColor(131,173,246);
+		$this->fpdf->cell(90,6,"Invoice",0,0,'R',1);
 
 		$this->fpdf->cell(100,6,' ',0,1,'L',1);
 		$this->fpdf->setFont('Arial','',10);
@@ -1133,16 +1123,19 @@ class Inventory extends CI_Controller {
 		$this->fpdf->cell(90,6,"Date : " . date('d/m/Y'),0,1,'R',1);
 
 		$this->fpdf->cell(50,6,"Phone: " . $this->input->post('phone'),0,0,'L',1);
-		$this->fpdf->cell(136,6,"Invoice No. : " . $this->invoice_number(),0,1,'R',1);
+		$this->fpdf->cell(138,6,"Invoice No. : " . $this->input->post('invoice-no'),0,1,'R',1);
 
 		$this->fpdf->cell(100,6,"Email : " . $this->input->post('email'),0,0,'L',1);
+
+		$this->fpdf->cell(50,6,' ',0,1,'C',1);
+		$this->fpdf->cell(138,6,"Address : " . $this->input->post('address'),0,0,'L',1);
 
 		$this->fpdf->Ln(12);
 		$this->fpdf->setFont('Arial','',14);
 		$this->fpdf->setFillColor(255,255,255);
 		$this->fpdf->cell(25,6,'',0,0,'C',0);
 
-		$this->fpdf->Ln(5);
+		$this->fpdf->Ln(1);
 		$this->fpdf->setFont('Arial','',10);
 		$this->fpdf->SetFillColor(200,220,255);
 
@@ -1152,7 +1145,7 @@ class Inventory extends CI_Controller {
 		 */
 
 		$this->fpdf->cell(10,6,'#',1,0,'C',1);
-		$this->fpdf->cell(90,6,'Product ID',1,0,'C',1);
+		$this->fpdf->cell(85,6,'Product ID',1,0,'C',1);
 		$this->fpdf->cell(25,6,'Quantity',1,0,'C',1);
 		$this->fpdf->cell(30,6,'Unit Price',1,0,'C',1);
 		//$this->fpdf->cell(25,6,'Discount (%)',1,0,'C',1);
@@ -1181,12 +1174,12 @@ class Inventory extends CI_Controller {
 			$this->fpdf->Ln(6);
 			$this->fpdf->cell(10,6,$id,1,0,1);
 
-			$this->fpdf->cell(90,6,$row->product_code,1,0,1);
+			$this->fpdf->cell(85,6,$row->product_code,1,0,1);
 			$this->fpdf->cell(25,6,$row->quantity,1,0,1);
 			$this->fpdf->cell(30,6,$row->price,1,0,1);
 			//$this->fpdf->cell(25,6,$row->discount.'%',1,0,1);
 			//$this->fpdf->cell(35,6,$row->discount_amount,1,0,1);
-			$this->fpdf->cell(40,6,$row->amount,1,0,1);
+			$this->fpdf->cell(40,6,$row->amount,1,0,'R',1);
 		}
 
 
@@ -1202,17 +1195,17 @@ class Inventory extends CI_Controller {
 		foreach($result as $row) {
 
 			$this->fpdf->Ln(6);
-			$this->fpdf->Cell(125);
+			$this->fpdf->Cell(120);
 			$this->fpdf->cell(30, 6, 'Subtotal', 1, 0, 1);
-			$this->fpdf->cell(40, 6, $row->subtotal, 1, 0,1);
+			$this->fpdf->cell(40, 6, $row->subtotal, 1,0,'R',1);
 			$this->fpdf->Ln(6);
-			$this->fpdf->Cell(125);
+			$this->fpdf->Cell(120);
 			$this->fpdf->cell(30, 6, 'Discount', 1, 0, 1);
-			$this->fpdf->cell(40, 6, $row->totaldiscount, 1, 0,1);
+			$this->fpdf->cell(40, 6, $row->totaldiscount, 1, 0,'R',1);
 			$this->fpdf->Ln(6);
-			$this->fpdf->Cell(125);
+			$this->fpdf->Cell(120);
 			$this->fpdf->cell(30, 6, 'Grand Total', 1, 0, 1);
-			$this->fpdf->cell(40, 6, ($row->subtotal - $row->totaldiscount).".00", 1, 0,1);
+			$this->fpdf->cell(40, 6, ($row->subtotal - $row->totaldiscount).".00", 1, 0,'R',1);
 		}
 
 		$this->fpdf->Ln(20);

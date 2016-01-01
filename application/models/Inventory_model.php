@@ -42,6 +42,7 @@ class Inventory_model extends CI_Model
             $this->db->join('tbl_product_color','tbl_product.product_color = tbl_product_color.id');
             $this->db->join('tbl_product_fabric','tbl_product.product_fabric = tbl_product_fabric.id');
             $this->db->join('tbl_product_category','tbl_product.product_category = tbl_product_category.id');
+            $this->db->order_by('product_code', 'ASC');
             $query = $this->db->get();
             return $query->result();
         }
@@ -333,7 +334,7 @@ class Inventory_model extends CI_Model
         function get_all_invoice($offset, $limit)
         {
             $this->db->select('*');
-            $this->db->select('SUM(quantity)as quantity ,SUM(amount) as subtotal,sum(discount_amount) as totalDiscount,(SUM(amount)-sum(discount_amount)) as total');
+            $this->db->select('SUM(quantity) as quantity ,SUM(amount) as subtotal, sum(discount_amount) as totalDiscount,(SUM(amount)-sum(discount_amount)) as total');
             $this->db->from('tbl_customer');
             $this->db->join('tbl_order','tbl_order.customer_id = tbl_customer.id');
             $this->db->join('tbl_orderdetail','tbl_order.order_id = tbl_orderdetail.id');
@@ -358,6 +359,18 @@ class Inventory_model extends CI_Model
             return $norow;
         }
 
+        function count_daily_invoice()
+        {
+            $this->db->select('*');
+            $this->db->from('tbl_customer');
+            $this->db->join('tbl_order','tbl_order.customer_id = tbl_customer.id');
+            $this->db->join('tbl_orderdetail','tbl_order.order_id = tbl_orderdetail.id');
+            $this->db->join('tbl_product','tbl_product.id = tbl_orderdetail.product_code');
+            $this->db->group_by('product_code');
+            $norow = $this->db->count_all('tbl_customer');
+            return $norow;
+        }
+
         function get_daily_summary( $date = null)
         {
             if(!isset($date)) {
@@ -371,8 +384,8 @@ class Inventory_model extends CI_Model
                                 sum(tbl_orderdetail.quantity) as totalquantity,
                                 tbl_orderdetail.price,
                                 ((tbl_orderdetail.price * COUNT(tbl_product.product_code))*sum(tbl_orderdetail.quantity)) as  subtotal,
-                                (SUM(discount_amount)*sum(tbl_orderdetail.quantity)) as discount,
-                                ((tbl_orderdetail.price * COUNT(tbl_product.product_code) - (SUM(discount_amount)))*sum(tbl_orderdetail.quantity)) as  total');
+                                SUM(discount_amount) as discount,
+                                (((tbl_orderdetail.price * COUNT(tbl_product.product_code))*sum(tbl_orderdetail.quantity)) - sum(discount_amount)) as  total');
             $this->db->from('tbl_orderdetail');
             $this->db->join('tbl_product','tbl_product.id = tbl_orderdetail.product_code');
             $this->db->group_by('tbl_product.product_code');
@@ -421,9 +434,10 @@ class Inventory_model extends CI_Model
                     sum(tbl_orderdetail.quantity) as totalquantity,
                     tbl_orderdetail.price,
                     ((tbl_orderdetail.price * COUNT(tbl_product.product_code))*sum(tbl_orderdetail.quantity)) as  subtotal,
-                    (SUM(discount_amount)*sum(tbl_orderdetail.quantity)) as discount,
-                    ((tbl_orderdetail.price * COUNT(tbl_product.product_code) - (SUM(discount_amount)))*sum(tbl_orderdetail.quantity)) as  total
-                    FROM
+                    SUM(discount_amount) as discount,
+                    ((tbl_orderdetail.price * COUNT(tbl_product.product_code))* sum(tbl_orderdetail.quantity) - SUM(discount_amount)) as  total
+
+                     FROM
                         tbl_orderdetail
                     INNER JOIN tbl_product ON tbl_product.id = tbl_orderdetail.product_code
                     WHERE
@@ -441,10 +455,8 @@ class Inventory_model extends CI_Model
         function gettotalCSV()
         {
             $sql = "SELECT
-                    date ,tbl_product.product_code,tbl_customer.customer_name,SUM(quantity)as quantity ,
-                    SUM(amount) as subtotal,
-                    sum(discount_amount) as totalDiscount,
-                    (SUM(amount)-sum(discount_amount)) as total
+                    date ,tbl_product.product_code,tbl_customer.customer_name,SUM(quantity)as quantity,SUM(quantity) as quantity ,SUM(amount) as subtotal, sum(discount_amount) as totalDiscount,(SUM(amount)-sum(discount_amount)) as total
+
                     FROM
                     tbl_customer
                     INNER JOIN tbl_order ON tbl_order.customer_id = tbl_customer.id
@@ -558,7 +570,7 @@ class Inventory_model extends CI_Model
             $this->db->join('tbl_product_color','tbl_product.product_color = tbl_product_color.id');
             $this->db->join('tbl_product_fabric','tbl_product.product_fabric = tbl_product_fabric.id');
             $this->db->join('tbl_product_category','tbl_product.product_category = tbl_product_category.id');
-            $this->db->order_by('product_name', 'ASC');
+            $this->db->order_by('product_code', 'ASC');
             $query = $this->db->get();
             $result = $query->result();
 

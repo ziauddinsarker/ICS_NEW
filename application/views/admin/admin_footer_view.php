@@ -60,12 +60,48 @@
       </script>
       <script>
 
+
+          $(function () {
+              $('#proCode').change(function () {
+                  $('#priceInput').val($('#proCode option:selected').attr('data-price'));
+              });
+          });
+
+          $("#proCode").change(function() {
+              $("#proCode").change(function() {
+                  $.ajax({
+                      // Change the link to the file you are using
+                      url: '<?php// base_url()?>json_search_product',
+                      type: 'post',
+                      // This just sends the value of the dropdown
+                      data: {client: $(this).val()},
+                      success: function (response) {
+                          // Parse the jSON that is returned
+                          // Using conditions here would probably apply
+                          // incase nothing is returned
+                          var Vals = JSON.parse(response);
+                      }
+                  });
+              });
+          });
+
+
+
+
+
+
+
+
+
+
+
+
           $(document).ready(function() {
               // On change of the dropdown do the ajax
               $("#proCode").change(function() {
                   $.ajax({
                       // Change the link to the file you are using
-                      url: '<?php base_url()?>json_search_product',
+                      url: '<?php// base_url()?>json_search_product',
                       type: 'post',
                       // This just sends the value of the dropdown
                       data: { client: $(this).val() },
@@ -94,7 +130,7 @@
                              // console.log(Vals[i].price);
                           }
 
-/*
+
                           var hasTag = function(productCode) {
                               var i = null;
                               for (i = 0; tags.length > i; i += 1) {
@@ -106,7 +142,7 @@
                               return false;
                           };
 
-                          */
+
                 // These are the inputs that will populate
                          //$("input[name='kk']").val(Vals[0].id);
                           //console.log(Vals.price)
@@ -115,7 +151,7 @@
                   });
               });
           });
-
+          */
       </script>
 
 
@@ -139,37 +175,33 @@
                 var price = tr.find('.price').val();
                 var amt = qty * price;
 
+                //pquantity = tr.find('.quantity').val();
+
                 //Discount Amount  if needed
                 var discamount = tr.find('.discount-amount').val();
+
                 var percent = tr.find('.discount').val();
                 //console.log(discamount);
                 if(discamount > 0){
                     var disc = (discamount/(qty * price))*100;
                     tr.find('.discount').val((disc).toFixed(2));
                 }
-/*
+                /*
                 if(percent > 0){
                     var disamount = (qty * price * percent)/100;
                     tr.find('.discount-amount').val(disamount);
                 }
-*/
-
-
+                */
                 //Discount option if needed
                 //var dis = tr.find('.discount').val();
-
                 //var disamount = (qty * price * dis)/100;
                // tr.find('.discount-amount').val(disamount);
-
-
-
                 //var discountamount =  tr.find('.discount-amount').val();
                // var percentage = (discountamount/price)/100;
                 //tr.find('.discount').val(percentage);
                 //var dis = tr.find('.discount').val();
-
-
                //var amt = (qty * price) - (qty * price * dis)/100;
+
                var amt = qty * price;
                 tr.find('.amount').val(amt);
 
@@ -185,10 +217,6 @@
                 //("#inword").txt(inw);
                 //tr.find('.inword').val(inw);
                 document.getElementById("inword").value = inw;
-
-
-
-
             });
 
 
@@ -214,18 +242,23 @@
         }
 
         /**
-         * Total Amount
+         * Total Discount Amount
          */
         function discount(){
             var t = 0;
+
             $('.discount-amount').each(function (i,e) {
                 var disc = $(this).val()- 0;
                 t += disc;
             });
 
+
+
             gdiscount = t;
 
-            $('.discount').html(t);
+            //gdiscount = gdiscount * pquantity;
+
+            $('.discount').html(gdiscount);
         }
 
 
