@@ -197,7 +197,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <ul class="treeview-menu" style="display: none;">
                     <li><a href="<?=  base_url()?>inventory/invoice" marked="1"><i class="fa fa-circle-o"></i> New Invoice</a></li>
                     <li><a href="<?=  base_url()?>inventory/all_invoice" marked="1"><i class="fa fa-circle-o"></i> All Invoice</a></li>
-                    <li><a href="<?=  base_url()?>inventory/all_invoice_daily_summary" marked="1"><i class="fa fa-circle-o"></i> Daily Summary</a></li>
+                    <li><a href="<?=  base_url()?>inventory/get_daily_product_summary" marked="1"><i class="fa fa-circle-o"></i> Daily Summary</a></li>
                   </ul>
                 </li>
 

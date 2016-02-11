@@ -1,7 +1,7 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <a class="btn btn-default btn-info" href="<?php echo base_url("woven_simple/woven_simple_all"); ?>">Back</a>
+    <a class="btn btn-default btn-info" href="<?php echo base_url("woven_simple/woven_simple_all"); ?>"><i class="fa fa-arrow-left fa-lg"></i></a>
     <a class="btn btn-default btn-info" href="<?php echo base_url("woven_simple/woven_simple_all"); ?>">All Woven Simple</a>
 
     <h1>Revisions</h1>
@@ -35,7 +35,7 @@
                         <td><?php echo $ppnw->tbl_dimension_body_height_total;?> x <?php echo $ppnw->tbl_dimension_body_width_total;?> x <?php echo $ppnw->tbl_dimension_body_panel_total;?></td>
                         <td><?php echo $ppnw->tbl_order_quantity;?></td>
                         <td><?php echo $ppnw->tbl_total_price;?></td>
-                        <td><a class="btn btn-default btn-info" href="<?=  base_url()?>woven_simple/single_revision_woven_simple_costing/<?= $ppnw->tbl_order_rev_id;?>">View</a></td>
+                        <td><a href="<?=  base_url()?>woven_simple/single_revision_woven_simple_costing/<?= $ppnw->tbl_order_rev_id;?>"><i class="fa fa-eye fa-2x"></i></a></td>
 
                     </tr>
                 <?php }?>

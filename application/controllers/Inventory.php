@@ -20,6 +20,13 @@ class Inventory extends CI_Controller {
 		$data['product_code'] = $this->inventory_model->get_product_code();
 		$this->data['inventorys'] = $this->inventory_model->get_inventory();
 
+		$this->data['inventory_product_id'] = $this->inventory_model->get_left_product_on_inventory(23);
+		//echo $this->data['inventory_product_id']->product_left();
+
+
+		//var_dump($this->data['inventory_product_id']);
+
+
 		$username = $this->session->userdata('username');
 		$this->data['employee'] = $this->admin_model->get_user_employee($username);
 
@@ -36,11 +43,6 @@ class Inventory extends CI_Controller {
 		$this->load->view('inventory/view_inventory',$this->data);
 		$this->load->view('admin/admin_footer_view',$this->data);
 	}
-
-
-
-
-
 
 	public function json_search_product()
 	{
@@ -789,19 +791,66 @@ class Inventory extends CI_Controller {
 		$data = $this->inventory_model->all_products();
 		echo json_encode($data);
 	}
-*/
+
 	/****************Invoice***************/
-
-
-
 	public function all_invoice($offset = 0){
 		// Config setup
 		$config['base_url'] = base_url().'/inventory/all_invoice/';
 		//$config['total_rows']= $this->db->count_all('brand');
-		$config['total_rows']= $this->inventory_model->count_all_invoice();
-
+		$config['total_rows']= $this->inventory_model->count_all_invoice();		
 
 		$config['per_page'] = 10;
+		// I added this extra one to control the number of links to show up at each page.
+		$config['num_links'] = 10;
+		/******************************/
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = false;
+		$config['last_link'] = false;
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['prev_link'] = '&laquo';
+		$config['prev_tag_open'] = '<li class="prev">';
+		$config['prev_tag_close'] = '</li>';
+		$config['next_link'] = '&raquo';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a href="#">';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		
+		/******************************/
+		// Initialize
+		$this->pagination->initialize($config);
+
+		if (!$this->ion_auth->logged_in()) {
+			// redirect them to the login page
+			redirect('login/index', 'refresh');
+		} else {
+			//$data['total_rows']= $this->inventory_model->count_all_invoice();
+			//var_dump($data['total_rows']);
+			$this->data['invoices'] = $this->inventory_model->get_all_invoice(10,$offset);
+			$this->data['count_invoice'] = $this->inventory_model->count_all_invoice();
+			$this->data['total_sold_by']= $this->inventory_model->count_sold_by_seller();
+			$this->data['total_sold_amount_by']= $this->inventory_model->count_sold_amount_by_seller();
+			//var_dump($this->data['total_sold_by']);
+
+			$this->load->view('admin/admin_header_view',$this->data);
+			$this->load->view('inventory/view_all_invoice',$this->data);
+			$this->load->view('admin/admin_footer_view',$this->data);
+		}
+	}
+	
+	public function all_invoice_by_date($offset = 0){
+		// Config setup
+		$config['base_url'] = base_url().'/inventory/all_invoice_by_date/';
+		//$config['total_rows']= $this->db->count_all('brand');
+		$config['total_rows']= $this->inventory_model->count_all_invoice();
+
+		$config['per_page'] = 100;
 		// I added this extra one to control the number of links to show up at each page.
 		$config['num_links'] = 10;
 		/******************************/
@@ -828,24 +877,53 @@ class Inventory extends CI_Controller {
 		// Initialize
 		$this->pagination->initialize($config);
 
-
 		if (!$this->ion_auth->logged_in()) {
 			// redirect them to the login page
 			redirect('login/index', 'refresh');
 		} else {
 			//$data['total_rows']= $this->inventory_model->count_all_invoice();
 			//var_dump($data['total_rows']);
-			$this->data['invoices'] = $this->inventory_model->get_all_invoice(10,$offset);
-			$this->data['count_invoice'] = $this->inventory_model->count_all_invoice();
+			$date = $this->input->post('date');
+			$this->data['show_date'] = $this->input->post('date');
 
+			$this->data['invoices'] = $this->inventory_model->get_all_invoice_by_date(100,$offset, $date);
+			$this->data['count_invoice'] = $this->inventory_model->count_all_invoice();
+			$this->data['total_sold_by']= $this->inventory_model->count_sold_by_seller();
+			//var_dump($this->data['total_sold_by']);
 
 			$this->load->view('admin/admin_header_view',$this->data);
-			$this->load->view('inventory/view_all_invoice',$this->data);
+			$this->load->view('inventory/view_all_invoice_by_date',$this->data);
 			$this->load->view('admin/admin_footer_view',$this->data);
-
-		}
+		}	
 	}
+	
 
+	function gettotalreportbydate() {
+		$this->load->dbutil();
+		//get the object
+
+		$date = $this->input->post('datereport');
+		if ($date == ''){
+			$date = date('Y-m-d');
+		}else{
+			$date = $this->input->post('datereport');
+		}
+
+		$report = $this->inventory_model->gettotalCSVByDate($date);
+
+		$delimiter = ",";
+		$newline = "\r\n";
+		$new_report = $this->dbutil->csv_from_result($report, $delimiter, $newline);
+		// write file
+		write_file($this->file_path . '/csv_file.csv', $new_report);
+		//force download from server
+		$this->load->helper('download');
+		$data = file_get_contents($this->file_path . '/csv_file.csv');
+		$name = 'Invoice-by-date-'.$date.'.csv';
+		force_download($name, $data);
+	}
+	
+	
 	public function all_invoice_daily_summary(){
 		if (!$this->ion_auth->logged_in()) {
 			// redirect them to the login page
@@ -859,7 +937,40 @@ class Inventory extends CI_Controller {
 			$this->load->view('admin/admin_footer_view',$this->data);
 		}
 	}
+	
+	
+	function get_daily_product_summary(){
+		if (!$this->ion_auth->logged_in()) {
+			// redirect them to the login page
+			redirect('login/index', 'refresh');
+		} else {
+			$date = $this->input->post('date');
+			$this->data['show_date'] = $this->input->post('date');
+			$this->data['daily_summary'] = $this->inventory_model->get_daily_product_summary($date);
+			$this->data['sell_today'] = $this->inventory_model->count_all_sell_today();
+			$this->load->view('admin/admin_header_view',$this->data);
+			$this->load->view('inventory/view_daily_summary',$this->data);
+			$this->load->view('admin/admin_footer_view',$this->data);
+		}
+	}
 
+	/**
+	 * Daily Product Summary for all dates
+	 */
+	 
+	function get_all_daily_product_summary(){
+		if (!$this->ion_auth->logged_in()) {
+			// redirect them to the login page
+			redirect('login/index', 'refresh');
+		} else {
+			$this->data['all_daily_summary'] = $this->inventory_model->get_all_daily_product_summary();
+			$this->data['total_sold_by']= $this->inventory_model->count_sold_by_seller();
+			$this->data['total_sold_amount_by']= $this->inventory_model->count_sold_amount_by_seller();
+			$this->load->view('admin/admin_header_view',$this->data);
+			$this->load->view('inventory/view_all_daily_summary',$this->data);
+			$this->load->view('admin/admin_footer_view',$this->data);
+		}
+	}
 
 
 	/**
@@ -874,7 +985,7 @@ class Inventory extends CI_Controller {
 		}else{
 			$date = $this->input->post('datereport');
 		}
-		$report = $this->inventory_model->getCSV($date);
+		$report = $this->inventory_model->getDailyCSV($date);
 
 		$delimiter = ",";
 		$newline = "\r\n";
@@ -914,11 +1025,29 @@ class Inventory extends CI_Controller {
 		//force download from server
 		$this->load->helper('download');
 		$data = file_get_contents($this->file_path . '/csv_file.csv');
-		$name = 'Daily-summary-'.date('Y-m-d').'.csv';
+		$name = 'Total-summary-'.date('Y-m-d').'.csv';
 		force_download($name, $data);
 	}
 
 
+	/**
+	 * Get Total Verbose Report in CSV format
+	 */
+	function gettotalverbosereport() {
+		$this->load->dbutil();
+		$report = $this->inventory_model->gettotalverboseCSV();
+
+		$delimiter = ",";
+		$newline = "\r\n";
+		$new_report = $this->dbutil->csv_from_result($report, $delimiter, $newline);
+		// write file
+		write_file($this->file_path . '/csv_file.csv', $new_report);
+		//force download from server
+		$this->load->helper('download');
+		$data = file_get_contents($this->file_path . '/csv_file.csv');
+		$name = 'All-Verbose-Data-'.date('d-m-Y').'.csv';
+		force_download($name, $data);
+	}
 
 
 
@@ -1040,7 +1169,6 @@ class Inventory extends CI_Controller {
 			// redirect them to the login page
 			redirect('login/index', 'refresh');
 		} else {
-
 			//$data['invoiceno'] = $this->invoice_number();
 			$data['invoiceno'] = $this->invno();
 
@@ -1052,11 +1180,16 @@ class Inventory extends CI_Controller {
 			$data['products'] = $this->inventory_model->all_products();
 
 			$this->load->view('admin/admin_header_view', $this->data);
-			$this->load->view('inventory/view_invoice', $data);
+			//$this->load->view('inventory/view_invoice', $data);
+			$this->load->view('inventory/view_invoice_with_autocomplete', $data);
 			$this->load->view('admin/admin_footer_view', $this->data);
 		}
 	}
 
+
+	/**
+	 *
+     */
 	function save_invoice(){
 		$customer_data = array(
 			'customer_name' => $this->input->post('name'),
@@ -1068,28 +1201,68 @@ class Inventory extends CI_Controller {
 		$this->db->insert('tbl_customer', $customer_data);
 		$customer_id = $this->db->insert_id();
 
+
+		//Check inventory and update inventory
+		for ($i = 0; $i < count($this->input->post('productcode')); $i++){
+
+			$product_id = $this->input->post('productcodeid')[$i];
+			$product_quantity = $this->input->post('quantity')[$i];
+
+			$inventory  = $this->inventory_model->get_left_product_on_inventory($product_id);
+
+			foreach($inventory as $inventory){
+				$product_left = $inventory->product_left;
+				$product_sold = $inventory->product_sold;
+			}
+
+			//var_dump($product_left);
+			//var_dump($product_sold);
+
+			if($product_quantity > $product_left){
+
+			}
+
+			$final_product_left = $product_left - $product_quantity;
+			$final_product_sold = $product_sold + $product_quantity;
+
+			$order_detail = array(
+				'product_left' => $final_product_left,
+				'product_sold' => $final_product_sold
+			);
+
+			$this->db->where('product_id',$product_id);
+			$this->db->update('tbl_inventory', $order_detail);
+		}
+
+
+
 		for ($i = 0; $i < count($this->input->post('productcode')); $i++){
 				$order_detail = array(
 					'invoice_no' => $this->input->post('invoice-no'),
-					'product_code' => $this->input->post('productcode')[$i],
+					'product_code' => $this->input->post('productcodeid')[$i],
 					'quantity' => $this->input->post('quantity')[$i],
 					'price' => $this->input->post('price')[$i],
 					'discount' => $this->input->post('discount')[$i],
 					'discount_amount' => $this->input->post('discountamount')[$i],
 					'amount' => $this->input->post('amount')[$i],
+
 					'date' => date("Y-m-d"),
 				);
 
 				$this->db->insert('tbl_orderdetail', $order_detail);
 				$order_id = $this->db->insert_id();
 
+
 				$order_data = array(
 					'order_id' => $order_id,
 					'customer_id' => $customer_id
 				);
+
 				$this->db->insert('tbl_order', $order_data);
 			}
 
+
+/*
 
 		//PDF output
 		$this->fpdf->SetTitle("ICS - PDF Output");
@@ -1139,11 +1312,13 @@ class Inventory extends CI_Controller {
 		$this->fpdf->setFont('Arial','',10);
 		$this->fpdf->SetFillColor(200,220,255);
 
+
+		*/
 		/**
 		 * Content
 		 *
 		 */
-
+/*
 		$this->fpdf->cell(10,6,'#',1,0,'C',1);
 		$this->fpdf->cell(85,6,'Product ID',1,0,'C',1);
 		$this->fpdf->cell(25,6,'Quantity',1,0,'C',1);
@@ -1151,12 +1326,12 @@ class Inventory extends CI_Controller {
 		//$this->fpdf->cell(25,6,'Discount (%)',1,0,'C',1);
 		//$this->fpdf->cell(35,6,'Discount (BDT)',1,0,'C',1);
 		$this->fpdf->cell(40,6,'Total (bdt)',1,0,'C',1);
-
+*/
 
 		/**
 		 * SQL
 		 */
-
+/*
 		$this->db->select('*');
 		$this->db->from('tbl_customer');
 		$this->db->join('tbl_order','tbl_order.customer_id = tbl_customer.id');
@@ -1243,9 +1418,12 @@ class Inventory extends CI_Controller {
 		//$this->fpdf->SetFont('Arial','',8);
 		//$this->fpdf->Cell(0,10,'Corporate Office: 109, Masjid Road, Old  D.O.H.S, Banani, Dhaka-1206',0,0,'L');
 
+
+*/
 		/**
 		 * Footer
 		 */
+		/*
 			//$this->fpdf->AliasNbPages();
 			//$this->fpdf->SetFont('Times','',12);
 
@@ -1262,6 +1440,164 @@ class Inventory extends CI_Controller {
 		//echo $this->fpdf->Output('ics.pdf','D');
 
 		//redirect('inventory/invoice', 'refresh');
+		*/
+		redirect('/inventory/invoice');
+	}
+	
+	function print_later_from_invoice_data()
+	{
+		$customer_id = $this->uri->segment(3);
+		if ($customer_id == NULL) {
+			redirect('inventory/all_invoice_by_date');
+		}
+
+
+		//PDF output
+		$this->fpdf->SetTitle("ICS - PDF Output");
+		//Set Font for Header
+
+		$this->fpdf->Ln(15);
+		$this->fpdf->setFont('Arial', '', 30);
+		$this->fpdf->setFillColor(255, 255, 255);
+		//$this->fpdf->cell(200,0,"SIMURA",0,0,'C',1);
+		//$this->fpdf->cell(100,6,' ',0,1,'C',1);
+
+		$this->fpdf->Image(base_url('assets/images/simura.png'), 10, 15, 40);
+		$this->fpdf->Cell(35);
+		$this->fpdf->cell(100, 5, ' ', 0, 1, 'C', 1);
+		$this->fpdf->SetFontSize(15);
+		$this->fpdf->SetFillColor(131, 173, 246);
+		$this->fpdf->cell(90, 6, "Invoice", 0, 0, 'R', 1);
+
+
+		$this->db->select("tbl_customer.id,
+							 DATE_FORMAT(tbl_orderdetail.date,'%d/%m/%Y') AS date ,
+							 tbl_orderdetail.invoice_no,
+							 tbl_customer.customer_name,
+							 tbl_customer.customer_phone,
+							 tbl_customer.customer_email,
+							 tbl_customer.customer_address,
+							 tbl_product.product_code,
+							 tbl_orderdetail.quantity,
+							 tbl_orderdetail.price,
+							 tbl_orderdetail.discount,
+							 tbl_orderdetail.discount_amount,
+							 tbl_orderdetail.amount");
+		$this->db->from("tbl_customer");
+		$this->db->join("tbl_order", "tbl_order.customer_id = tbl_customer.id");
+		$this->db->join("tbl_orderdetail", "tbl_order.order_id = tbl_orderdetail.id");
+		$this->db->join("tbl_product", "tbl_product.id = tbl_orderdetail.product_code");
+		$this->db->where("tbl_customer.id", $customer_id);
+		$this->db->limit(1);
+		$query = $this->db->get('');
+		$result = $query->result();
+
+		foreach ($result as $row) {
+
+
+		$this->fpdf->cell(100, 6, ' ', 0, 1, 'L', 1);
+		$this->fpdf->setFont('Arial', '', 10);
+		$this->fpdf->setFillColor(255, 255, 255);
+		$this->fpdf->cell(70, 6, "Customer Name: " . $row->customer_name , 0, 0, 'L', 1);
+		$this->fpdf->cell(90, 6, "Date : " . $row->date, 0, 1, 'R', 1);
+
+		$this->fpdf->cell(50, 6, "Phone: " . $row->customer_phone, 0, 0, 'L', 1);
+		$this->fpdf->cell(138, 6, "Invoice No. : " . $row->invoice_no, 0, 1, 'R', 1);
+
+		$this->fpdf->cell(100, 6, "Email : " . $row->customer_email, 0, 0, 'L', 1);
+
+		$this->fpdf->cell(50, 6, ' ', 0, 1, 'C', 1);
+		$this->fpdf->cell(138, 6, "Address : " . $row->customer_address, 0, 0, 'L', 1);
+		$this->fpdf->Ln(12);
+		$this->fpdf->setFont('Arial', '', 14);
+		$this->fpdf->setFillColor(255, 255, 255);
+		$this->fpdf->cell(25, 6, '', 0, 0, 'C', 0);
+
+		$this->fpdf->Ln(1);
+		$this->fpdf->setFont('Arial', '', 10);
+		$this->fpdf->SetFillColor(200, 220, 255);
+	}
+		/**
+		 * Content
+		 *
+		 */
+
+		$this->fpdf->cell(10,6,'#',1,0,'C',1);
+		$this->fpdf->cell(85,6,'Product ID',1,0,'C',1);
+		$this->fpdf->cell(25,6,'Quantity',1,0,'C',1);
+		$this->fpdf->cell(30,6,'Unit Price',1,0,'C',1);
+		//$this->fpdf->cell(25,6,'Discount (%)',1,0,'C',1);
+		//$this->fpdf->cell(35,6,'Discount (BDT)',1,0,'C',1);
+		$this->fpdf->cell(40,6,'Total (bdt)',1,0,'C',1);
+
+
+		/**
+		 * SQL
+		 */
+
+		$this->db->select('*');
+		$this->db->from('tbl_customer');
+		$this->db->join('tbl_order','tbl_order.customer_id = tbl_customer.id');
+		$this->db->join('tbl_orderdetail','tbl_order.order_id = tbl_orderdetail.id');
+		$this->db->join('tbl_product','tbl_product.id = tbl_orderdetail.product_code');
+		$this->db->where('customer_id',$customer_id);
+		$query = $this->db->get('');
+		$result = $query->result();
+		//var_dump($result);
+		//
+		$id = 0;
+		foreach($result as $row) {
+
+			$id++;
+			$this->fpdf->Ln(6);
+			$this->fpdf->cell(10,6,$id,1,0,1);
+
+			$this->fpdf->cell(85,6,$row->product_code,1,0,1);
+			$this->fpdf->cell(25,6,$row->quantity,1,0,1);
+			$this->fpdf->cell(30,6,$row->price,1,0,1);
+			//$this->fpdf->cell(25,6,$row->discount.'%',1,0,1);
+			//$this->fpdf->cell(35,6,$row->discount_amount,1,0,1);
+			$this->fpdf->cell(40,6,$row->amount,1,0,'R',1);
+		}
+
+
+		$this->db->select('SUM(amount) AS subtotal, SUM(discount_amount) AS totaldiscount');
+		$this->db->from('tbl_customer');
+		$this->db->join('tbl_order','tbl_order.customer_id = tbl_customer.id');
+		$this->db->join('tbl_orderdetail','tbl_order.order_id = tbl_orderdetail.id');
+		$this->db->join('tbl_product','tbl_product.id = tbl_orderdetail.product_code');
+		$this->db->where('customer_id',$customer_id);
+		$query = $this->db->get('');
+
+		$result = $query->result();
+		foreach($result as $row) {
+
+			$this->fpdf->Ln(6);
+			$this->fpdf->Cell(120);
+			$this->fpdf->cell(30, 6, 'Subtotal', 1, 0, 1);
+			$this->fpdf->cell(40, 6, $row->subtotal, 1,0,'R',1);
+			$this->fpdf->Ln(6);
+			$this->fpdf->Cell(120);
+			$this->fpdf->cell(30, 6, 'Discount', 1, 0, 1);
+			$this->fpdf->cell(40, 6, $row->totaldiscount, 1, 0,'R',1);
+			$this->fpdf->Ln(6);
+			$this->fpdf->Cell(120);
+			$this->fpdf->cell(30, 6, 'Grand Total', 1, 0, 1);
+			$this->fpdf->cell(40, 6, ($row->subtotal - $row->totaldiscount).".00", 1, 0,'R',1);
+		}
+
+		$this->fpdf->Ln(20);
+		//$this->fpdf->Cell(10);
+		//$this->fpdf->Cell(0,10,'In Word: '.$this->input->post('inword'),0,0,'L');
+		$this->fpdf->SetY(-50);
+		$this->fpdf->SetLineWidth(0.1);
+		$this->fpdf->SetDash(2,2); //5mm on, 5mm off
+		$this->fpdf->Line(250, 227, 0, 227);
+		//$this->fpdf->SetY(-80);
+		$this->fpdf->Image(base_url('assets/images/simcoupon.png'),30,230,150);
+
+		//Open PDF on same page
+		$this->fpdf->Output("Invoice.pdf", "I");
 	}
 
 }

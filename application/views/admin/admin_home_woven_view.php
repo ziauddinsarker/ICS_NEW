@@ -1,7 +1,7 @@
 
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <a class="btn btn-default btn-info" href="<?php echo base_url("admin"); ?>">Back</a>
+            <a class="btn btn-default btn-info" href="<?php echo base_url("admin"); ?>"><i class="fa fa-arrow-left fa-lg"></i></a>
             <a class="btn btn-default btn-info" href="<?php echo base_url("woven/woven_all"); ?>">All Woven</a>
           <h1>
             Woven Fabric Costing

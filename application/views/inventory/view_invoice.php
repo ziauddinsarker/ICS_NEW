@@ -70,7 +70,7 @@
 				<div class="form-group">
 					<label for="phone" class="control-label col-xs-2">Phone</label>
 					<div class="col-xs-10">
-						<input type="text" name="phone" class="form-control" placeholder="Phone">
+						<input type="text" name="phone" class="form-control" placeholder="Phone" >
 					</div>
 				</div>
 				
@@ -93,7 +93,7 @@
 				<div class="form-group">
 					<label for="invoice-no" class="control-label col-xs-2">Invoice</label>
 					<div class="col-xs-10">
-						<input type="text" name="invoice-no" class="form-control" placeholder="Invoice No." value="<?php echo $invoiceno?>">
+						<input type="text" name="invoice-no" class="form-control" placeholder="Invoice No." value="<?php echo $invoiceno?>" readonly="readonly">
 					</div>
 				</div>
 				
@@ -107,6 +107,7 @@
         </div> 
     </div>
 <div class="col-md-9">
+	
        <table class="table table-bordered table-hover invtable">
         <thead>
             <th>No</th>
@@ -128,8 +129,8 @@
 				?>
 				<!--<input type="text" class="form-control code " id="pcode" name="code[]">-->
 			</td>
-            <td><input type="text" class="form-control quantity" name="quantity[]"></td>
-            <td><input type="text" class="form-control price" value="" id="price" name="price[]"></td>
+            <td><input type="text" class="form-control quantity" name="quantity[]" required="required"></td>
+            <td><input type="text" class="form-control price" value="" id="price" name="price[]" required="required"></td>
 			<td><input type="text" class="form-control discount-amount" name="discountamount[]"></td>
             <td><input type="text" class="form-control discount" name="discount[]"></td>
             <td><input type="text" class="form-control amount" name="amount[]" readonly="readonly"></td>
@@ -159,8 +160,8 @@
 
 
 
-    <input type="submit" class="btn btn-primary inv-btn" name="save" value="Save">
-    <input type="submit" class="btn btn-primary inv-btn" name="print" value="Print" formtarget="_blank">
+    <input type="submit" class="btn btn-primary inv-btn" name="save" value="Print">
+    <!--<input type="submit" class="btn btn-primary inv-btn" name="print" value="Print" formtarget="_blank">-->
 	
 	</div>
 </form>

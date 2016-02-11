@@ -35,7 +35,7 @@
                                 <td><?php echo $ppnw->tbl_dimension_body_height_total;?> x <?php echo $ppnw->tbl_dimension_body_width_total;?> x <?php echo $ppnw->tbl_dimension_body_panel_total;?></td>
                                 <td><?php echo $ppnw->tbl_order_quantity;?></td>
                                 <td><?php echo $ppnw->tbl_total_price;?></td>
-                                <td><a class="btn btn-default btn-info" href="<?=  base_url()?>ppnw/single_revision_ppnw_costing/<?= $ppnw->tbl_order_rev_id;?>">View</a></td>
+                                <td><a href="<?=  base_url()?>ppnw/single_revision_ppnw_costing/<?= $ppnw->tbl_order_rev_id;?>"><i class="fa fa-eye fa-2x"></i></a></td>
 
                             </tr>
                         <?php }?>

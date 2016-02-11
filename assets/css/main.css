@@ -340,3 +340,14 @@ th.no-style {
     stroke: #000;
     shape-rendering: crispEdges;
 }
+
+.form-control.productcode.autocomplete_txt{
+
+    width:200px;
+}
+
+.table-sell td {
+    border: 1px solid;
+    text-align: center;
+	padding:5px;
+}
